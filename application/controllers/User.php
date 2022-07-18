@@ -10,7 +10,7 @@ class User extends CI_Controller
         // die;
         $data['judul'] = 'User Home';
         $this->load->view('templates/header', $data);
-        $this->load->view('user/index', $data);
+        $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/footer');
     }
 }

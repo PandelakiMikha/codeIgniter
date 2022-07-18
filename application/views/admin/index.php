@@ -363,7 +363,7 @@
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Kepala Biro</span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $user['name'] ?></span>
                             <img class="img-profile rounded-circle" src="https://cdn.pixabay.com/photo/2022/05/21/06/52/standup-paddleboarding-7210815_960_720.jpg">
                         </a>
                         <!-- Dropdown - User Information -->

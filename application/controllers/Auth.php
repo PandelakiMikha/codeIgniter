@@ -32,6 +32,8 @@ class Auth extends CI_Controller
         $password = $this->input->post('password');
 
         $user = $this->db->get_where('user', ['email' => $email])->row_array();
+        // var_dump($user);
+        // die;
 
         // ada user
         if ($user) {
@@ -44,7 +46,17 @@ class Auth extends CI_Controller
                     ];
 
                     $this->session->set_userdata($data);
-                    redirect('user');
+                    if ($user['role_id'] == 1) {
+                        redirect('admin');
+                    } else if ($user['role_id'] == 2) {
+                        redirect('admin');
+                    } else if ($user['role_id'] == 3) {
+                        redirect('admin');
+                    } else if ($user['role_id'] == 4) {
+                        redirect('admin');
+                    } else {
+                        redirect('user');
+                    }
                 } else {
                     $this->session->set_flashdata('massage', '<div class="alert alert-danger" role="alert">Password salah!</div>');
                     redirect('auth');

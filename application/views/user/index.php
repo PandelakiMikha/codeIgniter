@@ -6,7 +6,7 @@
         </div>
         <div class="profile d-flex flex-grow-1 align-items-center justify-content-end me-5">
             <i class="bi bi-person-circle me-3" style="font-size: 75px; "></i>
-            <h5 style="width: 100px;">Dinas Kesehatan</h5>
+            <h5 style="width: 100px;"><?= $user['name'] ?></h5>
         </div>
     </div>
     <div class="d-flex justify-content-center">

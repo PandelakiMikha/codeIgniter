@@ -1,66 +1,60 @@
-<div class="page">
-    <div class="sidebarr">
-        <div class="header">
-            <div class="list-item">
-                <a href="#">
-                    <img src="<?= base_url('assets/logo/Silonbog.png') ?>" alt="">
-                    <span class="header-title">Sistem Layanan Online Biro Organisasi</span>
-                </a>
-            </div>
+<div class="sidebarr">
+    <div class="header">
+        <div class="list-item">
+            <a href="#">
+                <img src="<?= base_url('assets/logo/Silonbog.png') ?>" alt="">
+                <span class="header-title">Sistem Layanan Online Biro Organisasi</span>
+            </a>
         </div>
-        <hr class="text-white">
-        <div class="main">
-            <div class="list-item">
-                <a href="#" class="item">
-                    <!-- <i class="fas fa-fw fa-light fa-envelope"></i> -->
-                    <i class="fa-fw bi bi-envelope-paper"></i>
-                    <span class="item-title">Surat Masuk</span>
-                </a>
-                <a href="#" class="item">
-                    <i class="fa-fw bi bi-clipboard-check"></i>
-                    <!-- <i class="fas fa-fw fa-solid fa-clipboard-list"></i> -->
-                    <span class="item-title">Disposisi</span>
-                </a>
-                <a href="#" class="item">
-                    <i class="fa-fw bi bi-send-plus"></i>
-                    <!-- <i class="fas fa-fw fa-solid fa-paper-plane"></i> -->
-                    <span class="item-title">Kirim Surat</span>
-                </a>
-                <!-- <a href="#">
+    </div>
+    <hr class="text-white">
+    <div class="main">
+        <div class="list-item">
+            <a href="#" class="item">
+                <!-- <i class="fas fa-fw fa-light fa-envelope"></i> -->
+                <i class="fa-fw bi bi-envelope-paper"></i>
+                <span class="item-title">Surat Masuk</span>
+            </a>
+            <a href="#" class="item">
+                <i class="fa-fw bi bi-clipboard-check"></i>
+                <!-- <i class="fas fa-fw fa-solid fa-clipboard-list"></i> -->
+                <span class="item-title">Disposisi</span>
+            </a>
+            <a href="#" class="item">
+                <i class="fa-fw bi bi-send-plus"></i>
+                <!-- <i class="fas fa-fw fa-solid fa-paper-plane"></i> -->
+                <span class="item-title">Kirim Surat</span>
+            </a>
+            <!-- <a href="#">
                     <i class="fa-fw bi bi-journal-bookmark"></i>
                     <i class="fas fa-fw fa-thin fa-folder-open"></i>
                     <span class="item-title">Arsip</span>
                 </a> -->
-                <div class="dropdown">
-                    <a href="#" class="item dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-fw bi bi-journal-bookmark"></i>
-                        <!-- <i class="fas fa-fw fa-thin fa-folder-open"></i> -->
-                        <span class="item-title">Arsip</span>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#">Surat Masuk</a></li>
-                        <li><a class="dropdown-item" href="#">Surat Keluar</a></li>
-                    </ul>
-                </div>
+            <div class="dropdown">
+                <a href="#" class="item dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-fw bi bi-journal-bookmark"></i>
+                    <!-- <i class="fas fa-fw fa-thin fa-folder-open"></i> -->
+                    <span class="item-title">Arsip</span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#">Surat Masuk</a></li>
+                    <li><a class="dropdown-item" href="#">Surat Keluar</a></li>
+                </ul>
             </div>
         </div>
     </div>
-    <div class="main-content">
-        <div id="menu-button">
-            <input type="checkbox" id="menu-checkbox">
-            <label for="menu-checkbox" id="menu-label">
-                <div id="hamburger"></div>
-            </label>
-        </div>
+</div>
+<div class="main-content">
+    <div id="menu-button">
+        <input type="checkbox" id="menu-checkbox">
+        <label for="menu-checkbox" id="menu-label">
+            <div id="hamburger"></div>
+        </label>
     </div>
 </div>
 
-<style>
-    .page {
-        display: flex;
-        min-height: 100vh;
-    }
 
+<style>
     .sidebarr {
         display: flex;
         width: 350px;
@@ -288,8 +282,8 @@
 
     #menu-checkbox:checked+#menu-label #hamburger::before {
         animation: moveUpThenDown 0.8s ease 0.2s forwards,
-            shakeUp 0.8s ease 0.2s forwards,
-            shakeDown 0.2s ease 0.8s forwards;
+            shakeUp 0.8s ease 0.8s forwards,
+            shakeDown 0.8s ease 0.8s forwards;
     }
 
     @keyframes moveUpThenDown {

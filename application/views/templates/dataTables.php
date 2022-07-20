@@ -1,5 +1,5 @@
 <div class="containerr mt-5 ">
-    <h3>Data Tables</h3>
+    <h5>Daftar Surat</h5>
     <div class="card">
         <div class="card-body table-responsive-sm">
             <table id="example" class="table table-hover">
@@ -13,6 +13,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                </tbody>
             </table>
         </div>
     </div>
@@ -53,13 +54,12 @@
 
     .cuss {
         display: flex;
-        justify-content: space-around;
-        /* width: 300px; */
+        justify-content: center;
     }
 
     .cuss .middle {
-        margin-right: 10px;
-        margin-left: 10px;
+        margin-right: 28px;
+        margin-left: 28px;
     }
 
     .cuss .btn {

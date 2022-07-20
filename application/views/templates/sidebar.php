@@ -1,4 +1,22 @@
+<!-- <div class="hamburgerr bg-primary">
+    <div id="menu-button">
+        <input type="checkbox" id="menu-checkbox">
+        <label for="menu-checkbox" id="menu-label">
+            <div id="hamburger"></div>
+        </label>
+    </div>
+</div> -->
 <div class="sidebarr">
+    <div class="hamburger   ">
+        <div class="hamburgerr ">
+            <div id="menu-button">
+                <input type="checkbox" id="menu-checkbox">
+                <label for="menu-checkbox" id="menu-label">
+                    <div id="hamburger"></div>
+                </label>
+            </div>
+        </div>
+    </div>
     <div class="header">
         <div class="list-item">
             <a href="#">
@@ -44,14 +62,6 @@
         </div>
     </div>
 </div>
-<div class="main-content">
-    <div id="menu-button">
-        <input type="checkbox" id="menu-checkbox">
-        <label for="menu-checkbox" id="menu-label">
-            <div id="hamburger"></div>
-        </label>
-    </div>
-</div>
 
 
 <style>
@@ -62,7 +72,7 @@
         background-color: #EB6D6D;
         border-radius: 0px 20px 20px 0px;
         padding-left: 20px;
-        padding-right: 20px;
+        /* padding-right: 20px; */
         box-sizing: border-box;
         transition: all ease-in 0.3s;
     }
@@ -72,6 +82,17 @@
         transition: all ease-out 0.3s;
         padding-left: 10px;
         padding-right: 10px;
+    }
+
+    .sidebarr .hamburger {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 17px;
+        margin-bottom: -20px;
+    }
+
+    .sidebarr.hide .hamburger {
+        margin-right: -9px;
     }
 
     .sidebarr .header {
@@ -92,10 +113,12 @@
 
     .sidebarr .header-title {
         font-weight: 700;
-        font-size: 19px;
+        font-weight: bolder;
+        font-size: 17px;
         color: #FFFFF0;
         margin-left: 10px;
         line-height: 33px;
+        box-sizing: border-box;
     }
 
     .sidebarr.hide .header-title {
@@ -104,8 +127,8 @@
 
 
     .sidebarr img {
-        width: 80px;
-        height: 80px;
+        width: 70px;
+        height: 70px;
         border-radius: 10px;
         box-sizing: border-box;
     }
@@ -215,15 +238,16 @@
     /* Toogle Menu */
     #menu-button {
         width: 32px;
-        position: absolute;
+        /* position: absolute; */
         overflow: hidden;
         top: 16px;
+
     }
 
     #menu-label {
         position: relative;
         display: block;
-        height: 20px;
+        height: 15px;
         cursor: pointer;
     }
 
@@ -266,7 +290,7 @@
         top: 5px;
         right: 0;
         left: 0;
-        color: #EB6D6D;
+        color: #FFFFF0;
         font-size: 10px;
         font-weight: bold;
         text-align: center;

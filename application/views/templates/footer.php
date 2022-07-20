@@ -24,8 +24,25 @@
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#example').DataTable();
+        $('#example').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "order": [],
+            "ajax": {
+                "url": "<?= base_url('ServerSideTables/getData'); ?>",
+                "type": "POST"
+            },
+            "columnDefs": [{
+                "targer": [-1],
+                "orderable": false
+            }]
+        });
     });
+</script>
+
+<script>
+    $("table tbody").addClass("align-middle");
+    $("table thead").addClass("align-middle");
 </script>
 
 <!-- Enable Popover -->

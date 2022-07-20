@@ -223,7 +223,7 @@
     #menu-label {
         position: relative;
         display: block;
-        height: 12px;
+        height: 20px;
         cursor: pointer;
     }
 

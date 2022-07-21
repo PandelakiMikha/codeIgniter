@@ -55,7 +55,7 @@ class Auth extends CI_Controller
                     } else if ($user['role_id'] == 4) {
                         redirect('admin');
                     } else {
-                        redirect('user');
+                        redirect('user/tampilanHome_user');
                     }
                 } else {
                     $this->session->set_flashdata('massage', '<div class="alert alert-danger" role="alert">Password salah!</div>');

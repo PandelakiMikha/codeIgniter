@@ -92,7 +92,9 @@
     }
 
     .sidebarr.hide .hamburger {
-        margin-right: -9px;
+        margin-right: -43px;
+        position: relative;
+        z-index: 99;
     }
 
     .sidebarr .header {
@@ -290,7 +292,7 @@
         top: 5px;
         right: 0;
         left: 0;
-        color: #FFFFF0;
+        color: #EB6D6D;
         font-size: 10px;
         font-weight: bold;
         text-align: center;

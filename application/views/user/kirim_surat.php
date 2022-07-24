@@ -31,6 +31,7 @@
     <div class="header">
         <div class="row">
             <div class="col-lg">
+                <a href="<?= base_url('user/tampilanHome_user') ?>"></a>
                 <h1 class="txtTitle">SILONBOG</h1>
                 <h5>Sistem Layanan Online Biro Organisasi</h5>
             </div>

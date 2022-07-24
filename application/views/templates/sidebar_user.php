@@ -1,3 +1,97 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">KIRIM SURAT</h5>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+            </div>
+            <div class="modal-body">
+                <!-- content -->
+                <div class="content">
+
+                    <!-- <h3>KIRIM SURAT</h3> -->
+
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <!-- <h3 class="text-center mt-5 txtKirim">Kirim Surat</h3> -->
+
+                            <!--form -->
+                            <!-- dropdown -->
+                            <div class=" d-flex forms mt-5 " style="width: 1000px;">
+                                <select class="form-select form-select-lg me-5" aria-label=".form-select-lg example">
+                                    <option selected value="">Pusat-Prov-Kab/Kot</option>
+                                    <option value="1">Pusat</option>
+                                    <option value="2">Prov</option>
+                                    <option value="2">Kab/Kota</option>
+                                </select>
+                                <select class="form-select form-select-lg ms-5" aria-label=".form-select-lg example">
+                                    <option selected>Dinas</option>
+                                    <option value="1">Badan</option>
+                                    <option value="2">UPTD</option>
+                                </select>
+                            </div>
+                            <div class=" d-flex forms mt-5 " style="width: 1000px;">
+                                <select class="form-select form-select-lg me-5" aria-label=".form-select-lg example">
+                                    <option selected>Prov, Kab/Kot</option>
+                                    <option value="1">Prov</option>
+                                    <option value="2">Kab/Kota</option>
+                                </select>
+                                <select class="form-select form-select-lg ms-5" aria-label=".form-select-lg example">
+                                    <option selected>Dinas</option>
+                                    <option value="1">Badan</option>
+                                    <option value="2">UPTD</option>
+                                </select>
+                            </div>
+                            <!-- text input -->
+                            <div class=" d-flex forms mt-5" style="width: 1000px;">
+                                <div class="form-floating me-5" style="width: 650px;">
+                                    <input type="text" class="form-control" id="perihal" name="perihal" placeholder="name@example.com"></input>
+                                    <label>Perihal</label>
+                                </div>
+                                <div class=" form-floating ms-5" style="width: 650px;">
+                                    <input type="text" class="form-control" id="lainya" name="lainya" placeholder="name@example.com"></input>
+                                    <label>Lainya</label>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div class="row">
+                                <div class="col">
+                                    <select class=" form-select form-select-lg mt-4" aria-label=".form-select-lg example">
+                                        <option selected>Dinas</option>
+                                        <option value="1">Badan</option>
+                                        <option value="2">UPTD</option>
+                                    </select>
+                                </div>
+                                <div class="col mt-4">
+                                    <input class="form-control form-control-lg" id="formFileLg" type="file" accept="application/pdf" multiple>
+                                </div>
+                            </div>
+
+                            <div class=" d-flex justify-content-center mt-5">
+                                <button type=" submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 230px; height: 55px; font-size: 25px;"><strong>Kirim</strong></button>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- end of content -->
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+<!-- end of modal -->
+
 <div class="sidebarr">
     <div class="header">
         <div class="list-item">
@@ -18,15 +112,25 @@
                         <span class="item-title">Surat</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#">Surat Masuk</a></li>
-                        <li><a class="dropdown-item" href="#">Surat Keluar</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('user/tampilanHome_user') ?>">Surat Masuk</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('user/user_surat_kel') ?>">Surat Keluar</a></li>
                     </ul>
                 </div>
-                <a href="<?= base_url('user/kirim_surat') ?>" class="item">
+
+                <!-- motode kirim surat 1 -->
+                <!-- <a href="<?= base_url('user/kirim_surat') ?>" class="item">
                     <i class="fa-fw bi bi-send-plus"></i>
-                    <!-- <i class="fas fa-fw fa-solid fa-paper-plane"></i> -->
                     <span class="item-title">Kirim Surat</span>
+                </a> -->
+
+                <!-- metode kirim surat 2 -->
+                <a class="item">
+                    <div class="spmodal" data-bs-target="#exampleModal" data-bs-toggle="modal">
+                        <i class="fa-fw bi bi-send-plus"></i>
+                        <span class="item-title">Kirim Surat</span>
+                    </div>
                 </a>
+
             </div>
         </div>
     </div>
@@ -43,7 +147,6 @@
 
 <style>
     .container {
-        margin-left: 20%;
         margin-top: 40%;
     }
 

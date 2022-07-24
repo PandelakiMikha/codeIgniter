@@ -23,4 +23,14 @@ class User extends CI_Controller
         $this->load->view('templates/datatables');
         $this->load->view('templates/footer');
     }
+
+    public function user_surat_kel()
+    {
+        $data['judul'] = 'Home User';
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar_user');
+        $this->load->view('user/user_surat_kel', $data);
+        // $this->load->view('templates/datatables');
+        $this->load->view('templates/footer');
+    }
 }

@@ -1,8 +1,22 @@
 <div class="containerr mt-5 ">
-    <h5>Daftar Surat</h5>
+    <h4>Daftar Surat</h4>
+    <div class="filter d-flex w-50 my-2 ">
+        <select class="form-select me-3" id="wilayah">
+            <option value="" hidden>Pusat, Kab/Kot, Prov</option>
+            <option value="1">Pusat</option>
+            <option value="2">Kabupaten/Kota</option>
+            <option value="3">Provinsi</option>
+        </select>
+        <select class="form-select" aria-label="Default select example">
+            <option selected hidden>Perangkat Daerah</option>
+            <option value="1">Dinas</option>
+            <option value="2">Badan</option>
+            <option value="3">Setda</option>
+        </select>
+    </div>
     <div class="card">
-        <div class="card-body table-responsive-sm">
-            <table id="example" class="table table-hover">
+        <div class="card-body table-responsive">
+            <table id="example" class="table table-hover1">
                 <thead class="table-light">
                     <tr>
                         <th>Pingirim</th>
@@ -46,6 +60,8 @@
         flex-grow: 1;
         margin-left: 30px;
         margin-right: 30px;
+        /* margin-top: 100px !important; */
+        /* background-color: aliceblue; */
     }
 
     /* .hala {

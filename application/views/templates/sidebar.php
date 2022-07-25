@@ -75,6 +75,7 @@
         /* padding-right: 20px; */
         box-sizing: border-box;
         transition: all ease-in 0.3s;
+        z-index: 99;
     }
 
     .sidebarr.hide {
@@ -144,7 +145,7 @@
 
     .sidebarr .main {
         flex-grow: 1;
-        margin-top: 30px;
+        margin-top: 10px;
     }
 
     .sidebarr .list-item {

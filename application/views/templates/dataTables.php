@@ -1,17 +1,13 @@
 <div class="containerr mt-5 ">
     <h4>Daftar Surat</h4>
-    <div class="filter d-flex w-50 my-2 ">
-        <select class="form-select me-3" id="wilayah">
-            <option value="" hidden>Pusat, Kab/Kot, Prov</option>
-            <option value="1">Pusat</option>
-            <option value="2">Kabupaten/Kota</option>
-            <option value="3">Provinsi</option>
+    <div class="d-flex w-50 my-2 ">
+        <select class="form-select me-3" id="daerah" name="daerah">
+            <?php foreach ($data_daerah as $value) : ?>
+                <option value="" hidden>Pilih Daerah</option>
+                <option value="<?= $value->id ?>"><?= $value->name ?></option>
+            <?php endforeach ?>
         </select>
-        <select class="form-select" aria-label="Default select example">
-            <option selected hidden>Perangkat Daerah</option>
-            <option value="1">Dinas</option>
-            <option value="2">Badan</option>
-            <option value="3">Setda</option>
+        <select class="form-select" aria-label="Default select example" id="perangkat_daerah" name="perangkat_daerah">
         </select>
     </div>
     <div class="card">

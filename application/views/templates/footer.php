@@ -12,12 +12,46 @@
 
 <script src="<?= base_url('assets/'); ?>js/sb-admin-2.min.js"></script>
 
+<!-- jquery-3.2.1 for filter -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-<!-- <script src="<?= base_url('assets/'); ?>vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="<?= base_url('assets/'); ?>vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<!-- select bertingkat -->
+<script>
+    $(document).ready(function() {
+        $("#perangkat_daerah").hide();
 
+        loadDaerah();
+    });
 
-<script src="<?= base_url('assets/'); ?>js/demo/datatables-demo.js"></script> -->
+    function loadDaerah() {
+
+        $("#daerah").change(function() {
+            var getDaerah = $("#daerah").val();
+
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: "<?= base_url('ServerSideTables/getDataPerangkatDaerah'); ?>",
+                data: {
+                    daerah: getDaerah
+                },
+                success: function(data) {
+                    console.log(data);
+
+                    var html = "";
+                    var i;
+                    for (i = 0; i < data.length; i++) {
+                        html += '<option selected hidden>Pilih Perangkat Daerah</option> <option value="' + data[i].id + '">' + data[i].name + '</option>';
+                    }
+
+                    $("#perangkat_daerah").html(html);
+                    $("#perangkat_daerah").show();
+                }
+            });
+
+        });
+    }
+</script>
 
 <!-- Data Tables Bootstrap 5 -->
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

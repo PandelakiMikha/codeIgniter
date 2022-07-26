@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" style="border-radius: 50px;" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,79 +8,65 @@
             </div>
             <div class="modal-body">
                 <!-- content -->
-                <div class="content">
-
-                    <!-- <h3>KIRIM SURAT</h3> -->
-
-                    <div class="d-flex justify-content-center">
-                        <div>
-                            <!-- <h3 class="text-center mt-5 txtKirim">Kirim Surat</h3> -->
-
-                            <!--form -->
-                            <!-- dropdown -->
-                            <div class=" d-flex forms mt-5 " style="width: 1000px;">
-                                <select class="form-select form-select-lg me-5" aria-label=".form-select-lg example">
-                                    <option selected value="">Pusat-Prov-Kab/Kot</option>
-                                    <option value="1">Pusat</option>
-                                    <option value="2">Prov</option>
-                                    <option value="2">Kab/Kota</option>
-                                </select>
-                                <select class="form-select form-select-lg ms-5" aria-label=".form-select-lg example">
-                                    <option selected>Dinas</option>
-                                    <option value="1">Badan</option>
-                                    <option value="2">UPTD</option>
-                                </select>
-                            </div>
-                            <div class=" d-flex forms mt-5 " style="width: 1000px;">
-                                <select class="form-select form-select-lg me-5" aria-label=".form-select-lg example">
-                                    <option selected>Prov, Kab/Kot</option>
-                                    <option value="1">Prov</option>
-                                    <option value="2">Kab/Kota</option>
-                                </select>
-                                <select class="form-select form-select-lg ms-5" aria-label=".form-select-lg example">
-                                    <option selected>Dinas</option>
-                                    <option value="1">Badan</option>
-                                    <option value="2">UPTD</option>
-                                </select>
-                            </div>
-                            <!-- text input -->
-                            <div class=" d-flex forms mt-5" style="width: 1000px;">
-                                <div class="form-floating me-5" style="width: 650px;">
-                                    <input type="text" class="form-control" id="perihal" name="perihal" placeholder="name@example.com"></input>
-                                    <label>Perihal</label>
-                                </div>
-                                <div class=" form-floating ms-5" style="width: 650px;">
-                                    <input type="text" class="form-control" id="lainya" name="lainya" placeholder="name@example.com"></input>
-                                    <label>Lainya</label>
-                                </div>
-                            </div>
-
-                            <br>
-
-                            <div class="row">
-                                <div class="col">
-                                    <select class=" form-select form-select-lg mt-4" aria-label=".form-select-lg example">
-                                        <option selected>Dinas</option>
-                                        <option value="1">Badan</option>
-                                        <option value="2">UPTD</option>
-                                    </select>
-                                </div>
-                                <div class="col mt-4">
-                                    <input class="form-control form-control-lg" id="formFileLg" type="file" accept="application/pdf" multiple>
-                                </div>
-                            </div>
-
-                            <div class=" d-flex justify-content-center mt-5">
-                                <button type=" submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 230px; height: 55px; font-size: 25px;"><strong>Kirim</strong></button>
-                            </div>
-
-
-
-                        </div>
-
+                <form class="row g-3">
+                    <!-- bagian dropdown -->
+                    <div class="col-md-4">
+                        <label for="inputState" class="form-label">Daerah</label>
+                        <select id="inputState" class="form-select">
+                            <option selected>Pilih...</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputState" class="form-label">Jenis Perangkat Daerah</label>
+                        <select id="inputState" class="form-select">
+                            <option selected>Pilih...</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputState" class="form-label">Daftar Dinas</label>
+                        <select id="inputState" class="form-select">
+                            <option selected>Pilih...</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputState" class="form-label">Jenis Perangkat</label>
+                        <select id="inputState" class="form-select">
+                            <option selected>Pilih...</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputState" class="form-label">Jenis Surat</label>
+                        <select id="inputState" class="form-select">
+                            <option selected>Pilih...</option>
+                            <option>Surat</option>
+                            <option>Laporan</option>
+                            <option>Undangan</option>
+                        </select>
+                    </div>
+                    <!-- bagian text input -->
+                    <div class="col-12">
+                        <label for="lainya" class="form-label">Lainya</label>
+                        <input type="text" class="form-control" id="lainya" placeholder="Jenis Surat Lainya">
+                    </div>
+                    <div class="col-12">
+                        <label for="perihal" class="form-label">Perihal</label>
+                        <input type="text" class="form-control" id="perihal" placeholder="Masukan Perihal yang Anda Inginkan">
                     </div>
 
-                </div>
+                    <!-- pilih file -->
+                    <div class="mb-3 mt-3">
+                        <label for="formFileSm" class="form-label">Pilih File</label>
+                        <input class="form-control form-control-sm" id="formFileSm" type="file" accept="application/pdf" multiple>
+                    </div>
+
+                    <div class=" d-flex justify-content-center mt-5">
+                        <button type="submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 230px; height: 55px; font-size: 25px;"><strong>Kirim</strong></button>
+                    </div>
+                </form>
                 <!-- end of content -->
             </div>
             <!-- <div class="modal-footer">
@@ -433,6 +419,22 @@
         100% {
             transform: rotateZ(0);
         }
+    }
+
+    /* .modal-body {
+        background: #FF7878;
+    } */
+
+    /* .modal {
+        color: antiquewhite;
+
+    } */
+
+    .modal-header {
+        background: #FF7878;
+        color: white;
+        /* border-bottom-left-radius: 30px; */
+        border-bottom-right-radius: 50px;
     }
 </style>
 

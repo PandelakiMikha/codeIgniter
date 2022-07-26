@@ -1,5 +1,19 @@
 <div class="containerr mt-5 ">
-    <h5>Daftar Surat</h5>
+    <h4>Daftar Surat</h4>
+    <div class="d-flex w-50 mb-3">
+        <select class="form-select me-3" aria-label="Default select example">
+            <option selected hidden>Pilih Pemerintahan</option>
+            <option value="1">Pusat</option>
+            <option value="2">Provinsi</option>
+            <option value="3">Kabupaten</option>
+        </select>
+        <select class="form-select" aria-label="Default select example">
+            <option selected hidden>Pilih Perangkat Daerah</option>
+            <option value="1">Dinas</option>
+            <option value="2">Badan</option>
+            <option value="3">Setda</option>
+        </select>
+    </div>
     <div class="card">
         <div class="card-body table-responsive-sm">
             <table id="example" class="table table-hover">

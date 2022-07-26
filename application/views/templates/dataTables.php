@@ -1,22 +1,18 @@
 <div class="containerr mt-5 ">
     <h4>Daftar Surat</h4>
-    <div class="d-flex w-50 mb-3">
-        <select class="form-select me-3" aria-label="Default select example">
-            <option selected hidden>Pilih Pemerintahan</option>
-            <option value="1">Pusat</option>
-            <option value="2">Provinsi</option>
-            <option value="3">Kabupaten</option>
+    <div class="d-flex w-50 my-2 ">
+        <select class="form-select me-3 w-50" id="daerah" name="daerah">
+            <?php foreach ($data_daerah as $value) : ?>
+                <option value="" hidden>Pilih Daerah</option>
+                <option value="<?= $value->id ?>"><?= $value->name ?></option>
+            <?php endforeach ?>
         </select>
-        <select class="form-select" aria-label="Default select example">
-            <option selected hidden>Pilih Perangkat Daerah</option>
-            <option value="1">Dinas</option>
-            <option value="2">Badan</option>
-            <option value="3">Setda</option>
+        <select class="form-select w-50" aria-label="Default select example" id="perangkat_daerah" name="perangkat_daerah">
         </select>
     </div>
     <div class="card">
-        <div class="card-body table-responsive-sm">
-            <table id="example" class="table table-hover">
+        <div class="card-body table-responsive">
+            <table id="example" class="table table-hover1">
                 <thead class="table-light">
                     <tr>
                         <th>Pingirim</th>
@@ -60,6 +56,8 @@
         flex-grow: 1;
         margin-left: 30px;
         margin-right: 30px;
+        /* margin-top: 100px !important; */
+        /* background-color: aliceblue; */
     }
 
     /* .hala {

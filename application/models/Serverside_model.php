@@ -26,6 +26,9 @@ class Serverside_model extends CI_Model
     public function getDataSurat()
     {
         $this->_get_data_query();
+        if ($_POST['length'] != -1) {
+            $this->db->limit($_POST['length'], $_POST['start']);
+        }
 
         $query = $this->db->get();
         return $query->result();
@@ -42,5 +45,21 @@ class Serverside_model extends CI_Model
     {
         $this->db->from($this->table);
         return $this->db->count_all_results();
+    }
+
+    public function getDataDaerah()
+    {
+        $this->db->order_by("name", "asc");
+        $query = $this->db->get('daerah');
+
+        return $query->result();
+    }
+
+    public function getDaerah($id_daerah)
+    {
+        // $this->db->order_by("name", "asc");
+        $query = $this->db->get_where('perangkat_daerah', ['daerah_id' => $id_daerah])->result_array();
+
+        return $query;
     }
 }

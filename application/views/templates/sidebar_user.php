@@ -1,22 +1,84 @@
-<!-- <div class="hamburgerr bg-primary">
-    <div id="menu-button">
-        <input type="checkbox" id="menu-checkbox">
-        <label for="menu-checkbox" id="menu-label">
-            <div id="hamburger"></div>
-        </label>
-    </div>
-</div> -->
-<div class="sidebarr">
-    <div class="hamburger   ">
-        <div class="hamburgerr ">
-            <div id="menu-button">
-                <input type="checkbox" id="menu-checkbox">
-                <label for="menu-checkbox" id="menu-label">
-                    <div id="hamburger"></div>
-                </label>
+<!-- Modal -->
+<div class="modal fade" style="border-radius: 50px;" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">KIRIM SURAT</h5>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
+            <div class="modal-body">
+                <!-- content -->
+                <form class="row g-3">
+                    <!-- bagian dropdown -->
+                    <div class="col-md-4">
+                        <label for="inputState" class="form-label">Daerah</label>
+                        <select id="inputState" class="form-select">
+                            <option selected>Pilih...</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputState" class="form-label">Jenis Perangkat Daerah</label>
+                        <select id="inputState" class="form-select">
+                            <option selected>Pilih...</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputState" class="form-label">Daftar Dinas</label>
+                        <select id="inputState" class="form-select">
+                            <option selected>Pilih...</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputState" class="form-label">Jenis Perangkat</label>
+                        <select id="inputState" class="form-select">
+                            <option selected>Pilih...</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputState" class="form-label">Jenis Surat</label>
+                        <select id="inputState" class="form-select">
+                            <option selected>Pilih...</option>
+                            <option>Surat</option>
+                            <option>Laporan</option>
+                            <option>Undangan</option>
+                        </select>
+                    </div>
+                    <!-- bagian text input -->
+                    <div class="col-12">
+                        <label for="lainya" class="form-label">Lainya</label>
+                        <input type="text" class="form-control" id="lainya" placeholder="Jenis Surat Lainya">
+                    </div>
+                    <div class="col-12">
+                        <label for="perihal" class="form-label">Perihal</label>
+                        <input type="text" class="form-control" id="perihal" placeholder="Masukan Perihal yang Anda Inginkan">
+                    </div>
+
+                    <!-- pilih file -->
+                    <div class="mb-3 mt-3">
+                        <label for="formFileSm" class="form-label">Pilih File</label>
+                        <input class="form-control form-control-sm" id="formFileSm" type="file" accept="application/pdf" multiple>
+                    </div>
+
+                    <div class=" d-flex justify-content-center mt-5">
+                        <button type="submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 230px; height: 55px; font-size: 25px;"><strong>Kirim</strong></button>
+                    </div>
+                </form>
+                <!-- end of content -->
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
         </div>
     </div>
+</div>
+<!-- end of modal -->
+
+<div class="sidebarr">
     <div class="header">
         <div class="list-item">
             <a href="#">
@@ -26,45 +88,54 @@
         </div>
     </div>
     <hr class="text-white">
-    <div class="main">
-        <div class="list-item">
-            <a href="#" class="item">
-                <!-- <i class="fas fa-fw fa-light fa-envelope"></i> -->
-                <i class="fa-fw bi bi-envelope-paper"></i>
-                <span class="item-title">Surat Masuk</span>
-            </a>
-            <a href="#" class="item">
-                <i class="fa-fw bi bi-clipboard-check"></i>
-                <!-- <i class="fas fa-fw fa-solid fa-clipboard-list"></i> -->
-                <span class="item-title">Disposisi</span>
-            </a>
-            <a href="#" class="item">
-                <i class="fa-fw bi bi-send-plus"></i>
-                <!-- <i class="fas fa-fw fa-solid fa-paper-plane"></i> -->
-                <span class="item-title">Kirim Surat</span>
-            </a>
-            <!-- <a href="#">
-                    <i class="fa-fw bi bi-journal-bookmark"></i>
-                    <i class="fas fa-fw fa-thin fa-folder-open"></i>
-                    <span class="item-title">Arsip</span>
+    <div class="container">
+        <div class="main">
+            <div class="list-item">
+                <div class="dropdown">
+                    <a href="#" class="item dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-fw bi bi-envelope-paper"></i>
+                        <!-- <i class="fas fa-fw fa-thin fa-folder-open"></i> -->
+                        <span class="item-title">Surat</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="<?= base_url('user/tampilanHome_user') ?>">Surat Masuk</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('user/user_surat_kel') ?>">Surat Keluar</a></li>
+                    </ul>
+                </div>
+
+                <!-- motode kirim surat 1 -->
+                <!-- <a href="<?= base_url('user/kirim_surat') ?>" class="item">
+                    <i class="fa-fw bi bi-send-plus"></i>
+                    <span class="item-title">Kirim Surat</span>
                 </a> -->
-            <div class="dropdown">
-                <a href="#" class="item dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-fw bi bi-journal-bookmark"></i>
-                    <!-- <i class="fas fa-fw fa-thin fa-folder-open"></i> -->
-                    <span class="item-title">Arsip</span>
+
+                <!-- metode kirim surat 2 -->
+                <a class="item">
+                    <div class="spmodal" data-bs-target="#exampleModal" data-bs-toggle="modal">
+                        <i class="fa-fw bi bi-send-plus"></i>
+                        <span class="item-title">Kirim Surat</span>
+                    </div>
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">Surat Masuk</a></li>
-                    <li><a class="dropdown-item" href="#">Surat Keluar</a></li>
-                </ul>
+
             </div>
         </div>
+    </div>
+</div>
+<div class="main-content">
+    <div id="menu-button">
+        <input type="checkbox" id="menu-checkbox">
+        <label for="menu-checkbox" id="menu-label">
+            <div id="hamburger"></div>
+        </label>
     </div>
 </div>
 
 
 <style>
+    .container {
+        margin-top: 40%;
+    }
+
     .sidebarr {
         display: flex;
         width: 350px;
@@ -72,10 +143,9 @@
         background-color: #EB6D6D;
         border-radius: 0px 20px 20px 0px;
         padding-left: 20px;
-        /* padding-right: 20px; */
+        padding-right: 20px;
         box-sizing: border-box;
         transition: all ease-in 0.3s;
-        z-index: 99;
     }
 
     .sidebarr.hide {
@@ -83,19 +153,6 @@
         transition: all ease-out 0.3s;
         padding-left: 10px;
         padding-right: 10px;
-    }
-
-    .sidebarr .hamburger {
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 17px;
-        margin-bottom: -20px;
-    }
-
-    .sidebarr.hide .hamburger {
-        margin-right: -43px;
-        position: relative;
-        z-index: 99;
     }
 
     .sidebarr .header {
@@ -116,12 +173,10 @@
 
     .sidebarr .header-title {
         font-weight: 700;
-        font-weight: bolder;
-        font-size: 17px;
+        font-size: 19px;
         color: #FFFFF0;
         margin-left: 10px;
         line-height: 33px;
-        box-sizing: border-box;
     }
 
     .sidebarr.hide .header-title {
@@ -130,8 +185,8 @@
 
 
     .sidebarr img {
-        width: 70px;
-        height: 70px;
+        width: 80px;
+        height: 80px;
         border-radius: 10px;
         box-sizing: border-box;
     }
@@ -145,7 +200,7 @@
 
     .sidebarr .main {
         flex-grow: 1;
-        margin-top: 10px;
+        margin-top: 30px;
     }
 
     .sidebarr .list-item {
@@ -241,16 +296,15 @@
     /* Toogle Menu */
     #menu-button {
         width: 32px;
-        /* position: absolute; */
+        position: absolute;
         overflow: hidden;
         top: 16px;
-
     }
 
     #menu-label {
         position: relative;
         display: block;
-        height: 15px;
+        height: 20px;
         cursor: pointer;
     }
 
@@ -365,6 +419,22 @@
         100% {
             transform: rotateZ(0);
         }
+    }
+
+    /* .modal-body {
+        background: #FF7878;
+    } */
+
+    /* .modal {
+        color: antiquewhite;
+
+    } */
+
+    .modal-header {
+        background: #FF7878;
+        color: white;
+        /* border-bottom-left-radius: 30px; */
+        border-bottom-right-radius: 50px;
     }
 </style>
 

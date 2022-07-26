@@ -1,8 +1,18 @@
 <div class="containerr mt-5 ">
-    <h3>Data Tables</h3>
+    <h4>Daftar Surat</h4>
+    <div class="d-flex w-50 my-2 ">
+        <select class="form-select me-3 w-50" id="daerah" name="daerah">
+            <?php foreach ($data_daerah as $value) : ?>
+                <option value="" hidden>Pilih Daerah</option>
+                <option value="<?= $value->id ?>"><?= $value->name ?></option>
+            <?php endforeach ?>
+        </select>
+        <select class="form-select w-50" aria-label="Default select example" id="perangkat_daerah" name="perangkat_daerah">
+        </select>
+    </div>
     <div class="card">
-        <div class="card-body table-responsive-sm">
-            <table id="example" class="table table-hover">
+        <div class="card-body table-responsive">
+            <table id="example" class="table table-hover1">
                 <thead class="table-light">
                     <tr>
                         <th>Pingirim</th>
@@ -13,6 +23,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                </tbody>
             </table>
         </div>
     </div>
@@ -45,6 +56,8 @@
         flex-grow: 1;
         margin-left: 30px;
         margin-right: 30px;
+        /* margin-top: 100px !important; */
+        /* background-color: aliceblue; */
     }
 
     /* .hala {
@@ -53,13 +66,12 @@
 
     .cuss {
         display: flex;
-        justify-content: space-around;
-        /* width: 300px; */
+        justify-content: center;
     }
 
     .cuss .middle {
-        margin-right: 10px;
-        margin-left: 10px;
+        margin-right: 28px;
+        margin-left: 28px;
     }
 
     .cuss .btn {

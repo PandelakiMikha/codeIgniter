@@ -28,7 +28,11 @@ class ServerSideTables extends CI_Controller
 
     public function getData()
     {
-        $results = $this->Serverside_model->getDataSurat();
+
+        $id_perangkat_daerah = $this->input->post('daerah');
+        var_dump($id_perangkat_daerah);
+        die;
+        $results = $this->Serverside_model->getDataSurat($id_perangkat_daerah);
         $data = [];
         foreach ($results as $result) {
             $row = array();
@@ -73,6 +77,8 @@ class ServerSideTables extends CI_Controller
     {
         $id_daerah = $this->input->post('daerah');
         // $id_perangkat_daerah = $this->input->post('perangkatDaerah');
+        // var_dump($id_daerah);
+        // die;
 
         $getDaerah = $this->Serverside_model->getDaerah($id_daerah);
 

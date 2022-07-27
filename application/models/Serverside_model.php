@@ -23,8 +23,15 @@ class Serverside_model extends CI_Model
         }
     }
 
-    public function getDataSurat()
+    public function getDataSurat($id_perangkat_daerah)
     {
+        if (!empty($_POST['perangkat_daerah'])) {
+            // $this->db->where('perangkat_daerah_id', $_POST['perangkat_daerah']);
+            $query = $this->db->get_where('surat_masuk', ['perangkat_daerah_id' => $id_perangkat_daerah])->result_array();
+
+            return $query;
+        }
+
         $this->_get_data_query();
         if ($_POST['length'] != -1) {
             $this->db->limit($_POST['length'], $_POST['start']);

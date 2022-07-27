@@ -24,15 +24,38 @@
         tabels();
     });
 
-    function loadDaerah() {
-        $("#perangkat_daerah").change(function(){
-            var getPerangkatDaerah = $("#perangkat_daerah").val();
-            // console.log(getPerangkatDaerah);
-            tabels();
-        }); 
+    function tabels() {
+        // for data tables
+        $('#example').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "order": [],
+            "ajax": {
+                "url": "<?= base_url('ServerSideTables/getData'); ?>",
+                "type": "POST",
+                "dataType": "JSON",
+                "data": {
+                    // perangkat_daerah: $("#perangkat_daerah").val(),
+                    daerah: $("#daerah").val(),
+                },
+            },
+            // bDestroy: true,
+            "columnDefs": [{
+                "target": [-1],
+                "orderable": false,
+                "searchable": false,
+                "render": function(data, type, row) {
+                    var btn = '<div class="cuss"><div><button type="button" class="btn btn-warning" data-bs-trigger="focus" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover"><i class="bi bi-eye"></i>Lihat</button></div><div class="middle"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-check-circle"></i>Disposisi</button></div><div><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-file-earmark-text"></i>Detail</button></div></div>';
+                    return btn;
+                }
+            }]
+        });
+    };
 
+    function loadDaerah() {
+        // for get data for filter
         $("#daerah").change(function() {
-            var getDaerah = $("#daerah").val();    
+            var getDaerah = $("#daerah").val();
             $.ajax({
                 type: "POST",
                 dataType: "JSON",
@@ -41,7 +64,7 @@
                     daerah: getDaerah,
                 },
                 success: function(data) {
-                    console.log(data);
+                    console.log('data', data);
 
                     var html = "";
                     var i;
@@ -55,34 +78,19 @@
             });
 
         });
+
+
     };
 
-    function tabels() {
-        var perangkatDaerah = $("#perangkat_daerah").val();
-        console.log('val', perangkatDaerah);
-        $('#example').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "order": [],
-            "ajax": {
-                "url": "<?= base_url('ServerSideTables/getData'); ?>",
-                // data: {
-                //     daerah: getDaerah,
-                //     perangkatDaerah: getPerangkatDaerah
-                // },
-                "type": "POST"
-            },
-            "columnDefs": [{
-                "target": [-1],
-                "orderable": false,
-                "searchable": false,
-                "render": function(data, type, row) {
-                    var btn = '<div class="cuss"><div><button type="button" class="btn btn-warning" data-bs-trigger="focus" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover"><i class="bi bi-eye"></i>Lihat</button></div><div class="middle"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-check-circle"></i>Disposisi</button></div><div><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-file-earmark-text"></i>Detail</button></div></div>';
-                    return btn;
-                }
-            }]
-        });
-    };
+    tabels();
+
+    $("#daerah").change(function() {
+        tabels();
+    });
+
+    $("#perangkat_daerah").change(function() {
+        tabels();
+    });
 </script>
 
 <!-- Data Tables Bootstrap 5 -->
@@ -90,7 +98,7 @@
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 <script>
-    
+
 </script>
 
 <script>

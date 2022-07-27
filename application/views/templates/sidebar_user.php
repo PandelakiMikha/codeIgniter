@@ -10,36 +10,40 @@
                 <!-- content -->
                 <form class="row g-3">
                     <!-- bagian dropdown -->
+
                     <div class="col-md-4">
-                        <label for="inputState" class="form-label">Daerah</label>
+                        <label for="daerah" class="form-label"><b>Daerah</b></label>
+                        <select name="daerah" id="daerah" class="form-select">
+                            <?php foreach ($data_daerah as $value) : ?>
+                                <option value="" hidden>Pilih..</option>
+                                <option value="<?= $value->id ?>"><?= $value->name ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="perangkat_daerah" class="form-label"><b>Jenis Perangkat Daerah</b></label>
+                        <select name="perangkat_daerah" id="perangkat_daerah" class="form-select">
+                            <option selected>Pilih...</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputState" class="form-label"><b>Daftar Dinas</b></label>
                         <select id="inputState" class="form-select">
                             <option selected>Pilih...</option>
                             <option>...</option>
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label for="inputState" class="form-label">Jenis Perangkat Daerah</label>
+                        <label for="inputState" class="form-label"><b>UPTD dan Dinas Induk</b></label>
                         <select id="inputState" class="form-select">
                             <option selected>Pilih...</option>
                             <option>...</option>
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label for="inputState" class="form-label">Daftar Dinas</label>
-                        <select id="inputState" class="form-select">
-                            <option selected>Pilih...</option>
-                            <option>...</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="inputState" class="form-label">Jenis Perangkat</label>
-                        <select id="inputState" class="form-select">
-                            <option selected>Pilih...</option>
-                            <option>...</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="inputState" class="form-label">Jenis Surat</label>
+                        <label for="inputState" class="form-label"><b>Jenis Surat</b></label>
                         <select id="inputState" class="form-select">
                             <option selected>Pilih...</option>
                             <option>Surat</option>
@@ -49,17 +53,17 @@
                     </div>
                     <!-- bagian text input -->
                     <div class="col-12">
-                        <label for="lainya" class="form-label">Lainya</label>
+                        <label for="lainya" class="form-label"><b>Lainya</b></label>
                         <input type="text" class="form-control" id="lainya" placeholder="Jenis Surat Lainya">
                     </div>
                     <div class="col-12">
-                        <label for="perihal" class="form-label">Perihal</label>
+                        <label for="perihal" class="form-label"><b>Perihal</b></label>
                         <input type="text" class="form-control" id="perihal" placeholder="Masukan Perihal yang Anda Inginkan">
                     </div>
 
                     <!-- pilih file -->
                     <div class="mb-3 mt-3">
-                        <label for="formFileSm" class="form-label">Pilih File</label>
+                        <label for="formFileSm" class="form-label"><b>Pilih File</b></label>
                         <input class="form-control form-control-sm" id="formFileSm" type="file" accept="application/pdf" multiple>
                     </div>
 

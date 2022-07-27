@@ -50,8 +50,14 @@
     });
 
     function loadDaerah() {
+        $("#perangkat_daerah").change(function() {
+            var getPerangkatDaerah = $("#perangkat_daerah").val();
+            // console.log(getPerangkatDaerah);
+            tabels();
+        });
+
         $("#daerah").change(function() {
-            var getDaerah = $("#daerah").val();    
+            var getDaerah = $("#daerah").val();
             $.ajax({
                 type: "POST",
                 dataType: "JSON",
@@ -91,7 +97,7 @@
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 <script>
-    
+
 </script>
 
 <script>

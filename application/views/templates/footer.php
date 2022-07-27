@@ -16,21 +16,40 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 <!-- select bertingkat -->
-<script>
+<script type="text/javascript"> 
+    var table;
     $(document).ready(function() {
         $("#perangkat_daerah").hide();
 
+        //data tables
+        table = $('#example').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "order": [],
+            "ajax": {
+                "url": "<?= base_url('ServerSideTables/getData'); ?>",
+                "type": "POST",
+                "data": function (data) {
+                    var perda;
+                    data.perangkat_daerah = $("#daerah").val();
+                    perda = data.perangkat_daerah;
+                    console.log('perda', perda);
+                },
+            },
+            "columnDefs": [{
+                "target": [-1],
+                "orderable": false,
+                "searchable": false,
+                "render": function(data, type, row) {
+                    var btn = '<div class="cuss"><div><button type="button" class="btn btn-warning" data-bs-trigger="focus" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover"><i class="bi bi-eye"></i>Lihat</button></div><div class="middle"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-check-circle"></i>Disposisi</button></div><div><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-file-earmark-text"></i>Detail</button></div></div>';
+                    return btn;
+                }
+            }]
+        });
         loadDaerah();
-        tabels();
     });
 
     function loadDaerah() {
-        $("#perangkat_daerah").change(function(){
-            var getPerangkatDaerah = $("#perangkat_daerah").val();
-            // console.log(getPerangkatDaerah);
-            tabels();
-        }); 
-
         $("#daerah").change(function() {
             var getDaerah = $("#daerah").val();    
             $.ajax({
@@ -57,32 +76,14 @@
         });
     };
 
-    function tabels() {
-        var perangkatDaerah = $("#perangkat_daerah").val();
-        console.log('val', perangkatDaerah);
-        $('#example').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "order": [],
-            "ajax": {
-                "url": "<?= base_url('ServerSideTables/getData'); ?>",
-                // data: {
-                //     daerah: getDaerah,
-                //     perangkatDaerah: getPerangkatDaerah
-                // },
-                "type": "POST"
-            },
-            "columnDefs": [{
-                "target": [-1],
-                "orderable": false,
-                "searchable": false,
-                "render": function(data, type, row) {
-                    var btn = '<div class="cuss"><div><button type="button" class="btn btn-warning" data-bs-trigger="focus" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover"><i class="bi bi-eye"></i>Lihat</button></div><div class="middle"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-check-circle"></i>Disposisi</button></div><div><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-file-earmark-text"></i>Detail</button></div></div>';
-                    return btn;
-                }
-            }]
-        });
-    };
+    $('#btn-filter').click(function(){ //button filter event click
+        table.ajax.reload();  //just reload table
+    });
+    $('#btn-reset').click(function(){ //button reset event click
+        $('#form-filter')[0].reset();
+        table.ajax.reload();  //just reload table
+    });
+ 
 </script>
 
 <!-- Data Tables Bootstrap 5 -->

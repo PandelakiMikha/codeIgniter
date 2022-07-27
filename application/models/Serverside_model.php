@@ -7,8 +7,17 @@ class Serverside_model extends CI_Model
     var $column_order = array('id', 'sender', 'type', 'date_sended', 'regarding');
     var $order = array('id', 'sender', 'type', 'date_sended', 'regarding');
 
+    private function _get_data_query1($val_daerah){
+        if($val_daerah != 0)
+        {
+            // var_dump( $this->db->get_where('surat_masuk', ['daerah_id' => $val_daerah])->result_array()); die;
+            var_dump('ayaya'); die;
+        }
+    }
+
     private function _get_data_query()
     {
+        // var_dump('ayayas'); die;
         $this->db->from($this->table);
         if (isset($_POST['search']['value'])) {
             $this->db->like('sender', $_POST['search']['value']);
@@ -23,9 +32,11 @@ class Serverside_model extends CI_Model
         }
     }
 
-    public function getDataSurat()
+    public function getDataSurat($val_daerah)
     {
+        // var_dump($val_daerah); die;
         $this->_get_data_query();
+        $this->_get_data_query1($val_daerah);
         if ($_POST['length'] != -1) {
             $this->db->limit($_POST['length'], $_POST['start']);
         }

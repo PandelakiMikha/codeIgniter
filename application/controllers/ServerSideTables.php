@@ -16,7 +16,6 @@ class ServerSideTables extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'User Home';
         $data['totals'] = $this->Serverside_model->count_all_data();
-
         $data['data_daerah'] = $this->Serverside_model->getDataDaerah();
 
         $this->load->view('templates/header', $data);
@@ -28,7 +27,10 @@ class ServerSideTables extends CI_Controller
 
     public function getData()
     {
-        $results = $this->Serverside_model->getDataSurat();
+        $val_daerah = $this->input->post('perda');
+        // var_dump($val_daerah);
+        
+        $results = $this->Serverside_model->getDataSurat($val_daerah);
         $data = [];
         foreach ($results as $result) {
             $row = array();

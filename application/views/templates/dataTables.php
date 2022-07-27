@@ -10,8 +10,15 @@
         <select class="form-select w-50" aria-label="Default select example" id="perangkat_daerah" name="perangkat_daerah">
         </select>
     </div>
-    <div class="card">
-        <div class="card-body table-responsive">
+    <div class="form-group">
+        <label for="LastName" class="col-sm-2 control-label"></label>
+        <div class="col-sm-4">
+            <button type="button" id="btn-filter" class="btn btn-primary">Filter</button>
+            <button type="button" id="btn-reset" class="btn btn-default">Reset</button>
+        </div>
+    </div>
+        <div class="card">
+            <div class="card-body table-responsive">
             <table id="example" class="table table-hover1">
                 <thead class="table-light">
                     <tr>

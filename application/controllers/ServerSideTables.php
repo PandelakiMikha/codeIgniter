@@ -16,7 +16,6 @@ class ServerSideTables extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'User Home';
         $data['totals'] = $this->Serverside_model->count_all_data();
-
         $data['data_daerah'] = $this->Serverside_model->getDataDaerah();
 
         $this->load->view('templates/header', $data);
@@ -28,11 +27,7 @@ class ServerSideTables extends CI_Controller
 
     public function getData()
     {
-
-        $id_perangkat_daerah = $this->input->post('daerah');
-        var_dump($id_perangkat_daerah);
-        die;
-        $results = $this->Serverside_model->getDataSurat($id_perangkat_daerah);
+        $results = $this->Serverside_model->getDataSurat();
         $data = [];
         foreach ($results as $result) {
             $row = array();
@@ -40,26 +35,6 @@ class ServerSideTables extends CI_Controller
             $row[] = $result->type;
             $row[] = $result->regarding;
             $row[] = $result->date_sended;
-            // $row[] = '<div class="cuss">
-            //             <div>
-            //                 <button type="button" class="btn btn-warning" data-bs-trigger="focus" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover">
-            //                     <i class="bi bi-eye"></i>    
-            //                     Lihat
-            //                 </button>
-            //             </div>
-            //             <div class="middle">
-            //                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            //                     <i class="bi bi-check-circle"></i>    
-            //                     Disposisi
-            //                 </button>
-            //             </div>
-            //             <div>
-            //                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            //                     <i class="bi bi-file-earmark-text"></i>    
-            //                     Detail
-            //                 </button>
-            //             </div>
-            //           </div>';
             $data[] = $row;
         }
 
@@ -85,3 +60,26 @@ class ServerSideTables extends CI_Controller
         echo json_encode($getDaerah);
     }
 }
+
+
+// catatan
+// $row[] = '<div class="cuss">
+            //             <div>
+            //                 <button type="button" class="btn btn-warning" data-bs-trigger="focus" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover">
+            //                     <i class="bi bi-eye"></i>    
+            //                     Lihat
+            //                 </button>
+            //             </div>
+            //             <div class="middle">
+            //                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            //                     <i class="bi bi-check-circle"></i>    
+            //                     Disposisi
+            //                 </button>
+            //             </div>
+            //             <div>
+            //                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            //                     <i class="bi bi-file-earmark-text"></i>    
+            //                     Detail
+            //                 </button>
+            //             </div>
+            //           </div>';

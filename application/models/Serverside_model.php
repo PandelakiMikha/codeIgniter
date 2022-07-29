@@ -4,11 +4,26 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Serverside_model extends CI_Model
 {
     var $table = 'surat_masuk';
-    var $column_order = array('id', 'sender', 'type', 'date_sended', 'regarding');
-    var $order = array('id', 'sender', 'type', 'date_sended', 'regarding');
+    var $column_order = array('id', 'sender', 'type', 'date_sended', 'regarding', 'daerah_id', 'perangkat_daerah_id');
+    var $order = array('id', 'sender', 'type', 'date_sended', 'regarding', 'daerah_id', 'perangkat_daerah_id');
+
+    private function _get_data_query1()
+    {
+        // if ( != 0) {
+        //     // var_dump( $this->db->get_where('surat_masuk', ['daerah_id' => ])->result_array()); die;
+        //     var_dump('ayaya');
+        //     die;
+        // }
+    }
 
     private function _get_data_query()
     {
+        // var_dump('ayayas'); die;
+        $filter = $this->input->post('daerah');
+        var_dump($filter);
+        if ($filter = 1) {
+            $this->db->like('daerah_id', $filter);
+        }
         $this->db->from($this->table);
         if (isset($_POST['search']['value'])) {
             $this->db->like('sender', $_POST['search']['value']);
@@ -23,20 +38,12 @@ class Serverside_model extends CI_Model
         }
     }
 
-    public function getDataSurat($id_perangkat_daerah)
+    public function getDataSurat()
     {
-        if (!empty($_POST['perangkat_daerah'])) {
-            // $this->db->where('perangkat_daerah_id', $_POST['perangkat_daerah']);
-            $query = $this->db->get_where('surat_masuk', ['perangkat_daerah_id' => $id_perangkat_daerah])->result_array();
-
-            return $query;
-        }
-
         $this->_get_data_query();
         if ($_POST['length'] != -1) {
             $this->db->limit($_POST['length'], $_POST['start']);
         }
-
         $query = $this->db->get();
         return $query->result();
     }

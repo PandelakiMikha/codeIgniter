@@ -16,30 +16,26 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 <!-- select bertingkat -->
-<script>
+<script type="text/javascript">
+    var table;
     $(document).ready(function() {
         $("#perangkat_daerah").hide();
 
-        loadDaerah();
-        tabels();
-    });
-
-    function tabels() {
-        // for data tables
-        $('#example').DataTable({
+        //data tables
+        table = $('#example').DataTable({
             "processing": true,
             "serverSide": true,
             "order": [],
             "ajax": {
                 "url": "<?= base_url('ServerSideTables/getData'); ?>",
                 "type": "POST",
-                "dataType": "JSON",
-                "data": {
-                    // perangkat_daerah: $("#perangkat_daerah").val(),
-                    daerah: $("#daerah").val(),
+                "data": function(data) {
+                    // var perda;
+                    data.daerah = $("#daerah").val();
+                    // perda = data.perangkat_daerah;
+                    // console.log('perda', perda);
                 },
             },
-            // bDestroy: true,
             "columnDefs": [{
                 "target": [-1],
                 "orderable": false,
@@ -50,9 +46,10 @@
                 }
             }]
         });
-    };
+        loadPerangkatDaerah();
+    });
 
-    function loadDaerah() {
+    function loadPerangkatDaerah() {
         // for get data for filter
         $("#daerah").change(function() {
             var getDaerah = $("#daerah").val();
@@ -79,18 +76,14 @@
 
         });
 
-
+        $('#btn-filter').click(function() { //button filter event click
+            table.ajax.reload(); //just reload table
+        });
+        $('#btn-reset').click(function() { //button reset event click
+            $('#form-filter')[0].reset();
+            table.ajax.reload(); //just reload table
+        });
     };
-
-    tabels();
-
-    $("#daerah").change(function() {
-        tabels();
-    });
-
-    $("#perangkat_daerah").change(function() {
-        tabels();
-    });
 </script>
 
 <!-- Data Tables Bootstrap 5 -->

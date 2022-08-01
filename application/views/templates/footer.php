@@ -16,38 +16,22 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 <!-- select bertingkat -->
-<script type="text/javascript"> 
-    var table;
+<script>
     $(document).ready(function() {
         $("#perangkat_daerah").hide();
 
-        //data tables
-        table = $('#example').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "order": [],
-            "ajax": {
-                "url": "<?= base_url('ServerSideTables/getData'); ?>",
-                "type": "POST",
-                "data": function (data) {
-                    var perda;
-                    data.perangkat_daerah = $("#daerah").val();
-                    perda = data.perangkat_daerah;
-                    console.log('perda', perda);
-                },
-            },
-            "columnDefs": [{
-                "target": [-1],
-                "orderable": false,
-                "searchable": false,
-                "render": function(data, type, row) {
-                    var btn = '<div class="cuss"><div><button type="button" class="btn btn-warning" data-bs-trigger="focus" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover"><i class="bi bi-eye"></i>Lihat</button></div><div class="middle"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-check-circle"></i>Disposisi</button></div><div><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-file-earmark-text"></i>Detail</button></div></div>';
-                    return btn;
-                }
-            }]
-        });
         loadDaerah();
+
+        tabels();
     });
+    $(document).ready(function() {
+        $("#perangkat_daerah2").show();
+        $("#daftar_dinas").show();
+
+        daerahLoad();
+        dinasLoad();
+    });
+
 
     function loadDaerah() {
         $("#perangkat_daerah").change(function() {
@@ -82,14 +66,94 @@
         });
     };
 
-    $('#btn-filter').click(function(){ //button filter event click
-        table.ajax.reload();  //just reload table
-    });
-    $('#btn-reset').click(function(){ //button reset event click
-        $('#form-filter')[0].reset();
-        table.ajax.reload();  //just reload table
-    });
- 
+    //function untuk krim surat.....
+
+    //untuk daerah
+    function daerahLoad() {
+
+
+        $("#daerah").change(function() {
+            var ambilDaerah = $("#daerah").val();
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: "<?= base_url('User/getDataPerangkat'); ?>",
+                data: {
+                    daerah: ambilDaerah,
+                },
+                success: function(data) {
+                    console.log(data);
+
+                    var html = "";
+                    var i;
+                    for (i = 0; i < data.length; i++) {
+                        html += '<option selected hidden>Pilih Perangkat</option> <option value="' + data[i].id + '">' + data[i].name + '</option>';
+                    }
+
+                    $("#perangkat_daerah2").html(html);
+                    $("#perangkat_daerah2").show();
+                }
+            });
+
+        });
+    };
+
+    //untuk dinas....
+    function dinasLoad() {
+
+        $("#perangkat_daerah2").change(function() {
+            var ambilDinas = $("#perangkat_daerah2").val();
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: "<?= base_url('User/getDataDinas'); ?>",
+                data: {
+                    dinas: ambilDinas,
+                },
+                success: function(data) {
+                    console.log(data);
+
+                    var html = "";
+                    var i;
+                    for (i = 0; i < data.length; i++) {
+                        html += '<option selected hidden>Silahkan Pilih Dinas/Badan/Setda</option> <option value="' + data[i].id + '">' + data[i].name + '</option>';
+                    }
+
+                    $("#daftar_dinas").html(html);
+                    $("#daftar_dinas").show();
+                }
+            });
+
+        });
+    };
+    // -------------------------------------------------
+    //untuk table....
+    function tabels() {
+        var perangkatDaerah = $("#perangkat_daerah").val();
+        console.log('val', perangkatDaerah);
+        $('#example').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "order": [],
+            "ajax": {
+                "url": "<?= base_url('ServerSideTables/getData'); ?>",
+                // data: {
+                //     daerah: getDaerah,
+                //     perangkatDaerah: getPerangkatDaerah
+                // },
+                "type": "POST"
+            },
+            "columnDefs": [{
+                "target": [-1],
+                "orderable": false,
+                "searchable": false,
+                "render": function(data, type, row) {
+                    var btn = '<div class="cuss"><div><button type="button" class="btn btn-warning" data-bs-trigger="focus" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover"><i class="bi bi-eye"></i>Lihat</button></div><div class="middle"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-check-circle"></i>Disposisi</button></div><div><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-file-earmark-text"></i>Detail</button></div></div>';
+                    return btn;
+                }
+            }]
+        });
+    };
 </script>
 
 <!-- Data Tables Bootstrap 5 -->

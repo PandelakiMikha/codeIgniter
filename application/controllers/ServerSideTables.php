@@ -27,10 +27,7 @@ class ServerSideTables extends CI_Controller
 
     public function getData()
     {
-        $val_daerah = $this->input->post('perda');
-        // var_dump($val_daerah);
-        
-        $results = $this->Serverside_model->getDataSurat($val_daerah);
+        $results = $this->Serverside_model->getDataSurat();
         $data = [];
         foreach ($results as $result) {
             $row = array();
@@ -38,7 +35,35 @@ class ServerSideTables extends CI_Controller
             $row[] = $result->type;
             $row[] = $result->regarding;
             $row[] = $result->date_sended;
-            // $row[] = '<div class="cuss">
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->Serverside_model->count_all_data(),
+            "recordsFiltered" => $this->Serverside_model->count_filtered_data(),
+            "data" => $data,
+        );
+
+        $this->output->set_content_type('application/json')->set_output(json_encode($output));
+    }
+
+    public function getDataPerangkatDaerah()
+    {
+        $id_daerah = $this->input->post('daerah');
+        // $id_perangkat_daerah = $this->input->post('perangkatDaerah');
+        // var_dump($id_daerah);
+        // die;
+
+        $getDaerah = $this->Serverside_model->getDaerah($id_daerah);
+
+        echo json_encode($getDaerah);
+    }
+}
+
+
+// catatan
+// $row[] = '<div class="cuss">
             //             <div>
             //                 <button type="button" class="btn btn-warning" data-bs-trigger="focus" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover">
             //                     <i class="bi bi-eye"></i>    
@@ -58,26 +83,3 @@ class ServerSideTables extends CI_Controller
             //                 </button>
             //             </div>
             //           </div>';
-            $data[] = $row;
-        }
-
-        $output = array(
-            "draw" => $_POST['draw'],
-            "recordsTotal" => $this->Serverside_model->count_all_data(),
-            "recordsFiltered" => $this->Serverside_model->count_filtered_data(),
-            "data" => $data,
-        );
-
-        $this->output->set_content_type('application/json')->set_output(json_encode($output));
-    }
-
-    public function getDataPerangkatDaerah()
-    {
-        $id_daerah = $this->input->post('daerah');
-        // $id_perangkat_daerah = $this->input->post('perangkatDaerah');
-
-        $getDaerah = $this->Serverside_model->getDaerah($id_daerah);
-
-        echo json_encode($getDaerah);
-    }
-}

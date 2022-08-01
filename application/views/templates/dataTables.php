@@ -12,10 +12,9 @@
     </div>
 
     <div class="form-group">
-        <label for="LastName" class="col-sm-2 control-label"></label>
         <div class="col-sm-4">
-            <button type="button" id="btn-filter" class="btn btn-primary">Filter</button>
-            <button type="button" id="btn-reset" class="btn btn-default">Reset</button>
+            <button type="button" id="btn-filter" class="btn btn-sm btn-danger">Filter</button>
+            <button type="button" id="btn-reset" class="btn btn-sm btn-outline-danger">Reset</button>
         </div>
     </div>
     <div class="card">
@@ -58,6 +57,11 @@
 
 
 <style>
+    .form-group {
+        margin-left: -12px;
+        margin-top: 10px;
+    }
+
     .containerr {
         box-sizing: border-box;
         /* margin: auto; */

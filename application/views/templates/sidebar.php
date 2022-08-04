@@ -19,7 +19,7 @@
     </div>
     <div class="header">
         <div class="list-item">
-            <a href="<?= base_url('surat_masuk') ?>">
+            <a href="<?= base_url('karo') ?>">
                 <img src="<?= base_url('assets/logo/Silonbog.png') ?>" alt="">
                 <span class="header-title">Sistem Layanan Online Biro Organisasi</span>
             </a>
@@ -131,7 +131,7 @@
 <style>
     .sidebarr {
         display: flex;
-        width: 350px;
+        width: 300px !important;
         flex-direction: column;
         background-color: #EB6D6D;
         border-radius: 0px 20px 20px 0px;

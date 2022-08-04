@@ -14,7 +14,7 @@
                     <div class="col-md-4">
                         <label for="daerah" class="form-label"><b>Daerah</b></label>
                         <select name="daerah" id="daerah" class="form-select">
-                            <?php foreach ($data_daerah as $value) : ?>
+                            <?php foreach ($daerah_data as $value) : ?>
                                 <option value="" hidden>Pilih..</option>
                                 <option value="<?= $value->id ?>"><?= $value->name ?></option>
                             <?php endforeach ?>
@@ -22,19 +22,21 @@
                     </div>
 
                     <div class="col-md-4">
-                        <label for="perangkat_daerah" class="form-label"><b>Jenis Perangkat Daerah</b></label>
-                        <select name="perangkat_daerah" id="perangkat_daerah" class="form-select">
+                        <label for="perangkat_daerah2" class="form-label"><b>Jenis Perangkat / kementrian</b></label>
+                        <select name="perangkat_daerah2" id="perangkat_daerah2" class="form-select">
                             <option selected>Pilih...</option>
                             <option>...</option>
                         </select>
                     </div>
-                    <div class="col-md-4">
-                        <label for="inputState" class="form-label"><b>Daftar Dinas</b></label>
-                        <select id="inputState" class="form-select">
+
+                    <div class="col-md-4 mt-5">
+                        <!-- <label for="daftar_dinas" class="form-label"><b>Daftar Dinas</b></label> -->
+                        <select name="daftar_dinas" id="daftar_dinas" class="form-select">
                             <option selected>Pilih...</option>
                             <option>...</option>
                         </select>
                     </div>
+
                     <div class="col-md-4">
                         <label for="inputState" class="form-label"><b>UPTD dan Dinas Induk</b></label>
                         <select id="inputState" class="form-select">
@@ -43,12 +45,13 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label for="inputState" class="form-label"><b>Jenis Surat</b></label>
-                        <select id="inputState" class="form-select">
-                            <option selected>Pilih...</option>
-                            <option>Surat</option>
-                            <option>Laporan</option>
-                            <option>Undangan</option>
+                        <label for="jenis_surat" class="form-label"><b>Jenis Surat</b></label>
+                        <select name="jenis_surat" id="jenis_surat" class="form-select">
+                            <?php foreach ($jenis_surat as $value) : ?>
+                                <option value="" hidden>Pilih..</option>
+                                <option value="<?= $value->id ?>"><?= $value->name ?></option>
+
+                            <?php endforeach ?>
                         </select>
                     </div>
                     <!-- bagian text input -->
@@ -453,3 +456,46 @@
         console.log('ok');
     })
 </script>
+
+<!-- dropdown select bertingkat -->
+<!-- <script>
+    $(document).ready(function() {
+        $("#perangkat_daerah");
+
+        daerahLoad();
+        // tabels();
+    });
+
+    function daerahLoad() {
+        $("#perangkat_daerah").change(function() {
+            var getPerangkatDaerah = $("#perangkat_daerah").val();
+            // console.log(getPerangkatDaerah);
+            // tabels();
+        });
+
+        $("#daerah").change(function() {
+            var ambilDaerah = $("#daerah").val();
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: "<?= base_url('User/getDataPerangkat'); ?>",
+                data: {
+                    daerah: ambilDaerah,
+                },
+                success: function(data) {
+                    console.log(data);
+
+                    var html = "";
+                    var i;
+                    for (i = 0; i < data.length; i++) {
+                        html += '<option selected hidden>Pilih Perangkat Daerah</option> <option value="' + data[i].id + '">' + data[i].name + '</option>';
+                    }
+
+                    $("#perangkat_daerah").html(html);
+                    $("#perangkat_daerah").show();
+                }
+            });
+
+        });
+    };
+</script> -->

@@ -4,7 +4,7 @@ use LDAP\Result;
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class ServerSideTables extends CI_Controller
+class Ktu extends CI_Controller
 {
     public function __construct()
     {
@@ -14,14 +14,14 @@ class ServerSideTables extends CI_Controller
     public function index()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['judul'] = 'User Home';
+        $data['judul'] = 'Dashboard';
         $data['totals'] = $this->Serverside_model->count_all_data();
         $data['data_daerah'] = $this->Serverside_model->getDataDaerah();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/navbar', $data);
-        $this->load->view('templates/dataTables');
+        $this->load->view('surat_masuk/index');
         $this->load->view('templates/footer');
     }
 

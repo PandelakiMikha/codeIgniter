@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Serverside_model extends CI_Model
+class Surat extends CI_Model
 {
     var $table = 'surat_masuk';
     var $column_order = array('id', 'sender', 'type', 'date_sended', 'regarding', 'daerah_id', 'perangkat_daerah_id');

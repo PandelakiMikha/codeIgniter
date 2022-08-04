@@ -23,7 +23,7 @@
         $("#perangkat_daerah").hide();
 
         //data tables
-        table = $('#example').DataTable({
+        table = $('#dispo').DataTable({
             "processing": true,
             "serverSide": true,
             "order": [],
@@ -213,7 +213,40 @@
             $('#form-filter')[0].reset();
             table.ajax.reload(); //just reload table
         });
-    };
+
+
+    }
+</script>
+
+<script>
+    var table;
+    $(document).ready(function() {
+        //data tables
+        table = $('#surat_masuk').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "order": [],
+            "ajax": {
+                "url": "<?= base_url('Surat_masuk/getData'); ?>",
+                "type": "POST",
+                "data": function(data) {
+                    // var perda;
+                    data.daerah = $("#daerah").val();
+                    // perda = data.perangkat_daerah;
+                    // console.log('perda', perda);
+                },
+            },
+            "columnDefs": [{
+                "target": [-1],
+                "orderable": false,
+                "searchable": false,
+                // "render": function(data, type, row) {
+                //     var btn = '<div class="cuss"><div><button type="button" class="btn btn-warning" data-bs-trigger="focus" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover"><i class="bi bi-eye"></i>Lihattt</button></div><div class="middle"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-check-circle"></i>Disposisi</button></div><div><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-file-earmark-text"></i>Detail</button></div></div>';
+                //     return btn;
+                // }
+            }]
+        });
+    });
 </script>
 
 <!-- Data Tables Bootstrap 5 -->

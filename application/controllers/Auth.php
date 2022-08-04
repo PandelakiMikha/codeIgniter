@@ -47,15 +47,15 @@ class Auth extends CI_Controller
 
                     $this->session->set_userdata($data);
                     if ($user['role_id'] == 1) {
-                        redirect('admin');
+                        redirect('Karo');
                     } else if ($user['role_id'] == 2) {
-                        redirect('admin');
+                        redirect('Kabag');
                     } else if ($user['role_id'] == 3) {
-                        redirect('admin');
+                        redirect('Ktu');
                     } else if ($user['role_id'] == 4) {
-                        redirect('admin');
+                        redirect('Jabfung');
                     } else {
-                        redirect('user/tampilanHome_user');
+                        redirect('User');
                     }
                 } else {
                     $this->session->set_flashdata('massage', '<div class="alert alert-danger" role="alert">Password salah!</div>');

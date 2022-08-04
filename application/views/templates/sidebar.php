@@ -19,7 +19,7 @@
     </div>
     <div class="header">
         <div class="list-item">
-            <a href="#">
+            <a href="<?= base_url('karo') ?>">
                 <img src="<?= base_url('assets/logo/Silonbog.png') ?>" alt="">
                 <span class="header-title">Sistem Layanan Online Biro Organisasi</span>
             </a>
@@ -28,37 +28,101 @@
     <hr class="text-white">
     <div class="main">
         <div class="list-item">
-            <a href="#" class="item">
-                <!-- <i class="fas fa-fw fa-light fa-envelope"></i> -->
+            <?php if ($user['role_id'] == 1 || $user['role_id'] == 2) : ?>
+                <a href="<?= base_url('surat_masuk') ?>" class="item" id="surma">
+                    <i class="fa-fw bi bi-envelope-paper"></i>
+                    <span class="item-title">Surat Masuk</span>
+                </a>
+                <a href="<?= base_url('dispo') ?>" class="item">
+                    <i class="fa-fw bi bi-clipboard-check"></i>
+                    <span class="item-title">Disposisi</span>
+                </a>
+                <div class="dropdown">
+                    <a href="#" class="item dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-fw bi bi-journal-bookmark"></i>
+                        <span class="item-title">Arsip</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#">Surat Masuk</a></li>
+                        <li><a class="dropdown-item" href="#">Surat Keluar</a></li>
+                    </ul>
+                </div>
+            <?php elseif ($user['role_id'] == 3) : ?>
+                <div class="dropdown">
+                    <a href="#" class="item dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-fw bi bi-envelope-paper"></i>
+                        <span class="item-title">Surat</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#">Surat Masuk</a></li>
+                        <li><a class="dropdown-item" href="#">Surat Keluar</a></li>
+                    </ul>
+                </div>
+                <a href="#" class="item">
+                    <i class="fa-fw bi bi-clipboard-check"></i>
+                    <span class="item-title">Disposisi</span>
+                </a>
+                <a href="#" class="item">
+                    <i class="fa-fw bi bi-send-plus"></i>
+                    <span class="item-title">Kirim Surat</span>
+                </a>
+                <div class="dropdown">
+                    <a href="#" class="item dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-fw bi bi-journal-bookmark"></i>
+                        <span class="item-title">Arsip</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#">Surat Masuk</a></li>
+                        <li><a class="dropdown-item" href="#">Surat Keluar</a></li>
+                    </ul>
+                </div>
+            <?php elseif ($user['role_id'] == 4) : ?>
+                <a href="#" class="item">
+                    <i class="fa-fw bi bi-envelope-paper"></i>
+                    <span class="item-title">Surat Masuk</span>
+                </a>
+                <a href="#" class="item">
+                    <i class="fa-fw bi bi-clipboard-check"></i>
+                    <span class="item-title">Disposisi</span>
+                </a>
+            <?php elseif ($user['role_id'] == 5) : ?>
+                <div class="dropdown">
+                    <a href="#" class="item dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-fw bi bi-envelope-paper"></i>
+                        <span class="item-title">Surat</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#">Surat Masuk</a></li>
+                        <li><a class="dropdown-item" href="#">Surat Keluar</a></li>
+                    </ul>
+                </div>
+                <a href="#" class="item">
+                    <i class="fa-fw bi bi-send-plus"></i>
+                    <span class="item-title">Kirim Surat</span>
+                </a>
+            <?php endif ?>
+            <!-- <a href="#" class="item">
                 <i class="fa-fw bi bi-envelope-paper"></i>
                 <span class="item-title">Surat Masuk</span>
             </a>
             <a href="#" class="item">
                 <i class="fa-fw bi bi-clipboard-check"></i>
-                <!-- <i class="fas fa-fw fa-solid fa-clipboard-list"></i> -->
                 <span class="item-title">Disposisi</span>
             </a>
             <a href="#" class="item">
                 <i class="fa-fw bi bi-send-plus"></i>
-                <!-- <i class="fas fa-fw fa-solid fa-paper-plane"></i> -->
                 <span class="item-title">Kirim Surat</span>
             </a>
-            <!-- <a href="#">
-                    <i class="fa-fw bi bi-journal-bookmark"></i>
-                    <i class="fas fa-fw fa-thin fa-folder-open"></i>
-                    <span class="item-title">Arsip</span>
-                </a> -->
             <div class="dropdown">
                 <a href="#" class="item dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fa-fw bi bi-journal-bookmark"></i>
-                    <!-- <i class="fas fa-fw fa-thin fa-folder-open"></i> -->
                     <span class="item-title">Arsip</span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li><a class="dropdown-item" href="#">Surat Masuk</a></li>
                     <li><a class="dropdown-item" href="#">Surat Keluar</a></li>
-                </ul>
-            </div>
+                </ul>       
+            </div> -->
         </div>
     </div>
 </div>
@@ -67,7 +131,7 @@
 <style>
     .sidebarr {
         display: flex;
-        width: 350px;
+        width: 300px !important;
         flex-direction: column;
         background-color: #EB6D6D;
         border-radius: 0px 20px 20px 0px;
@@ -190,14 +254,14 @@
 
     .sidebarr .main .list-item .dropdown .dropdown-menu {
         margin-left: 10px !important;
-        background-color: #FFFFF0;
+        background-color: #FFFFFF;
         width: 240px;
         box-sizing: border-box;
     }
 
-    .sidebarr .main .list-item .dropdown.dropend .dropdown-menu.dropend {
+    /* .sidebarr .main .list-item .dropdown.dropend .dropdown-menu.dropend {
         background-color: #FFFFF0;
-    }
+    } */
 
     .sidebarr .main .list-item .dropdown .dropdown-menu a {
         color: #111827;

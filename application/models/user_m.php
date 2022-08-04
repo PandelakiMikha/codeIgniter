@@ -6,7 +6,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class user_m extends CI_Model
 {
-    //untuk menampilkan data daerah....
+    //untuk menampilkan data daerah yang ada dalam database....
     function getdataDaerah()
     {
         $query = $this->db->query("SELECT * FROM daerah ORDER BY name ASC");

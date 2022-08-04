@@ -8,12 +8,12 @@
             </div>
             <div class="modal-body">
                 <!-- content -->
-                <form class="row g-3">
+                <form class="row g-3" action="" method="post">
                     <!-- bagian dropdown -->
 
                     <div class="col-md-4">
                         <label for="daerah" class="form-label"><b>Daerah</b></label>
-                        <select name="daerah" id="daerah" class="form-select">
+                        <select name="daerah" id="daerah" class="form-select" value="<?= set_value('daerah') ?>">
                             <?php foreach ($daerah_data as $value) : ?>
                                 <option value="" hidden>Pilih..</option>
                                 <option value="<?= $value->id ?>"><?= $value->name ?></option>
@@ -23,7 +23,7 @@
 
                     <div class="col-md-4">
                         <label for="perangkat_daerah2" class="form-label"><b>Jenis Perangkat / kementrian</b></label>
-                        <select name="perangkat_daerah2" id="perangkat_daerah2" class="form-select">
+                        <select name="perangkat_daerah2" id="perangkat_daerah2" class="form-select" value="<?= set_value('perangkat_daerah2') ?>">
                             <option selected>Pilih...</option>
                             <option>...</option>
                         </select>
@@ -31,22 +31,22 @@
 
                     <div class="col-md-4 mt-5">
                         <!-- <label for="daftar_dinas" class="form-label"><b>Daftar Dinas</b></label> -->
-                        <select name="daftar_dinas" id="daftar_dinas" class="form-select">
+                        <select name="daftar_dinas" id="daftar_dinas" class="form-select" value="<?= set_value('daftar_dinas') ?>">
                             <option selected>Pilih...</option>
                             <option>...</option>
                         </select>
                     </div>
 
                     <div class="col-md-4">
-                        <label for="inputState" class="form-label"><b>UPTD dan Dinas Induk</b></label>
-                        <select id="inputState" class="form-select">
+                        <label for="uptd" class="form-label"><b>UPTD dan Dinas Induk</b></label>
+                        <select name="uptd" id="uptd" class="form-select" value="<?= set_value('uptd') ?>">
                             <option selected>Pilih...</option>
                             <option>...</option>
                         </select>
                     </div>
                     <div class="col-md-4">
                         <label for="jenis_surat" class="form-label"><b>Jenis Surat</b></label>
-                        <select name="jenis_surat" id="jenis_surat" class="form-select">
+                        <select name="jenis_surat" id="jenis_surat" class="form-select" value="<?= set_value('jenis_surat') ?>">
                             <?php foreach ($jenis_surat as $value) : ?>
                                 <option value="" hidden>Pilih..</option>
                                 <option value="<?= $value->id ?>"><?= $value->name ?></option>
@@ -57,17 +57,17 @@
                     <!-- bagian text input -->
                     <div class="col-12">
                         <label for="lainya" class="form-label"><b>Lainya</b></label>
-                        <input type="text" class="form-control" id="lainya" placeholder="Jenis Surat Lainya">
+                        <input type="text" class="form-control" name="lainya" id="lainya" placeholder="Jenis Surat Lainya" value="<?= set_value('lainya') ?>">
                     </div>
                     <div class="col-12">
                         <label for="perihal" class="form-label"><b>Perihal</b></label>
-                        <input type="text" class="form-control" id="perihal" placeholder="Masukan Perihal yang Anda Inginkan">
+                        <input type="text" class="form-control" name="perihal" id="perihal" placeholder="Masukan Perihal yang Anda Inginkan" value="<?= set_value('perihal') ?>">
                     </div>
 
                     <!-- pilih file -->
                     <div class="mb-3 mt-3">
-                        <label for="formFileSm" class="form-label"><b>Pilih File</b></label>
-                        <input class="form-control form-control-sm" id="formFileSm" type="file" accept="application/pdf" multiple>
+                        <label for="nama_file" class="form-label"><b>Pilih File</b></label>
+                        <input class="form-control form-control-sm" name="nama_file" id="nama_file" type="file" accept="application/pdf" value="<?= set_value('nama_file') ?>" multiple>
                     </div>
 
                     <div class=" d-flex justify-content-center mt-5">
@@ -86,6 +86,16 @@
 <!-- end of modal -->
 
 <div class="sidebarr">
+    <div class="hamburger   ">
+        <div class="hamburgerr ">
+            <div id="menu-button">
+                <input type="checkbox" id="menu-checkbox">
+                <label for="menu-checkbox" id="menu-label">
+                    <div id="hamburger"></div>
+                </label>
+            </div>
+        </div>
+    </div>
     <div class="header">
         <div class="list-item">
             <a href="#">
@@ -128,21 +138,17 @@
         </div>
     </div>
 </div>
-<div class="main-content">
+<!-- <div class="main-content">
     <div id="menu-button">
         <input type="checkbox" id="menu-checkbox">
         <label for="menu-checkbox" id="menu-label">
             <div id="hamburger"></div>
         </label>
     </div>
-</div>
+</div> -->
 
 
 <style>
-    .container {
-        margin-top: 40%;
-    }
-
     .sidebarr {
         display: flex;
         width: 350px;
@@ -150,9 +156,10 @@
         background-color: #EB6D6D;
         border-radius: 0px 20px 20px 0px;
         padding-left: 20px;
-        padding-right: 20px;
+        /* padding-right: 20px; */
         box-sizing: border-box;
         transition: all ease-in 0.3s;
+        z-index: 99;
     }
 
     .sidebarr.hide {
@@ -160,6 +167,19 @@
         transition: all ease-out 0.3s;
         padding-left: 10px;
         padding-right: 10px;
+    }
+
+    .sidebarr .hamburger {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 17px;
+        margin-bottom: -20px;
+    }
+
+    .sidebarr.hide .hamburger {
+        margin-right: -43px;
+        position: relative;
+        z-index: 99;
     }
 
     .sidebarr .header {
@@ -180,10 +200,12 @@
 
     .sidebarr .header-title {
         font-weight: 700;
-        font-size: 19px;
+        font-weight: bolder;
+        font-size: 17px;
         color: #FFFFF0;
         margin-left: 10px;
         line-height: 33px;
+        box-sizing: border-box;
     }
 
     .sidebarr.hide .header-title {
@@ -192,8 +214,8 @@
 
 
     .sidebarr img {
-        width: 80px;
-        height: 80px;
+        width: 70px;
+        height: 70px;
         border-radius: 10px;
         box-sizing: border-box;
     }
@@ -207,7 +229,7 @@
 
     .sidebarr .main {
         flex-grow: 1;
-        margin-top: 30px;
+        margin-top: 10px;
     }
 
     .sidebarr .list-item {
@@ -303,15 +325,16 @@
     /* Toogle Menu */
     #menu-button {
         width: 32px;
-        position: absolute;
+        /* position: absolute; */
         overflow: hidden;
         top: 16px;
+
     }
 
     #menu-label {
         position: relative;
         display: block;
-        height: 20px;
+        height: 15px;
         cursor: pointer;
     }
 
@@ -426,22 +449,6 @@
         100% {
             transform: rotateZ(0);
         }
-    }
-
-    /* .modal-body {
-        background: #FF7878;
-    } */
-
-    /* .modal {
-        color: antiquewhite;
-
-    } */
-
-    .modal-header {
-        background: #FF7878;
-        color: white;
-        /* border-bottom-left-radius: 30px; */
-        border-bottom-right-radius: 50px;
     }
 </style>
 

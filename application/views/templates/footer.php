@@ -6,7 +6,7 @@
 
 <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
 <script src="<?= base_url('assets/'); ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="<?= base_url('assets/'); ?>vendor/js/userjs.js"></script>
+
 
 <script src="<?= base_url('assets/'); ?>vendor/jquery-easing/jquery.easing.min.js"></script>
 
@@ -49,9 +49,11 @@
         });
         loadPerangkatDaerah();
     });
+
+    //function load krim surat.....
     $(document).ready(function() {
         $("#perangkat_daerah2").show();
-        $("#daftar_dinas").show();
+        $("#daftar_dinas").hide();
 
         daerahLoad();
         dinasLoad();
@@ -86,9 +88,9 @@
         });
     }
 
-    //function untuk krim surat.....
+    // //function untuk krim surat.....
 
-    //untuk daerah
+    // //untuk daerah
     function daerahLoad() {
 
 
@@ -118,6 +120,7 @@
         });
     };
 
+
     //untuk dinas....
     function dinasLoad() {
 
@@ -146,6 +149,36 @@
 
         });
     };
+
+    //untuk dinas....
+    // function dinasLoad() {
+
+    //     $("#perangkat_daerah2").change(function() {
+    //         var ambilDinas = $("#perangkat_daerah2").val();
+    //         $.ajax({
+    //             type: "POST",
+    //             dataType: "JSON",
+    //             url: "<?= base_url('User/getDataDinas'); ?>",
+    //             data: {
+    //                 dinas: ambilDinas,
+    //             },
+    //             success: function(data) {
+    //                 console.log(data);
+
+    //                 var html = "";
+    //                 var i;
+    //                 for (i = 0; i < data.length; i++) {
+    //                     html += '<option selected hidden>Silahkan Pilih Dinas/Badan/Setda</option> <option value="' + data[i].id + '">' + data[i].name + '</option>';
+    //                 }
+
+    //                 $("#daftar_dinas").html(html);
+    //                 $("#daftar_dinas").show();
+    //             }
+    //         });
+
+    //     });
+    // };
+
     // -------------------------------------------------
     //untuk table....
     function tabels() {
@@ -187,9 +220,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-<script>
-
-</script>
+<!-- <script src="<?php echo base_url('assets/'); ?>js/user.js"></script> -->
 
 <script>
     $("table thead tr th").addClass("align-middle");

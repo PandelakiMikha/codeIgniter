@@ -4,7 +4,7 @@ use LDAP\Result;
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class ServerSideTables extends CI_Controller
+class Karo extends CI_Controller
 {
     public function __construct()
     {
@@ -14,19 +14,29 @@ class ServerSideTables extends CI_Controller
     public function index()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['judul'] = 'User Home';
+        $data['judul'] = 'Dashboard';
         $data['totals'] = $this->Serverside_model->count_all_data();
-        $data['data_daerah'] = $this->Serverside_model->getDataDaerah();
+        // $data['data_daerah'] = $this->Serverside_model->getDataDaerah();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/navbar', $data);
-        $this->load->view('templates/dataTables');
+        $this->load->view('surat_masuk/index');
         $this->load->view('templates/footer');
     }
 
     public function getData()
     {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['judul'] = 'Dashboard';
+        $data['totals'] = $this->Serverside_model->count_all_data();
+        
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/navbar', $data);
+        $this->load->view('dispo/index');
+        $this->load->view('templates/footer');
+
         $results = $this->Serverside_model->getDataSurat();
         $data = [];
         foreach ($results as $result) {
@@ -48,17 +58,13 @@ class ServerSideTables extends CI_Controller
         $this->output->set_content_type('application/json')->set_output(json_encode($output));
     }
 
-    public function getDataPerangkatDaerah()
-    {
-        $id_daerah = $this->input->post('daerah');
-        // $id_perangkat_daerah = $this->input->post('perangkatDaerah');
-        // var_dump($id_daerah);
-        // die;
+    // public function getDataPerangkatDaerah()
+    // {
+    //     $id_daerah = $this->input->post('daerah');
+    //     $getDaerah = $this->Serverside_model->getDaerah($id_daerah);
 
-        $getDaerah = $this->Serverside_model->getDaerah($id_daerah);
-
-        echo json_encode($getDaerah);
-    }
+    //     echo json_encode($getDaerah);
+    // }
 }
 
 

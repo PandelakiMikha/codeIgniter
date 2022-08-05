@@ -4,7 +4,7 @@ use LDAP\Result;
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class ServerSideTables extends CI_Controller
+class Surat_masuk extends CI_Controller
 {
     public function __construct()
     {
@@ -16,14 +16,14 @@ class ServerSideTables extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'User Home';
         $data['totals'] = $this->Serverside_model->count_all_data();
-        $data['data_daerah'] = $this->Serverside_model->getDataDaerah();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/navbar', $data);
-        $this->load->view('templates/dataTables');
+        $this->load->view('surat_masuk/index', $data);
         $this->load->view('templates/footer');
     }
+
 
     public function getData()
     {
@@ -46,18 +46,6 @@ class ServerSideTables extends CI_Controller
         );
 
         $this->output->set_content_type('application/json')->set_output(json_encode($output));
-    }
-
-    public function getDataPerangkatDaerah()
-    {
-        $id_daerah = $this->input->post('daerah');
-        // $id_perangkat_daerah = $this->input->post('perangkatDaerah');
-        // var_dump($id_daerah);
-        // die;
-
-        $getDaerah = $this->Serverside_model->getDaerah($id_daerah);
-
-        echo json_encode($getDaerah);
     }
 }
 

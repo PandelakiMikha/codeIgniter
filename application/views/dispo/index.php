@@ -10,7 +10,6 @@
         <select class="form-select w-50" aria-label="Default select example" id="perangkat_daerah" name="perangkat_daerah">
         </select>
     </div>
-
     <div class="form-group">
         <div class="col-sm-4">
             <button type="button" id="btn-filter" class="btn btn-sm btn-danger">Filter</button>
@@ -19,7 +18,7 @@
     </div>
     <div class="card">
         <div class="card-body table-responsive">
-            <table id="example" class="table table-hover1">
+            <table id="dispo" class="table table-hover1">
                 <thead class="table-light">
                     <tr>
                         <th>Pingirim</th>

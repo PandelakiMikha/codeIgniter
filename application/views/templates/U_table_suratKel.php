@@ -1,6 +1,6 @@
 <div class="containerr mt-5 ">
     <h4>Daftar Surat</h4>
-    <div class="d-flex w-50 my-2 ">
+    <!-- <div class="d-flex w-50 my-2 ">
         <select class="form-select me-3 w-50" id="daerah" name="daerah">
             <?php foreach ($data_daerah as $value) : ?>
                 <option value="" hidden>Pilih Daerah</option>
@@ -9,14 +9,17 @@
         </select>
         <select class="form-select w-50" aria-label="Default select example" id="perangkat_daerah" name="perangkat_daerah">
         </select>
-    </div>
+    </div> -->
 
-    <div class="form-group">
+    <!-- <div class="form-group">
+        <label for="LastName" class="col-sm-2 control-label"></label>
         <div class="col-sm-4">
-            <button type="button" id="btn-filter" class="btn btn-sm btn-danger">Filter</button>
-            <button type="button" id="btn-reset" class="btn btn-sm btn-outline-danger">Reset</button>
+            <button type="button" id="btn-filter" class="btn btn-primary">Filter</button>
+            <button type="button" id="btn-reset" class="btn btn-default">Reset</button>
         </div>
-    </div>
+    </div> -->
+
+
     <div class="card">
         <div class="card-body table-responsive">
             <table id="example" class="table table-hover1">
@@ -25,7 +28,7 @@
                         <th>Pingirim</th>
                         <th>Jenis Surat</th>
                         <th>Perihal</th>
-                        <th>Tanggal Masuk</th>
+                        <th>Tanggal Keluar</th>
                         <th class="hala"></th>
                     </tr>
                 </thead>
@@ -57,11 +60,6 @@
 
 
 <style>
-    .form-group {
-        margin-left: -12px;
-        margin-top: 10px;
-    }
-
     .containerr {
         box-sizing: border-box;
         /* margin: auto; */

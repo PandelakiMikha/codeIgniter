@@ -1,11 +1,3 @@
-<!-- <div class="hamburgerr bg-primary">
-    <div id="menu-button">
-        <input type="checkbox" id="menu-checkbox">
-        <label for="menu-checkbox" id="menu-label">
-            <div id="hamburger"></div>
-        </label>
-    </div>
-</div> -->
 <div class="sidebarr">
     <div class="hamburger   ">
         <div class="hamburgerr ">
@@ -101,28 +93,6 @@
                     <span class="item-title">Kirim Surat</span>
                 </a>
             <?php endif ?>
-            <!-- <a href="#" class="item">
-                <i class="fa-fw bi bi-envelope-paper"></i>
-                <span class="item-title">Surat Masuk</span>
-            </a>
-            <a href="#" class="item">
-                <i class="fa-fw bi bi-clipboard-check"></i>
-                <span class="item-title">Disposisi</span>
-            </a>
-            <a href="#" class="item">
-                <i class="fa-fw bi bi-send-plus"></i>
-                <span class="item-title">Kirim Surat</span>
-            </a>
-            <div class="dropdown">
-                <a href="#" class="item dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-fw bi bi-journal-bookmark"></i>
-                    <span class="item-title">Arsip</span>
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">Surat Masuk</a></li>
-                    <li><a class="dropdown-item" href="#">Surat Keluar</a></li>
-                </ul>       
-            </div> -->
         </div>
     </div>
 </div>
@@ -131,7 +101,7 @@
 <style>
     .sidebarr {
         display: flex;
-        width: 300px !important;
+        width: 300px;
         flex-direction: column;
         background-color: #EB6D6D;
         border-radius: 0px 20px 20px 0px;
@@ -254,14 +224,14 @@
 
     .sidebarr .main .list-item .dropdown .dropdown-menu {
         margin-left: 10px !important;
-        background-color: #FFFFFF;
+        background-color: #FFFFF0;
         width: 240px;
         box-sizing: border-box;
     }
 
-    /* .sidebarr .main .list-item .dropdown.dropend .dropdown-menu.dropend {
+    .sidebarr .main .list-item .dropdown.dropend .dropdown-menu.dropend {
         background-color: #FFFFF0;
-    } */
+    }
 
     .sidebarr .main .list-item .dropdown .dropdown-menu a {
         color: #111827;
@@ -431,15 +401,3 @@
         }
     }
 </style>
-
-<script>
-    const menu = document.getElementById('menu-label');
-    const sidebar = document.getElementsByClassName('sidebarr')[0];
-    const dropdown = document.getElementsByClassName('dropdown')[0];
-
-    menu.addEventListener('click', function() {
-        sidebar.classList.toggle('hide');
-        dropdown.classList.toggle('dropend');
-        console.log('ok');
-    })
-</script>

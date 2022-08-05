@@ -253,7 +253,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-<!-- <script src="<?php echo base_url('assets/'); ?>js/user.js"></script> -->
+<script src="<?php echo base_url('assets/'); ?>js/user.js"></script>
 
 <script>
     $("table thead tr th").addClass("align-middle");
@@ -265,6 +265,29 @@
     var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
     var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
         return new bootstrap.Popover(popoverTriggerEl)
+    })
+</script>
+
+<script>
+    const menu = document.getElementById('menu-label');
+    const sidebar = document.getElementsByClassName('sidebarr')[0];
+    const dropdown = document.getElementsByClassName('dropdown')[0];
+
+    menu.addEventListener('click', function() {
+        sidebar.classList.toggle('hide');
+        dropdown.classList.toggle('dropend');
+        console.log('ok');
+    })
+</script>
+
+<script>
+    $("#pesan").hide();
+    const side = document.getElementById('surma');
+    console.log('side', side);
+
+    side.addEventListener('click', function(e) {
+        console.log('e', e);
+        $("#pesan").show();
     })
 </script>
 

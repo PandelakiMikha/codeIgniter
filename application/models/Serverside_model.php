@@ -7,15 +7,6 @@ class Serverside_model extends CI_Model
     var $column_order = array('id', 'sender', 'type', 'date_sended', 'regarding', 'daerah_id', 'perangkat_daerah_id');
     var $order = array('id', 'sender', 'type', 'date_sended', 'regarding', 'daerah_id', 'perangkat_daerah_id');
 
-    private function _get_data_query1()
-    {
-        // if ( != 0) {
-        //     // var_dump( $this->db->get_where('surat_masuk', ['daerah_id' => ])->result_array()); die;
-        //     var_dump('ayaya');
-        //     die;
-        // }
-    }
-
     private function _get_data_query()
     {
         // var_dump('ayayas'); die;
@@ -71,7 +62,6 @@ class Serverside_model extends CI_Model
 
     public function getDaerah($id_daerah)
     {
-        // $this->db->order_by("name", "asc");
         $query = $this->db->get_where('perangkat_daerah', ['daerah_id' => $id_daerah])->result_array();
 
         return $query;

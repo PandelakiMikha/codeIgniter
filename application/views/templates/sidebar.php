@@ -25,7 +25,7 @@
                     <i class="fa-fw bi bi-envelope-paper"></i>
                     <span class="item-title">Surat Masuk</span>
                 </a>
-                <a href="<?= base_url('dispo') ?>" class="item">
+                <a href="<?= base_url('dispo/index') ?>" class="item">
                     <i class="fa-fw bi bi-clipboard-check"></i>
                     <span class="item-title">Disposisi</span>
                 </a>

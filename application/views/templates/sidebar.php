@@ -33,7 +33,7 @@
                 <i class="fa-fw bi bi-envelope-paper"></i>
                 <span class="item-title">Surat Masuk</span>
             </a>
-            <a href="#" class="item">
+            <a href="<?php echo ('MainMenu/disposisi') ?>" class="item">
                 <i class="fa-fw bi bi-clipboard-check"></i>
                 <!-- <i class="fas fa-fw fa-solid fa-clipboard-list"></i> -->
                 <span class="item-title">Disposisi</span>
@@ -77,6 +77,7 @@
         transition: all ease-in 0.3s;
         z-index: 99;
     }
+
 
     .sidebarr.hide {
         width: 87px;
@@ -174,6 +175,11 @@
         padding-left: 6px;
         background: linear-gradient(224.57deg, #EABDBD 0.62%, rgba(217, 217, 217, 0) 75.19%);
     }
+
+    .sidebarr .main .list-item .item:focus {
+        background: linear-gradient(224.57deg, #EABDBD 0.62%, rgba(217, 217, 217, 0) 75.19%);
+    }
+
 
     .sidebarr.hide .main .list-item .item {
         justify-content: center;

@@ -11,7 +11,7 @@
                 <form class="row g-3" action="" method="post">
                     <!-- bagian dropdown -->
 
-                    <div class="col-md-4">
+                    <!-- <div class="col-md-4">
                         <label for="daerah" class="form-label"><b>Daerah</b></label>
                         <select name="daerah" id="daerah" class="form-select" value="<?= set_value('daerah') ?>">
                             <?php foreach ($daerah_data as $value) : ?>
@@ -19,46 +19,57 @@
                                 <option value="<?= $value->id ?>"><?= $value->name ?></option>
                             <?php endforeach ?>
                         </select>
-                    </div>
+                    </div> -->
 
-                    <div class="col-md-4">
+                    <!-- <div class="col-md-4">
                         <label for="perangkat_daerah2" class="form-label"><b>Jenis Perangkat / kementrian</b></label>
                         <select name="perangkat_daerah2" id="perangkat_daerah2" class="form-select" value="<?= set_value('perangkat_daerah2') ?>">
                             <option selected>Pilih...</option>
                             <option>...</option>
                         </select>
-                    </div>
+                    </div> -->
 
-                    <div class="col-md-4 mt-5">
-                        <!-- <label for="daftar_dinas" class="form-label"><b>Daftar Dinas</b></label> -->
+                    <!-- <div class="col-md-4 mt-5">
+                        
                         <select name="daftar_dinas" id="daftar_dinas" class="form-select" value="<?= set_value('daftar_dinas') ?>">
                             <option selected>Pilih...</option>
                             <option>...</option>
                         </select>
-                    </div>
+                    </div> -->
 
-                    <div class="col-md-4">
+                    <!-- <div class="col-md-4">
                         <label for="uptd" class="form-label"><b>UPTD dan Dinas Induk</b></label>
                         <select name="uptd" id="uptd" class="form-select" value="<?= set_value('uptd') ?>">
                             <option selected>Pilih...</option>
                             <option>...</option>
                         </select>
-                    </div>
+                    </div> -->
                     <div class="col-md-4">
                         <label for="jenis_surat" class="form-label"><b>Jenis Surat</b></label>
                         <select name="jenis_surat" id="jenis_surat" class="form-select" value="<?= set_value('jenis_surat') ?>">
-                            <?php foreach ($jenis_surat as $value) : ?>
+                            <!-- <?php foreach ($jenis_surat as $value) : ?>
                                 <option value="" hidden>Pilih..</option>
                                 <option value="<?= $value->id ?>"><?= $value->name ?></option>
 
-                            <?php endforeach ?>
+                            <?php endforeach ?> -->
+                            <option hidden value="">Pilih..</option>
+                            <option value="">Surat</option>
+                            <option value="">Laporan</option>
+                            <option value="">Undangan</option>
                         </select>
                     </div>
                     <!-- bagian text input -->
-                    <div class="col-12">
-                        <label for="lainya" class="form-label"><b>Lainya</b></label>
-                        <input type="text" class="form-control" name="lainya" id="lainya" placeholder="Jenis Surat Lainya" value="<?= set_value('lainya') ?>">
+                    <div class="col-md-4">
+                        <label for="lainya" class="form-label"><b>Tipe Surat Lainya</b></label>
+                        <input type="text" class="form-control" name="lainya" id="lainya" placeholder="Masukan Tipe Surat Lainya" value="<?= set_value('lainya') ?>">
                     </div>
+
+                    <!-- date picker -->
+                    <div class="col-md-4">
+                        <label for="date" class="form-label"><b>Waktu Mengirim</b></label>
+                        <input class="form-control" type="date" name="date" id="date">
+                    </div>
+
                     <div class="col-12">
                         <label for="perihal" class="form-label"><b>Perihal</b></label>
                         <input type="text" class="form-control" name="perihal" id="perihal" placeholder="Masukan Perihal yang Anda Inginkan" value="<?= set_value('perihal') ?>">
@@ -115,8 +126,8 @@
                         <span class="item-title">Surat</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="<?= base_url('user/tampilanHome_user') ?>">Surat Masuk</a></li>
-                        <li><a class="dropdown-item" href="<?= base_url('user/user_surat_kel') ?>">Surat Keluar</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('User/index') ?>">Surat Masuk</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('User/user_surat_kel') ?>">Surat Keluar</a></li>
                     </ul>
                 </div>
 
@@ -146,6 +157,7 @@
         </label>
     </div>
 </div> -->
+
 
 
 <style>
@@ -450,6 +462,8 @@
             transform: rotateZ(0);
         }
     }
+
+    /* date picker style */
 </style>
 
 <script>
@@ -463,6 +477,8 @@
         console.log('ok');
     })
 </script>
+
+<!-- jquery date picker -->
 
 <!-- dropdown select bertingkat -->
 <!-- <script>

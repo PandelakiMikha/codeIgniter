@@ -16,6 +16,7 @@
 <!-- jquery-3.2.1 for filter -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
+
 <!-- select bertingkat -->
 <script type="text/javascript">
     var table;
@@ -51,13 +52,13 @@
     });
 
     //function load krim surat.....
-    $(document).ready(function() {
-        $("#perangkat_daerah2").show();
-        $("#daftar_dinas").hide();
+    // $(document).ready(function() {
+    //     $("#perangkat_daerah2").show();
+    //     $("#daftar_dinas").hide();
 
-        daerahLoad();
-        dinasLoad();
-    });
+    //     daerahLoad();
+    //     dinasLoad();
+    // });
 
 
     function loadPerangkatDaerah() {
@@ -91,64 +92,64 @@
     // //function untuk krim surat.....
 
     // //untuk daerah
-    function daerahLoad() {
+    // function daerahLoad() {
 
 
-        $("#daerah").change(function() {
-            var ambilDaerah = $("#daerah").val();
-            $.ajax({
-                type: "POST",
-                dataType: "JSON",
-                url: "<?= base_url('User/getDataPerangkat'); ?>",
-                data: {
-                    daerah: ambilDaerah,
-                },
-                success: function(data) {
-                    console.log(data);
+    //     $("#daerah").change(function() {
+    //         var ambilDaerah = $("#daerah").val();
+    //         $.ajax({
+    //             type: "POST",
+    //             dataType: "JSON",
+    //             url: "<?= base_url('User/getDataPerangkat'); ?>",
+    //             data: {
+    //                 daerah: ambilDaerah,
+    //             },
+    //             success: function(data) {
+    //                 console.log(data);
 
-                    var html = "";
-                    var i;
-                    for (i = 0; i < data.length; i++) {
-                        html += '<option selected hidden>Pilih Perangkat</option> <option value="' + data[i].id + '">' + data[i].name + '</option>';
-                    }
+    //                 var html = "";
+    //                 var i;
+    //                 for (i = 0; i < data.length; i++) {
+    //                     html += '<option selected hidden>Pilih Perangkat</option> <option value="' + data[i].id + '">' + data[i].name + '</option>';
+    //                 }
 
-                    $("#perangkat_daerah2").html(html);
-                    $("#perangkat_daerah2").show();
-                }
-            });
+    //                 $("#perangkat_daerah2").html(html);
+    //                 $("#perangkat_daerah2").show();
+    //             }
+    //         });
 
-        });
-    };
+    //     });
+    // };
 
 
     //untuk dinas....
-    function dinasLoad() {
+    // function dinasLoad() {
 
-        $("#perangkat_daerah2").change(function() {
-            var ambilDinas = $("#perangkat_daerah2").val();
-            $.ajax({
-                type: "POST",
-                dataType: "JSON",
-                url: "<?= base_url('User/getDataDinas'); ?>",
-                data: {
-                    dinas: ambilDinas,
-                },
-                success: function(data) {
-                    console.log(data);
+    //     $("#perangkat_daerah2").change(function() {
+    //         var ambilDinas = $("#perangkat_daerah2").val();
+    //         $.ajax({
+    //             type: "POST",
+    //             dataType: "JSON",
+    //             url: "<?= base_url('User/getDataDinas'); ?>",
+    //             data: {
+    //                 dinas: ambilDinas,
+    //             },
+    //             success: function(data) {
+    //                 console.log(data);
 
-                    var html = "";
-                    var i;
-                    for (i = 0; i < data.length; i++) {
-                        html += '<option selected hidden>Silahkan Pilih Dinas/Badan/Setda</option> <option value="' + data[i].id + '">' + data[i].name + '</option>';
-                    }
+    //                 var html = "";
+    //                 var i;
+    //                 for (i = 0; i < data.length; i++) {
+    //                     html += '<option selected hidden>Silahkan Pilih Dinas/Badan/Setda</option> <option value="' + data[i].id + '">' + data[i].name + '</option>';
+    //                 }
 
-                    $("#daftar_dinas").html(html);
-                    $("#daftar_dinas").show();
-                }
-            });
+    //                 $("#daftar_dinas").html(html);
+    //                 $("#daftar_dinas").show();
+    //             }
+    //         });
 
-        });
-    };
+    //     });
+    // };
 
     //untuk dinas....
     // function dinasLoad() {
@@ -249,12 +250,72 @@
     });
 </script>
 
+<!-- ------------------------------------- -->
+<!-- scirpt untuk surat_masuk_user -->
+<script>
+    var table;
+    $(document).ready(function() {
+        //data tables
+        table = $('#surat_masuk_user').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "order": [],
+            "ajax": {
+                "url": "<?= base_url('User/getData'); ?>",
+                "type": "POST",
+                "data": function(data) {
+                    // var perda;
+                    data.daerah = $("#daerah").val();
+                    // perda = data.perangkat_daerah;
+                    // console.log('perda', perda);
+                },
+            },
+            "columnDefs": [{
+                "target": [-1],
+                "orderable": false,
+                "searchable": false,
+                "render": function(data, type, row) {
+                    var btn = '<div><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-file-earmark-text"></i>Detail</button></div></div>';
+                    return btn;
+                }
+            }]
+        });
+    });
+</script>
+
 <!-- Data Tables Bootstrap 5 -->
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-<!-- <script src="<?php echo base_url('assets/'); ?>js/user.js"></script> -->
 
+<!-- jquery script for sidebar_user -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+<script>
+    // untuk mendisablekan form lainya ketika user mengklik form jenis surat..
+    $('#jenis_surat').change(function() {
+        $('#lainya').prop('disabled', true);
+        if ($(this).val() == 'car') {
+            $('#lainya').prop('disabled', false);
+        }
+    });
+</script>
+
+<script>
+    //untuk mendisablekan form jenis surat ketika user menaruh input pada fort lainya..
+    $('#lainya').change(function() {
+        $('#jenis_surat').prop('disabled', true);
+        if ($(this).val() == 'car') {
+            $('#jenis_surat').prop('disabled', false);
+        }
+    });
+</script>
+
+<!-- end of jquery script -->
+
+<!-- sweet alert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- end of sweet alert -->
 <script>
     $("table thead tr th").addClass("align-middle");
     $("table tbody").addClass("align-middle");

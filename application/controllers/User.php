@@ -10,40 +10,42 @@ class User extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Serverside_model');
-        $this->load->model('User_m');
-        $this->load->model('Serverside_model');
+        $this->load->model('user_m');
+        // $this->load->model('Serverside_model');
     }
     public function index()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Dashboard';
-        $data['totals'] = $this->Serverside_model->count_all_data();
+        $data['totals'] = $this->user_m->count_all_data();
         $data['data_daerah'] = $this->Serverside_model->getDataDaerah();
 
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/sidebar_user', $data);
         $this->load->view('templates/navbar', $data);
-        $this->load->view('templates/dataTables');
+        $this->load->view('templates/U_table_suratMasuk', $data);
         $this->load->view('templates/footer');
     }
 
+    //function untuk data table......
     public function getData()
     {
-        $results = $this->Serverside_model->getDataSurat();
+        $results = $this->user_m->getDataSurat();
         $data = [];
         foreach ($results as $result) {
+
             $row = array();
-            $row[] = $result->sender;
-            $row[] = $result->type;
-            $row[] = $result->regarding;
-            $row[] = $result->date_sended;
+            $row[] = $result->Perihal;
+            $row[] = $result->Jenis_surat;
+            $row[] = $result->No_agenda;
+            $row[] = $result->Nama_file;
             $data[] = $row;
         }
 
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->Serverside_model->count_all_data(),
-            "recordsFiltered" => $this->Serverside_model->count_filtered_data(),
+            "recordsTotal" => $this->user_m->count_all_data(),
+            "recordsFiltered" => $this->user_m->count_filtered_data(),
             "data" => $data,
         );
 
@@ -112,8 +114,12 @@ class User extends CI_Controller
 
     public function user_surat_kel()
     {
+
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->Serverside_model->count_all_data();
+        $data['data_daerah'] = $this->Serverside_model->getDataDaerah();
         $data['judul'] = 'Home User';
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar_user');
         $this->load->view('templates/navbar', $data);

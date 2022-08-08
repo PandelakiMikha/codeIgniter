@@ -51,6 +51,7 @@
         loadPerangkatDaerah();
     });
 
+
     //function load krim surat.....
     // $(document).ready(function() {
     //     $("#perangkat_daerah2").show();
@@ -59,6 +60,23 @@
     //     daerahLoad();
     //     dinasLoad();
     // });
+
+    function loadDaerah() {
+        $("#perangkat_daerah").change(function() {
+            var getPerangkatDaerah = $("#perangkat_daerah").val();
+            // console.log(getPerangkatDaerah);
+            tabels();
+        });
+        //function load krim surat.....
+        $(document).ready(function() {
+            $("#perangkat_daerah2").show();
+            $("#daftar_dinas").hide();
+
+            daerahLoad();
+            dinasLoad();
+        });
+    }
+
 
 
     function loadPerangkatDaerah() {
@@ -202,7 +220,7 @@
                 "orderable": false,
                 "searchable": false,
                 "render": function(data, type, row) {
-                    var btn = '<div class="cuss"><div><button type="button" class="btn btn-warning" data-bs-trigger="focus" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover"><i class="bi bi-eye"></i>Lihat</button></div><div class="middle"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-check-circle"></i>Disposisi</button></div><div><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-file-earmark-text"></i>Detail</button></div></div>';
+                    var btn = '<div class="cuss"><div><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-placement="center" data-bs-target="#staticBackdropLihat"><i class="bi bi-eye"></i>Lihat Log</button></div><div class="middle"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropDispo"><i class="bi bi-check-circle"></i>Disposisi</button></div><div><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropDetail"><i class="bi bi-file-earmark-text"></i>Detail</button></div></div>';
                     return btn;
                 }
             }]
@@ -287,48 +305,74 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+<<<<<<< HEAD=======<script src="<?php echo base_url('assets/'); ?>js/user.js">
+    </script>
+    >>>>>>> 239b3f687512820bf12be683cd6bb9b96b5ed1c8
 
-<!-- jquery script for sidebar_user -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
-<script>
-    // untuk mendisablekan form lainya ketika user mengklik form jenis surat..
-    $('#jenis_surat').change(function() {
-        $('#lainya').prop('disabled', true);
-        if ($(this).val() == 'car') {
-            $('#lainya').prop('disabled', false);
-        }
-    });
-</script>
+    <!-- jquery script for sidebar_user -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+    <script>
+        // untuk mendisablekan form lainya ketika user mengklik form jenis surat..
+        $('#jenis_surat').change(function() {
+            $('#lainya').prop('disabled', true);
+            if ($(this).val() == 'car') {
+                $('#lainya').prop('disabled', false);
+            }
+        });
+    </script>
 
-<script>
-    //untuk mendisablekan form jenis surat ketika user menaruh input pada fort lainya..
-    $('#lainya').change(function() {
-        $('#jenis_surat').prop('disabled', true);
-        if ($(this).val() == 'car') {
-            $('#jenis_surat').prop('disabled', false);
-        }
-    });
-</script>
+    <script>
+        //untuk mendisablekan form jenis surat ketika user menaruh input pada fort lainya..
+        $('#lainya').change(function() {
+            $('#jenis_surat').prop('disabled', true);
+            if ($(this).val() == 'car') {
+                $('#jenis_surat').prop('disabled', false);
+            }
+        });
+    </script>
 
-<!-- end of jquery script -->
+    <!-- end of jquery script -->
 
-<!-- sweet alert -->
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- sweet alert -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<!-- end of sweet alert -->
-<script>
-    $("table thead tr th").addClass("align-middle");
-    $("table tbody").addClass("align-middle");
-</script>
+    <!-- end of sweet alert -->
+    <script>
+        $("table thead tr th").addClass("align-middle");
+        $("table tbody").addClass("align-middle");
+    </script>
 
-<!-- Enable Popover -->
-<script>
-    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-    var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
-        return new bootstrap.Popover(popoverTriggerEl)
-    })
-</script>
+    <!-- Enable Popover -->
+    <script>
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl)
+        })
+    </script>
 
-</body>
+    <script>
+        const menu = document.getElementById('menu-label');
+        const sidebar = document.getElementsByClassName('sidebarr')[0];
+        const dropdown = document.getElementsByClassName('dropdown')[0];
 
-</html>
+        menu.addEventListener('click', function() {
+            sidebar.classList.toggle('hide');
+            dropdown.classList.toggle('dropend');
+            console.log('ok');
+        })
+    </script>
+
+    <script>
+        $("#pesan").hide();
+        const side = document.getElementById('surma');
+        console.log('side', side);
+
+        side.addEventListener('click', function(e) {
+            console.log('e', e);
+            $("#pesan").show();
+        })
+    </script>
+
+    </body>
+
+    </html>

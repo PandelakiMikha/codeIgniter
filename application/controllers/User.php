@@ -23,7 +23,11 @@ class User extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar_user', $data);
         $this->load->view('templates/navbar', $data);
+
         $this->load->view('templates/U_table_suratMasuk', $data);
+
+        $this->load->view('surat_masuk/index');
+
         $this->load->view('templates/footer');
     }
 

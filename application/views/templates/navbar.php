@@ -7,7 +7,7 @@
             <!-- Nav Item - Alerts -->
 
             <!-- Nav Item - Messages -->
-            <li class="nav-item mx-1" id="pesan">
+            <li class="pesan nav-item mx-1" id="pesan">
                 <div class="nav-link ">
                     <i class="fas fass fa-envelope fa-fw" style="font-size: 25px;"></i>
                     <!-- Counter - Messages -->

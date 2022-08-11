@@ -1,5 +1,5 @@
 <div class="containerr mt-5 ">
-    <h4>Daftar Surat</h4>
+    <h4>Daftar Surat Masuk</h4>
     <!-- <div class="d-flex w-50 my-2 ">
         <select class="form-select me-3 w-50" id="daerah" name="daerah">
             <?php foreach ($data_daerah as $value) : ?>
@@ -22,14 +22,14 @@
 
     <div class="card">
         <div class="card-body table-responsive">
-            <table id="example" class="table table-hover1">
+            <table id="surat_masuk_user" class="table table-hover1">
                 <thead class="table-light">
                     <tr>
-                        <th>Pingirim</th>
-                        <!-- <th>Jenis Surat</th> -->
                         <th>Perihal</th>
-                        <th>Tanggal Keluar</th>
-                        <th class="hala"></th>
+                        <th>Jenis Surat</th>
+                        <th>No Agenda</th>
+                        <th>Nama File</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>

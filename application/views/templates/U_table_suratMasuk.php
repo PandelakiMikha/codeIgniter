@@ -25,12 +25,14 @@
             <table id="surat_masuk_user" class="table table-hover">
                 <thead>
                     <tr class="table-active">
+
                         <th>Perihal</th>
                         <th>Jenis Surat</th>
                         <th>No Agenda</th>
                         <th>Nama File</th>
                         <th>Action</th>
                     </tr>
+
                 </thead>
                 <tbody>
                 </tbody>

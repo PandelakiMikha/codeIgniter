@@ -13,6 +13,13 @@
                     <!-- content -->
                     <form class="row g-3" action="<?= base_url('User/index') ?>" method="post">
 
+                        <!-- input data user -->
+                        <div class="col-md-4">
+                            <label for="sender" class="form-label"><b>Nama Pengguna Anda</b></label>
+                            <input type="text" class="form-control" name="sender" id="sender" value="<?= $user['name'] ?>">
+                            <small class="text-danger"><?= form_error('type'); ?></small>
+                        </div>
+
                         <div class="col-md-4">
                             <label for="jenis_surat" class="form-label"><b>Jenis Surat</b></label>
                             <select name="type" id="jenis_surat" class="form-select" value="<?= set_value('type') ?>">

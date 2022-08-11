@@ -25,31 +25,34 @@
             <table id="surat_kel_user" class="table table-hover">
                 <thead class="table-light">
                     <tr class="table-active">
+                        <th>No</th>
                         <th>Perihal</th>
-                        <th>Jenis Surat</th>
                         <th>Nama File</th>
+                        <th>Jenis Surat</th>
+                        <th>Tanggal Keluar</th>
                         <!-- <th>Action</th> -->
-                        <?php
-                        foreach ($h->result() as $row) {
-                        ?>
 
-                    <tr>
-                        <td><?php echo $row->Perihal; ?>
-                            <hr>
-                        </td>
-                        <td><?php echo $row->Jenis_Surat; ?>
-                            <hr>
-                        </td>
-                        <td><?php echo $row->Nama_file; ?>
-                            <hr>
-                        </td>
-                    </tr>
-                    <!-- <td>Action</td> -->
-                    </tr>
-                <?php }
-                ?>
                 </thead>
                 <tbody>
+                    <?php $no = 1;
+                    foreach ($h->result() as $row) {
+                    ?>
+
+                        <tr>
+                            <td><?= $no++ ?></td>
+                            <td class="td-2"><?php echo $row->regarding; ?>
+                            </td>
+                            <td class="td-3"><?php echo $row->File_name; ?>
+                            </td>
+                            <td class="td-4"><?php echo $row->type; ?>
+                            </td>
+                            <td class="td-5"><?php echo $row->date_sended; ?>
+                            </td>
+                        </tr>
+                        <!-- <td>Action</td> -->
+                        </tr>
+                    <?php }
+                    ?>
                 </tbody>
             </table>
         </div>
@@ -89,6 +92,10 @@
 
     /* .hala {
         width: 300px;
+    } */
+
+    /* .table {
+        background-color: #FFEBEB;
     } */
 
     .cuss {

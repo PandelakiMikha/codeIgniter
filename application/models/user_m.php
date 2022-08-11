@@ -23,6 +23,7 @@ class user_m extends CI_Model
     function input_data($data)
     {
         $this->db->insert('surat_masuk', $data);
+        $this->db->insert('surat_kel_user', $data);
         return true;
     }
     //untuk menampilkan data daerah yang ada dalam database....

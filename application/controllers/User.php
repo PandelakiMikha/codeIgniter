@@ -41,16 +41,18 @@ class User extends CI_Controller
             $date_sended   = $this->input->post('date_sended');
             $regarding   = $this->input->post('regarding');
             $File_name  = $this->input->post('File_name');
+            $sender  = $this->input->post('sender');
 
             $data = array(
                 'type' => $type,
                 'date_sended' => $date_sended,
                 'regarding' => $regarding,
                 'File_name' => $File_name,
+                'sender' => $sender,
             );
 
             $this->user_m->input_data($data, 'surat_masuk');
-            redirect('User/index');
+            redirect('User/user_surat_kel');
         }
     }
 
@@ -59,15 +61,14 @@ class User extends CI_Controller
     {
 
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        // $data['totals'] = $this->user_m->count_all_data();
-        // $data['data_daerah'] = $this->Serverside_model->getDataDaerah();
         $data['judul'] = 'Home User';
         $data['h'] = $this->user_m->select();
 
+        $getsurat = $this->user_m->getSuratData();
+        $data['jenis_surat'] = $getsurat;
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar_user', $data);
         $this->load->view('templates/navbar', $data);
-        // $this->load->view('user/user_surat_kel');
         $this->load->view('templates/U_table_suratKel', $data);
         $this->load->view('templates/footer');
 

@@ -268,7 +268,6 @@
     });
 </script>
 
-<!-- ------------------------------------- -->
 <!-- scirpt untuk surat_masuk_user -->
 <script>
     var table;
@@ -300,79 +299,117 @@
         });
     });
 </script>
+<!-- ------------------------------------- -->
+
+<!-- script untuk surat keluar user -->
+<!-- <script>
+    var $tablee;
+    $(document).ready(function() {
+        //data tables
+        tablee = $('#surat_kel_user').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "order": [],
+            "ajax": {
+                "url": "<?= base_url('User/getDataKel'); ?>",
+                "type": "POST",
+                "data": function(data) {
+                    // var perda;
+                    data.daerah = $("#daerah").val();
+                    // perda = data.perangkat_daerah;
+                    // console.log('perda', perda);
+                },
+            },
+            "columnDefs": [{
+                "target": [-1],
+                "orderable": false,
+                "searchable": false,
+                "render": function(data, type, row) {
+                    var btn = '<div><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-file-earmark-text"></i>Detail</button></div></div>';
+                    return btn;
+                }
+            }]
+        });
+    });
+</script> -->
+<!-- ------------------------------ -->
 
 <!-- Data Tables Bootstrap 5 -->
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-<<<<<<< HEAD=======<script src="<?php echo base_url('assets/'); ?>js/user.js">
-    </script>
-    >>>>>>> 239b3f687512820bf12be683cd6bb9b96b5ed1c8
+<script src="<?php echo base_url('assets/'); ?>js/user.js">
+</script>
 
-    <!-- jquery script for sidebar_user -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
-    <script>
-        // untuk mendisablekan form lainya ketika user mengklik form jenis surat..
-        $('#jenis_surat').change(function() {
-            $('#lainya').prop('disabled', true);
-            if ($(this).val() == 'car') {
-                $('#lainya').prop('disabled', false);
-            }
-        });
-    </script>
+<!-- sweetalert2 -->
+<script src="<?= base_url('assets/') ?>js/sweetalert2.all.min.js"></script>
+<!-- my script -->
+<script src="<?= base_url('assets/') ?>js/myjs.js"></script>
 
-    <script>
-        //untuk mendisablekan form jenis surat ketika user menaruh input pada fort lainya..
-        $('#lainya').change(function() {
-            $('#jenis_surat').prop('disabled', true);
-            if ($(this).val() == 'car') {
-                $('#jenis_surat').prop('disabled', false);
-            }
-        });
-    </script>
+<!-- jquery script for sidebar_user -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+<script>
+    // untuk mendisablekan form lainya ketika user mengklik form jenis surat..
+    $('#jenis_surat').change(function() {
+        $('#lainya').prop('disabled', true);
+        if ($(this).val() == 'car') {
+            $('#lainya').prop('disabled', false);
+        }
+    });
+</script>
 
-    <!-- end of jquery script -->
+<script>
+    //untuk mendisablekan form jenis surat ketika user menaruh input pada fort lainya..
+    $('#lainya').change(function() {
+        $('#jenis_surat').prop('disabled', true);
+        if ($(this).val() == 'car') {
+            $('#jenis_surat').prop('disabled', false);
+        }
+    });
+</script>
 
-    <!-- sweet alert -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- end of jquery script -->
 
-    <!-- end of sweet alert -->
-    <script>
-        $("table thead tr th").addClass("align-middle");
-        $("table tbody").addClass("align-middle");
-    </script>
+<!-- sweet alert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- Enable Popover -->
-    <script>
-        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-        var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
-            return new bootstrap.Popover(popoverTriggerEl)
-        })
-    </script>
+<!-- end of sweet alert -->
+<script>
+    $("table thead tr th").addClass("align-middle");
+    $("table tbody").addClass("align-middle");
+</script>
 
-    <script>
-        const menu = document.getElementById('menu-label');
-        const sidebar = document.getElementsByClassName('sidebarr')[0];
-        const dropdown = document.getElementsByClassName('dropdown')[0];
+<!-- Enable Popover -->
+<script>
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+    })
+</script>
 
-        menu.addEventListener('click', function() {
-            sidebar.classList.toggle('hide');
-            dropdown.classList.toggle('dropend');
-            console.log('ok');
-        })
-    </script>
+<script>
+    const menu = document.getElementById('menu-label');
+    const sidebar = document.getElementsByClassName('sidebarr')[0];
+    const dropdown = document.getElementsByClassName('dropdown')[0];
 
-    <script>
-        $("#pesan").hide();
-        const side = document.getElementById('surma');
-        console.log('side', side);
+    menu.addEventListener('click', function() {
+        sidebar.classList.toggle('hide');
+        dropdown.classList.toggle('dropend');
+        console.log('ok');
+    })
+</script>
 
-        side.addEventListener('click', function(e) {
-            console.log('e', e);
-            $("#pesan").show();
-        })
-    </script>
+<script>
+    $("#pesan").hide();
+    const side = document.getElementById('surma');
+    console.log('side', side);
 
-    </body>
+    side.addEventListener('click', function(e) {
+        console.log('e', e);
+        $("#pesan").show();
+    })
+</script>
 
-    </html>
+</body>
+
+</html>

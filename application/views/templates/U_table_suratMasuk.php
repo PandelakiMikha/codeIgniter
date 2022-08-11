@@ -22,9 +22,9 @@
 
     <div class="card">
         <div class="card-body table-responsive">
-            <table id="surat_masuk_user" class="table table-hover1">
-                <thead class="table-light">
-                    <tr>
+            <table id="surat_masuk_user" class="table table-hover">
+                <thead>
+                    <tr class="table-active">
                         <th>Perihal</th>
                         <th>Jenis Surat</th>
                         <th>No Agenda</th>

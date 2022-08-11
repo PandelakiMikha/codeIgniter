@@ -1,101 +1,73 @@
 <!-- Modal -->
-<div class="modal fade" style="border-radius: 50px;" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">KIRIM SURAT</h5>
-                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-            </div>
-            <div class="modal-body">
-                <!-- content -->
-                <form class="row g-3" action="" method="post">
-                    <!-- bagian dropdown -->
+<div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>">
 
-                    <!-- <div class="col-md-4">
-                        <label for="daerah" class="form-label"><b>Daerah</b></label>
-                        <select name="daerah" id="daerah" class="form-select" value="<?= set_value('daerah') ?>">
-                            <?php foreach ($daerah_data as $value) : ?>
-                                <option value="" hidden>Pilih..</option>
-                                <option value="<?= $value->id ?>"><?= $value->name ?></option>
-                            <?php endforeach ?>
-                        </select>
-                    </div> -->
 
-                    <!-- <div class="col-md-4">
-                        <label for="perangkat_daerah2" class="form-label"><b>Jenis Perangkat / kementrian</b></label>
-                        <select name="perangkat_daerah2" id="perangkat_daerah2" class="form-select" value="<?= set_value('perangkat_daerah2') ?>">
-                            <option selected>Pilih...</option>
-                            <option>...</option>
-                        </select>
-                    </div> -->
+    <div class="modal fade" style="border-radius: 50px;" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">KIRIM SURAT</h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+                <div class="modal-body">
+                    <!-- content -->
+                    <form class="row g-3" action="<?= base_url('User/index') ?>" method="post">
 
-                    <!-- <div class="col-md-4 mt-5">
-                        
-                        <select name="daftar_dinas" id="daftar_dinas" class="form-select" value="<?= set_value('daftar_dinas') ?>">
-                            <option selected>Pilih...</option>
-                            <option>...</option>
-                        </select>
-                    </div> -->
+                        <div class="col-md-4">
+                            <label for="jenis_surat" class="form-label"><b>Jenis Surat</b></label>
+                            <select name="type" id="jenis_surat" class="form-select" value="<?= set_value('type') ?>">
+                                <?php foreach ($jenis_surat as $value) : ?>
+                                    <option value="" hidden>Pilih..</option>
+                                    <option value="<?= $value->id ?>"><?= $value->name ?></option>
+                                <?php endforeach ?>
+                            </select>
+                            <small class="text-danger"><?= form_error('type'); ?></small>
+                        </div>
+                        <!-- bagian text input -->
+                        <div class="col-md-4">
+                            <label for="lainya" class="form-label"><b>Tipe Surat Lainya</b></label>
+                            <input type="text" class="form-control" name="type" id="lainya" placeholder="Masukan Tipe Surat Lainya" value="<?= set_value('type') ?>">
+                            <small class="text-danger"><?= form_error('type'); ?></small>
+                        </div>
 
-                    <!-- <div class="col-md-4">
-                        <label for="uptd" class="form-label"><b>UPTD dan Dinas Induk</b></label>
-                        <select name="uptd" id="uptd" class="form-select" value="<?= set_value('uptd') ?>">
-                            <option selected>Pilih...</option>
-                            <option>...</option>
-                        </select>
-                    </div> -->
-                    <div class="col-md-4">
-                        <label for="jenis_surat" class="form-label"><b>Jenis Surat</b></label>
-                        <select name="jenis_surat" id="jenis_surat" class="form-select" value="<?= set_value('jenis_surat') ?>">
-                            <!-- <?php foreach ($jenis_surat as $value) : ?>
-                                <option value="" hidden>Pilih..</option>
-                                <option value="<?= $value->id ?>"><?= $value->name ?></option>
+                        <!-- date picker -->
+                        <div class="col-md-4">
+                            <label for="date" class="form-label"><b>Waktu Mengirim</b></label>
+                            <input class="form-control" type="date" name="date_sended" id="date_sended" value="<?= set_value('date_sended') ?>">
+                            <small class="text-danger"><?= form_error('date_sended'); ?></small>
+                        </div>
 
-                            <?php endforeach ?> -->
-                            <option hidden value="">Pilih..</option>
-                            <option value="">Surat</option>
-                            <option value="">Laporan</option>
-                            <option value="">Undangan</option>
-                        </select>
-                    </div>
-                    <!-- bagian text input -->
-                    <div class="col-md-4">
-                        <label for="lainya" class="form-label"><b>Tipe Surat Lainya</b></label>
-                        <input type="text" class="form-control" name="lainya" id="lainya" placeholder="Masukan Tipe Surat Lainya" value="<?= set_value('lainya') ?>">
-                    </div>
+                        <div class="col-12">
+                            <label for="perihal" class="form-label"><b>Perihal</b></label>
+                            <input type="text" class="form-control" name="regarding" id="regarding" placeholder="Masukan Perihal yang Anda Inginkan" value="<?= set_value('regarding') ?>">
+                            <small class="text-danger"><?= form_error('regarding'); ?></small>
+                        </div>
 
-                    <!-- date picker -->
-                    <div class="col-md-4">
-                        <label for="date" class="form-label"><b>Waktu Mengirim</b></label>
-                        <input class="form-control" type="date" name="date" id="date">
-                    </div>
+                        <!-- pilih file -->
+                        <div class="mb-3 mt-3">
+                            <label for="nama_file" class="form-label"><b>Pilih File</b></label>
+                            <input class="form-control form-control-sm" name="File_name" id="nama_file" type="file" accept="application/pdf" value="" multiple>
+                            <small class="text-danger"><?= form_error('File_name'); ?></small>
+                        </div>
 
-                    <div class="col-12">
-                        <label for="perihal" class="form-label"><b>Perihal</b></label>
-                        <input type="text" class="form-control" name="perihal" id="perihal" placeholder="Masukan Perihal yang Anda Inginkan" value="<?= set_value('perihal') ?>">
-                    </div>
+                        <div class=" d-flex justify-content-center mt-5">
+                            <button type="reset" class="btn bg-body  d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;" name="save" value="Save Data"><span class="Btn_reset"><i class="bi bi-trash"></i>Hapus</span></button>
 
-                    <!-- pilih file -->
-                    <div class="mb-3 mt-3">
-                        <label for="nama_file" class="form-label"><b>Pilih File</b></label>
-                        <input class="form-control form-control-sm" name="nama_file" id="nama_file" type="file" accept="application/pdf" value="<?= set_value('nama_file') ?>" multiple>
-                    </div>
-
-                    <div class=" d-flex justify-content-center mt-5">
-                        <button type="submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 230px; height: 55px; font-size: 25px;"><strong>Kirim</strong></button>
-                    </div>
-                </form>
-                <!-- end of content -->
-            </div>
-            <!-- <div class="modal-footer">
+                            <button type="submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;" name="save" value="Save Data"><i class="bi bi-send"></i><strong>Kirim</strong></button>
+                        </div>
+                    </form>
+                    <!-- end of content -->
+                </div>
+                <!-- <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
             </div> -->
+            </div>
         </div>
     </div>
-</div>
-<!-- end of modal -->
+    <!-- end of modal -->
 
+</div>
 <div class="sidebarr">
     <div class="hamburger   ">
         <div class="hamburgerr ">
@@ -161,6 +133,19 @@
 
 
 <style>
+    .btn {
+        margin-left: 15px;
+    }
+
+    .Btn_reset {
+        color: red;
+    }
+
+    .Btn,
+    .bi {
+        margin-right: 10px;
+    }
+
     .sidebarr {
         display: flex;
         width: 350px;

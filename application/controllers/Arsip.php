@@ -1,13 +1,7 @@
-<!-- 
-
-    !!!!! CATATAN
-    Ini controller kita dapake cuman for load page disposisi lewat sidebar
- -->
-
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class MainMenu extends CI_Controller
+class Arsip extends CI_Controller
 {
 
     public function __construct()
@@ -15,29 +9,27 @@ class MainMenu extends CI_Controller
         parent::__construct();
         $this->load->model('Serverside_model');
     }
-    // kase nama fungsi show_daftar_dispo
     public function index()
     {
-        $data['totals'] = $this->Serverside_model->count_all_data();
-
-        $data['judul'] = 'Main Menu';
+        $data['judul'] = 'Arsip';
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/navbar', $data);
+        $this->load->view('templates/sidebar');
+        $this->load->view('templates/navbar');
+        $this->load->view('arsip/index.php');
         $this->load->view('templates/footer');
     }
 
 
-    public function disposisi()
+    public function lampiran_arsip()
     {
-
+        $data['judul'] = "Lampiran Arsip";
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->Serverside_model->count_all_data();
 
-        $data['judul'] = 'Disposisi';
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/navbar', $data);
-        $this->load->view('disposisi/disposisi');
+        $this->load->view('templates/navbar');
+        $this->load->view('arsip/lampiran_arsip');
         $this->load->view('templates/footer');
     }
 }

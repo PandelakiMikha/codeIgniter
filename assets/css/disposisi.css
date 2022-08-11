@@ -4,7 +4,6 @@
 
 .container {
     margin-top: 58px;
-
 }
 
 /* Dropdown */
@@ -76,6 +75,7 @@
     gap: 3rem;
     margin-bottom: 12px;
     background: linear-gradient(224.57deg, #EABDBD 0.52%, rgba(217, 217, 217, 0) 90.19%);
+
 }
 
 .col-left .item p {

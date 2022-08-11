@@ -43,7 +43,39 @@
                 "orderable": false,
                 "searchable": false,
                 "render": function(data, type, row) {
-                    var btn = '<div class="cuss"><div><button type="button" class="btn btn-warning" data-bs-trigger="focus" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover"><i class="bi bi-eye"></i>Lihat</button></div><div class="middle"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-check-circle"></i>Disposisi</button></div><div><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-file-earmark-text"></i>Detail</button></div></div>';
+                    var btn = '<div class="cuss"><div><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-placement="center" data-bs-target="#staticBackdropLihat"><i class="bi bi-eye"></i>Lihat Log</button></div><div class="middle"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropDispoKTU"><i class="bi bi-check-circle"></i>Disposisi</button></div><div><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropDetail"><i class="bi bi-file-earmark-text"></i>Detail</button></div></div>';
+                    return btn;
+                }
+            }]
+        });
+        loadPerangkatDaerah();
+    });
+
+    var table;
+    $(document).ready(function() {
+        $("#perangkat_daerah").hide();
+
+        //data tables
+        table = $('#lampiranArsip').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "order": [],
+            "ajax": {
+                "url": "<?= base_url('ServerSideTables/getData'); ?>",
+                "type": "POST",
+                "data": function(data) {
+                    // var perda;
+                    data.daerah = $("#daerah").val();
+                    // perda = data.perangkat_daerah;
+                    // console.log('perda', perda);
+                },
+            },
+            "columnDefs": [{
+                "target": [-1],
+                "orderable": false,
+                "searchable": false,
+                "render": function(data, type, row) {
+                    var btn = '<div class="cuss"><div><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-placement="center" data-bs-target="#staticBackdropLihat"><i class="bi bi-eye"></i>Lihat Log</button></div><div class="cuss-detail"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropDetail"><i class="bi bi-file-earmark-text"></i>Detail</button></div></div>';
                     return btn;
                 }
             }]
@@ -268,6 +300,158 @@
     });
 </script>
 
+<script type="text/javascript">
+    //function load krim surat.....
+    // $(document).ready(function() {
+    //     $("#perangkat_daerah2").show();
+    //     $("#daftar_dinas").hide();
+
+    //     daerahLoad();
+    //     dinasLoad();
+    // });
+
+    function loadDaerah() {
+        $("#perangkat_daerah").change(function() {
+            var getPerangkatDaerah = $("#perangkat_daerah").val();
+            // console.log(getPerangkatDaerah);
+            tabels();
+        });
+        //function load krim surat.....
+        $(document).ready(function() {
+            $("#perangkat_daerah2").show();
+            $("#daftar_dinas").hide();
+
+            daerahLoad();
+            dinasLoad();
+        });
+    }
+
+
+
+    function loadPerangkatDaerah() {
+        // for get data for filter
+        $("#daerah").change(function() {
+            var getDaerah = $("#daerah").val();
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: "<?= base_url('ServerSideTables/getDataPerangkatDaerah'); ?>",
+                data: {
+                    daerah: getDaerah,
+                },
+                success: function(data) {
+                    console.log('data', data);
+
+                    var html = "";
+                    var i;
+                    for (i = 0; i < data.length; i++) {
+                        html += '<option selected hidden>Pilih Perangkat Daerah</option> <option value="' + data[i].id + '">' + data[i].name + '</option>';
+                    }
+
+                    $("#perangkat_daerah").html(html);
+                    $("#perangkat_daerah").show();
+                }
+            });
+
+        });
+    }
+
+    // //function untuk krim surat.....
+
+    // //untuk daerah
+    // function daerahLoad() {
+
+
+    //     $("#daerah").change(function() {
+    //         var ambilDaerah = $("#daerah").val();
+    //         $.ajax({
+    //             type: "POST",
+    //             dataType: "JSON",
+    //             url: "<?= base_url('User/getDataPerangkat'); ?>",
+    //             data: {
+    //                 daerah: ambilDaerah,
+    //             },
+    //             success: function(data) {
+    //                 console.log(data);
+
+    //                 var html = "";
+    //                 var i;
+    //                 for (i = 0; i < data.length; i++) {
+    //                     html += '<option selected hidden>Pilih Perangkat</option> <option value="' + data[i].id + '">' + data[i].name + '</option>';
+    //                 }
+
+    //                 $("#perangkat_daerah2").html(html);
+    //                 $("#perangkat_daerah2").show();
+    //             }
+    //         });
+
+    //     });
+    // };
+
+
+    //untuk dinas....
+    // function dinasLoad() {
+
+    //     $("#perangkat_daerah2").change(function() {
+    //         var ambilDinas = $("#perangkat_daerah2").val();
+    //         $.ajax({
+    //             type: "POST",
+    //             dataType: "JSON",
+    //             url: "<?= base_url('User/getDataDinas'); ?>",
+    //             data: {
+    //                 dinas: ambilDinas,
+    //             },
+    //             success: function(data) {
+    //                 console.log(data);
+
+    //                 var html = "";
+    //                 var i;
+    //                 for (i = 0; i < data.length; i++) {
+    //                     html += '<option selected hidden>Silahkan Pilih Dinas/Badan/Setda</option> <option value="' + data[i].id + '">' + data[i].name + '</option>';
+    //                 }
+
+    //                 $("#daftar_dinas").html(html);
+    //                 $("#daftar_dinas").show();
+    //             }
+    //         });
+
+    //     });
+    // };
+
+    //untuk dinas....
+    // function dinasLoad() {
+
+    //     $("#perangkat_daerah2").change(function() {
+    //         var ambilDinas = $("#perangkat_daerah2").val();
+    //         $.ajax({
+    //             type: "POST",
+    //             dataType: "JSON",
+    //             url: "<?= base_url('User/getDataDinas'); ?>",
+    //             data: {
+    //                 dinas: ambilDinas,
+    //             },
+    //             success: function(data) {
+    //                 console.log(data);
+
+    //                 var html = "";
+    //                 var i;
+    //                 for (i = 0; i < data.length; i++) {
+    //                     html += '<option selected hidden>Silahkan Pilih Dinas/Badan/Setda</option> <option value="' + data[i].id + '">' + data[i].name + '</option>';
+    //                 }
+
+    //                 $("#daftar_dinas").html(html);
+    //                 $("#daftar_dinas").show();
+    //             }
+    //         });
+
+    //     });
+    // };
+
+    // -------------------------------------------------
+    //untuk table....
+</script>
+
+<!-- ------------------------------------- -->
 <!-- scirpt untuk surat_masuk_user -->
 <script>
     var table;
@@ -297,6 +481,8 @@
                 }
             }]
         });
+
+        loadPerangkatDaerah();
     });
 </script>
 <!-- ------------------------------------- -->
@@ -340,7 +526,6 @@
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 <script src="<?php echo base_url('assets/'); ?>js/user.js">
 </script>
-
 <!-- sweetalert2 -->
 <script src="<?= base_url('assets/') ?>js/sweetalert2.all.min.js"></script>
 <!-- my script -->
@@ -348,6 +533,46 @@
 
 <!-- jquery script for sidebar_user -->
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+<script>
+    // untuk mendisablekan form lainya ketika user mengklik form jenis surat..
+    $('#jenis_surat').change(function() {
+        $('#lainya').prop('disabled', true);
+        if ($(this).val() == 'car') {
+            $('#lainya').prop('disabled', false);
+        }
+    });
+</script>
+
+<script>
+    //untuk mendisablekan form jenis surat ketika user menaruh input pada fort lainya..
+    $('#lainya').change(function() {
+        $('#jenis_surat').prop('disabled', true);
+        if ($(this).val() == 'car') {
+            $('#jenis_surat').prop('disabled', false);
+        }
+    });
+</script>
+
+<!-- end of jquery script -->
+
+<!-- sweet alert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- end of sweet alert -->
+<script>
+    $("table thead tr th").addClass("align-middle");
+    $("table tbody").addClass("align-middle");
+</script>
+
+<!-- Enable Popover -->
+<script>
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+    })
+    // <!-- jquery script for sidebar_user -->
+</script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"> -->
 <script>
     // untuk mendisablekan form lainya ketika user mengklik form jenis surat..
     $('#jenis_surat').change(function() {
@@ -396,6 +621,29 @@
         sidebar.classList.toggle('hide');
         dropdown.classList.toggle('dropend');
         console.log('ok');
+    })
+</script>
+
+<script>
+    const menu = document.getElementById('menu-label');
+    const sidebar = document.getElementsByClassName('sidebarr')[0];
+    const dropdown = document.getElementsByClassName('dropdown')[0];
+
+    menu.addEventListener('click', function() {
+        sidebar.classList.toggle('hide');
+        dropdown.classList.toggle('dropend');
+        console.log('ok');
+    })
+</script>
+
+<script>
+    $("#pesan").hide();
+    const side = document.getElementById('surma');
+    console.log('side', side);
+
+    side.addEventListener('click', function(e) {
+        console.log('e', e);
+        $("#pesan").show();
     })
 </script>
 

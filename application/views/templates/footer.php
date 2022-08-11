@@ -42,7 +42,7 @@
                 "orderable": false,
                 "searchable": false,
                 "render": function(data, type, row) {
-                    var btn = '<div class="cuss"><div><button type="button" class="btn btn-warning" data-bs-trigger="focus" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover"><i class="bi bi-eye"></i>Lihat</button></div><div class="middle"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-check-circle"></i>Disposisi</button></div><div><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-file-earmark-text"></i>Detail</button></div></div>';
+                    var btn = '<div class="cuss"><div><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-placement="center" data-bs-target="#staticBackdropLihat"><i class="bi bi-eye"></i>Lihat Log</button></div><div class="middle"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropDispoKTU"><i class="bi bi-check-circle"></i>Disposisi</button></div><div><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropDetail"><i class="bi bi-file-earmark-text"></i>Detail</button></div></div>';
                     return btn;
                 }
             }]
@@ -256,6 +256,40 @@
     });
 </script>
 
+
+<script>
+    var table;
+    $(document).ready(function() {
+        $("#perangkat_daerah").hide();
+
+        //data tables
+        table = $('#lampiranArsip').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "order": [],
+            "ajax": {
+                "url": "<?= base_url('ServerSideTables/getData'); ?>",
+                "type": "POST",
+                "data": function(data) {
+                    // var perda;
+                    data.daerah = $("#daerah").val();
+                    // perda = data.perangkat_daerah;
+                    // console.log('perda', perda);
+                },
+            },
+            "columnDefs": [{
+                "target": [-1],
+                "orderable": false,
+                "searchable": false,
+                "render": function(data, type, row) {
+                    var btn = '<div class="cuss"><div><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-placement="center" data-bs-target="#staticBackdropLihat"><i class="bi bi-eye"></i>Lihat Log</button></div><div class="cuss-detail"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropDetail"><i class="bi bi-file-earmark-text"></i>Detail</button></div></div>';
+                    return btn;
+                }
+            }]
+        });
+        loadPerangkatDaerah();
+    });
+</script>
 <!-- Data Tables Bootstrap 5 -->
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>

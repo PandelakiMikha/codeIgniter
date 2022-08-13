@@ -20,12 +20,12 @@
     <hr class="text-white">
     <div class="main">
         <div class="list-item">
-            <?php if ($user['role_id'] == 1 || $user['role_id'] == 2) : ?>
-                <a href="<?= base_url('surat_masuk') ?>" class="item" id="surma">
+            <?php if ($user['role_id'] == 1) : ?>
+                <a href="<?= base_url('karoo') ?>" class="item" id="surma">
                     <i class="fa-fw bi bi-envelope-paper"></i>
                     <span class="item-title">Surat Masuk</span>
                 </a>
-                <a href="<?= base_url('dispo') ?>" class="item">
+                <a href="<?= base_url('karoo/disposisi') ?>" class="item">
                     <i class="fa-fw bi bi-clipboard-check"></i>
                     <span class="item-title">Disposisi</span>
                 </a>
@@ -35,7 +35,26 @@
                         <span class="item-title">Arsip</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#">Surat Masuk</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('karoo/arsip') ?>">Surat Masuk</a></li>
+                        <li><a class="dropdown-item" href="#">Surat Keluar</a></li>
+                    </ul>
+                </div>
+            <?php elseif ($user['role_id'] == 2) : ?>
+                <a href="<?= base_url('kabag') ?>" class="item" id="surma">
+                    <i class="fa-fw bi bi-envelope-paper"></i>
+                    <span class="item-title">Surat Masuk</span>
+                </a>
+                <a href="<?= base_url('kabag/disposisi') ?>" class="item">
+                    <i class="fa-fw bi bi-clipboard-check"></i>
+                    <span class="item-title">Disposisi</span>
+                </a>
+                <div class="dropdown">
+                    <a href="#" class="item dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-fw bi bi-journal-bookmark"></i>
+                        <span class="item-title">Arsip</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="<?= base_url('kabag/arsip') ?>">Surat Masuk</a></li>
                         <li><a class="dropdown-item" href="#">Surat Keluar</a></li>
                     </ul>
                 </div>
@@ -46,15 +65,15 @@
                         <span class="item-title">Surat</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#">Surat Masuk</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('ktu') ?>">Surat Masuk</a></li>
                         <li><a class="dropdown-item" href="#">Surat Keluar</a></li>
                     </ul>
                 </div>
-                <a href="#" class="item">
+                <a href="<?= base_url('ktu/disposisi') ?>" class="item">
                     <i class="fa-fw bi bi-clipboard-check"></i>
                     <span class="item-title">Disposisi</span>
                 </a>
-                <a href="#" class="item">
+                <a href="<?= base_url('ktu/arsip') ?>" class="item">
                     <i class="fa-fw bi bi-send-plus"></i>
                     <span class="item-title">Kirim Surat</span>
                 </a>
@@ -69,11 +88,11 @@
                     </ul>
                 </div>
             <?php elseif ($user['role_id'] == 4) : ?>
-                <a href="#" class="item">
+                <a href="<?= base_url('jabfung') ?>" class="item">
                     <i class="fa-fw bi bi-envelope-paper"></i>
                     <span class="item-title">Surat Masuk</span>
                 </a>
-                <a href="#" class="item">
+                <a href="<?= base_url('jabfung/disposisi') ?>" class="item">
                     <i class="fa-fw bi bi-clipboard-check"></i>
                     <span class="item-title">Disposisi</span>
                 </a>
@@ -111,6 +130,7 @@
         transition: all ease-in 0.3s;
         z-index: 99;
     }
+
 
     .sidebarr.hide {
         width: 87px;
@@ -208,6 +228,11 @@
         padding-left: 6px;
         background: linear-gradient(224.57deg, #EABDBD 0.62%, rgba(217, 217, 217, 0) 75.19%);
     }
+
+    .sidebarr .main .list-item .item:focus {
+        background: linear-gradient(224.57deg, #EABDBD 0.62%, rgba(217, 217, 217, 0) 75.19%);
+    }
+
 
     .sidebarr.hide .main .list-item .item {
         justify-content: center;

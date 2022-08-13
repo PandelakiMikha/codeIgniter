@@ -1,5 +1,5 @@
 <div class="containerr mt-5 ">
-    <h4>Daftar Surat</h4>
+    <h4>Daftar Surat Keluar</h4>
     <!-- <div class="d-flex w-50 my-2 ">
         <select class="form-select me-3 w-50" id="daerah" name="daerah">
             <?php foreach ($data_daerah as $value) : ?>
@@ -22,17 +22,37 @@
 
     <div class="card">
         <div class="card-body table-responsive">
-            <table id="example" class="table table-hover1">
+            <table id="surat_kel_user" class="table table-hover">
                 <thead class="table-light">
-                    <tr>
-                        <th>Pingirim</th>
-                        <th>Jenis Surat</th>
+                    <tr class="table-active">
+                        <th>No</th>
                         <th>Perihal</th>
+                        <th>Nama File</th>
+                        <th>Jenis Surat</th>
                         <th>Tanggal Keluar</th>
-                        <th class="hala"></th>
-                    </tr>
+                        <!-- <th>Action</th> -->
+
                 </thead>
                 <tbody>
+                    <?php $no = 1;
+                    foreach ($h->result() as $row) {
+                    ?>
+
+                        <tr>
+                            <td><?= $no++ ?></td>
+                            <td class="td-2"><?php echo $row->regarding; ?>
+                            </td>
+                            <td class="td-3"><?php echo $row->File_name; ?>
+                            </td>
+                            <td class="td-4"><?php echo $row->type; ?>
+                            </td>
+                            <td class="td-5"><?php echo $row->date_sended; ?>
+                            </td>
+                        </tr>
+                        <!-- <td>Action</td> -->
+                        </tr>
+                    <?php }
+                    ?>
                 </tbody>
             </table>
         </div>
@@ -72,6 +92,10 @@
 
     /* .hala {
         width: 300px;
+    } */
+
+    /* .table {
+        background-color: #FFEBEB;
     } */
 
     .cuss {

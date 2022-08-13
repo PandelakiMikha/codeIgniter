@@ -1,0 +1,115 @@
+.page {
+    background: linear-gradient(224.57deg, #F4E1E1 0.62%, rgba(217, 217, 217, 0) 75.19%);
+}
+
+.container {
+    margin-top: 58px;
+}
+
+/* Dropdown */
+.dua-dropdown {
+    width: 50%;
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 34px;
+}
+
+.dua-dropdown .dropdown1 {
+    width: 40%;
+}
+
+.dua-dropdown .dropdown2 {
+    width: 50%;
+}
+
+/* Untuk semua inputan musti pke border radius */
+.form-control,
+.form-select {
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+/*  ***Styling untuk modals***  */
+
+/* Start dari sini untuk modal */
+.modal-content {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: #FFEBEB;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Untuk semua h4 pada thead dalam table */
+.modal-header h4 {
+    font-weight: 700;
+}
+
+/* Untuk semua label yang ada dpe input ato label yang jadi acuan */
+.label-bold {
+    font-weight: 700;
+}
+
+/* --Styling modal Detail */
+.row-custom {
+    width: 100%;
+    margin: 27px 62px;
+    display: flex;
+}
+
+/* Col left -> Daftar Isi yang ada di modal Detail */
+.col-left {
+    width: 60%;
+}
+
+.col-left .item {
+    border-radius: 8px;
+    height: 45px;
+    width: 550px;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    margin-bottom: 12px;
+    background: linear-gradient(224.57deg, #EABDBD 0.52%, rgba(217, 217, 217, 0) 90.19%);
+
+}
+
+.col-left .item p {
+    color: black;
+}
+
+
+/* Col right-> Kotak Dokumen + button Download */
+.col-right {
+    width: 30%;
+}
+
+.col-right label {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.col-right .lampiran-surat-kotak {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    background-color: #F4F4F4;
+    border: 1px solid #000;
+}
+
+.col-right .lampiran-surat-kotak h3 {
+    font-weight: 700;
+}
+
+
+.btn.btn-download {
+    background: rgba(63, 163, 255, 1);
+    width: 46%;
+    color: white;
+}

@@ -1,85 +1,56 @@
-<?php
-
-use LDAP\Result;
-
-defined('BASEPATH') or exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Kabag extends CI_Controller
 {
+
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Serverside_model');
+        $this->load->model('surma_model');
     }
     public function index()
     {
+
+        // $get = $this->uri->segment(1);
+        // var_dump($get);
+        // die;
+
+        $data['judul'] = "Surat Masuk";
+        $data['belanja'] = $this->surma_model->dataSuratM();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['judul'] = 'Dashboard';
-        $data['totals'] = $this->Serverside_model->count_all_data();
-        $data['data_daerah'] = $this->Serverside_model->getDataDaerah();
+        $data['totals'] = $this->surma_model->count_all_data();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/navbar', $data);
-        $this->load->view('surat_masuk/index');
+        $this->load->view("Admin/Surat_Masuk/surat_masuk", $data, NULL);
         $this->load->view('templates/footer');
     }
 
-    public function getData()
+    public function disposisi()
     {
-        $results = $this->Serverside_model->getDataSurat();
-        $data = [];
-        foreach ($results as $result) {
-            $row = array();
-            $row[] = $result->sender;
-            $row[] = $result->type;
-            $row[] = $result->regarding;
-            $row[] = $result->date_sended;
-            $data[] = $row;
-        }
+        // echo date('y-m-d');
+        $data['judul'] = "Kabag Disposisi";
+        $data['belanja'] = $this->surma_model->dataSuratM();
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['totals'] = $this->surma_model->count_all_data();
 
-        $output = array(
-            "draw" => $_POST['draw'],
-            "recordsTotal" => $this->Serverside_model->count_all_data(),
-            "recordsFiltered" => $this->Serverside_model->count_filtered_data(),
-            "data" => $data,
-        );
-
-        $this->output->set_content_type('application/json')->set_output(json_encode($output));
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/navbar', $data);
+        $this->load->view("Admin/Disposisi/disposisi", $data, NULL);
+        $this->load->view('templates/footer');
     }
 
-    public function getDataPerangkatDaerah()
+    public function arsip()
     {
-        $id_daerah = $this->input->post('daerah');
-        // $id_perangkat_daerah = $this->input->post('perangkatDaerah');
-        // var_dump($id_daerah);
-        // die;
-
-        $getDaerah = $this->Serverside_model->getDaerah($id_daerah);
-
-        echo json_encode($getDaerah);
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['totals'] = $this->surma_model->count_all_data();
+        $data['judul'] = 'Arsip';
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/navbar', $data);
+        $this->load->view('arsip/index.php');
+        $this->load->view('templates/footer');
     }
 }
-
-
-// catatan
-// $row[] = '<div class="cuss">
-            //             <div>
-            //                 <button type="button" class="btn btn-warning" data-bs-trigger="focus" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover">
-            //                     <i class="bi bi-eye"></i>    
-            //                     Lihat
-            //                 </button>
-            //             </div>
-            //             <div class="middle">
-            //                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            //                     <i class="bi bi-check-circle"></i>    
-            //                     Disposisi
-            //                 </button>
-            //             </div>
-            //             <div>
-            //                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            //                     <i class="bi bi-file-earmark-text"></i>    
-            //                     Detail
-            //                 </button>
-            //             </div>
-            //           </div>';

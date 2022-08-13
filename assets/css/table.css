@@ -1,0 +1,54 @@
+/* Styling untuk Button yang ada di tables */
+.cuss {
+    display: flex;
+    justify-content: center;
+}
+
+.cuss .middle {
+    margin-right: 28px;
+    margin-left: 28px;
+}
+
+.cuss .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.cuss .btn i {
+    margin-right: 6px;
+    box-sizing: border-box;
+}
+
+/* Styling untuk tables */
+
+/* Atur radius di th pertama dengan th terakhir */
+th:first-of-type {
+    border-top-left-radius: 10px;
+}
+
+th:last-of-type {
+    border-top-right-radius: 10px;
+}
+
+/* --> Action in Table*/
+.btn:hover {
+    transform: scale(1.02);
+}
+
+.table-hover tbody tr:hover,
+.table-hover tbody tr:hover {
+    background: linear-gradient(190deg, #E7E7E7 0%, rgba(217, 217, 217, 0) 40%);
+}
+
+/* Ini ketika angka halaman ditekan */
+.page-item.active .page-link {
+    background-color: lightgrey;
+    border-color: lightgrey;
+}
+
+/* Ini ketika prev / next tidak ditekan */
+.page-link {
+    color: black;
+}

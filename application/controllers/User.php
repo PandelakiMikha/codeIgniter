@@ -10,45 +10,123 @@ class User extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Serverside_model');
-        $this->load->model('User_m');
-        $this->load->model('Serverside_model');
+        $this->load->model('user_m');
+        // $this->load->model('Serverside_model');
     }
     public function index()
     {
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['judul'] = 'Dashboard';
-        $data['totals'] = $this->Serverside_model->count_all_data();
-        $data['data_daerah'] = $this->Serverside_model->getDataDaerah();
+        //form validation
+        $this->form_validation->set_rules('type', 'Type', 'required');
+        $this->form_validation->set_rules('date_sended', 'Date_sended', 'required');
+        $this->form_validation->set_rules('regarding', 'Regarding', 'required');
+        $this->form_validation->set_rules('File_name', 'file_name', 'required');
 
+        if ($this->form_validation->run() == FALSE) {
+
+            $getsurat = $this->user_m->getSuratData();
+            $data['jenis_surat'] = $getsurat;
+
+            $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+            $data['judul'] = 'Dashboard';
+            $data['totals'] = $this->user_m->count_all_data();
+            $data['data_daerah'] = $this->Serverside_model->getDataDaerah();
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar_user', $data);
+            $this->load->view('templates/navbar', $data);
+            $this->load->view('templates/U_table_suratMasuk', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $type   = $this->input->post('type');
+            $date_sended   = $this->input->post('date_sended');
+            $regarding   = $this->input->post('regarding');
+            $File_name  = $this->input->post('File_name');
+            $sender  = $this->input->post('sender');
+
+            $data = array(
+                'type' => $type,
+                'date_sended' => $date_sended,
+                'regarding' => $regarding,
+                'File_name' => $File_name,
+                'sender' => $sender,
+            );
+
+            $this->user_m->input_data($data, 'surat_masuk');
+            redirect('User/user_surat_kel');
+        }
+    }
+
+
+    public function user_surat_kel()
+    {
+
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['judul'] = 'Home User';
+        $data['h'] = $this->user_m->select();
+
+        $getsurat = $this->user_m->getSuratData();
+        $data['jenis_surat'] = $getsurat;
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar_user', $data);
         $this->load->view('templates/navbar', $data);
-        $this->load->view('surat_masuk/index');
+        $this->load->view('templates/U_table_suratKel', $data);
         $this->load->view('templates/footer');
+
+        //load the database  
+        // $this->load->database();
+        //load the model  
+        // $this->load->model('select');
+        //load the method of model  
     }
 
+    //function untuk data table surat masuk......
     public function getData()
     {
-        $results = $this->Serverside_model->getDataSurat();
+        $results = $this->user_m->getDataSurat();
         $data = [];
         foreach ($results as $result) {
+
             $row = array();
-            $row[] = $result->sender;
-            $row[] = $result->type;
-            $row[] = $result->regarding;
-            $row[] = $result->date_sended;
+            $row[] = $result->Perihal;
+            $row[] = $result->Jenis_surat;
+            $row[] = $result->No_agenda;
+            $row[] = $result->Nama_file;
             $data[] = $row;
         }
 
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->Serverside_model->count_all_data(),
-            "recordsFiltered" => $this->Serverside_model->count_filtered_data(),
+            "recordsTotal" => $this->user_m->count_all_data(),
+            "recordsFiltered" => $this->user_m->count_filtered_data(),
             "data" => $data,
         );
 
         $this->output->set_content_type('application/json')->set_output(json_encode($output));
     }
+
+    //function untuk data table surat keluar...
+    // public function getDataKel()
+    // {
+    //     $results = $this->user_m->getDataSuratKel();
+    //     $data = [];
+    //     foreach ($results as $result) {
+
+    //         $row = array();
+    //         $row[] = $result->Perihal;
+    //         $row[] = $result->Jenis_surat;
+    //         $row[] = $result->Nama_file;
+    //         $data[] = $row;
+    //     }
+
+    //     $output = array(
+    //         "draw" => $_POST['draw'],
+    //         "recordsTotal" => $this->user_m->count_all_dataKel(),
+    //         "recordsFiltered" => $this->user_m->count_filtered_data(),
+    //         "data" => $data,
+    //     );
+
+    //     $this->output->set_content_type('application/json')->set_output(json_encode($output));
+    // }
 
     public function getDataPerangkatDaerah()
     {
@@ -107,19 +185,6 @@ class User extends CI_Controller
         $ambilDinas = $this->User_m->ambilDinas($id_dinas);
 
         echo json_encode($ambilDinas);
-    }
-
-
-    public function user_surat_kel()
-    {
-        $data['totals'] = $this->Serverside_model->count_all_data();
-        $data['judul'] = 'Home User';
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar_user');
-        $this->load->view('templates/navbar', $data);
-        $this->load->view('user/user_surat_kel', $data);
-        $this->load->view('templates/U_table_suratKel');
-        $this->load->view('templates/footer');
     }
 }
 

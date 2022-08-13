@@ -10,6 +10,7 @@ class user_m extends CI_Model
     function getdataDaerah()
     {
         $query = $this->db->query("SELECT * FROM daerah ORDER BY name ASC");
+        var_dump($query);
 
         return $query->result();
     }

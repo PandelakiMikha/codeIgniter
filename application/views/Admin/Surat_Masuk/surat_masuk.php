@@ -14,17 +14,17 @@
                 </thead>
                 <tbody>
                     <?php
-                    if (!empty($belanja)) {
+                    if (!empty($surat)) {
                         $i = 0;
-                        foreach ($belanja as $isi) {
+                        foreach ($surat as $s) {
                             $i++;
                     ?>
                             <tr>
-                                <td class="tg-baqh"><?= $isi->sender; ?></td>
-                                <td class="tg-baqh"><?= $isi->type; ?></td>
-                                <td class="tg-baqh"><?= $isi->regarding; ?></td>
-                                <td class="tg-baqh"><?= $isi->ket; ?></td>
-                                <td class="tg-baqh"><?= $isi->date_sended; ?></td>
+                                <td class="tg-baqh"><?= $s->sender; ?></td>
+                                <td class="tg-baqh"><?= $s->type; ?></td>
+                                <td class="tg-baqh"><?= $s->regarding; ?></td>
+                                <td class="tg-baqh"><?= $s->ket; ?></td>
+                                <td class="tg-baqh"><?= $s->date_sended; ?></td>
                             </tr>
                     <?php
                         }

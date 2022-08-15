@@ -11,7 +11,7 @@ class Karoo extends CI_Controller
     public function index()
     {
         $data['judul'] = "Surat Masuk";
-        $data['belanja'] = $this->surma_model->dataSuratM();
+        $data['surat'] = $this->surma_model->dataSuratM();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
 
@@ -26,7 +26,7 @@ class Karoo extends CI_Controller
     {
         // echo date('y-m-d');
         $data['judul'] = "Karo Disposisi";
-        $data['belanja'] = $this->surma_model->dataSuratM();
+        $data['surat'] = $this->surma_model->dataSuratM();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
 

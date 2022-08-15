@@ -15,31 +15,68 @@
                 </thead>
                 <tbody>
                     <?php
-                    if (!empty($belanja)) {
-                        $i = 0;
-                        foreach ($belanja as $isi) {
-                            $i++;
+                    if (!empty($surat)) {
+                        foreach ($surat as $s) {
                     ?>
                             <tr>
-                                <td class="tg-baqh"><?= $isi->sender; ?></td>
-                                <td class="tg-baqh"><?= $isi->type; ?></td>
-                                <td class="tg-baqh"><?= $isi->regarding; ?></td>
-                                <td class="tg-baqh"><?= $isi->ket; ?></td>
-                                <td class="tg-baqh"><?= $isi->date_sended; ?></td>
+                                <td class="tg-baqh"><?= $s->sender; ?></td>
+                                <td class="tg-baqh"><?= $s->type; ?></td>
+                                <td class="tg-baqh"><?= $s->regarding; ?></td>
+                                <td class="tg-baqh"><?= $s->ket; ?></td>
+                                <td class="tg-baqh"><?= $s->date_sended; ?></td>
                                 <td>
                                     <div class="cuss">
-                                        <div class="me-4">
-                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-placement="center" data-bs-target="#staticBackdropLihat">
-                                                <i class="bi bi-eye"></i>Log
-                                            </button>
-                                        </div>
-                                        <?php if ($user['role_id'] == 4) : ?>
-                                        <?php elseif ($user['role_id'] != 4) : ?>
-                                            <div>
-                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropDispo">
-                                                    <i class="bi bi-check-circle"></i>Disposisi
+                                        <?php if ($user['role_id'] == 1 || $user['role_id'] == 2) : ?>
+                                            <div class="me-4">
+                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-placement="center" data-bs-target="#staticBackdropLihat">
+                                                    <i class="bi bi-eye"></i>Log
                                                 </button>
                                             </div>
+                                        <?php endif ?>
+                                        <?php if ($user['role_id'] == 4) : ?>
+                                            <!-- Tidah menampilkan button disposisi -->
+                                        <?php elseif ($user['role_id'] != 4) : ?>
+                                            <?php if ($s->is_dispo == 'false' && $user['role_id'] != 3) : ?>
+                                                <div>
+                                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#belumDispo">
+                                                        <i class="bi bi-check-circle"></i>Disposisi
+                                                    </button>
+                                                </div>
+                                            <?php elseif ($s->is_dispo == 'true') : ?>
+                                                <?php if ($user['role_id'] == 1) : ?>
+                                                    <div>
+                                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropDispo">
+                                                            <i class="bi bi-check-circle"></i>Disposisi
+                                                        </button>
+                                                    </div>
+                                                <?php elseif ($user['role_id'] == 2) : ?>
+                                                    <div>
+                                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropDispoKabag">
+                                                            <i class="bi bi-check-circle"></i>Disposisi
+                                                        </button>
+                                                    </div>
+                                                <?php elseif ($user['role_id'] == 3) : ?>
+                                                    <div>
+                                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#belumDispo">
+                                                            <i class="bi bi-check-circle"></i>Disposisi
+                                                        </button>
+                                                    </div>
+                                                <?php endif ?>
+                                            <?php elseif ($s->is_dispo == 'false' && $user['role_id'] == 3) : ?>
+                                                <?php if ($s->is_dispo_karo == 'true' || $s->is_dispo_kabag == 'true') : ?>
+                                                    <div>
+                                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropDispoKTU2">
+                                                            <i class="bi bi-check-circle"></i>Disposisi
+                                                        </button>
+                                                    </div>
+                                                <?php else : ?>
+                                                    <div>
+                                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropDispoKTU">
+                                                            <i class="bi bi-check-circle"></i>Disposisi
+                                                        </button>
+                                                    </div>
+                                                <?php endif ?>
+                                            <?php endif ?>
                                         <?php endif ?>
                                         <div class="ms-4">
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropDetail">
@@ -59,25 +96,6 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Modal untuk button lihat -->
 <div class="modal fade" id="staticBackdropLihat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -87,9 +105,25 @@
                 <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
             <div class="modal-body">
+
                 <!-- Data Static -->
-                <h5 class="editBy">Di edit oleh Kabag Tatalaksana</h5>
-                <p class="editByDate">20 Juli 2022</p>
+                <?php foreach ($surat as $s) { ?>
+                    <?php if ($user['role_id'] == 1) : ?>
+                        <?php if ($s->is_dispo == 'false') : ?>
+                            <h5 class="editBy">Menunggu disposi KTU</h5>
+                            <?php break; ?>
+                        <?php elseif ($s->is_dispo == 'true') : ?>
+                            <?php if ($s->is_dispo_karo == 'true' || $s->is_dispo_kabag == 'true' || $s->is_dispo_ktu == 'true') : ?>
+                                <h5 class="editBy">Sedang ditindaklanjuti oleh Jabfung</h5>
+                                <?php break; ?>
+                            <?php elseif ($s->is_dispo_kabag == 'false') : ?>
+                                <h5 class="editBy">Menunggu disposi Kabag</h5>
+                                <?php break; ?>
+                            <?php endif ?>
+                        <?php endif ?>
+                    <?php endif ?>
+                <?php
+                } ?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -131,6 +165,148 @@
                 </div>
                 <div class="input-groupp">
                     <label for="form-control" class="label-bold">Catatan Kepala Biro</label>
+                    <textarea class="form-control" aria-label="With textarea" placeholder="Isi catatan disini."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="button-kirim">Kirim</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal Untuk Button Disposisi Kabag-->
+<div class="modal fade" id="staticBackdropDispoKabag" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="staticBackdropLabel">Formulir Disposisi</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="form-select" class="label-bold">Tujuan</label>
+                    <select name="form-select" class="form-select">
+                        <option value="pilihPenerima" hidden>Pilih Tujuan</option>
+                        <option value="KTU">KTU</option>
+                        <option value="Bendahara">Bendahara</option>
+                        <option value="Jabfung1">Jabfung1</option>
+                        <option value="Jabfung2">Jabfung2</option>
+                        <option value="Jabfung3">Jabfung3</option>
+                    </select>
+                </div>
+                <div class="input-groupp">
+                    <label class="label-bold">Catatan Kepala Bagian</label>
+                    <textarea class="form-control" aria-label="With textarea" placeholder="Isi catatan disini."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="button-kirim">Kirim</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal untuk Button Disposisi KTU Pertama-->
+<div class="modal fade" id="staticBackdropDispoKTU" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-center">
+                <h4 class="modal-title" id="staticBackdropLabel">Formulir Disposisi</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row g-2 d-flex align-items-center justify-content-center gap-3">
+                    <div class="col-md-5">
+                        <div class="form-floating">
+                            <input type="text" class="form-control " placeholder="Surat Dari" id="floatingInput">
+                            <label for="floatingInput" class="label-bold">Surat dari</label>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" placeholder="Tanggal Keluar" id="floatingInput">
+                            <label for="floatingInput" class="label-bold">Tanggal Keluar</label>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" placeholder="Nomor Surat" id="floatingInput">
+                            <label for="floatingInput" class="label-bold">Nomor Surat</label>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" placeholder="Nomor Agenda" id="floatingInput">
+                            <label for="floatingInput" class="label-bold">Nomor Agenda</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" placeholder="Tanggal Surat" id="floatingInput">
+                            <label for="floatingInput" class="label-bold">Tanggal Surat</label>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" placeholder="Sifat Surat" id="floatingInput">
+                            <label for="floatingInput" class="label-bold">Sifat Surat</label>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" placeholder="Diterima Tanggal" id="floatingInput">
+                            <label for="floatingInput" class="label-bold">Diterima Tanggal</label>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <select class="form-select form-select-lg " aria-label="pilihStatus">
+                            <option hidden selected>Status</option>
+                            <option value="1">Segera</option>
+                            <option value="2">Sangat Segera</option>
+                            <option value="3">Rahasia</option>
+                        </select>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="form-floating w-100">
+                            <textarea class="form-control" placeholder="hal" id="floatingTextarea" id="Hal" name="Hal"></textarea>
+                            <label for="floatingTextarea" class="label-bold">Hal</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="button-kirim">Kirim</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--Modal Untuk Button Disposisi KTU ke-2 -->
+<div class="modal fade" id="staticBackdropDispoKTU2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="staticBackdropLabel">Formulir Disposisi</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="form-select" class="label-bold">Tujuan</label>
+                    <select name="form-select" class="form-select">
+                        <option value="pilihPenerima" hidden>Pilih Tujuan</option>
+                        <option value="Jabfung1">Jabfung1</option>
+                        <option value="Jabfung2">Jabfung2</option>
+                        <option value="Jabfung3">Jabfung3</option>
+                    </select>
+                </div>
+                <div class="input-groupp">
+                    <label class="label-bold">Catatan KTU/Jabfung Ahli Muda</label>
                     <textarea class="form-control" aria-label="With textarea" placeholder="Isi catatan disini."></textarea>
                 </div>
             </div>
@@ -196,6 +372,24 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal untuk massage belum di disposisi -->
+<!-- Modal -->
+<div class="modal fade" id="belumDispo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="exampleModalLabel">Maaf...</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <?php if ($user['role_id'] == 3) : ?>
+                    Belum di Disposisi oleh KTU
+                <?php endif ?>
             </div>
         </div>
     </div>

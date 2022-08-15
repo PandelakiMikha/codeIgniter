@@ -14,7 +14,10 @@ class Surma_model extends CI_Model
         } elseif ($checkUser == 4 && $currentUri == 'http://localhost/codeIgniter/jabfung' || $currentUri == 'http://localhost/codeIgniter/jabfung/disposisi') {
             return $query = $this->db->get_where('surat_masuk', ['is_dispo_ktu' => 'true'])->result();
         } else {
-            return $query = $this->db->get('surat_masuk')->result();
+            return $query = $this->db->get_where('surat_masuk', ['is_done_dispo' => 'false'])->result();
+
+            var_dump($query);
+            die;
         }
     }
 

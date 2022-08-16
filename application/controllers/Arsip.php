@@ -12,8 +12,8 @@ class Arsip extends CI_Controller
     public function index()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['judul'] = 'Arsip';
         $data['totals'] = $this->Serverside_model->count_all_data();
+        $data['judul'] = 'Arsip';
         $data['data_daerah'] = $this->Serverside_model->getDataDaerah();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');

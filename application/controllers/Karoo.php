@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Kabag extends CI_Controller
+class Karoo extends CI_Controller
 {
 
     public function __construct()
@@ -10,11 +10,6 @@ class Kabag extends CI_Controller
     }
     public function index()
     {
-
-        // $get = $this->uri->segment(1);
-        // var_dump($get);
-        // die;
-
         $data['judul'] = "Surat Masuk";
         $data['surat'] = $this->surma_model->dataSuratM();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
@@ -30,7 +25,7 @@ class Kabag extends CI_Controller
     public function disposisi()
     {
         // echo date('y-m-d');
-        $data['judul'] = "Kabag Disposisi";
+        $data['judul'] = "Karo Disposisi";
         $data['surat'] = $this->surma_model->dataSuratM();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();

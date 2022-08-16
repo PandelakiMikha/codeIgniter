@@ -1,57 +1,34 @@
 <div class="containerr mt-5 ">
-    <h4>Daftar Surat Keluar</h4>
-    <!-- <div class="d-flex w-50 my-2 ">
-        <select class="form-select me-3 w-50" id="daerah" name="daerah">
-            <?php foreach ($data_daerah as $value) : ?>
-                <option value="" hidden>Pilih Daerah</option>
-                <option value="<?= $value->id ?>"><?= $value->name ?></option>
-            <?php endforeach ?>
-        </select>
-        <select class="form-select w-50" aria-label="Default select example" id="perangkat_daerah" name="perangkat_daerah">
-        </select>
-    </div> -->
-
-    <!-- <div class="form-group">
-        <label for="LastName" class="col-sm-2 control-label"></label>
-        <div class="col-sm-4">
-            <button type="button" id="btn-filter" class="btn btn-primary">Filter</button>
-            <button type="button" id="btn-reset" class="btn btn-default">Reset</button>
-        </div>
-    </div> -->
-
-
+    <h4>Daftar Surat</h4>
     <div class="card">
         <div class="card-body table-responsive">
-            <table id="surat_kel_user" class="table table-hover">
+            <table id="surat" class="table table-hover">
                 <thead class="table-light">
-                    <tr class="table-active">
-                        <th>No</th>
-                        <th>Perihal</th>
-                        <th>Nama File</th>
+                    <tr>
+                        <th>Pingirim</th>
                         <th>Jenis Surat</th>
-                        <th>Tanggal Keluar</th>
-                        <!-- <th>Action</th> -->
-
+                        <th>Perihal</th>
+                        <th>Keterangan</th>
+                        <th>Tanggal Masuk</th>
+                    </tr>
                 </thead>
                 <tbody>
-                    <?php $no = 1;
-                    foreach ($h->result() as $row) {
+                    <?php
+                    if (!empty($surat)) {
+                        $i = 0;
+                        foreach ($surat as $s) {
+                            $i++;
                     ?>
-
-                        <tr>
-                            <td><?= $no++ ?></td>
-                            <td class="td-2"><?php echo $row->regarding; ?>
-                            </td>
-                            <td class="td-3"><?php echo $row->File_name; ?>
-                            </td>
-                            <td class="td-4"><?php echo $row->type; ?>
-                            </td>
-                            <td class="td-5"><?php echo $row->date_sended; ?>
-                            </td>
-                        </tr>
-                        <!-- <td>Action</td> -->
-                        </tr>
-                    <?php }
+                            <tr>
+                                <td class="tg-baqh"><?= $s->sender; ?></td>
+                                <td class="tg-baqh"><?= $s->type; ?></td>
+                                <td class="tg-baqh"><?= $s->regarding; ?></td>
+                                <td class="tg-baqh"><?= $s->ket; ?></td>
+                                <td class="tg-baqh"><?= $s->date_sended; ?></td>
+                            </tr>
+                    <?php
+                        }
+                    }
                     ?>
                 </tbody>
             </table>
@@ -80,6 +57,11 @@
 
 
 <style>
+    .form-group {
+        margin-left: -12px;
+        margin-top: 10px;
+    }
+
     .containerr {
         box-sizing: border-box;
         /* margin: auto; */
@@ -92,10 +74,6 @@
 
     /* .hala {
         width: 300px;
-    } */
-
-    /* .table {
-        background-color: #FFEBEB;
     } */
 
     .cuss {

@@ -11,7 +11,21 @@ class user_m extends CI_Model
     var $column_order = array('id', 'Perihal', 'Jenis_surat', 'No_agenda', 'Nama_file');
     // var $order = array('id', 'sender', 'type', 'date_sended', 'regarding', 'daerah_id', 'perangkat_daerah_id');
 
-
+    public function select()
+    {
+        $query = $this->db->query("SELECT * FROM daerah ORDER BY name ASC");
+        var_dump($query);
+        //data is retrive from this query  
+        $query = $this->db->get('surat_kel_user');
+        return $query;
+    }
+    //untuk insert data kedalam table surat_masuk.....
+    function input_data($data)
+    {
+        $this->db->insert('surat_masuk', $data);
+        $this->db->insert('surat_kel_user', $data);
+        return true;
+    }
     //untuk menampilkan data daerah yang ada dalam database....
     // function getdataDaerah()
     // {
@@ -37,12 +51,12 @@ class user_m extends CI_Model
     // }
 
     //model untuk pilih jenis surat
-    // function getSuratData()
-    // {
-    //     $query = $this->db->query("SELECT * FROM jenis_surat ORDER BY name ASC");
+    function getSuratData()
+    {
+        $query = $this->db->query("SELECT * FROM jenis_surat ORDER BY name ASC");
 
-    //     return $query->result();
-    // }
+        return $query->result();
+    }
 
     //----------------------------------------------------
     //untuk model yang di ambil dari severside model.....
@@ -57,6 +71,7 @@ class user_m extends CI_Model
         // }
     }
 
+    //private function untuk surat masuk user.....
     private function _get_data_query()
     {
         // var_dump('ayayas'); die;
@@ -79,6 +94,9 @@ class user_m extends CI_Model
         }
     }
 
+
+
+    //public function untuk mengambil data dari table surat masuk user...
     public function getDataSurat()
     {
         $this->_get_data_query();
@@ -89,6 +107,10 @@ class user_m extends CI_Model
         return $query->result();
     }
 
+
+
+
+
     public function count_filtered_data()
     {
         $this->_get_data_query();
@@ -96,11 +118,20 @@ class user_m extends CI_Model
         return $query->num_rows();
     }
 
+
+
+    //
+
     public function count_all_data()
     {
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }
+
+
+    //
+
+
 
     // public function getDataDaerah()
     // {

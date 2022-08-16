@@ -1,88 +1,121 @@
+<!--
+    Catatan: 
+    Untuk sementara yang button for tiap bulan itu pas click cuman mo muncul yang surat masuk punya, kalo yang surat keluar belum ada karena dpe table nda ada
+    Kan harusnya kalo user pilih yang surat keluar kan dia muncul yang surat keluar punya lagi to
+ -->
+
 <!-- <div class="container-arsip"> -->
-
-
-
-<div class="dropdownPilihTahun mt-5">
-    <label for="form-control">Pilih Tahun</label>
-    <select name="pilihTahunArsip" id="" class="form-select pilihTahunArsip">
-        <option value="1" hidden selected>Pilih</option>
-        <option value="2">2015</option>
-        <option value="3">2016</option>
-        <option value="4">2017</option>
-        <option value="5">2018</option>
-        <option value="6">2019</option>
-        <option value="7">2020</option>
-        <option value="8">2021</option>
-    </select>
-</div>
-
-<!-- Arsip File Start -->
-<div class="container-arsip">
-    <div class="row">
-        <div class="col-custom bulan">
-            <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
-            <h5>Januari</h5>
-        </div>
-        <div class="col-custom bulan">
-            <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
-            <h5>Februari</h5>
-        </div>
-        <div class="col-custom bulan">
-            <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
-            <h5>Maret</h5>
-        </div>
-        <div class="col-custom bulan">
-            <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
-            <h5>April</h5>
-        </div>
-        <div class="col-custom bulan">
-            <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
-            <h5>Mei</h5>
-        </div>
-        <div class="col-custom bulan">
-            <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
-            <h5>Juni</h5>
-        </div>
-        <div class="col-custom bulan">
-            <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
-            <h5>Juli</h5>
-        </div>
-        <div class="col-custom bulan">
-            <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
-            <h5>Agustus</h5>
-        </div>
-        <div class="col-custom bulan">
-            <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
-            <h5>September</h5>
-        </div>
-        <div class="col-custom bulan">
-            <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
-            <h5>Oktober</h5>
-        </div>
-        <div class="col-custom bulan">
-            <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
-            <h5>November</h5>
-        </div>
-        <div class="col-custom bulan">
-            <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
-            <h5>Desember</h5>
-        </div>
+<div class="container">
+    <div class="dropdownPilihTahun mt-5">
+        <label for="form-select">Pilih Tahun</label>
+        <select name="pilihTahunArsip" id="" class="form-select pilihTahunArsip">
+            <option value="1" hidden selected>Pilih</option>
+            <option value="2">2015</option>
+            <option value="3">2016</option>
+            <option value="4">2017</option>
+            <option value="5">2018</option>
+            <option value="6">2019</option>
+            <option value="7">2020</option>
+            <option value="8">2021</option>
+        </select>
     </div>
-    <!-- Arsip File End -->
+
+    <!-- Arsip File Start -->
+    <div class="container-arsip">
+        <div class="row">
+            <div class="col-custom bulan">
+                <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
+                <a href="<?= base_url('/arsip/arsip_surat_masuk') ?>" class="">
+                    <h5>Januari</h5>
+                </a>
+            </div>
+            <div class="col-custom bulan">
+                <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
+                <a href="<?= base_url('/arsip/arsip_surat_masuk') ?>">
+                    <h5>Februari</h5>
+                </a>
+            </div>
+
+            <div class="col-custom bulan">
+                <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
+                <a href="<?= base_url('/arsip/arsip_surat_masuk') ?>" class="">
+                    <h5>Maret</h5>
+                </a>
+            </div>
+            <div class="col-custom bulan">
+                <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
+                <a href="<?= base_url('/arsip/arsip_surat_masuk') ?>" class="">
+                    <h5>April</h5>
+                </a>
+            </div>
+            <div class="col-custom bulan">
+                <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
+                <a href="<?= base_url('/arsip/arsip_surat_masuk') ?>" class="">
+                    <a href="<?= base_url('/arsip/arsip_surat_masuk') ?>" class="">
+                        <h5>Mei</h5>
+                    </a>
+                </a>
+            </div>
+            <div class="col-custom bulan">
+                <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
+                <a href="<?= base_url('/arsip/arsip_surat_masuk') ?>" class="">
+                    <h5>Juni</h5>
+                </a>
+            </div>
+            <div class="col-custom bulan">
+                <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
+                <a href="<?= base_url('/arsip/arsip_surat_masuk') ?>" class="">
+                    <h5>Juli</h5>
+                </a>
+            </div>
+            <div class="col-custom bulan">
+                <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
+                <a href="<?= base_url('/arsip/arsip_surat_masuk') ?>" class="">
+                    <h5>Agustus</h5>
+                </a>
+            </div>
+            <div class="col-custom bulan">
+                <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
+                <a href="<?= base_url('/arsip/arsip_surat_masuk') ?>" class="">
+                    <h5>September</h5>
+                </a>
+            </div>
+            <div class="col-custom bulan">
+                <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
+                <a href="<?= base_url('/arsip/arsip_surat_masuk') ?>" class="">
+                    <h5>Oktober</h5>
+                </a>
+            </div>
+            <div class="col-custom bulan">
+                <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
+                <a href="<?= base_url('/arsip/arsip_surat_masuk') ?>" class="">
+                    <h5>November</h5>
+                </a>
+            </div>
+            <div class="col-custom bulan">
+                <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
+                <a href="<?= base_url('/arsip/arsip_surat_masuk') ?>" class="">
+                    <h5>Desember</h5>
+                </a>
+            </div>
+        </div>
+        <!-- Arsip File End -->
+    </div>
 </div>
 
 
 
 <style>
-    .dropdownPilihTahun {
-        margin-left: 154px;
-    }
-
     .container-arsip {
         /* margin-left: 131px; */
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    label {
+        font-weight: 700;
+        font-size: 20px;
     }
 
     .form-select.pilihTahunArsip {
@@ -108,6 +141,11 @@
         /* background: rgb(256, 256, 256); */
         background: transparent !important;
         gap: 2rem;
+    }
+
+    .col-custom.bulan a {
+        text-decoration: none;
+        color: black;
     }
 
     .col-custom.bulan h5 {

@@ -25,6 +25,21 @@ class Ktu extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+
+    public function kirim_surat()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['judul'] = 'Kirim Surat';
+        $data['totals'] = $this->Serverside_model->count_all_data();
+        $data['data_daerah'] = $this->Serverside_model->getDataDaerah();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/navbar', $data);
+        $this->load->view('ktu_kirim_surat/index');
+        $this->load->view('templates/footer');
+    }
+
     public function getData()
     {
         $results = $this->Serverside_model->getDataSurat();

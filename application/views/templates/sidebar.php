@@ -25,7 +25,7 @@
                     <i class="fa-fw bi bi-envelope-paper"></i>
                     <span class="item-title">Surat Masuk</span>
                 </a>
-                <a href="<?= base_url('dispo/index') ?>" class="item">
+                <a href="<?= base_url('dispo') ?>" class="item">
                     <i class="fa-fw bi bi-clipboard-check"></i>
                     <span class="item-title">Disposisi</span>
                 </a>
@@ -35,8 +35,8 @@
                         <span class="item-title">Arsip</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#">Surat Masuk</a></li>
-                        <li><a class="dropdown-item" href="#">Surat Keluar</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('arsip') ?>">Surat Masuk</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('arsip') ?>">Surat Keluar</a></li>
                     </ul>
                 </div>
             <?php elseif ($user['role_id'] == 3) : ?>
@@ -54,7 +54,7 @@
                     <i class="fa-fw bi bi-clipboard-check"></i>
                     <span class="item-title">Disposisi</span>
                 </a>
-                <a href="#" class="item">
+                <a href="<?= base_url('/ktu/kirim_surat') ?>" class="item">
                     <i class="fa-fw bi bi-send-plus"></i>
                     <span class="item-title">Kirim Surat</span>
                 </a>

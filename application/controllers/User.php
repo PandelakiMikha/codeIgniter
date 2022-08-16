@@ -63,6 +63,8 @@ class User extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Home User';
         $data['h'] = $this->user_m->select();
+        $data['totals'] = $this->user_m->count_all_data();
+
 
         $getsurat = $this->user_m->getSuratData();
         $data['jenis_surat'] = $getsurat;

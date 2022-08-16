@@ -612,17 +612,6 @@
     })
 </script>
 
-<script>
-    const menu = document.getElementById('menu-label');
-    const sidebar = document.getElementsByClassName('sidebarr')[0];
-    const dropdown = document.getElementsByClassName('dropdown')[0];
-
-    menu.addEventListener('click', function() {
-        sidebar.classList.toggle('hide');
-        dropdown.classList.toggle('dropend');
-        console.log('ok');
-    })
-</script>
 
 <script>
     const menu = document.getElementById('menu-label');
@@ -650,6 +639,74 @@
 <script>
     $(document).ready(function() {
         $('#surat').DataTable();
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        var push_dispo_ktu = $('#push_dispo_ktu');
+
+        push_dispo_ktu.submit(function(e) {
+
+            e.preventDefault();
+
+            $.ajax({
+
+                type: push_dispo_ktu.attr('method'),
+                url: push_dispo_ktu.attr('action'),
+                data: push_dispo_ktu.serialize(),
+                success: function(data) {
+                    if (data.status = true) {
+
+                        location.reload();
+
+                    } else if (data.status = false) {
+
+                        location.reload();
+
+                    };
+
+                },
+                error: function(s) {
+
+                    alert('Terjadi Kesalahan!')
+
+                }
+
+            })
+
+        });
+
+        jQuery(document).on("click", "#pushDispoKtu", function() {
+
+            var idnya = $(this).data("idnya");
+
+            var basee = window.base_url = <?php echo json_encode(base_url('Ktu/')); ?> + 'dispoKTU';
+            console.log(basee);
+
+            $('#modalKtu').modal('show');
+
+            jQuery.ajax({
+
+                type: "POST",
+                dataType: "json",
+                url: basee,
+                data: {
+                    idnya: idnya
+                }
+
+            }).done(function(data) {
+
+                if (data.status = false) {
+                    alert('Gagal memuat data!');
+                };
+                var tabs = $("#dKtu_id").val(data.id);
+                console.log('tab', tabs.val());
+
+            })
+
+        });
     });
 </script>
 

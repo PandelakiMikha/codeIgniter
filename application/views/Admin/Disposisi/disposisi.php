@@ -71,7 +71,7 @@
                                                     </div>
                                                 <?php else : ?>
                                                     <div>
-                                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropDispoKTU">
+                                                        <button type="button" class="btn btn-danger" id="pushDispoKtu" data-idnya="<?= $s->id; ?>" data-bs-toggle="modal" data-bs-target="#modalKtu">
                                                             <i class="bi bi-check-circle"></i>Disposisi
                                                         </button>
                                                     </div>
@@ -165,7 +165,7 @@
                 </div>
                 <div class="input-groupp">
                     <label for="form-control" class="label-bold">Catatan Kepala Biro</label>
-                    <textarea class="form-control" aria-label="With textarea" placeholder="Isi catatan disini."></textarea>
+                    <textarea class="form-control" required="required" aria-label="With textarea" placeholder="Isi catatan disini."></textarea>
                 </div>
             </div>
             <div class="modal-footer">
@@ -198,7 +198,7 @@
                 </div>
                 <div class="input-groupp">
                     <label class="label-bold">Catatan Kepala Bagian</label>
-                    <textarea class="form-control" aria-label="With textarea" placeholder="Isi catatan disini."></textarea>
+                    <textarea class="form-control" required="required" aria-label="With textarea" placeholder="Isi catatan disini."></textarea>
                 </div>
             </div>
             <div class="modal-footer">
@@ -210,78 +210,80 @@
 </div>
 
 <!-- Modal untuk Button Disposisi KTU Pertama-->
-<div class="modal fade" id="staticBackdropDispoKTU" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="modalKtu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalKtu" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-center">
                 <h4 class="modal-title" id="staticBackdropLabel">Formulir Disposisi</h4>
             </div>
-            <div class="modal-body">
-                <div class="row g-2 d-flex align-items-center justify-content-center gap-3">
-                    <div class="col-md-5">
-                        <div class="form-floating">
-                            <input type="text" class="form-control " placeholder="Surat Dari" id="floatingInput">
-                            <label for="floatingInput" class="label-bold">Surat dari</label>
+            <form role="form" id="push_dispo_ktu" action="<?php echo base_url(); ?>ktu/push_dispo_ktu" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="row g-2 d-flex align-items-center justify-content-center gap-3">
+                        <div class="col-md-5">
+                            <div class="form-floating">
+                                <input type="hidden" required="required" id="dKtu_id" name="dKtu_id" value="">
+                                <input type="text" class="form-control" required="required" placeholder="Surat Dari" id="suratDari" name="suratDari">
+                                <label for="suratDari" class="label-bold">Surat dari</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" placeholder="Tanggal Keluar" id="floatingInput">
-                            <label for="floatingInput" class="label-bold">Tanggal Keluar</label>
+                        <div class="col-md-5">
+                            <div class="form-floating">
+                                <input type="date" class="form-control" required="required" placeholder="Tanggal Keluar" id="tanggalKeluar" name="tanggalKeluar">
+                                <label for="tanggalKeluar" class="label-bold">Tanggal Keluar</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" placeholder="Nomor Surat" id="floatingInput">
-                            <label for="floatingInput" class="label-bold">Nomor Surat</label>
+                        <div class="col-md-5">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" required="required" placeholder="Nomor Surat" id="noSurat" name="noSurat">
+                                <label for="noSurat" class="label-bold">Nomor Surat</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" placeholder="Nomor Agenda" id="floatingInput">
-                            <label for="floatingInput" class="label-bold">Nomor Agenda</label>
+                        <div class="col-md-5">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" required="required" placeholder="Nomor Agenda" id="noAgenda" name="noAgenda">
+                                <label for="noAgenda" class="label-bold">Nomor Agenda</label>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-5">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" placeholder="Tanggal Surat" id="floatingInput">
-                            <label for="floatingInput" class="label-bold">Tanggal Surat</label>
+                        <div class="col-md-5">
+                            <div class="form-floating">
+                                <input type="date" class="form-control" required="required" placeholder="Tanggal Surat" id="tglSurat" name="tglSurat">
+                                <label for="tglSurat" class="label-bold">Tanggal Surat</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" placeholder="Sifat Surat" id="floatingInput">
-                            <label for="floatingInput" class="label-bold">Sifat Surat</label>
+                        <div class="col-md-5">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" required="required" placeholder="Sifat Surat" id="sifatSurat" name="sifatSurat">
+                                <label for="sifatSurat" class="label-bold">Sifat Surat</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" placeholder="Diterima Tanggal" id="floatingInput">
-                            <label for="floatingInput" class="label-bold">Diterima Tanggal</label>
+                        <div class="col-md-5">
+                            <div class="form-floating">
+                                <input type="date" class="form-control" required="required" placeholder="Diterima Tanggal" id="diterima" name="diterima">
+                                <label for="diterima" class="label-bold">Diterima Tanggal</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-5">
-                        <select class="form-select form-select-lg " aria-label="pilihStatus">
-                            <option hidden selected>Status</option>
-                            <option value="1">Segera</option>
-                            <option value="2">Sangat Segera</option>
-                            <option value="3">Rahasia</option>
-                        </select>
-                    </div>
-                    <div class="col-md-10">
-                        <div class="form-floating w-100">
-                            <textarea class="form-control" placeholder="hal" id="floatingTextarea" id="Hal" name="Hal"></textarea>
-                            <label for="floatingTextarea" class="label-bold">Hal</label>
+                        <div class="col-md-5">
+                            <select class="form-select form-select-lg" required="required" name="status" aria-label="pilihStatus">
+                                <option hidden selected>Status</option>
+                                <option value="Segera">Segera</option>
+                                <option value="Sangat Segera">Sangat Segera</option>
+                                <option value="Rahasia">Rahasia</option>
+                            </select>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="form-floating w-100">
+                                <textarea class="form-control" required="required" placeholder="hal" id="hal" name="hal"></textarea>
+                                <label for="hal" class="label-bold">Hal</label>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="button-kirim">Kirim</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
+                    <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" value="tambahkan">Kirim</button>
+                </div>
+            </form>
 
         </div>
     </div>
@@ -307,7 +309,7 @@
                 </div>
                 <div class="input-groupp">
                     <label class="label-bold">Catatan KTU/Jabfung Ahli Muda</label>
-                    <textarea class="form-control" aria-label="With textarea" placeholder="Isi catatan disini."></textarea>
+                    <textarea class="form-control" required="required" aria-label="With textarea" placeholder="Isi catatan disini."></textarea>
                 </div>
             </div>
             <div class="modal-footer">
@@ -387,9 +389,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <?php if ($user['role_id'] == 3) : ?>
-                    Belum di Disposisi oleh KTU
-                <?php endif ?>
+                Surat belum di disposisi
             </div>
         </div>
     </div>

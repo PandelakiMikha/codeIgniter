@@ -18,6 +18,12 @@ class user_m extends CI_Model
         $query = $this->db->get('surat_kel_user');
         return $query;
     }
+    public function detail()
+    {
+        //data is retrive from this query  
+        $query = $this->db->get('surat_masuk_user');
+        return $query;
+    }
 
     //untuk insert data kedalam table surat_masuk.....
     function input_data($data)

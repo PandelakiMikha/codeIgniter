@@ -2,7 +2,7 @@
 <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>">
 
 
-    <div class="modal fade" style="border-radius: 50px;" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" style="border-radius: 50px;" id="exampleModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
@@ -16,7 +16,7 @@
                         <!-- input data user -->
                         <div class="col-md-4">
                             <label for="sender" class="form-label"><b>Nama Pengguna Anda</b></label>
-                            <input type="text" class="form-control" name="sender" id="sender" value="<?= $user['name'] ?>">
+                            <input type="text" class="form-control border-0" name="sender" id="sender" value="<?= $user['name'] ?>">
                             <small class="text-danger"><?= form_error('type'); ?></small>
                         </div>
 
@@ -60,7 +60,7 @@
                         <div class=" d-flex justify-content-center mt-5">
                             <button type="reset" class="btn bg-body  d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;" name="save" value="Save Data"><span class="Btn_reset"><i class="bi bi-trash"></i>Hapus</span></button>
 
-                            <button type="submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;" name="save" value="Save Data"><i class="bi bi-send"></i><strong>Kirim</strong></button>
+                            <button type="submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;" name="save" value="Save Data" id="send"><i class="bi bi-send"></i><strong>Kirim</strong></button>
                         </div>
                     </form>
                     <!-- end of content -->
@@ -69,12 +69,16 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
             </div> -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
             </div>
         </div>
     </div>
     <!-- end of modal -->
-
 </div>
+
+<!-- sidebar user start -->
 <div class="sidebarr">
     <div class="hamburger   ">
         <div class="hamburgerr ">
@@ -88,7 +92,7 @@
     </div>
     <div class="header">
         <div class="list-item">
-            <a href="#">
+            <a href="<?= base_url('User/index') ?>">
                 <img src="<?= base_url('assets/logo/Silonbog.png') ?>" alt="">
                 <span class="header-title">Sistem Layanan Online Biro Organisasi</span>
             </a>
@@ -469,48 +473,3 @@
         console.log('ok');
     })
 </script>
-
-<!-- jquery date picker -->
-
-<!-- dropdown select bertingkat -->
-<!-- <script>
-    $(document).ready(function() {
-        $("#perangkat_daerah");
-
-        daerahLoad();
-        // tabels();
-    });
-
-    function daerahLoad() {
-        $("#perangkat_daerah").change(function() {
-            var getPerangkatDaerah = $("#perangkat_daerah").val();
-            // console.log(getPerangkatDaerah);
-            // tabels();
-        });
-
-        $("#daerah").change(function() {
-            var ambilDaerah = $("#daerah").val();
-            $.ajax({
-                type: "POST",
-                dataType: "JSON",
-                url: "<?= base_url('User/getDataPerangkat'); ?>",
-                data: {
-                    daerah: ambilDaerah,
-                },
-                success: function(data) {
-                    console.log(data);
-
-                    var html = "";
-                    var i;
-                    for (i = 0; i < data.length; i++) {
-                        html += '<option selected hidden>Pilih Perangkat Daerah</option> <option value="' + data[i].id + '">' + data[i].name + '</option>';
-                    }
-
-                    $("#perangkat_daerah").html(html);
-                    $("#perangkat_daerah").show();
-                }
-            });
-
-        });
-    };
-</script> -->

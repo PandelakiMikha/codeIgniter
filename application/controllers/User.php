@@ -25,6 +25,7 @@ class User extends CI_Controller
 
             $getsurat = $this->user_m->getSuratData();
             $data['jenis_surat'] = $getsurat;
+            $data['h'] = $this->user_m->detail();
 
             $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
             $data['judul'] = 'Dashboard';

@@ -1,38 +1,17 @@
 <div class="containerr mt-5 ">
+
     <h4>Daftar Surat Masuk</h4>
-    <!-- <div class="d-flex w-50 my-2 ">
-        <select class="form-select me-3 w-50" id="daerah" name="daerah">
-            <?php foreach ($data_daerah as $value) : ?>
-                <option value="" hidden>Pilih Daerah</option>
-                <option value="<?= $value->id ?>"><?= $value->name ?></option>
-            <?php endforeach ?>
-        </select>
-        <select class="form-select w-50" aria-label="Default select example" id="perangkat_daerah" name="perangkat_daerah">
-        </select>
-    </div> -->
-
-    <!-- <div class="form-group">
-        <label for="LastName" class="col-sm-2 control-label"></label>
-        <div class="col-sm-4">
-            <button type="button" id="btn-filter" class="btn btn-primary">Filter</button>
-            <button type="button" id="btn-reset" class="btn btn-default">Reset</button>
-        </div>
-    </div> -->
-
-
     <div class="card">
         <div class="card-body table-responsive">
             <table id="surat_masuk_user" class="table table-hover">
                 <thead>
                     <tr class="table-active">
-
                         <th>Perihal</th>
                         <th>Jenis Surat</th>
                         <th>No Agenda</th>
                         <th>Nama File</th>
                         <th>Action</th>
                     </tr>
-
                 </thead>
                 <tbody>
                 </tbody>
@@ -41,20 +20,63 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
+
+<!-- modal 2 -->
+<div class="modal fade" id="staticBackdropDetail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h4 class="modal-title" id="staticBackdropLabel">Detail Surat</h4>
             </div>
             <div class="modal-body">
-                ...
+                <div class="row-custom gap-5">
+                    <!-- Daftar isi detail surat -->
+                    <div class="col-left">
+
+                        <div class="item">
+                            <p class="label-bold">Jenis Surat: </p>
+                            <!-- <p><?php echo $row->Jenis_surat; ?></p> -->
+                        </div>
+                        <div class="item">
+                            <p class="label-bold">Nomor Agenda: </p>
+                            <!-- <p><?php echo $row->No_agenda; ?></p> -->
+                        </div>
+                        <div class="item">
+                            <p class="label-bold">Nama File: </p>
+                            <!-- <p><?php echo $row->Nama_file; ?></p> -->
+                        </div>
+                        <div class="item">
+                            <p class="label-bold">Perihal: </p>
+                            <!-- <p><?php echo $row->Perihal; ?></p> -->
+                        </div>
+                        <!-- <div class="item">
+                                <p class="label-bold">Tanggal Keluar: </p>
+                                <p>20 Juli 2022</p>
+                            </div>
+                            <div class="item">
+                                <p class="label-bold">Nomor Agenda: </p>
+                                <p>00234</p>
+                            </div>
+                            <div class="item">
+                                <p class="label-bold">Sifat: </p>
+                                <p>Umum</p>
+                            </div> -->
+                    </div>
+                    <!-- Lampiran Surat dalam bentuk dokumen -->
+                    <div class="col-right form-hover">
+                        <label for="lampiran-surat-kotak">Lampiran Surat</label>
+                        <div class="lampiran-surat-kotak">
+                            <h3>PDF</h3>
+                        </div>
+                        <p>nama surat</p>
+                        <button class="btn btn-download">Download</button>
+                    </div>
+
+                </div>
+
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
             </div>
         </div>
     </div>

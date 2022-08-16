@@ -9,6 +9,7 @@
 
 
 <script src="<?= base_url('assets/'); ?>vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- <script src="<?= base_url('assets/'); ?>js/myjs.js"></script> -->
 
 
 <script src="<?= base_url('assets/'); ?>js/sb-admin-2.min.js"></script>
@@ -100,13 +101,13 @@
             tabels();
         });
         //function load krim surat.....
-        $(document).ready(function() {
-            $("#perangkat_daerah2").show();
-            $("#daftar_dinas").hide();
+        // $(document).ready(function() {
+        //     $("#perangkat_daerah2").show();
+        //     $("#daftar_dinas").hide();
 
-            daerahLoad();
-            dinasLoad();
-        });
+        //     daerahLoad();
+        //     dinasLoad();
+        // });
     }
 
 
@@ -465,10 +466,7 @@
                 "url": "<?= base_url('User/getData'); ?>",
                 "type": "POST",
                 "data": function(data) {
-                    // var perda;
                     data.daerah = $("#daerah").val();
-                    // perda = data.perangkat_daerah;
-                    // console.log('perda', perda);
                 },
             },
             "columnDefs": [{
@@ -476,7 +474,7 @@
                 "orderable": false,
                 "searchable": false,
                 "render": function(data, type, row) {
-                    var btn = '<div><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-file-earmark-text"></i>Detail</button></div></div>';
+                    var btn = '<div><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropDetail"><i class="bi bi-file-earmark-text"></i>Detail</button></div></div>';
                     return btn;
                 }
             }]
@@ -556,7 +554,24 @@
 <!-- end of jquery script -->
 
 <!-- sweet alert -->
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+
+<script>
+    // letting css, html to be loaded first before execute the function
+    $(document).ready(function() {
+
+        // condition if btn-show-sweetalert2 cliced
+        $("#send").click(function() {
+            // show the sweetalert after btn clicked
+            Swal.fire(
+                'Surat Terkirim!',
+                'Surat Anda Sudah Terkirim ke Biro Organisasi!',
+                'success'
+            )
+        });
+
+    });
+</script>
 
 <!-- end of sweet alert -->
 <script>

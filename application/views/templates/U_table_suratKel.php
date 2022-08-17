@@ -26,6 +26,7 @@
                 <thead class="table-light">
                     <tr class="table-active">
                         <th>No</th>
+                        <th>Pengirim</th>
                         <th>Perihal</th>
                         <th>Nama File</th>
                         <th>Jenis Surat</th>
@@ -40,6 +41,7 @@
 
                         <tr>
                             <td><?= $no++ ?></td>
+                            <td><?php echo $row->sender; ?></td>
                             <td class="td-2"><?php echo $row->regarding; ?>
                             </td>
                             <td class="td-3"><?php echo $row->File_name; ?>

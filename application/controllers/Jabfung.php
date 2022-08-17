@@ -10,13 +10,8 @@ class Jabfung extends CI_Controller
     }
     public function index()
     {
-
-        // $get = $this->uri->segment(1);
-        // var_dump($get);
-        // die;
-
         $data['judul'] = "Surat Masuk";
-        $data['belanja'] = $this->surma_model->dataSuratM();
+        $data['surat'] = $this->surma_model->dataSuratM();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
 
@@ -29,9 +24,8 @@ class Jabfung extends CI_Controller
 
     public function disposisi()
     {
-        // echo date('y-m-d');
-        $data['judul'] = "Daftar Disposisi";
-        $data['belanja'] = $this->surma_model->dataSuratM();
+        $data['judul'] = "Daftar Surat Disposisi";
+        $data['surat'] = $this->surma_model->dataSuratM();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
 

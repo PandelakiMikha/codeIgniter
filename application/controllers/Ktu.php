@@ -7,6 +7,7 @@ class Ktu extends CI_Controller
     {
         parent::__construct();
         $this->load->model('surma_model');
+        $this->load->model('User_model');
         $this->load->library('form_validation');
     }
     public function index()
@@ -30,6 +31,9 @@ class Ktu extends CI_Controller
         $data['surat'] = $this->surma_model->dataSuratM();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
+
+        $bawahan = 3;
+        $data['user_biro'] = $this->User_model->getUserBiro($bawahan);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -56,6 +60,7 @@ class Ktu extends CI_Controller
 
         $result = $this->surma_model->dispoKTU($idnya);
 
+
         if ($result == false) {
             echo (json_encode(array('status' => FALSE)));
         } else {
@@ -79,8 +84,6 @@ class Ktu extends CI_Controller
             $this->index();
         } else {
             $idnya = $this->input->post('dKtu_id');
-            var_dump($idnya);
-            die;
             $suratDari    = $this->input->post('suratDari');
             $tanggalKeluar     = $this->input->post('tanggalKeluar');
             $noSurat     = $this->input->post('noSurat');
@@ -92,7 +95,7 @@ class Ktu extends CI_Controller
             $hal = $this->input->post('hal');
 
             $isiDispoKtu = [
-
+                'surat_masuk_id' => $idnya,
                 'suratDari'     => $suratDari,
                 'tanggalKeluar' => $tanggalKeluar,
                 'noSurat'       => $noSurat,
@@ -108,7 +111,46 @@ class Ktu extends CI_Controller
             $result = $this->surma_model->tambahDispoKtu($isiDispoKtu);
             $update = $this->surma_model->updateStatus($idnya);
 
-            // redirect('ktu');
+            if ($result > 0) {
+                echo (json_encode(array('status' => TRUE)));
+            } else {
+                echo (json_encode(array('status' => FALSE)));
+            }
+        }
+    }
+
+    public function dispoKtu1()
+    {
+        $idnya = $this->input->post('idnya');
+
+        $result = $this->surma_model->dispoKtu1($idnya);
+
+        if ($result == false) {
+            echo (json_encode(array('status' => FALSE)));
+        } else {
+            echo (json_encode($result[0]));
+        }
+    }
+
+    public function push_dispo_ktu1()
+    {
+        $this->form_validation->set_rules('tujuan', 'Tujuan', 'trim|required|max_length[20]|xss_clean');
+        $this->form_validation->set_rules('catKtu1', 'CatKtu1', 'trim|required|max_length[256]|xss_clean');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->index();
+        } else {
+            $idnya              = $this->input->post('dKtu1_id');
+            $tujuan             = $this->input->post('tujuan');
+            $catKtu1            = $this->input->post('catKtu1');
+
+            $isiDispoKtu1 = [
+                'tujuan_ktu'       => $tujuan,
+                'catKtu1'           => $catKtu1,
+            ];
+
+            $result = $this->surma_model->tambahDispoKtu1($isiDispoKtu1, $idnya);
+            $update = $this->surma_model->updateStatusKtu1($idnya);
 
             if ($result > 0) {
                 echo (json_encode(array('status' => TRUE)));

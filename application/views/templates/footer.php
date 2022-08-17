@@ -642,11 +642,15 @@
     });
 </script>
 
+
+<!-- dispo ktu 1 ando -->
 <script type="text/javascript">
     $(document).ready(function() {
 
         var push_dispo_ktu = $('#push_dispo_ktu');
+        var push_dispo_ktu1 = $('#push_dispo_ktu1');
 
+        // dispo ktu pertama
         push_dispo_ktu.submit(function(e) {
 
             e.preventDefault();
@@ -668,9 +672,9 @@
                     };
 
                 },
-                error: function(s) {
+                error: function() {
 
-                    alert('Terjadi Kesalahan!')
+                    alert('Terjadi Mistake!')
 
                 }
 
@@ -683,7 +687,6 @@
             var idnya = $(this).data("idnya");
 
             var basee = window.base_url = <?php echo json_encode(base_url('Ktu/')); ?> + 'dispoKTU';
-            console.log(basee);
 
             $('#modalKtu').modal('show');
 
@@ -701,8 +704,202 @@
                 if (data.status = false) {
                     alert('Gagal memuat data!');
                 };
-                var tabs = $("#dKtu_id").val(data.id);
-                console.log('tab', tabs.val());
+                $("#dKtu_id").val(data.id);
+
+            })
+
+        });
+
+
+        // dispo ktu kedua
+        push_dispo_ktu1.submit(function(e) {
+
+            e.preventDefault();
+
+            $.ajax({
+
+                type: push_dispo_ktu1.attr('method'),
+                url: push_dispo_ktu1.attr('action'),
+                data: push_dispo_ktu1.serialize(),
+                success: function(data) {
+                    if (data.status = true) {
+
+                        location.reload();
+
+                    } else if (data.status = false) {
+
+                        location.reload();
+
+                    };
+
+                },
+                error: function() {
+
+                    alert('Terjadi Mistake!')
+
+                }
+
+            })
+
+        });
+
+        jQuery(document).on("click", "#pushDispoKtu1", function() {
+
+            var idnya = $(this).data("idnya");
+
+            var basee = window.base_url = <?php echo json_encode(base_url('Ktu/')); ?> + 'dispoKtu1';
+
+            $('#modalKtu1').modal('show');
+
+            jQuery.ajax({
+
+                type: "POST",
+                dataType: "json",
+                url: basee,
+                data: {
+                    idnya: idnya
+                }
+
+            }).done(function(data) {
+
+                if (data.status = false) {
+                    alert('Gagal memuat data!');
+                };
+                $("#dKtu1_id").val(data.id);
+
+            })
+
+        });
+    });
+</script>
+
+<!-- dispo karo ando -->
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        var push_dispo_karo = $('#push_dispo_karo');
+
+        push_dispo_karo.submit(function(e) {
+
+            e.preventDefault();
+
+            $.ajax({
+
+                type: push_dispo_karo.attr('method'),
+                url: push_dispo_karo.attr('action'),
+                data: push_dispo_karo.serialize(),
+                success: function(data) {
+                    if (data.status = true) {
+
+                        location.reload();
+
+                    } else if (data.status = false) {
+
+                        location.reload();
+
+                    };
+
+                },
+                error: function() {
+
+                    alert('Terjadi Mistake!')
+
+                }
+
+            })
+
+        });
+
+        jQuery(document).on("click", "#pushDispoKaro", function() {
+
+            var idnya = $(this).data("idnya");
+
+            var basee = window.base_url = <?php echo json_encode(base_url('Karoo/')); ?> + 'dispoKaro';
+
+            $('#modalKaro').modal('show');
+
+            jQuery.ajax({
+
+                type: "POST",
+                dataType: "json",
+                url: basee,
+                data: {
+                    idnya: idnya
+                }
+
+            }).done(function(data) {
+
+                if (data.status = false) {
+                    alert('Gagal memuat data!');
+                };
+                $("#dKaro_id").val(data.id);
+
+            })
+
+        });
+    });
+</script>
+
+<!-- dispo kabag ando -->
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        var push_dispo_kabag = $('#push_dispo_kabag');
+
+        push_dispo_kabag.submit(function(e) {
+
+            e.preventDefault();
+
+            $.ajax({
+
+                type: push_dispo_kabag.attr('method'),
+                url: push_dispo_kabag.attr('action'),
+                data: push_dispo_kabag.serialize(),
+                success: function(data) {
+                    if (data.status = true) {
+
+                        location.reload();
+
+                    } else if (data.status = false) {
+
+                        location.reload();
+
+                    };
+
+                },
+                error: function() {
+
+                    alert('Terjadi Mistake!')
+
+                }
+
+            })
+
+        });
+
+        jQuery(document).on("click", "#pushDispoKabag", function() {
+
+            var idnya = $(this).data("idnya");
+
+            var basee = window.base_url = <?php echo json_encode(base_url('Kabag/')); ?> + 'dispoKabag';
+
+            $('#modalKabag').modal('show');
+
+            jQuery.ajax({
+
+                type: "POST",
+                dataType: "json",
+                url: basee,
+                data: {
+                    idnya: idnya
+                }
+
+            }).done(function(data) {
+
+                if (data.status = false) {
+                    alert('Gagal memuat data!');
+                };
+                $("#dKabag_id").val(data.id);
 
             })
 

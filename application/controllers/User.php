@@ -11,7 +11,7 @@ class User extends CI_Controller
         parent::__construct();
         $this->load->model('Serverside_model');
         $this->load->model('user_m');
-        // $this->load->model('Serverside_model');
+        $this->load->model('surma_model');
     }
     public function index()
     {
@@ -60,23 +60,16 @@ class User extends CI_Controller
     public function user_surat_kel()
     {
 
+        $data['judul'] = "Dashboard";
+        $data['surat'] = $this->surma_model->dataSuratKelUser();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['judul'] = 'Home User';
-        $data['h'] = $this->user_m->select();
+        $data['totals'] = $this->surma_model->count_all_data();
 
-        $getsurat = $this->user_m->getSuratData();
-        $data['jenis_surat'] = $getsurat;
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar_user', $data);
         $this->load->view('templates/navbar', $data);
-        $this->load->view('templates/U_table_suratKel', $data);
+        $this->load->view("templates/U_table_suratKel", $data, NULL);
         $this->load->view('templates/footer');
-
-        //load the database  
-        // $this->load->database();
-        //load the model  
-        // $this->load->model('select');
-        //load the method of model  
     }
 
     //function untuk data table surat masuk......

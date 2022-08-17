@@ -65,6 +65,7 @@ class User extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
 
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar_user', $data);
         $this->load->view('templates/navbar', $data);

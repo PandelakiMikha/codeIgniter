@@ -14,6 +14,7 @@ class Arsip extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->Serverside_model->count_all_data();
         $data['judul'] = 'Arsip';
+        $data['data_daerah'] = $this->Serverside_model->getDataDaerah();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
         $this->load->view('templates/navbar');
@@ -22,16 +23,17 @@ class Arsip extends CI_Controller
     }
 
 
-    public function lampiran_arsip()
+    public function arsip_surat_masuk()
     {
-        $data['judul'] = "Lampiran Arsip";
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['judul'] = 'Lampiran Arsip';
         $data['totals'] = $this->Serverside_model->count_all_data();
+        $data['data_daerah'] = $this->Serverside_model->getDataDaerah();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/navbar');
-        $this->load->view('arsip/lampiran_arsip');
+        $this->load->view('lampiran_arsip/index');
         $this->load->view('templates/footer');
     }
 }

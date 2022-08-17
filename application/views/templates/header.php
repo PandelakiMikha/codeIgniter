@@ -28,6 +28,7 @@
     <!-- Styling untuk page Disposisi -->
     <link rel="stylesheet" href="<?= base_url('assets/'); ?>css/disposisi.css">
     <link rel="stylesheet" href="<?= base_url('assets/'); ?>css/table.css">
+    <link rel="stylesheet" href="<?= base_url('assets/'); ?>css/modal.css">
 
     <style>
         * {

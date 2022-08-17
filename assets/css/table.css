@@ -44,8 +44,8 @@ th:last-of-type {
 
 /* Ini ketika angka halaman ditekan */
 .page-item.active .page-link {
-    background-color: lightgrey;
-    border-color: lightgrey;
+    background-color: grey;
+    border-color: grey;
 }
 
 /* Ini ketika prev / next tidak ditekan */

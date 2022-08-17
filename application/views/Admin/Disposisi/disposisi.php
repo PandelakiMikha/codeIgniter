@@ -43,35 +43,59 @@
                                                     </button>
                                                 </div>
                                             <?php elseif ($s->is_dispo == 'true') : ?>
-                                                <?php if ($user['role_id'] == 1) : ?>
-                                                    <div>
-                                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropDispo">
-                                                            <i class="bi bi-check-circle"></i>Disposisi
-                                                        </button>
-                                                    </div>
-                                                <?php elseif ($user['role_id'] == 2) : ?>
-                                                    <div>
-                                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropDispoKabag">
-                                                            <i class="bi bi-check-circle"></i>Disposisi
-                                                        </button>
-                                                    </div>
-                                                <?php elseif ($user['role_id'] == 3) : ?>
+                                                <?php if ($s->is_dispo_karo == 'true') : ?>
+                                                    <?php if ($user['role_id'] == 1) : ?>
+                                                        <div>
+                                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#belumDispo">
+                                                                <i class="bi bi-check-circle"></i>Disposisi
+                                                            </button>
+                                                        </div>
+                                                    <?php elseif ($user['role_id'] == 2) : ?>
+                                                        <div>
+                                                            <button type="button" class="btn btn-danger" id="pushDispoKabag" data-idnya="<?= $s->id; ?>" data-bs-toggle="modal" data-bs-target="#modalKabag">
+                                                                <i class="bi bi-check-circle"></i>Disposisi
+                                                            </button>
+                                                        </div>
+                                                    <?php elseif ($user['role_id'] == 3) : ?>
+                                                        <div>
+                                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#belumDispo">
+                                                                <i class="bi bi-check-circle"></i>Disposisi
+                                                            </button>
+                                                        </div>
+                                                    <?php endif ?>
+                                                <?php elseif ($s->is_dispo_kabag == 'true') : ?>
+                                                    <?php if ($user['role_id'] == 2) : ?>
+                                                        <div>
+                                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#belumDispo">
+                                                                <i class="bi bi-check-circle"></i>Disposisi
+                                                            </button>
+                                                        </div>
+                                                    <?php endif ?>
+                                                <?php elseif ($user['role_id'] == 2 || $user['role_id'] == 3) : ?>
                                                     <div>
                                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#belumDispo">
                                                             <i class="bi bi-check-circle"></i>Disposisi
                                                         </button>
                                                     </div>
+                                                <?php else : ?>
+                                                    <?php if ($user['role_id'] == 1) : ?>
+                                                        <div>
+                                                            <button type="button" class="btn btn-danger" id="pushDispoKaro" data-idnya="<?= $s->id; ?>" data-bs-toggle="modal" data-bs-target="#modalKaro">
+                                                                <i class="bi bi-check-circle"></i>Disposisi
+                                                            </button>
+                                                        </div>
+                                                    <?php endif ?>
                                                 <?php endif ?>
                                             <?php elseif ($s->is_dispo == 'false' && $user['role_id'] == 3) : ?>
                                                 <?php if ($s->is_dispo_karo == 'true' || $s->is_dispo_kabag == 'true') : ?>
                                                     <div>
-                                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropDispoKTU2">
+                                                        <button type="button" class="btn btn-danger" id="pushDispoKtu1" data-idnya="<?= $s->id; ?>" data-bs-toggle="modal" data-bs-target="#modalKtu1">
                                                             <i class="bi bi-check-circle"></i>Disposisi
                                                         </button>
                                                     </div>
                                                 <?php else : ?>
                                                     <div>
-                                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropDispoKTU">
+                                                        <button type="button" class="btn btn-danger" id="pushDispoKtu" data-idnya="<?= $s->id; ?>" data-bs-toggle="modal" data-bs-target="#modalKtu">
                                                             <i class="bi bi-check-circle"></i>Disposisi
                                                         </button>
                                                     </div>
@@ -133,187 +157,212 @@
 </div>
 
 <!--Modal Untuk Button Disposisi Karo -->
-<div class="modal fade" id="staticBackdropDispo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="modalKaro" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalKaro" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="staticBackdropLabel">Formulir Disposisi</h4>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="form-select" class="label-bold">Tujuan</label>
-                    <select name="form-select" class="form-select">
-                        <option value="pilihPenerima" hidden>Pilih Tujuan</option>
-                        <option value="">Kepala Bagian Kelembagaan dan Anjab</option>
-                        <option value="">Kepala Bagian Reformasi Birokrasi</option>
-                        <option value="">Kepala Bagian Tatalaksana</option>
-                        <option value="">Kepala sub Bagian TU Biro</option>
-                        <option value="">Bendahara</option>
-                    </select>
+            <form role="form" id="push_dispo_karo" action="<?php echo base_url(); ?>karoo/push_dispo_karo" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="form-select" class="label-bold">Tujuan</label>
+                        <select name="tujuan" class="form-select" required>
+                            <option value="" hidden>Pilih Tujuan</option>
+                            <?php
+                            if (!empty($user_biro)) {
+                                foreach ($user_biro as $uB) {
+                            ?>
+                                    <option value="<?= $uB->email ?>"><?= $uB->name ?></option>
+                            <?php
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="form-select" class="label-bold">Mengharapkan</label>
+                        <select name="mengharapkan" required class="form-select">
+                            <option value="" hidden>Pilih Pesan</option>
+                            <option value="Buat Tanggapan dan Saran">Buat Tanggapan dan Saran</option>
+                            <option value="Proses Lebih Lanjut">Proses Lebih Lanjut</option>
+                            <option value="Laporkan? Menghadap Saya">Laporkan? Menghadap Saya</option>
+                            <option value="Monitor Untuk Masukan">Monitor Untuk Masukan</option>
+                            <option value="Kordinasi">Kordinasi</option>
+                            <option value="Untuk Minta Perhatian">Untuk Minta Perhatian</option>
+                        </select>
+                    </div>
+                    <div class="input-groupp">
+                        <label for="form-control" class="label-bold">Catatan Kepala Biro</label>
+                        <input type="hidden" required="required" id="dKaro_id" name="dKaro_id" value="">
+                        <textarea class="form-control" required="required" id="catKaro" name="catKaro" aria-label="With textarea" placeholder="Isi catatan disini."></textarea>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="form-select" class="label-bold">Mengharapkan</label>
-                    <select name="form-select" class="form-select">
-                        <option value="pilihPesan" hidden>Pilih Pesan</option>
-                        <option value="">Buat Tanggapan dan Saran</option>
-                        <option value="">Proses Lebih Lanjut</option>
-                        <option value="">Laporkan? Menghadap Saya</option>
-                        <option value="">Monitor Untuk Masukan</option>
-                        <option value="">Kordinasi</option>
-                        <option value="">Untuk Minta Perhatian</option>
-                    </select>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
+                    <button type="submit" class="btn btn-danger">Kirim</button>
                 </div>
-                <div class="input-groupp">
-                    <label for="form-control" class="label-bold">Catatan Kepala Biro</label>
-                    <textarea class="form-control" aria-label="With textarea" placeholder="Isi catatan disini."></textarea>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="button-kirim">Kirim</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>
 
 <!--Modal Untuk Button Disposisi Kabag-->
-<div class="modal fade" id="staticBackdropDispoKabag" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="modalKabag" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalKabag" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="staticBackdropLabel">Formulir Disposisi</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="form-select" class="label-bold">Tujuan</label>
-                    <select name="form-select" class="form-select">
-                        <option value="pilihPenerima" hidden>Pilih Tujuan</option>
-                        <option value="KTU">KTU</option>
-                        <option value="Bendahara">Bendahara</option>
-                        <option value="Jabfung1">Jabfung1</option>
-                        <option value="Jabfung2">Jabfung2</option>
-                        <option value="Jabfung3">Jabfung3</option>
-                    </select>
+            <form role="form" id="push_dispo_kabag" action="<?php echo base_url(); ?>kabag/push_dispo_kabag" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="form-select" class="label-bold">Tujuan</label>
+                        <select name="tujuan" required class="form-select">
+                            <option value="" hidden>Pilih Tujuan</option>
+                            <?php
+                            if (!empty($user_biro)) {
+                                foreach ($user_biro as $uB) {
+                            ?>
+                                    <option value="<?= $uB->email ?>"><?= $uB->name ?></option>
+                            <?php
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="input-groupp">
+                        <label class="label-bold">Catatan Kepala Bagian</label>
+                        <input type="hidden" required="required" id="dKabag_id" name="dKabag_id" value="">
+                        <textarea class="form-control" name="catKabag" id="catKabag" required="required" aria-label="With textarea" placeholder="Isi catatan disini."></textarea>
+                    </div>
                 </div>
-                <div class="input-groupp">
-                    <label class="label-bold">Catatan Kepala Bagian</label>
-                    <textarea class="form-control" aria-label="With textarea" placeholder="Isi catatan disini."></textarea>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
+                    <button type="submit" class="btn btn-danger">Kirim</button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="button-kirim">Kirim</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>
 
 <!-- Modal untuk Button Disposisi KTU Pertama-->
-<div class="modal fade" id="staticBackdropDispoKTU" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" tabindex="-1" id="modalKtu" role="dialog" data-bs-backdrop="static" aria-labelledby="modalKtu" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-center">
                 <h4 class="modal-title" id="staticBackdropLabel">Formulir Disposisi</h4>
             </div>
-            <div class="modal-body">
-                <div class="row g-2 d-flex align-items-center justify-content-center gap-3">
-                    <div class="col-md-5">
-                        <div class="form-floating">
-                            <input type="text" class="form-control " placeholder="Surat Dari" id="floatingInput">
-                            <label for="floatingInput" class="label-bold">Surat dari</label>
+            <form role="form" id="push_dispo_ktu" action="<?php echo base_url(); ?>ktu/push_dispo_ktu" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="row g-2 d-flex align-items-center justify-content-center gap-3">
+                        <div class="col-md-5">
+                            <div class="form-floating">
+                                <input type="hidden" required="required" id="dKtu_id" name="dKtu_id" value="">
+                                <input type="text" class="form-control" required="required" placeholder="Surat Dari" id="suratDari" name="suratDari">
+                                <label for="suratDari" class="label-bold">Surat dari</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" placeholder="Tanggal Keluar" id="floatingInput">
-                            <label for="floatingInput" class="label-bold">Tanggal Keluar</label>
+                        <div class="col-md-5">
+                            <div class="form-floating">
+                                <input type="date" class="form-control" required="required" placeholder="Tanggal Keluar" id="tanggalKeluar" name="tanggalKeluar">
+                                <label for="tanggalKeluar" class="label-bold">Tanggal Keluar</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" placeholder="Nomor Surat" id="floatingInput">
-                            <label for="floatingInput" class="label-bold">Nomor Surat</label>
+                        <div class="col-md-5">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" required="required" placeholder="Nomor Surat" id="noSurat" name="noSurat">
+                                <label for="noSurat" class="label-bold">Nomor Surat</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" placeholder="Nomor Agenda" id="floatingInput">
-                            <label for="floatingInput" class="label-bold">Nomor Agenda</label>
+                        <div class="col-md-5">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" required="required" placeholder="Nomor Agenda" id="noAgenda" name="noAgenda">
+                                <label for="noAgenda" class="label-bold">Nomor Agenda</label>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-5">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" placeholder="Tanggal Surat" id="floatingInput">
-                            <label for="floatingInput" class="label-bold">Tanggal Surat</label>
+                        <div class="col-md-5">
+                            <div class="form-floating">
+                                <input type="date" class="form-control" required="required" placeholder="Tanggal Surat" id="tglSurat" name="tglSurat">
+                                <label for="tglSurat" class="label-bold">Tanggal Surat</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" placeholder="Sifat Surat" id="floatingInput">
-                            <label for="floatingInput" class="label-bold">Sifat Surat</label>
+                        <div class="col-md-5">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" required="required" placeholder="Sifat Surat" id="sifatSurat" name="sifatSurat">
+                                <label for="sifatSurat" class="label-bold">Sifat Surat</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" placeholder="Diterima Tanggal" id="floatingInput">
-                            <label for="floatingInput" class="label-bold">Diterima Tanggal</label>
+                        <div class="col-md-5">
+                            <div class="form-floating">
+                                <input type="date" class="form-control" required="required" placeholder="Diterima Tanggal" id="diterima" name="diterima">
+                                <label for="diterima" class="label-bold">Diterima Tanggal</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-5">
-                        <select class="form-select form-select-lg " aria-label="pilihStatus">
-                            <option hidden selected>Status</option>
-                            <option value="1">Segera</option>
-                            <option value="2">Sangat Segera</option>
-                            <option value="3">Rahasia</option>
-                        </select>
-                    </div>
-                    <div class="col-md-10">
-                        <div class="form-floating w-100">
-                            <textarea class="form-control" placeholder="hal" id="floatingTextarea" id="Hal" name="Hal"></textarea>
-                            <label for="floatingTextarea" class="label-bold">Hal</label>
+                        <div class="col-md-5">
+                            <select class="form-select form-select-lg" required="required" name="status" aria-label="pilihStatus">
+                                <option hidden selected>Status</option>
+                                <option value="Segera">Segera</option>
+                                <option value="Sangat Segera">Sangat Segera</option>
+                                <option value="Rahasia">Rahasia</option>
+                            </select>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="form-floating w-100">
+                                <textarea class="form-control" required="required" placeholder="hal" id="hal" name="hal"></textarea>
+                                <label for="hal" class="label-bold">Hal</label>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="button-kirim">Kirim</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
+                    <button type="submit" class="btn btn-danger">Kirim</button>
+                </div>
+            </form>
 
         </div>
     </div>
 </div>
 
 <!--Modal Untuk Button Disposisi KTU ke-2 -->
-<div class="modal fade" id="staticBackdropDispoKTU2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="modalKtu1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalKtu1" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="staticBackdropLabel">Formulir Disposisi</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="form-select" class="label-bold">Tujuan</label>
-                    <select name="form-select" class="form-select">
-                        <option value="pilihPenerima" hidden>Pilih Tujuan</option>
-                        <option value="Jabfung1">Jabfung1</option>
-                        <option value="Jabfung2">Jabfung2</option>
-                        <option value="Jabfung3">Jabfung3</option>
-                    </select>
+            <form role="form" id="push_dispo_ktu1" action="<?php echo base_url(); ?>ktu/push_dispo_ktu1" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="form-select" class="label-bold">Tujuan</label>
+                        <select name="tujuan" class="form-select" required>
+                            <option value="" hidden>Pilih Tujuan</option>
+                            <?php
+                            if (!empty($user_biro)) {
+                                foreach ($user_biro as $uB) {
+                            ?>
+                                    <option value="<?= $uB->email ?>"><?= $uB->name ?></option>
+                            <?php
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="input-groupp">
+                        <label class="label-bold">Catatan KTU/Jabfung Ahli Muda</label>
+                        <input type="hidden" required="required" id="dKtu1_id" name="dKtu1_id" value="">
+                        <textarea class="form-control" id="catKtu1" name="catKtu1" required="required" aria-label="With textarea" placeholder="Isi catatan disini."></textarea>
+                    </div>
                 </div>
-                <div class="input-groupp">
-                    <label class="label-bold">Catatan KTU/Jabfung Ahli Muda</label>
-                    <textarea class="form-control" aria-label="With textarea" placeholder="Isi catatan disini."></textarea>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
+                    <button type="submit" class="btn btn-danger">Kirim</button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="button-kirim">Kirim</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>
@@ -387,9 +436,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <?php if ($user['role_id'] == 3) : ?>
-                    Belum di Disposisi oleh KTU
-                <?php endif ?>
+                Surat belum di disposisi
             </div>
         </div>
     </div>

@@ -22,7 +22,7 @@
 <!--**** List Modal untuk Button Disposisi ****-->
 
 <!--Modal Untuk Button Disposisi Karo -->
-<!-- <div class="modal fade" id="staticBackdropDispo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdropDispo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -63,10 +63,10 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
 
 <!-- Modal untuk Button Disposisi KTU -->
-<div class="modal fade" id="staticBackdropDispoKTU" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="staticBackdropDispoKTU" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-center">
@@ -141,7 +141,7 @@
 
         </div>
     </div>
-</div>
+</div> -->
 
 <!--Modal Untuk Button Disposisi Kabag -->
 <!-- <div class="modal fade" id="staticBackdropDispoKabag" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -267,6 +267,7 @@
     </div>
 </div>
 
+<!-- Content Start -->
 <div class="container">
     <!-- Dropdown box -->
     <div class="dua-dropdown">
@@ -308,3 +309,4 @@
     </table>
     <!-- End of Table -->
 </div>
+<!-- Content End -->

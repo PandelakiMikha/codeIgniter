@@ -73,7 +73,7 @@
                     <i class="fa-fw bi bi-clipboard-check"></i>
                     <span class="item-title">Disposisi</span>
                 </a>
-                <a href="<?= base_url('ktu/arsip') ?>" class="item">
+                <a href="<?= base_url('/ktu/kirim_surat') ?>" class="item">
                     <i class="fa-fw bi bi-send-plus"></i>
                     <span class="item-title">Kirim Surat</span>
                 </a>

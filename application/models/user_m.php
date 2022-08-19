@@ -14,6 +14,7 @@ class user_m extends CI_Model
     public function select()
     {
         $query = $this->db->query("SELECT * FROM daerah ORDER BY name ASC");
+
         //data is retrive from this query  
         $query = $this->db->get('surat_kel_user');
         return $query;

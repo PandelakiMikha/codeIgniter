@@ -103,10 +103,11 @@
                                             <?php endif ?>
                                         <?php endif ?>
                                         <div class="ms-4">
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropDetail">
+                                            <button type="button" id="details" class="btn btn-primary" data-idnya="<?= $s->id; ?>" data-dispo="<?= $s->is_dispo; ?>" data-bs-toggle="modal" data-bs-target="#modalDetail">
                                                 <i class="bi bi-file-earmark-text"></i>Detail
                                             </button>
                                         </div>
+
                                     </div>
                                 </td>
                             </tr>
@@ -368,45 +369,97 @@
 </div>
 
 <!--Modal Untuk Button Detail -->
-<div class="modal fade" id="staticBackdropDetail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered">
-        <div class="modal-content">
+<div class="modal fade" id="modalDetail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalDetail" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class=" modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="staticBackdropLabel">Detail Surat</h4>
             </div>
             <div class="modal-body">
                 <div class="row-custom gap-5">
                     <!-- Daftar isi detail surat -->
+                    <!-- <?php var_dump($details);
+                            if (!empty($details)) {
+                                foreach ($details as $d) {
+                            ?> -->
+                    <script>
+                        console.log(<?= $details; ?>);
+                    </script>
                     <div class="col-left">
+                        <!-- <span id="detail_id" name="detail_id">hai</span> -->
                         <div class="item">
                             <p class="label-bold">Surat dari: </p>
-                            <p>Dinas Kesehatan</p>
+                            <p><?= $d->suratDari ?></p>
                         </div>
                         <div class="item">
                             <p class="label-bold">Nomor Surat: </p>
-                            <p>1104</p>
+                            <p><?= $d->noSurat ?></p>
                         </div>
                         <div class="item">
                             <p class="label-bold">Tanggal Surat: </p>
-                            <p>19 Juli 2022</p>
+                            <p><?= $d->tglSurat ?></p>
                         </div>
                         <div class="item">
                             <p class="label-bold">Diterima Tanggal: </p>
-                            <p>19 Juli 2022</p>
+                            <p><?= $d->diterima ?></p>
                         </div>
                         <div class="item">
                             <p class="label-bold">Tanggal Keluar: </p>
-                            <p>20 Juli 2022</p>
+                            <p><?= $d->tanggalKeluar ?></p>
                         </div>
                         <div class="item">
                             <p class="label-bold">Nomor Agenda: </p>
-                            <p>00234</p>
+                            <p><?= $d->noAgenda ?></p>
                         </div>
                         <div class="item">
                             <p class="label-bold">Sifat: </p>
-                            <p>Umum</p>
+                            <p><?= $d->sifatSurat ?></p>
+                        </div>
+                        <div class="item">
+                            <p class="label-bold">Status: </p>
+                            <p><?= $d->status ?></p>
+                        </div>
+                        <div class="item">
+                            <p class="label-bold">Hal: </p>
+                            <p><?= $d->hal ?></p>
+                        </div>
+                        <div class="item">
+                            <p class="label-bold">Tujuan dari Karo: </p>
+                            <p><?= $d->tujuan_karo ?></p>
+                        </div>
+                        <div class="item">
+                            <p class="label-bold">Mengharapkan: </p>
+                            <p><?= $d->mengharapkan ?></p>
+                        </div>
+                        <div class="item">
+                            <p class="label-bold">Cat Karo: </p>
+                            <p><?= $d->catKaro ?></p>
+                        </div>
+                        <div class="item">
+                            <p class="label-bold">Ttd Karo: </p>
+                            <p>Sign </p>
+                        </div>
+                        <div class="item">
+                            <p class="label-bold">Tujuan dari Kabag: </p>
+                            <p><?= $d->tujuan_kabag ?></p>
+                        </div>
+                        <div class="item">
+                            <p class="label-bold">Cat Kabag: </p>
+                            <p><?= $d->catKabag ?></p>
+                        </div>
+                        <div class="item">
+                            <p class="label-bold">Tujuan dari JAM: </p>
+                            <p><?= $d->tujuan_ktu ?></p>
+                        </div>
+                        <div class="item">
+                            <p class="label-bold">Cat Jam: </p>
+                            <p><?= $d->catKtu1 ?></p>
                         </div>
                     </div>
+                    <!-- <?php
+                                }
+                            }
+                            ?> -->
                     <!-- Lampiran Surat dalam bentuk dokumen -->
                     <div class="col-right form-hover">
                         <label for="lampiran-surat-kotak">Lampiran Surat</label>
@@ -415,10 +468,13 @@
                         </div>
                         <button class="btn btn-download">Download</button>
                     </div>
+                    <span id="detail_id" name="detail_id"></span>
+                    <span id="dispo_id" name="dispo_id"></span>
 
                 </div>
 
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
             </div>

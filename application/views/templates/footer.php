@@ -704,7 +704,7 @@
                 if (data.status = false) {
                     alert('Gagal memuat data!');
                 };
-                $("#dKtu_id").val(data.id);
+                var a = $("#dKtu_id").val(data.id);
 
             })
 
@@ -770,6 +770,31 @@
             })
 
         });
+
+        jQuery(document).on("click", "#details", function() {
+
+            var idnya = $(this).data("idnya");
+            var dispo = $(this).data("dispo");
+            var basee = window.base_url = <?php echo json_encode(base_url('Ktu/')); ?> + 'disposisi';
+
+            $('#modalDetail').modal('show');
+
+            $.ajax({
+                type: "POST", //send with post 
+                url: basee,
+                data: {
+                    idnya: idnya
+                },
+                success: function(data) {
+                    $('#detail_id').text(idnya);
+                    $('#dispo_id').text(dispo);
+                }
+            });
+
+
+        });
+
+
     });
 </script>
 

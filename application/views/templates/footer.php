@@ -823,6 +823,9 @@
         var push_dispo_ktu = $('#push_dispo_ktu');
         var push_dispo_ktu1 = $('#push_dispo_ktu1');
 
+        var kirim_surat_ktu = $('#kirim_surat_ktu');
+        // var kirim_surat_ktu_tujuan = $('#kirim_surat_ktu_tujuan');
+
         // dispo ktu pertama
         push_dispo_ktu.submit(function(e) {
 
@@ -882,6 +885,50 @@
             })
 
         });
+
+        // push kirim surat ktu
+        kirim_surat_ktu.submit(function(e) {
+            e.preventDefault();
+
+            var uri = window.base_url = <?php echo json_encode(base_url('Ktu/')); ?> + 'kirim_surat_ktu'
+            // console.log(uri);
+
+            $.ajax({
+
+                type: kirim_surat_ktu.attr('method'),
+                url: uri,
+                data: kirim_surat_ktu.serialize(),
+                success: function(data) {
+                    if (data.status = true) {
+                        location.reload();
+
+                    } else if (data.status = false) {
+
+                        location.reload();
+
+                    };
+
+                },
+                error: function() {
+
+                    alert('Terjadi Mistake!')
+
+                }
+
+
+            })
+        })
+
+        // kirim_surat_ktu_tujuan.submit(function(e) {
+        //     e.preventDefault();
+
+        //     $.ajax({
+
+        //         type: kirim_surat_ktu_tujuan.attr('method'),
+        //         url: kirim_surat_ktu_tujuan.attr('action'),
+        //         data: kirim_surat_ktu_tujuan.serialize(),
+        //     })
+        // })
 
 
         // dispo ktu kedua
@@ -944,10 +991,27 @@
 
         });
 
+        // untuk details
         jQuery(document).on("click", "#details", function() {
 
             var idnya = $(this).data("idnya");
-            var dispo = $(this).data("dispo");
+            var surat_dari = $(this).data("suratdari");
+            var no_surat = $(this).data("nosurat");
+            var tgl_surat = $(this).data("tglsurat");
+            var diterima = $(this).data("diterima");
+            var tanggal_keluar = $(this).data("tanggalkeluar");
+            var no_agenda = $(this).data("noagenda");
+            var sifat_surat = $(this).data("sifatsurat");
+            var status = $(this).data("status");
+            var hal = $(this).data("hal");
+            var tujuan_karo = $(this).data("tujuankaro");
+            var mengharapkan = $(this).data("mengharapkan");
+            var cat_karo = $(this).data("catkaro");
+            var tujuan_kabag = $(this).data("tujuankabag");
+            var cat_kabag = $(this).data("catkabag");
+            var tujuan_ktu = $(this).data("tujuanktu");
+            var cat_ktu = $(this).data("catktu");
+
             var basee = window.base_url = <?php echo json_encode(base_url('Ktu/')); ?> + 'disposisi';
 
             $('#modalDetail').modal('show');
@@ -960,7 +1024,22 @@
                 },
                 success: function(data) {
                     $('#detail_id').text(idnya);
-                    $('#dispo_id').text(dispo);
+                    $('#surat_dari_id').text(surat_dari);
+                    $('#no_surat_id').text(no_surat);
+                    $('#tgl_surat_id').text(tgl_surat);
+                    $('#diterima_id').text(diterima);
+                    $('#tgl_keluar_id').text(tanggal_keluar);
+                    $('#no_agenda_id').text(no_agenda);
+                    $('#sifat_surat_id').text(sifat_surat);
+                    $('#status_id').text(status);
+                    $('#hal_id').text(hal);
+                    $('#tujuan_karo_id').text(tujuan_karo);
+                    $('#mengharapkan_id').text(mengharapkan);
+                    $('#cat_karo_id').text(cat_karo);
+                    $('#tujuan_kabag_id').text(tujuan_kabag);
+                    $('#cat_kabag_id').text(cat_kabag);
+                    $('#tujaun_ktu_id').text(tujuan_ktu);
+                    $('#cat_ktu_id').text(cat_ktu);
                 }
             });
 

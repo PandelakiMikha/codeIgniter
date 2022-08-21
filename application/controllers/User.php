@@ -94,8 +94,15 @@ class User extends CI_Controller
 
         if ($this->form_validation->run() == FALSE) {
 
+
             $getsurat = $this->user_m->getSuratData();
             $data['jenis_surat'] = $getsurat;
+
+            $config['allowed_types']          = './upload/';
+            $config['allowed_types']        = 'pdf';
+            $config['max_size']             = 2048;
+            $this->load->library('upload', $config);
+
 
             // $item = $this->user_m->get_surma()->result();
             // $data = ['item' => $item];
@@ -129,6 +136,7 @@ class User extends CI_Controller
                 'regarding' => $regarding,
                 'File_name' => $File_name,
                 'sender' => $sender,
+
                 'is_done_dispo' => 'false',
                 'is_dispo' => 'false',
 
@@ -144,6 +152,8 @@ class User extends CI_Controller
                 // 'regarding'   => $this->input->post('regarding'),
                 // 'File_name'  => $this->input->post('File_name'),
                 // 'sender'  => $this->input->post('sender'),
+
+
             );
 
             $this->user_m->input_data($data, 'surat_masuk');

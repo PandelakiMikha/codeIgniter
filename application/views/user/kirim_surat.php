@@ -1,128 +1,72 @@
-<style>
-    body {
-        width: 1920px;
-        /* height: 1080px; */
-        margin-top: 58px;
-        height: 100vh;
-        background: linear-gradient(223.79deg, #FF8B7C 0.75%, rgba(215, 212, 212, 0) 75.53%);
-    }
-
-    h1 {
-        font-family: 'Poppins';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 105px;
-    }
-
-    h5 {
-        font-family: 'Poppins';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 35px;
-        color: #7A7A7A;
-    }
-</style>
-
-
-
 <div class="container">
+    <form id="my-form-new" class="row form-1 g-3" action="<?= base_url('User/kirim_surat') ?>" method="POST">
 
-    <!-- header -->
-    <div class="header">
-        <div class="row">
-            <div class="col-lg">
-                <a href="<?= base_url('user/tampilanHome_user') ?>"></a>
-                <h1 class="txtTitle">SILONBOG</h1>
-                <h5>Sistem Layanan Online Biro Organisasi</h5>
-            </div>
-            <div class="d-flex  align-items-center col-lg-auto justify-content-end me-5">
-                <i class="bi bi-person-circle me-3" style="font-size: 75px; "></i>
-                <h4 style="width: 100px;"><?= $user['name'] ?></h4>
-            </div>
-        </div>
-    </div>
-    <!-- end of header -->
-
-    <!-- content -->
-    <div class="content">
-
-        <!-- <h3>KIRIM SURAT</h3> -->
-
-        <div class="d-flex justify-content-center">
-            <div>
-                <h3 class="text-center mt-5 txtKirim">Kirim Surat</h3>
-
-                <!--form -->
-                <!-- dropdown -->
-                <div class=" d-flex forms mt-5 " style="width: 1000px;">
-                    <select class="form-select form-select-lg me-5" aria-label=".form-select-lg example">
-                        <option selected value="">Pusat-Prov-Kab/Kot</option>
-                        <option value="1">Pusat</option>
-                        <option value="2">Prov</option>
-                        <option value="2">Kab/Kota</option>
-                    </select>
-                    <select class="form-select form-select-lg ms-5" aria-label=".form-select-lg example">
-                        <option selected>Dinas</option>
-                        <option value="1">Badan</option>
-                        <option value="2">UPTD</option>
-                    </select>
-                </div>
-                <div class=" d-flex forms mt-5 " style="width: 1000px;">
-                    <select class="form-select form-select-lg me-5" aria-label=".form-select-lg example">
-                        <option selected>Prov, Kab/Kot</option>
-                        <option value="1">Prov</option>
-                        <option value="2">Kab/Kota</option>
-                    </select>
-                    <select class="form-select form-select-lg ms-5" aria-label=".form-select-lg example">
-                        <option selected>Dinas</option>
-                        <option value="1">Badan</option>
-                        <option value="2">UPTD</option>
-                    </select>
-                </div>
-                <!-- text input -->
-                <div class=" d-flex forms mt-5" style="width: 1000px;">
-                    <div class="form-floating me-5" style="width: 650px;">
-                        <input type="text" class="form-control" id="perihal" name="perihal" placeholder="name@example.com"></input>
-                        <label>Perihal</label>
-                    </div>
-                    <div class=" form-floating ms-5" style="width: 650px;">
-                        <input type="text" class="form-control" id="lainya" name="lainya" placeholder="name@example.com"></input>
-                        <label>Lainya</label>
-                    </div>
-                </div>
-
-                <!-- pilih file -->
-
-                <!-- <div class=" d-flex justify-content-center mt-5">
-                    <input type="file" id="file" accept="application/pdf">
-                    <label for="file"> <strong>Pilih</strong>&nbsp;<i class="bi bi-plus" style="font-size: 40px;"></i></label>
-                </div> -->
-                <br>
-
-                <div class="row">
-                    <div class="col">
-                        <select class=" form-select form-select-lg mt-4" aria-label=".form-select-lg example">
-                            <option selected>Dinas</option>
-                            <option value="1">Badan</option>
-                            <option value="2">UPTD</option>
-                        </select>
-                    </div>
-                    <div class="col mt-4">
-                        <input class="form-control form-control-lg" id="formFileLg" type="file" accept="application/pdf">
-                    </div>
-                </div>
-
-                <div class=" d-flex justify-content-center mt-5">
-                    <button type=" submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 230px; height: 55px; font-size: 25px;"><strong>Kirim</strong></button>
-                </div>
-
-
-
-            </div>
-
+        <!-- input data user -->
+        <div class="col-md-4">
+            <label for="sender" class="form-label"><b>Nama Pengguna Anda</b></label>
+            <input type="text" class="form-control" name="sender" id="sender" value="<?= $user['name'] ?>">
+            <small class="text-danger"><?= form_error('type'); ?></small>
         </div>
 
-    </div>
-    <!-- end of content -->
+        <div class="col-md-4">
+            <label for="jenis_surat" class="form-label"><b>Jenis Surat</b></label>
+            <select name="type" id="jenis_surat" class="form-select" value="<?= set_value('type') ?>">
+                <?php foreach ($jenis_surat as $value) : ?>
+                    <option value="" hidden>Pilih..</option>
+                    <option value="<?= $value->id ?>"><?= $value->name ?></option>
+                <?php endforeach ?>
+            </select>
+            <small class="text-danger"><?= form_error('type'); ?></small>
+        </div>
+        <!-- bagian text input -->
+        <div class="col-md-4">
+            <label for="lainya" class="form-label"><b>Tipe Surat Lainya</b></label>
+            <input type="text" class="form-control" name="type" id="lainya" placeholder="Masukan Tipe Surat Lainya" value="<?= set_value('type') ?>">
+            <small class="text-danger"><?= form_error('type'); ?></small>
+        </div>
 
+        <!-- date picker -->
+        <div class="col-md-4">
+            <label for="date" class="form-label"><b>Waktu Mengirim</b></label>
+            <input class="form-control" type="date" name="date_sended" id="date_sended" value="<?= set_value('date_sended') ?>">
+            <small class="text-danger"><?= form_error('date_sended'); ?></small>
+        </div>
+
+        <div class="col-12">
+            <label for="perihal" class="form-label"><b>Perihal</b></label>
+            <input type="text" class="form-control" name="regarding" id="regarding" placeholder="Masukan Perihal yang Anda Inginkan" value="<?= set_value('regarding') ?>">
+            <small class="text-danger"><?= form_error('regarding'); ?></small>
+        </div>
+
+        <!-- pilih file -->
+
+        <!-- <?php if ($error !== null) : echo $error;
+                endif; ?> -->
+        <!-- <?php echo $error; ?> -->
+        <!-- <?php echo form_open_multipart('User/kirim_surat'); ?> -->
+        <div class="col-md-4 mb-3 mt-3">
+            <label for="nama_file" class="form-label"><b>Pilih File</b></label>
+            <input class="form-control form-control-sm" name="File_name" id="File_name" type="file" accept="application/pdf" value="" multiple />
+            <small class="text-danger"><?= form_error('File_name'); ?></small>
+        </div>
+
+        <!-- upload file -->
+        <!-- <div class="col-md-4">
+    <input class="btn btn-primary mt-4" type="submit" id="upload" value="upload">
+    <input type="submit" value="upload" />
+
+</div> -->
+
+        <div class=" d-flex justify-content-center mt-5">
+            <button type="reset" class="btn bg-body  d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;" name="save" value="Save Data"><span class="Btn_reset"><i class="bi bi-trash"></i>Hapus</span></button>
+
+            <!-- <button type="submit" id="btn-submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;" name="save" value="Save Data"><i class="bi bi-send"></i><strong>Kirim</strong></button> -->
+
+            <button type="submit" value="KIRIM" name="btn-submit" onclick="pilih()" onkeyup="success()" id="button-submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;"><i class="bi bi-send"></i><strong>Kirim</strong></button>
+
+            <!-- <input type="submit" value="KIRIM" name="btn-submit" onkeyup="success()" id="button-submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;"> -->
+        </div>
+
+        <!-- <?= form_close(); ?> -->
+    </form>
 </div>

@@ -23,13 +23,13 @@ class user_m extends CI_Model
     {
 
         $this->db->insert('surat_masuk', $data);
-        $this->db->insert('surat_kel_user', $data);
+        // $this->db->insert('surat_kel_user', $data);
 
         return true;
     }
 
     //fungsi untuk mengambil data surat masuk dari biro untuk di tampilkan di modal detail surat...
-
+    //belum di pakai!!!...
     public function get_surma($id = null)
     {
         // $this->db-select('surat_masuk_user');

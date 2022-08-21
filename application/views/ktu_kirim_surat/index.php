@@ -13,55 +13,221 @@
                         <li><a type="button" class="button-pilih-pemerintah">Pusat</a></li>
                         <li class="animation start"></li>
                     </ul> -->
-                <nav class="bar-pilih">
-                    <a type="button" class="button-pilih-pemerintah">Kabupaten/Kota</a>
-                    <a type="button" class="button-pilih-pemerintah">Provinsi</a>
-                    <a type="button" class="button-pilih-pemerintah">Pusat</a>
-                    <!-- <div class="animation start-animation"></div> -->
-                </nav>
-                <!-- </div> -->
-                <!-- Ini kalo KTU pilih Kab/Kota -->
-                <!-- <div class="heading-penerima-kab-kota mt-3">
-                    <label for="cariKab/Kota" class="nama-kab-kota">Cari Kabupaten/Kota:</label>
-                    <div class="input-icons">
-                        <span class="icons"><i class="bi bi-search"></i></span>
-                        <input class="form-control" id="cariKab/Kota" rows="3" placeholder="Cari">
+                <!-- <div class="container-bar-pilih">
+                    <div class="bar-pilih kab-kota">
+                        <a type="button" class="button-pilih-pemerintah kab-kota" id="buttonPilihKabKota">Kabupaten/Kota</a>
                     </div>
-                </div>
-                <hr>
-                <div class="ktu-pilih-kab-kota">
-                    <div class="form-check pilih-kab-kota d-flex align-items-center">
-                        <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota1" value="option1">
-                        <label class="form-check-label" for="pilihanKabKota1">
-                            Kabupaten Minahasa Utara
-                        </label>
+
+                    <div class="bar-pilih prov">
+                        <a type="button" class="button-pilih-pemerintah prov">Provinsi</a>
+
                     </div>
-                    <hr>
-                    <div class="form-check pilih-kab-kota d-flex align-items-center">
-                        <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota2" value="option2">
-                        <label class="form-check-label" for="pilihanKabKota2">
-                            Kota Bitung
-                        </label>
+                    <div class="bar-pilih pusat">
+                        <a type="button" class="button-pilih-pemerintah pusat">Pusat</a>
+
                     </div>
-                    <hr>
-                    <div class="form-check pilih-kab-kota d-flex align-items-center">
-                        <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota3" value="option3">
-                        <label class="form-check-label" for="pilihanKabKota3">
-                            Kabupaten Minahasa
-                        </label>
-                    </div>
-                    <hr>
-                    <div class="form-check pilih-kab-kota d-flex align-items-center">
-                        <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota4" value="option4">
-                        <label class="form-check-label" for="pilihanKabKota4">
-                            Kabupaten Minahasa Selatan
-                        </label>
-                    </div>
-                    <hr>
                 </div> -->
 
+                <div class="accordion" id="accordionExample">
+                    <!-- Ini yang kab/kota -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button button-pilih-pemerintah-kab-kota" id="buttonPilihKabKota" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Kabupaten/Kota
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" aria-expanded="true">
+                            <div class="accordion-body">
+                                <div class="ktu-pilih-kab-kota">
+                                    <div class="heading-penerima-kab-kota mt-3">
+                                        <label for="cariKab/Kota" class="nama-kab-kota">Cari Kabupaten/Kota:</label>
+                                        <div class="input-icons">
+                                            <span class="icons"><i class="bi bi-search"></i></span>
+                                            <input class="form-control" id="cariKab/Kota" rows="3" placeholder="Cari">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="daftar-pilihan-KabKota">
+                                        <div class="form-check pilih-kab-kota d-flex align-items-center">
+                                            <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota1" value="option1">
+                                            <label class="form-check-label" for="pilihanKabKota1">
+                                                Kabupaten Minahasa Utara
+                                            </label>
+                                        </div>
+                                        <hr>
+                                        <div class="form-check pilih-kab-kota d-flex align-items-center">
+                                            <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota2" value="option2">
+                                            <label class="form-check-label" for="pilihanKabKota2">
+                                                Kota Bitung
+                                            </label>
+                                        </div>
+                                        <hr>
+                                        <div class="form-check pilih-kab-kota d-flex align-items-center">
+                                            <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota3" value="option3">
+                                            <label class="form-check-label" for="pilihanKabKota3">
+                                                Kabupaten Minahasa
+                                            </label>
+                                        </div>
+                                        <hr>
+                                        <div class="form-check pilih-kab-kota d-flex align-items-center">
+                                            <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota4" value="option4">
+                                            <label class="form-check-label" for="pilihanKabKota4">
+                                                Kabupaten Minahasa Selatan
+                                            </label>
+                                        </div>
+                                        <hr>
+
+                                        <div class="form-check pilih-kab-kota d-flex align-items-center">
+                                            <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota4" value="option4">
+                                            <label class="form-check-label" for="pilihanKabKota4">
+                                                Kabupaten Minahasa Selatan
+                                            </label>
+                                        </div>
+                                        <hr>
+
+                                        <div class="form-check pilih-kab-kota d-flex align-items-center">
+                                            <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota4" value="option4">
+                                            <label class="form-check-label" for="pilihanKabKota4">
+                                                Kabupaten Minahasa Selatan
+                                            </label>
+                                        </div>
+                                        <hr>
+
+                                        <div class="form-check pilih-kab-kota d-flex align-items-center">
+                                            <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota4" value="option4">
+                                            <label class="form-check-label" for="pilihanKabKota4">
+                                                Kabupaten Minahasa Selatan
+                                            </label>
+                                        </div>
+                                        <hr>
+
+                                        <div class="form-check pilih-kab-kota d-flex align-items-center">
+                                            <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota4" value="option4">
+                                            <label class="form-check-label" for="pilihanKabKota4">
+                                                Kabupaten Minahasa Selatan
+                                            </label>
+                                        </div>
+                                        <hr>
+
+                                        <div class="form-check pilih-kab-kota d-flex align-items-center">
+                                            <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota4" value="option4">
+                                            <label class="form-check-label" for="pilihanKabKota4">
+                                                Kabupaten Minahasa Selatan
+                                            </label>
+                                        </div>
+                                        <hr>
+
+                                        <div class="form-check pilih-kab-kota d-flex align-items-center">
+                                            <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota4" value="option4">
+                                            <label class="form-check-label" for="pilihanKabKota4">
+                                                Kabupaten Minahasa Selatan
+                                            </label>
+                                        </div>
+                                        <hr>
+
+                                        <div class="form-check pilih-kab-kota d-flex align-items-center">
+                                            <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota4" value="option4">
+                                            <label class="form-check-label" for="pilihanKabKota4">
+                                                Kabupaten Minahasa Selatan
+                                            </label>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Ini yang Prov -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed button-pilih-pemerintah-prov" id="buttonPilihProv" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                Provinsi
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="ktu-pilih-prov">
+                                    <div class="bagian-form-select d-flex gap-3">
+                                        <select name="" id="" class="form-select jenis-perangkat-daerah">
+                                            <option value="defaultValue" selected hidden>Pilih Jenis Perangkat Daerah</option>
+                                            <option value="jenisPerangkatDaerah1">Dinas</option>
+                                            <option value="jenisPerangkatDaerah2">Badan</option>
+                                            <option value="jenisPerangkatDaerah3">Setda</option>
+                                        </select>
+                                        <select name="" id="" class="form-select perangkat-daerah">
+                                            <option value="defaultValue" selected hidden>Pilih Perangkat Daerah</option>
+                                            <option value="perangkatDaerah1">Dinas Kesehatan</option>
+                                            <option value="perangkatDaerah2">Dinas Pariwisata</option>
+                                            <option value="perangkatDaerah3">Dinas Pendidikan </option>
+                                        </select>
+                                        <hr>
+                                    </div>
+                                    <hr>
+                                    <div class="form-check pilih-perangkat-daerah d-flex align-items-center">
+                                        <input class="form-check-input" type="radio" name="pilihanPerangkatDaerah" id="pilihanPerangkatDaerah1" value="option1">
+                                        <label class="form-check-label" for="pilihanPerangkatDaerah1">
+                                            Induk
+                                        </label>
+                                    </div>
+                                    <hr>
+                                    <div class="form-check pilih-perangkat-daerah d-flex align-items-center">
+                                        <input class="form-check-input" type="radio" name="pilihanPerangkatDaerah" id="pilihanPerangkatDaerah2" value="option2">
+                                        <label class="form-check-label" for="pilihanPerangkatDaerah2">
+                                            UPTD Rumah Sakit Umum Daerah ODSK
+                                        </label>
+                                    </div>
+                                    <hr>
+                                    <div class="form-check pilih-perangkat-daerah d-flex align-items-center">
+                                        <input class="form-check-input" type="radio" name="pilihanPerangkatDaerah" id="pilihanPerangkatDaerah3" value="option3">
+                                        <label class="form-check-label" for="pilihanPerangkatDaerah3">
+                                            UPTD Rumah Sakit Khusus Mata
+                                        </label>
+                                    </div>
+                                    <hr>
+                                    <div class="form-check pilih-perangkat-daerah d-flex align-items-center">
+                                        <input class="form-check-input" type="radio" name="pilihanPerangkatDaerah" id="pilihanPerangkatDaerah4" value="option4">
+                                        <label class="form-check-label" for="pilihanPerangkatDaerah4">
+                                            UPTD Rumah Sakit Jiwa Daerah
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Ini yang pusat -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Pusat
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                            <div class="accordion-body" aria-expanded="false">
+                                <div class="ktu-pilih-pusat">
+                                    <div class="form-check pilih-pusat d-flex align-items-center">
+                                        <input class="form-check-input" type="radio" name="pilihanPusat" id="pilihanPusat1" value="option1">
+                                        <label class="form-check-label" for="pilihanPusat1">
+                                            Kemendagri
+                                        </label>
+                                    </div>
+                                    <hr>
+                                    <div class="form-check pilih-kab-kota d-flex align-items-center">
+                                        <input class="form-check-input" type="radio" name="pilihanPusat" id="pilihanPusat2" value="option2">
+                                        <label class="form-check-label" for="pilihanPusat2">
+                                            Kemenpan
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- </div> -->
+                <!-- Ini kalo KTU pilih Kab/Kota -->
+
+
                 <!-- Ini kalo KTU pilih Prov -->
-                <div class="ktu-pilih-prov">
+                <!-- <div class="ktu-pilih-prov">
                     <div class="bagian-form-select d-flex gap-3 mt-3">
                         <select name="" id="" class="form-select jenis-perangkat-daerah">
                             <option value="defaultValue" selected hidden>Pilih Jenis Perangkat Daerah</option>
@@ -106,7 +272,7 @@
                         </label>
                     </div>
                     <hr>
-                </div>
+                </div> -->
                 <!-- Ini kalo KTU pilih Pusat -->
                 <!-- <div class="ktu-pilih-pusat mt-3">
                     <div class="form-check pilih-pusat d-flex align-items-center">
@@ -138,7 +304,6 @@
 <div class="container">
     <h3 style="text-align: center ;" class="headingKirimSurat">Kirim Surat</h3>
     <div class="content">
-
         <div class="content-form">
             <div class="form-floating nomor-agenda">
                 <input name="" id="nomorAgenda" cols="30" rows="10" placeholder="Nomor Agenda" class="form-control"></input>
@@ -153,6 +318,10 @@
                     <option value="">Undangan</option>
                     <option value="">Laporan</option>
                 </select>
+            </div>
+            <div class="form-floating keterangan">
+                <textarea name="" id="keterangan" cols="30" rows="10" class="form-control keteranga" placeholder="Keterangan"></textarea>
+                <label for="keterangan">Keterangan</label>
             </div>
             <div class="form-floating perihal">
                 <textarea name="" id="perihal" cols="30" rows="10" class="form-control perihal" placeholder="Perihal"></textarea>
@@ -201,6 +370,7 @@
     }
 </script>
 
+<script src="<?= base_url('assets/') ?>scripts/display-content-ktu.js"></script>
 
 
 <style>
@@ -241,6 +411,17 @@
     /* .form-jenis-surat select {
         font-size: 15px;
     } */
+    .form-floating.keterangan {
+        /* height: 70px; */
+        /* width: 60%; */
+        width: 82%;
+        display: flex;
+        justify-content: start;
+    }
+
+    .form-floating.keterangan>textarea {
+        min-height: 60px;
+    }
 
     .form-floating.perihal {
         /* height: 70px; */
@@ -280,19 +461,22 @@
         position: relative;
     } */
 
-    .bar-pilih {
-        background: rgba(255, 255, 255, 0.6);
-        position: relative;
-        border-radius: 8px;
-        height: 50px;
-        font-size: 20px;
-        margin: 0;
-        font-weight: 700;
-        box-shadow:
-            0px 0px 80px rgba(0, 0, 0, 0.17);
+    .container-bar-pilih {
+        /* gap: 5rem; */
     }
 
-    .bar-pilih a {
+    /* .bar-pilih {
+        position: relative;
+        height: 50px;
+        font-size: 18px;
+        margin: 0;
+        font-weight: 500;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+    } */
+
+    /* .bar-pilih a {
         text-decoration: none;
         color: black;
         position: relative;
@@ -300,12 +484,31 @@
         display: inline-block;
         z-index: 1;
         text-align: center;
-        margin-left: 10px;
+        background: rgba(255, 255, 255, 0.6);
+        box-shadow:
+            0px 0px 80px rgba(0, 0, 0, 0.17);
+        border-radius: 10px;
+        width: 90%;
+    } */
+    .accordion {
+        /* text-decoration: none; */
+        /* color: black; */
+        /* position: relative; */
+        /* padding: 10px 15px; */
+        /* display: inline-block;
+        z-index: 1; */
+        /* text-align: center; */
+        background: rgba(255, 255, 255, 0.6);
+        box-shadow:
+            0px 0px 80px rgba(0, 0, 0, 0.17);
+        border-radius: 100px;
+        background-color: #FF8B7C;
+        /* width: 90%; */
     }
 
 
     /* --- Animasinya--- */
-    .bar-pilih a::after {
+    /* .bar-pilih a::after {
         content: '';
         position: absolute;
         width: 100%;
@@ -317,11 +520,11 @@
         transition: transform 0.3s ease;
         justify-content: center;
         border-radius: 50px;
-    }
+    } */
 
-    .bar-pilih a:hover::after {
+    /* .bar-pilih a:hover::after {
         transform: scale(1, 1);
-    }
+    } */
 
     /* Ini animasi laeng */
     /* nav .animation {
@@ -368,11 +571,11 @@
         display: flex;
         margin: 0;
         gap: 2rem;
-        margin-left: 20px;
+        /* margin-left: 20px; */
     }
 
     .heading-penerima-kab-kota label {
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 500;
     }
 
@@ -392,13 +595,27 @@
     }
 
     .form-check-label {
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 500;
     }
 
     /* Ini styling untuk modal ketika KTU pilih prov */
-    .form-select.jenis-perangkat-daerah {
+    .form-select option {
         width: 40%;
+        font-size: 20px;
+    }
+
+    /* Styling untuk accordion */
+    .accordion-button:not(.collapsed) {
+        color: white;
+        font-weight: 700;
+        font-size: large;
+        background: linear-gradient(80.79deg, #FF8B7C 0.55%, rgba(215, 212, 212, 0) 90.53%);
+        box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
+    }
+
+    .accordion-button {
+        font-weight: 700;
         font-size: large;
     }
 </style>

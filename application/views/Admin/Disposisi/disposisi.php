@@ -510,19 +510,16 @@
         display: flex;
         justify-content: center;
     }
-
     .cuss .middle {
         margin-right: 28px;
         margin-left: 28px;
     }
-
     .cuss .btn {
         display: flex;
         justify-content: center;
         align-items: center;
         box-sizing: border-box;
     }
-
     .cuss .btn i {
         margin-right: 6px;
         box-sizing: border-box;

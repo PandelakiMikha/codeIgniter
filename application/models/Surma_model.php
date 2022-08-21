@@ -34,7 +34,13 @@ class Surma_model extends CI_Model
             if ($currentUri == 'http://localhost/codeIgniter/ktu') {
                 return $query = $this->db->get_where('surat_masuk', ['date_sended' => $currentDate])->result();
             } else {
-                return $query = $this->db->get_where('surat_masuk', ['is_done_dispo' => 'false'])->result();
+                $this->db->select('*');
+                $this->db->from('surat_masuk');
+                $this->db->where(['is_done_dispo' => 'false']);
+                $this->db->join('tbl_dispo', 'tbl_dispo.surat_masuk_id = surat_masuk.id', 'left');
+                $query = $this->db->get();
+                return $query->result();
+                // return $query = $this->db->get_where('surat_masuk', ['is_done_dispo' => 'false'])->result();
             }
         } elseif ($checkUserR == '4') {
             if ($currentUri == 'http://localhost/codeIgniter/jabfung') {

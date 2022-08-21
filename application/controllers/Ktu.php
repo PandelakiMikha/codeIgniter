@@ -45,6 +45,8 @@ class Ktu extends CI_Controller
         $data['surat'] = $this->surma_model->dataSuratM();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
+        // var_dump($data['surat']);
+        // die;
 
         // $idSurat = $_POST['idnya'];
         $idSurat = $this->input->post('idnya');

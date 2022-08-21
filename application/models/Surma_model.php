@@ -54,6 +54,7 @@ class Surma_model extends CI_Model
         }
     }
 
+    //function untuk mengecek user name di dalam table surat_masuk agar bisa di tampilkan pada dashbor surat keluar yang ada di pages user...
     function dataSuratKelUser()
     {
         $checkUserN = $this->session->userdata('name');
@@ -63,6 +64,8 @@ class Surma_model extends CI_Model
             // return $query = $this->db->get_where('surat_masuk', ['is_done_dispo' => 'false'])->result();
         }
     }
+
+
 
     function count_all_data()
     {

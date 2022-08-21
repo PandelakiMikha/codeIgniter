@@ -1,14 +1,14 @@
 <!-- Modal -->
-<div class="modal fade" style="border-radius: 50px;" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" style="border-radius: 50px;" data-bs-backdrop="static" data-bs-backdrop="static" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">KIRIM SURAT</h5>
-                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <!-- content -->
-                <form class="row g-3" action="<?= base_url('User/index') ?>" method="post">
+                <form class="row form-1 g-3" action="<?= base_url('User/index') ?>" method="post">
 
                     <!-- input data user -->
                     <div class="col-md-4">
@@ -48,17 +48,32 @@
                     </div>
 
                     <!-- pilih file -->
-                    <div class="mb-3 mt-3">
+
+                    <!-- <?php if ($error !== null) : echo $error;
+                            endif; ?> -->
+                    <!-- <?php echo $error; ?> -->
+                    <?php echo form_open_multipart('User/index'); ?>
+                    <div class="col-md-4 mb-3 mt-3">
                         <label for="nama_file" class="form-label"><b>Pilih File</b></label>
-                        <input class="form-control form-control-sm" name="File_name" id="nama_file" type="file" accept="application/pdf" value="" multiple>
+                        <input class="form-control form-control-sm" name="File_name" id="File_name" type="file" accept="application/pdf" value="" multiple />
                         <small class="text-danger"><?= form_error('File_name'); ?></small>
                     </div>
+
+                    <!-- upload file -->
+                    <!-- <div class="col-md-4">
+                        <input class="btn btn-primary mt-4" type="submit" id="upload" value="upload">
+                        <input type="submit" value="upload" />
+
+                    </div> -->
 
                     <div class=" d-flex justify-content-center mt-5">
                         <button type="reset" class="btn bg-body  d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;" name="save" value="Save Data"><span class="Btn_reset"><i class="bi bi-trash"></i>Hapus</span></button>
 
-                        <button type="submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;" name="save" value="Save Data"><i class="bi bi-send"></i><strong>Kirim</strong></button>
+                        <!-- <button type="submit" id="btn-submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;" name="save" value="Save Data"><i class="bi bi-send"></i><strong>Kirim</strong></button> -->
+                        <input type="submit" value="KIRIM" id="btn-submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;">
                     </div>
+
+                    <?= form_close(); ?>
                 </form>
                 <!-- end of content -->
             </div>
@@ -133,6 +148,7 @@
         </label>
     </div>
 </div> -->
+
 
 
 

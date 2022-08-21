@@ -464,25 +464,19 @@
             "ajax": {
                 "url": "<?= base_url('User/getData'); ?>",
                 "type": "POST",
-                "data": function(data) {
-                    // var perda;
-                    data.daerah = $("#daerah").val();
-                    // perda = data.perangkat_daerah;
-                    // console.log('perda', perda);
-                },
+
             },
             "columnDefs": [{
                 "target": [-1],
                 "orderable": false,
                 "searchable": false,
-                "render": function(data, type, row) {
-                    var btn = '<div><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-file-earmark-text"></i>Detail</button></div></div>';
+                "render": function(type, row) {
+                    var btn = '<div><button id="download" type="button" class="btn btn-primary"><i class="bi bi-download"></i>Download File</button></div></div>';
                     return btn;
+
                 }
             }]
         });
-
-        loadPerangkatDaerah();
     });
 </script>
 <!-- ------------------------------------- -->
@@ -543,6 +537,8 @@
     });
 </script>
 
+
+
 <script>
     //untuk mendisablekan form jenis surat ketika user menaruh input pada fort lainya..
     $('#lainya').change(function() {
@@ -593,10 +589,111 @@
     });
 </script>
 
+<!-- script untuk menampilkan detail pada modal yang ada di U_table_srutaMasuk.. -->
+<!-- <script>
+    $(document).ready(function() {
+        $(document).on('click', '#set_dtl', function() {
+            var Jenissurat = $(this).data('Jenissurat');
+            var Noagenda = $(this).data('Noagenda');
+            var Namafile = $(this).data('Namafile');
+            var Perihal = $(this).data('Perihal');
+
+            $("#modal-detail, #Jenis_surat").text(Jenissurat);
+            $("#modal-detail, #No_agenda").text(Noagenda);
+            $("#modal-detail, #Nama_file").text(Namafile);
+            $("#modal-detail, #Perihal").text(Perihal);
+
+            // $("#modal-detail #Jenis_surat").val(Jenissurat);
+            // $("#modal-detail #No_agenda").val(Noagenda);
+            // $("#modal-detail #Nama_file").val(Namafile);
+            // $("#modal-detail #Perihal").val(Perihal);
+
+            // $('#Jenis_surat').text(Jenissurat);
+            // $('#No_agenda').text(Noagenda);
+            // $('#Nama_file').text(Namafile);
+            // $('#Perihal').text(Perihal);
+        })
+    })
+</script> -->
+
+<!-- script untuk membuat modal yang ada di sidebar user tetap timbul walaupun ada actio yang di lakukan -->
+<script>
+    $(function() {
+        $('#exampleModal').modal({
+            backdrop: false,
+            keyboard: false
+        });
+        $('#exampleModal').modal('show');
+    });
+</script>
+
 <!-- end of jquery script -->
 
 <!-- sweet alert -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    // letting css, html to be loaded first before execute the function
+    $(document).ready(function() {
+        // condition if btn-show-sweetalert2 cliced
+        $("#btn-submit").click(function() {
+            // show the sweetalert after btn clicked
+            Swal.fire(
+                'Good job!',
+                'You clicked the button!',
+                'success'
+            )
+        });
+    });
+
+    // $('#btn-submit').submit(function(e, params) {
+    //     var localParams = params || {};
+
+    //     if (!localParams.send) {
+    //         e.preventDefault();
+    //     }
+
+    //     //additional input validations can be done hear
+
+    //     swal({
+    //         title: "Confirm Entry",
+    //         text: "Are you sure all entries are correct",
+    //         type: "warning",
+    //         showCancelButton: true,
+    //         confirmButtonColor: "#6A9944",
+    //         confirmButtonText: "Confirm",
+    //         cancelButtonText: "Cancel",
+    //         closeOnConfirm: true
+    //     }, function(isConfirm) {
+    //         if (isConfirm) {
+    //             $(e.currentTarget).trigger(e.type, {
+    //                 'send': true
+    //             });
+    //         } else {
+
+    //             //additional run on cancel  functions can be done hear
+
+    //         }
+    //     });
+    // });
+
+    // $('#btn-submit').on('click', function(e) {
+    //     e.preventDefault();
+    //     var form = $(this).parents('form');
+    //     swal({
+    //         title: "Are you sure?",
+    //         text: "You will not be able to recover this imaginary file!",
+    //         type: "warning",
+    //         showCancelButton: true,
+    //         confirmButtonColor: "#DD6B55",
+    //         confirmButtonText: "Yes, delete it!",
+    //         closeOnConfirm: false
+    //     }, function(isConfirm) {
+    //         if (isConfirm) form.submit();
+    //     });
+    // });
+</script>
+
 
 <!-- end of sweet alert -->
 <script>

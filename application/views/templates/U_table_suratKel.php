@@ -4,23 +4,26 @@
         <div class="card-body table-responsive">
             <table id="surat" class="table table-hover">
                 <thead class="table-light">
-                    <tr>
+                    <tr class="table-active">
                         <th>Jenis Surat</th>
                         <th>Perihal</th>
                         <th>Tanggal Masuk</th>
+                        <!-- <th>Action</th> -->
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     if (!empty($surat)) {
                         $i = 0;
-                        foreach ($surat as $s) {
+                        foreach ($surat as $row) {
                             $i++;
                     ?>
                             <tr>
-                                <td class="tg-baqh"><?= $s->type; ?></td>
-                                <td class="tg-baqh"><?= $s->regarding; ?></td>
-                                <td class="tg-baqh"><?= $s->date_sended; ?></td>
+                                <td class="tg-baqh"><?= $row->type; ?></td>
+                                <td class="tg-baqh"><?= $row->regarding; ?></td>
+                                <td class="tg-baqh"><?= $row->date_sended; ?></td>
+                                <!-- <td><a href="<?= base_url(); ?>User/download/<?= $row->File_name; ?> ">Download</a></td> -->
+
                             </tr>
                     <?php
                         }

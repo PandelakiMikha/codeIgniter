@@ -5,296 +5,56 @@
             <div class="modal-header">
                 <h4 class="modal-title" id="staticBackdropLabel">Daftar Penerima</h4>
             </div>
-            <div class="modal-body">
-                <!-- <div class="bar-pilih"> -->
-                <!-- <ul>
-                        <li><a type="button" class="button-pilih-pemerintah">Kabupaten/Kota</a></li>
-                        <li><a type="button" class="button-pilih-pemerintah">Provinsi</a></li>
-                        <li><a type="button" class="button-pilih-pemerintah">Pusat</a></li>
-                        <li class="animation start"></li>
-                    </ul> -->
-                <!-- <div class="container-bar-pilih">
-                    <div class="bar-pilih kab-kota">
-                        <a type="button" class="button-pilih-pemerintah kab-kota" id="buttonPilihKabKota">Kabupaten/Kota</a>
-                    </div>
-
-                    <div class="bar-pilih prov">
-                        <a type="button" class="button-pilih-pemerintah prov">Provinsi</a>
-
-                    </div>
-                    <div class="bar-pilih pusat">
-                        <a type="button" class="button-pilih-pemerintah pusat">Pusat</a>
-
-                    </div>
-                </div> -->
-
-                <div class="accordion" id="accordionExample">
-                    <!-- Ini yang kab/kota -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button button-pilih-pemerintah-kab-kota" id="buttonPilihKabKota" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                Kabupaten/Kota
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" aria-expanded="true">
-                            <div class="accordion-body">
-                                <div class="ktu-pilih-kab-kota">
-                                    <div class="heading-penerima-kab-kota mt-3">
-                                        <label for="cariKab/Kota" class="nama-kab-kota">Cari Kabupaten/Kota:</label>
-                                        <div class="input-icons">
-                                            <span class="icons"><i class="bi bi-search"></i></span>
-                                            <input class="form-control" id="cariKab/Kota" rows="3" placeholder="Cari">
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="daftar-pilihan-KabKota">
-                                        <div class="form-check pilih-kab-kota d-flex align-items-center">
-                                            <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota1" value="option1">
-                                            <label class="form-check-label" for="pilihanKabKota1">
-                                                Kabupaten Minahasa Utara
-                                            </label>
+            <form role="form" id="kirim_surat_ktu_tujuan" action="<?php echo base_url(); ?>ktu/kirim_surat_ktu" method="get" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="accordion" id="accordionExample">
+                        <!-- Ini yang kab/kota -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button button-pilih-pemerintah-kab-kota" id="buttonPilihKabKota" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Pilih Tujuan
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" aria-expanded="true">
+                                <div class="accordion-body">
+                                    <div class="ktu-pilih-kab-kota">
+                                        <div class="heading-penerima-kab-kota mt-3">
+                                            <label for="cariKab/Kota" class="nama-kab-kota">Cari Tujuan:</label>
+                                            <div class="input-icons">
+                                                <span class="icons"><i class="bi bi-search"></i></span>
+                                                <input class="form-control" id="cariKab/Kota" rows="3" placeholder="Cari">
+                                            </div>
                                         </div>
                                         <hr>
-                                        <div class="form-check pilih-kab-kota d-flex align-items-center">
-                                            <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota2" value="option2">
-                                            <label class="form-check-label" for="pilihanKabKota2">
-                                                Kota Bitung
-                                            </label>
+                                        <div class="daftar-pilihan-KabKota">
+                                            <?php
+                                            if (!empty($data_user)) {
+                                                foreach ($data_user as $dU) {
+                                            ?>
+                                                    <div class="form-check pilih-kab-kota d-flex align-items-center">
+                                                        <input class="form-check-input" type="radio" name="pilihTujuan" id="pilihTujuan" value="<?= $dU->email ?>">
+                                                        <label class="form-check-label" for="pilihTujuan">
+                                                            <?= $dU->name ?>
+                                                        </label>
+                                                    </div>
+                                                    <hr>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
                                         </div>
-                                        <hr>
-                                        <div class="form-check pilih-kab-kota d-flex align-items-center">
-                                            <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota3" value="option3">
-                                            <label class="form-check-label" for="pilihanKabKota3">
-                                                Kabupaten Minahasa
-                                            </label>
-                                        </div>
-                                        <hr>
-                                        <div class="form-check pilih-kab-kota d-flex align-items-center">
-                                            <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota4" value="option4">
-                                            <label class="form-check-label" for="pilihanKabKota4">
-                                                Kabupaten Minahasa Selatan
-                                            </label>
-                                        </div>
-                                        <hr>
-
-                                        <div class="form-check pilih-kab-kota d-flex align-items-center">
-                                            <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota4" value="option4">
-                                            <label class="form-check-label" for="pilihanKabKota4">
-                                                Kabupaten Minahasa Selatan
-                                            </label>
-                                        </div>
-                                        <hr>
-
-                                        <div class="form-check pilih-kab-kota d-flex align-items-center">
-                                            <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota4" value="option4">
-                                            <label class="form-check-label" for="pilihanKabKota4">
-                                                Kabupaten Minahasa Selatan
-                                            </label>
-                                        </div>
-                                        <hr>
-
-                                        <div class="form-check pilih-kab-kota d-flex align-items-center">
-                                            <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota4" value="option4">
-                                            <label class="form-check-label" for="pilihanKabKota4">
-                                                Kabupaten Minahasa Selatan
-                                            </label>
-                                        </div>
-                                        <hr>
-
-                                        <div class="form-check pilih-kab-kota d-flex align-items-center">
-                                            <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota4" value="option4">
-                                            <label class="form-check-label" for="pilihanKabKota4">
-                                                Kabupaten Minahasa Selatan
-                                            </label>
-                                        </div>
-                                        <hr>
-
-                                        <div class="form-check pilih-kab-kota d-flex align-items-center">
-                                            <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota4" value="option4">
-                                            <label class="form-check-label" for="pilihanKabKota4">
-                                                Kabupaten Minahasa Selatan
-                                            </label>
-                                        </div>
-                                        <hr>
-
-                                        <div class="form-check pilih-kab-kota d-flex align-items-center">
-                                            <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota4" value="option4">
-                                            <label class="form-check-label" for="pilihanKabKota4">
-                                                Kabupaten Minahasa Selatan
-                                            </label>
-                                        </div>
-                                        <hr>
-
-                                        <div class="form-check pilih-kab-kota d-flex align-items-center">
-                                            <input class="form-check-input" type="radio" name="pilihanKabKota" id="pilihanKabKota4" value="option4">
-                                            <label class="form-check-label" for="pilihanKabKota4">
-                                                Kabupaten Minahasa Selatan
-                                            </label>
-                                        </div>
-                                        <hr>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Ini yang Prov -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed button-pilih-pemerintah-prov" id="buttonPilihProv" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                Provinsi
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <div class="ktu-pilih-prov">
-                                    <div class="bagian-form-select d-flex gap-3">
-                                        <select name="" id="" class="form-select jenis-perangkat-daerah">
-                                            <option value="defaultValue" selected hidden>Pilih Jenis Perangkat Daerah</option>
-                                            <option value="jenisPerangkatDaerah1">Dinas</option>
-                                            <option value="jenisPerangkatDaerah2">Badan</option>
-                                            <option value="jenisPerangkatDaerah3">Setda</option>
-                                        </select>
-                                        <select name="" id="" class="form-select perangkat-daerah">
-                                            <option value="defaultValue" selected hidden>Pilih Perangkat Daerah</option>
-                                            <option value="perangkatDaerah1">Dinas Kesehatan</option>
-                                            <option value="perangkatDaerah2">Dinas Pariwisata</option>
-                                            <option value="perangkatDaerah3">Dinas Pendidikan </option>
-                                        </select>
-                                        <hr>
-                                    </div>
-                                    <hr>
-                                    <div class="form-check pilih-perangkat-daerah d-flex align-items-center">
-                                        <input class="form-check-input" type="radio" name="pilihanPerangkatDaerah" id="pilihanPerangkatDaerah1" value="option1">
-                                        <label class="form-check-label" for="pilihanPerangkatDaerah1">
-                                            Induk
-                                        </label>
-                                    </div>
-                                    <hr>
-                                    <div class="form-check pilih-perangkat-daerah d-flex align-items-center">
-                                        <input class="form-check-input" type="radio" name="pilihanPerangkatDaerah" id="pilihanPerangkatDaerah2" value="option2">
-                                        <label class="form-check-label" for="pilihanPerangkatDaerah2">
-                                            UPTD Rumah Sakit Umum Daerah ODSK
-                                        </label>
-                                    </div>
-                                    <hr>
-                                    <div class="form-check pilih-perangkat-daerah d-flex align-items-center">
-                                        <input class="form-check-input" type="radio" name="pilihanPerangkatDaerah" id="pilihanPerangkatDaerah3" value="option3">
-                                        <label class="form-check-label" for="pilihanPerangkatDaerah3">
-                                            UPTD Rumah Sakit Khusus Mata
-                                        </label>
-                                    </div>
-                                    <hr>
-                                    <div class="form-check pilih-perangkat-daerah d-flex align-items-center">
-                                        <input class="form-check-input" type="radio" name="pilihanPerangkatDaerah" id="pilihanPerangkatDaerah4" value="option4">
-                                        <label class="form-check-label" for="pilihanPerangkatDaerah4">
-                                            UPTD Rumah Sakit Jiwa Daerah
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Ini yang pusat -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                Pusat
-                            </button>
-                        </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                            <div class="accordion-body" aria-expanded="false">
-                                <div class="ktu-pilih-pusat">
-                                    <div class="form-check pilih-pusat d-flex align-items-center">
-                                        <input class="form-check-input" type="radio" name="pilihanPusat" id="pilihanPusat1" value="option1">
-                                        <label class="form-check-label" for="pilihanPusat1">
-                                            Kemendagri
-                                        </label>
-                                    </div>
-                                    <hr>
-                                    <div class="form-check pilih-kab-kota d-flex align-items-center">
-                                        <input class="form-check-input" type="radio" name="pilihanPusat" id="pilihanPusat2" value="option2">
-                                        <label class="form-check-label" for="pilihanPusat2">
-                                            Kemenpan
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
-                <!-- </div> -->
-                <!-- Ini kalo KTU pilih Kab/Kota -->
-
-
-                <!-- Ini kalo KTU pilih Prov -->
-                <!-- <div class="ktu-pilih-prov">
-                    <div class="bagian-form-select d-flex gap-3 mt-3">
-                        <select name="" id="" class="form-select jenis-perangkat-daerah">
-                            <option value="defaultValue" selected hidden>Pilih Jenis Perangkat Daerah</option>
-                            <option value="jenisPerangkatDaerah1">Dinas</option>
-                            <option value="jenisPerangkatDaerah2">Badan</option>
-                            <option value="jenisPerangkatDaerah3">Setda</option>
-                        </select>
-                        <select name="" id="" class="form-select perangkat-daerah">
-                            <option value="defaultValue" selected hidden>Pilih Perangkat Daerah</option>
-                            <option value="perangkatDaerah1">Dinas Kesehatan</option>
-                            <option value="perangkatDaerah2">Dinas Pariwisata</option>
-                            <option value="perangkatDaerah3">Dinas Pendidikan </option>
-                        </select>
-                        <hr>
-                    </div>
-                    <hr>
-                    <div class="form-check pilih-perangkat-daerah d-flex align-items-center">
-                        <input class="form-check-input" type="radio" name="pilihanPerangkatDaerah" id="pilihanPerangkatDaerah1" value="option1">
-                        <label class="form-check-label" for="pilihanPerangkatDaerah1">
-                            Induk
-                        </label>
-                    </div>
-                    <hr>
-                    <div class="form-check pilih-perangkat-daerah d-flex align-items-center">
-                        <input class="form-check-input" type="radio" name="pilihanPerangkatDaerah" id="pilihanPerangkatDaerah2" value="option2">
-                        <label class="form-check-label" for="pilihanPerangkatDaerah2">
-                            UPTD Rumah Sakit Umum Daerah ODSK
-                        </label>
-                    </div>
-                    <hr>
-                    <div class="form-check pilih-perangkat-daerah d-flex align-items-center">
-                        <input class="form-check-input" type="radio" name="pilihanPerangkatDaerah" id="pilihanPerangkatDaerah3" value="option3">
-                        <label class="form-check-label" for="pilihanPerangkatDaerah3">
-                            UPTD Rumah Sakit Khusus Mata
-                        </label>
-                    </div>
-                    <hr>
-                    <div class="form-check pilih-perangkat-daerah d-flex align-items-center">
-                        <input class="form-check-input" type="radio" name="pilihanPerangkatDaerah" id="pilihanPerangkatDaerah4" value="option4">
-                        <label class="form-check-label" for="pilihanPerangkatDaerah4">
-                            UPTD Rumah Sakit Jiwa Daerah
-                        </label>
-                    </div>
-                    <hr>
-                </div> -->
-                <!-- Ini kalo KTU pilih Pusat -->
-                <!-- <div class="ktu-pilih-pusat mt-3">
-                    <div class="form-check pilih-pusat d-flex align-items-center">
-                        <input class="form-check-input" type="radio" name="pilihanPusat" id="pilihanPusat1" value="option1">
-                        <label class="form-check-label" for="pilihanPusat1">
-                            Kemendagri
-                        </label>
-                    </div>
-                    <hr>
-                    <div class="form-check pilih-kab-kota d-flex align-items-center">
-                        <input class="form-check-input" type="radio" name="pilihanPusat" id="pilihanPusat2" value="option2">
-                        <label class="form-check-label" for="pilihanPusat2">
-                            Kemenpan
-                        </label>
-                    </div>
-                    <hr>
-                </div> -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="button-kirim">Selesai</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
+                    <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" id="button-kirim">Selesai</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -303,41 +63,58 @@
 <!-- Main Content -->
 <div class="container">
     <h3 style="text-align: center ;" class="headingKirimSurat">Kirim Surat</h3>
+    <?= form_open_multipart('ktu/kirim_surat_ktu'); ?>
+    <!-- <form role="form" id="kirim_surat_ktu" action="" method="post" enctype="multipart/form-data"> -->
     <div class="content">
         <div class="content-form">
             <div class="form-floating nomor-agenda">
-                <input name="" id="nomorAgenda" cols="30" rows="10" placeholder="Nomor Agenda" class="form-control"></input>
+                <input name="nomorAgenda" id="nomorAgenda" required="required" cols="30" rows="10" placeholder="Nomor Agenda" class="form-control"></input>
                 <label for="nomorAgenda">Nomor Agenda</label>
             </div>
             <div class="form-jenis-surat">
-                <select name="" id="jenisSurat" class="form-select form-select-lg">
+                <select name="jenisSurat" id="jenisSurat" required="required" class="form-select form-select-lg">
                     <option value="" hidden selected>
                         <p>Pilih Jenis Surat</p>
                     </option>
-                    <option value="">Surat</option>
-                    <option value="">Undangan</option>
-                    <option value="">Laporan</option>
+                    <option value="surat">Surat</option>
+                    <option value="laporan">Undangan</option>
+                    <option value="undangan">Laporan</option>
                 </select>
             </div>
             <div class="form-floating keterangan">
-                <textarea name="" id="keterangan" cols="30" rows="10" class="form-control keteranga" placeholder="Keterangan"></textarea>
+                <textarea name="keterangan" id="keterangan" required="required" cols="30" rows="10" class="form-control keteranga" placeholder="Keterangan"></textarea>
                 <label for="keterangan">Keterangan</label>
             </div>
             <div class="form-floating perihal">
-                <textarea name="" id="perihal" cols="30" rows="10" class="form-control perihal" placeholder="Perihal"></textarea>
+                <textarea name="perihal" id="perihal" required="required" cols="30" rows="10" class="form-control perihal" placeholder="Perihal"></textarea>
                 <label for="perihal">Perihal</label>
             </div>
-            <a class="btn tambah-penerima" data-bs-target="#modalTambahPenerima" data-bs-toggle="modal">
-                <img src="<?= base_url('assets/img/Plus.svg') ?>" alt="">
-                <p>Tambah Penerima</p>
-            </a>
+            <div class="form-tujuan">
+                <select name="pilihTujuan" id="pilihTujuan" required="required" class="form-select form-select-lg">
+                    <option value="" hidden selected>
+                        <p>Pilih Tujuan</p>
+                    </option>
+                    <?php
+                    if (!empty($data_user)) {
+                        foreach ($data_user as $dU) {
+                    ?>
+                            <option value="<?= $dU->email ?>"><?= $dU->email ?></option>
+                    <?php
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+            <!-- <a class="btn tambah-penerima" data-bs-target="#modalTambahPenerima" data-bs-toggle="modal">
+                    <img src="<?= base_url('assets/img/Plus.svg') ?>" alt="">
+                    <p>Tambah Penerima</p>
+                </a> -->
         </div>
-        <div id="liveAlertPlaceholder" style="width: 40%;"></div>
 
         <div class="bagian-bawah">
             <div class="input-file">
                 <!-- <label for="" class=""><b>Pilih File</b></label> -->
-                <input class="form-control form-control-lg" name="nama_file" id="nama_file" type="file" accept="application/pdf" value="<?= set_value('nama_file') ?>" multiple>
+                <input class="form-control form-control-sm" name="File_name" id="File_name" type="file" value="" multiple />
             </div>
             <div class="btn-custom submit">
                 <button type="submit" class="btn btn-danger" style="width: 230px; height: 55px; font-size: 25px;" id="liveAlertBtnKirim"><strong>Kirim</strong>
@@ -345,32 +122,10 @@
             </div>
         </div>
     </div>
+    <!-- </form> -->
+    <?= form_close(); ?>
 </div>
 
-<script>
-    const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
-
-    const alert = (message, type) => {
-        const wrapper = document.createElement('div')
-        wrapper.innerHTML = [
-            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-            `   <div style="color: black; font-weight: 500;">${message}</div>`,
-            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-            '</div>'
-        ].join('')
-
-        alertPlaceholder.append(wrapper)
-    }
-
-    const alertTrigger = document.getElementById('liveAlertBtnKirim')
-    if (alertTrigger) {
-        alertTrigger.addEventListener('click', () => {
-            alert('Surat Berhasil Dikirim!', 'success')
-        })
-    }
-</script>
-
-<script src="<?= base_url('assets/') ?>scripts/display-content-ktu.js"></script>
 
 
 <style>
@@ -406,6 +161,10 @@
 
     .form-jenis-surat {
         width: 40%;
+    }
+
+    .form-tujuan {
+        width: 82%;
     }
 
     /* .form-jenis-surat select {

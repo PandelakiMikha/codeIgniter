@@ -747,6 +747,9 @@
         var push_dispo_ktu = $('#push_dispo_ktu');
         var push_dispo_ktu1 = $('#push_dispo_ktu1');
 
+        var kirim_surat_ktu = $('#kirim_surat_ktu');
+        // var kirim_surat_ktu_tujuan = $('#kirim_surat_ktu_tujuan');
+
         // dispo ktu pertama
         push_dispo_ktu.submit(function(e) {
 
@@ -806,6 +809,50 @@
             })
 
         });
+
+        // push kirim surat ktu
+        kirim_surat_ktu.submit(function(e) {
+            e.preventDefault();
+
+            var uri = window.base_url = <?php echo json_encode(base_url('Ktu/')); ?> + 'kirim_surat_ktu'
+            // console.log(uri);
+
+            $.ajax({
+
+                type: kirim_surat_ktu.attr('method'),
+                url: uri,
+                data: kirim_surat_ktu.serialize(),
+                success: function(data) {
+                    if (data.status = true) {
+                        location.reload();
+
+                    } else if (data.status = false) {
+
+                        location.reload();
+
+                    };
+
+                },
+                error: function() {
+
+                    alert('Terjadi Mistake!')
+
+                }
+
+
+            })
+        })
+
+        // kirim_surat_ktu_tujuan.submit(function(e) {
+        //     e.preventDefault();
+
+        //     $.ajax({
+
+        //         type: kirim_surat_ktu_tujuan.attr('method'),
+        //         url: kirim_surat_ktu_tujuan.attr('action'),
+        //         data: kirim_surat_ktu_tujuan.serialize(),
+        //     })
+        // })
 
 
         // dispo ktu kedua
@@ -868,6 +915,7 @@
 
         });
 
+        // untuk details
         jQuery(document).on("click", "#details", function() {
 
             var idnya = $(this).data("idnya");

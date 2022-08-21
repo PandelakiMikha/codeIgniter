@@ -25,7 +25,7 @@ class User extends CI_Controller
 
         if ($this->form_validation->run() == FALSE) {
 
-            $config['upload_path']          = './upload/';
+            $config['allowed_types']          = './upload/';
             $config['allowed_types']        = 'pdf';
             $config['max_size']             = 2048;
             $this->load->library('upload', $config);
@@ -75,6 +75,8 @@ class User extends CI_Controller
                 'regarding' => $regarding,
                 'File_name' => $File_name,
                 'sender' => $sender,
+                'is_dispo' => 'false',
+                'is_done_dispo' => 'false'
             );
 
             $this->user_m->input_data($data, 'surat_masuk');

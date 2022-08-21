@@ -304,7 +304,7 @@
                         </div>
                         <div class="col-md-5">
                             <select class="form-select form-select-lg" required="required" name="status" aria-label="pilihStatus">
-                                <option hidden selected>Status</option>
+                                <option value="" hidden selected>Status</option>
                                 <option value="Segera">Segera</option>
                                 <option value="Sangat Segera">Sangat Segera</option>
                                 <option value="Rahasia">Rahasia</option>

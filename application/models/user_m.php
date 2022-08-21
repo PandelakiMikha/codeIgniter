@@ -23,7 +23,7 @@ class user_m extends CI_Model
     {
 
         $this->db->insert('surat_masuk', $data);
-        $this->db->insert('surat_kel_user', $data);
+        // $this->db->insert('surat_kel_user', $data);
 
         return true;
     }

@@ -261,4 +261,16 @@ class Surma_model extends CI_Model
         // return $query = $this->db->get('tbl_dispo');
         // var_dump($query);
     }
+
+    public function kirimSuratKtu($isiSurat)
+    {
+        $this->db->trans_start();
+        $this->db->insert('surat_keluar', $isiSurat);
+
+        $insert_id = $this->db->insert_id();
+
+        $this->db->trans_complete();
+
+        return $insert_id;
+    }
 }

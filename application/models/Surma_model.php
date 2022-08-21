@@ -9,9 +9,9 @@ class Surma_model extends CI_Model
         $checkUserN = $this->session->userdata('name');
         $checkUserE = $this->session->userdata('email');
         $currentUri = current_url();
-        $currentDate = date('y-m-d');
+        $currentDate = date('Y-m-d');
 
-        if ($checkUserR == '1') {
+        if ($checkUserR == 1) {
             if ($currentUri == 'http://localhost/codeIgniter/karoo') {
                 return $query = $this->db->get_where('surat_masuk', ['date_sended' => $currentDate])->result();
             } else {
@@ -242,5 +242,17 @@ class Surma_model extends CI_Model
         $this->db->update('surat_masuk', $isDispoKabag);
 
         return $this->db->affected_rows();
+    }
+
+    function getDataDisposisi($idSurat)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_dispo');
+        $this->db->where('surat_masuk_id', $idSurat);
+        $query = $this->db->get();
+        return $query->result();
+        // return $query = $this->db->get_where('tbl_dispo', ['surat_masuk_id' => $idSurat])->result();
+        // return $query = $this->db->get('tbl_dispo');
+        // var_dump($query);
     }
 }

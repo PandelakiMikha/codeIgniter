@@ -5,6 +5,7 @@
     - Arsip lagi belum pake backend dpe pilih tahun
     - Kirim surat KTU belum selesai
     - Jang lupa style kase pisah
+<<<<<<< HEAD
 
     data-Jenis_surat"<?= $data->Jenis_surat ?>" data-No_agenda"<?= $data->No_agenda ?>" data-Nama_file"<?= $data->Nama_file ?>" data-Perihal"<?= $data->Perihal ?>"
 
@@ -36,4 +37,9 @@
                     }
                     ?>
                 </tbody>
+=======
+    - Jang lupa script lagi kase pisah
+    - Tambah input keterangan di page kirim surat ktu (done)
+    - Tambah tombol reset/hapus data di modal tambah penerima (page kirim surat ktu)
+>>>>>>> fa8ddf39e35cbb0fad97fa3f9024b42b5b08f787
 *****

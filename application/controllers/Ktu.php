@@ -26,11 +26,13 @@ class Ktu extends CI_Controller
 
     public function kirim_surat()
     {
+        // $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        // $data['judul'] = 'Kirim Surat';
+        // $data['totals'] = $this->Serverside_model->count_all_data();
+        // $data['data_daerah'] = $this->Serverside_model->getDataDaerah();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['totals'] = $this->surma_model->count_all_data();
         $data['judul'] = 'Kirim Surat';
-        $data['totals'] = $this->Serverside_model->count_all_data();
-        $data['data_daerah'] = $this->Serverside_model->getDataDaerah();
-
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/navbar', $data);
@@ -46,6 +48,12 @@ class Ktu extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
 
+        // $idSurat = $_POST['idnya'];
+        $idSurat = $this->input->post('idnya');
+
+        $data['details'] = $this->surma_model->getDataDisposisi($idSurat);
+        // var_dump($data['details']);
+
         $bawahan = 3;
         $data['user_biro'] = $this->User_model->getUserBiro($bawahan);
 
@@ -54,6 +62,12 @@ class Ktu extends CI_Controller
         $this->load->view('templates/navbar', $data);
         $this->load->view("Admin/Disposisi/disposisi", $data, NULL);
         $this->load->view('templates/footer');
+    }
+
+    public function detailDispo()
+    {
+        $idnya = $this->input->post('idnya');
+        $data['disposisi'] = $this->surma_model->getDataDisposisi();
     }
 
     public function arsip()

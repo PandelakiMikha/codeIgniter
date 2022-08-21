@@ -5,4 +5,7 @@
     - Arsip lagi belum pake backend dpe pilih tahun
     - Kirim surat KTU belum selesai
     - Jang lupa style kase pisah
+    - Jang lupa script lagi kase pisah
+    - Tambah input keterangan di page kirim surat ktu (done)
+    - Tambah tombol reset/hapus data di modal tambah penerima (page kirim surat ktu)
 *****

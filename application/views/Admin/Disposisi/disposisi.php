@@ -1,99 +1,99 @@
 <div class="containerr mt-5 ">
     <h4>Daftar Surat</h4>
-    <div class="card">
-        <div class="card-body table-responsive">
-            <table id="surat" class="table table-hover">
-                <thead class="table-light">
+    <!-- <div class="card"> -->
+    <!-- <div class="card-body table-responsive"> -->
+    <table id="surat" class="table table-hover">
+        <thead class="table-active">
+            <tr>
+                <th>Pingirim</th>
+                <th>Jenis Surat</th>
+                <th>Perihal</th>
+                <th>Keterangan</th>
+                <th>Tanggal Masuk</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            if (!empty($surat)) {
+                foreach ($surat as $s) {
+            ?>
                     <tr>
-                        <th>Pingirim</th>
-                        <th>Jenis Surat</th>
-                        <th>Perihal</th>
-                        <th>Keterangan</th>
-                        <th>Tanggal Masuk</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    if (!empty($surat)) {
-                        foreach ($surat as $s) {
-                    ?>
-                            <tr>
-                                <td class="tg-baqh"><?= $s->sender; ?></td>
-                                <td class="tg-baqh"><?= $s->type; ?></td>
-                                <td class="tg-baqh"><?= $s->regarding; ?></td>
-                                <td class="tg-baqh"><?= $s->ket; ?></td>
-                                <td class="tg-baqh"><?= $s->date_sended; ?></td>
-                                <td>
-                                    <div class="cuss">
-                                        <?php if ($user['role_id'] == 1 || $user['role_id'] == 2) : ?>
-                                            <div class="me-4">
-                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-placement="center" data-bs-target="#staticBackdropLihat">
-                                                    <i class="bi bi-eye"></i>Log
+                        <td class="tg-baqh"><?= $s->sender; ?></td>
+                        <td class="tg-baqh"><?= $s->type; ?></td>
+                        <td class="tg-baqh"><?= $s->regarding; ?></td>
+                        <td class="tg-baqh"><?= $s->ket; ?></td>
+                        <td class="tg-baqh"><?= $s->date_sended; ?></td>
+                        <td>
+                            <div class="cuss">
+                                <?php if ($user['role_id'] == 1 || $user['role_id'] == 2) : ?>
+                                    <div class="me-4">
+                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-placement="center" data-bs-target="#staticBackdropLihat">
+                                            <i class="bi bi-eye"></i>Log
+                                        </button>
+                                    </div>
+                                <?php endif ?>
+                                <?php if ($user['role_id'] == 4) : ?>
+                                    <!-- Tidah menampilkan button disposisi -->
+                                <?php elseif ($user['role_id'] != 4) : ?>
+                                    <?php if ($s->is_dispo == 'false' && $user['role_id'] != 3) : ?>
+                                        <div>
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#belumDispo">
+                                                <i class="bi bi-check-circle"></i>Disposisi
+                                            </button>
+                                        </div>
+                                    <?php elseif ($s->is_dispo == 'true') : ?>
+                                        <?php if ($user['role_id'] == 1) : ?>
+                                            <div>
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropDispo">
+                                                    <i class="bi bi-check-circle"></i>Disposisi
+                                                </button>
+                                            </div>
+                                        <?php elseif ($user['role_id'] == 2) : ?>
+                                            <div>
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropDispoKabag">
+                                                    <i class="bi bi-check-circle"></i>Disposisi
+                                                </button>
+                                            </div>
+                                        <?php elseif ($user['role_id'] == 3) : ?>
+                                            <div>
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#belumDispo">
+                                                    <i class="bi bi-check-circle"></i>Disposisi
                                                 </button>
                                             </div>
                                         <?php endif ?>
-                                        <?php if ($user['role_id'] == 4) : ?>
-                                            <!-- Tidah menampilkan button disposisi -->
-                                        <?php elseif ($user['role_id'] != 4) : ?>
-                                            <?php if ($s->is_dispo == 'false' && $user['role_id'] != 3) : ?>
-                                                <div>
-                                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#belumDispo">
-                                                        <i class="bi bi-check-circle"></i>Disposisi
-                                                    </button>
-                                                </div>
-                                            <?php elseif ($s->is_dispo == 'true') : ?>
-                                                <?php if ($user['role_id'] == 1) : ?>
-                                                    <div>
-                                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropDispo">
-                                                            <i class="bi bi-check-circle"></i>Disposisi
-                                                        </button>
-                                                    </div>
-                                                <?php elseif ($user['role_id'] == 2) : ?>
-                                                    <div>
-                                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropDispoKabag">
-                                                            <i class="bi bi-check-circle"></i>Disposisi
-                                                        </button>
-                                                    </div>
-                                                <?php elseif ($user['role_id'] == 3) : ?>
-                                                    <div>
-                                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#belumDispo">
-                                                            <i class="bi bi-check-circle"></i>Disposisi
-                                                        </button>
-                                                    </div>
-                                                <?php endif ?>
-                                            <?php elseif ($s->is_dispo == 'false' && $user['role_id'] == 3) : ?>
-                                                <?php if ($s->is_dispo_karo == 'true' || $s->is_dispo_kabag == 'true') : ?>
-                                                    <div>
-                                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropDispoKTU2">
-                                                            <i class="bi bi-check-circle"></i>Disposisi
-                                                        </button>
-                                                    </div>
-                                                <?php else : ?>
-                                                    <div>
-                                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropDispoKTU">
-                                                            <i class="bi bi-check-circle"></i>Disposisi
-                                                        </button>
-                                                    </div>
-                                                <?php endif ?>
-                                            <?php endif ?>
+                                    <?php elseif ($s->is_dispo == 'false' && $user['role_id'] == 3) : ?>
+                                        <?php if ($s->is_dispo_karo == 'true' || $s->is_dispo_kabag == 'true') : ?>
+                                            <div>
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropDispoKTU2">
+                                                    <i class="bi bi-check-circle"></i>Disposisi
+                                                </button>
+                                            </div>
+                                        <?php else : ?>
+                                            <div>
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropDispoKTU">
+                                                    <i class="bi bi-check-circle"></i>Disposisi
+                                                </button>
+                                            </div>
                                         <?php endif ?>
-                                        <div class="ms-4">
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropDetail">
-                                                <i class="bi bi-file-earmark-text"></i>Detail
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                    <?php
-                        }
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
+                                    <?php endif ?>
+                                <?php endif ?>
+                                <div class="ms-4">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropDetail">
+                                        <i class="bi bi-file-earmark-text"></i>Detail
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+            <?php
+                }
+            }
+            ?>
+        </tbody>
+    </table>
+    <!-- </div> -->
+    <!-- </div> -->
 </div>
 
 <!-- Modal untuk button lihat -->

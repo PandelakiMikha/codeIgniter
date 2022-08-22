@@ -1,21 +1,5 @@
 <div class="containerr mt-5 ">
     <h4>Daftar Surat</h4>
-    <div class="d-flex w-50 my-2 ">
-        <select class="form-select me-3 w-50" id="daerah" name="daerah">
-            <?php foreach ($data_daerah as $value) : ?>
-                <option value="" hidden>Pilih Daerah</option>
-                <option value="<?= $value->id ?>"><?= $value->name ?></option>
-            <?php endforeach ?>
-        </select>
-        <select class="form-select w-50" aria-label="Default select example" id="perangkat_daerah" name="perangkat_daerah">
-        </select>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-4">
-            <button type="button" id="btn-filter" class="btn btn-sm btn-danger">Filter</button>
-            <button type="button" id="btn-reset" class="btn btn-sm btn-outline-danger">Reset</button>
-        </div>
-    </div>
     <div class="card">
         <div class="card-body table-responsive">
             <table id="dispo" class="table table-hover1">

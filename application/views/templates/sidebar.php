@@ -21,7 +21,7 @@
     <div class="main">
         <div class="list-item">
             <?php if ($user['role_id'] == 1 || $user['role_id'] == 2) : ?>
-                <a href="<?= base_url('surat_masuk') ?>" class="item" id="surma">
+                <a href="<?= base_url('surat_masuk/index') ?>" class="item" id="surma">
                     <i class="fa-fw bi bi-envelope-paper"></i>
                     <span class="item-title">Surat Masuk</span>
                 </a>

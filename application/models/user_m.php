@@ -11,21 +11,39 @@ class user_m extends CI_Model
     var $column_order = array('id', 'Perihal', 'Jenis_surat', 'No_agenda', 'Nama_file');
     // var $order = array('id', 'sender', 'type', 'date_sended', 'regarding', 'daerah_id', 'perangkat_daerah_id');
 
-    public function select()
-    {
-        $query = $this->db->query("SELECT * FROM daerah ORDER BY name ASC");
-
-        //data is retrive from this query  
-        $query = $this->db->get('surat_kel_user');
-        return $query;
-    }
+    // public function select_surma()
+    // {
+    //     //data is retrive from this query  
+    //     $query = $this->db->get('surat_masuk_user');
+    //     // var_dump($query);
+    //     return $query;
+    // }
     //untuk insert data kedalam table surat_masuk.....
     function input_data($data)
     {
+
         $this->db->insert('surat_masuk', $data);
-        $this->db->insert('surat_kel_user', $data);
+        // $this->db->insert('surat_kel_user', $data);
+
         return true;
     }
+
+    //fungsi untuk mengambil data surat masuk dari biro untuk di tampilkan di modal detail surat...
+    //belum di pakai!!!...
+    public function get_surma($id = null)
+    {
+        // $this->db-select('surat_masuk_user');
+        $this->db->from('surat_masuk_user');
+        if ($id = null) {
+            $this->db->where('id', $id);
+        }
+        $this->db->order_by('id', 'asc');
+        $query = $this->db->get();
+        return $query;
+    }
+
+
+
     //untuk menampilkan data daerah yang ada dalam database....
     // function getdataDaerah()
     // {
@@ -130,7 +148,6 @@ class user_m extends CI_Model
 
 
     //
-
 
 
     // public function getDataDaerah()

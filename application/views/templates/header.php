@@ -25,6 +25,7 @@
     <!-- Data tables bootstrap 5 -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+
     <!-- Styling untuk page Disposisi -->
     <link rel="stylesheet" href="<?= base_url('assets/'); ?>css/disposisi.css">
     <link rel="stylesheet" href="<?= base_url('assets/'); ?>css/table.css">

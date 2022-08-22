@@ -8,7 +8,6 @@ class Ktu extends CI_Controller
         parent::__construct();
         $this->load->model('surma_model');
         $this->load->model('User_model');
-        $this->load->library('form_validation');
     }
     public function index()
     {
@@ -33,11 +32,71 @@ class Ktu extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
         $data['judul'] = 'Kirim Surat';
+
+        $data['data_user'] = $this->User_model->getUser();
+
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/navbar', $data);
         $this->load->view('ktu_kirim_surat/index');
         $this->load->view('templates/footer');
+    }
+
+    public function kirim_surat_ktu()
+    {
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('nomorAgenda', 'NomorAgenda', 'trim|required|max_length[25]|xss_clean');
+        $this->form_validation->set_rules('jenisSurat', 'JenisSurat', 'trim|required|max_length[20]|xss_clean');
+        $this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required|max_length[256]|xss_clean');
+        $this->form_validation->set_rules('perihal', 'perihal', 'trim|required|max_length[256]|xss_clean');
+        $this->form_validation->set_rules('pilihTujuan', 'pilihTujuan', 'trim|required|max_length[30]|xss_clean');
+        $this->form_validation->set_rules('File_name', 'File_Name', 'required');
+
+        if ($this->form_validation->run() == FALSE) {
+            echo "Upload asdf";
+            print_r($this->input->post($_FILES['File_name']));
+        } else {
+
+            $nomorAgenda    = $this->input->post('nomorAgenda');
+            $jenisSurat     = $this->input->post('jenisSurat');
+            $keterangan     = $this->input->post('keterangan');
+            $perihal        = $this->input->post('perihal');
+            $pilihTujuan    = $this->input->post('pilihTujuan');
+            $File_name      = $_FILES['File_name'];
+            if ($File_name == '') {
+            } else {
+                $config['upload_path']  = '../../assets/suratKeluar';
+                $config['allowed_types']  = 'jpg|png';
+
+                $this->load->library('upload', $config);
+                if (!$this->upload->do_upload('File_name')) {
+                    echo "Upload gagal";
+                    die();
+                } else {
+                    $File_name = $this->upload->data('file_name');
+                }
+            }
+
+            $isiSurat = [
+                'nomorAgenda'       => $nomorAgenda,
+                'jenisSurat'        => $jenisSurat,
+                'perihal'        => $perihal,
+                'keterangan'    => $keterangan,
+                'pilihTujuan'    => $pilihTujuan,
+                'File_name'    => $File_name,
+
+            ];
+
+            $result = $this->surma_model->kirimSuratKtu($isiSurat);
+            // $this->index();
+
+            if ($result > 0) {
+                echo (json_encode(array('status' => TRUE)));
+            } else {
+                echo (json_encode(array('status' => FALSE)));
+            }
+        }
     }
 
     public function disposisi()
@@ -47,6 +106,8 @@ class Ktu extends CI_Controller
         $data['surat'] = $this->surma_model->dataSuratM();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
+        // var_dump($data['surat']);
+        // die;
 
         // $idSurat = $_POST['idnya'];
         $idSurat = $this->input->post('idnya');

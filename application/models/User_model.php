@@ -17,4 +17,13 @@ class User_model extends CI_Model
             return $query = $this->db->get_where('user', ['bawahan_ktu' => $bawahan])->result();
         }
     }
+
+    function getUser()
+    {
+        $this->db->select('*');
+        $this->db->from('user');
+        $this->db->where('role_id', 5);
+        $query = $this->db->get();
+        return $query->result();
+    }
 }

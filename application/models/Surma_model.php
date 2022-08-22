@@ -34,7 +34,13 @@ class Surma_model extends CI_Model
             if ($currentUri == 'http://localhost/codeIgniter/ktu') {
                 return $query = $this->db->get_where('surat_masuk', ['date_sended' => $currentDate])->result();
             } else {
-                return $query = $this->db->get_where('surat_masuk', ['is_done_dispo' => 'false'])->result();
+                $this->db->select('*');
+                $this->db->from('surat_masuk');
+                $this->db->where(['is_done_dispo' => 'false']);
+                $this->db->join('tbl_dispo', 'tbl_dispo.surat_masuk_id = surat_masuk.id', 'left');
+                $query = $this->db->get();
+                return $query->result();
+                // return $query = $this->db->get_where('surat_masuk', ['is_done_dispo' => 'false'])->result();
             }
         } elseif ($checkUserR == '4') {
             if ($currentUri == 'http://localhost/codeIgniter/jabfung') {
@@ -54,6 +60,7 @@ class Surma_model extends CI_Model
         }
     }
 
+    //function untuk mengecek user name di dalam table surat_masuk agar bisa di tampilkan pada dashbor surat keluar yang ada di pages user...
     function dataSuratKelUser()
     {
         $checkUserN = $this->session->userdata('name');
@@ -63,6 +70,8 @@ class Surma_model extends CI_Model
             // return $query = $this->db->get_where('surat_masuk', ['is_done_dispo' => 'false'])->result();
         }
     }
+
+
 
     function count_all_data()
     {
@@ -251,5 +260,17 @@ class Surma_model extends CI_Model
         // return $query = $this->db->get_where('tbl_dispo', ['surat_masuk_id' => $idSurat])->result();
         // return $query = $this->db->get('tbl_dispo');
         // var_dump($query);
+    }
+
+    public function kirimSuratKtu($isiSurat)
+    {
+        $this->db->trans_start();
+        $this->db->insert('surat_keluar', $isiSurat);
+
+        $insert_id = $this->db->insert_id();
+
+        $this->db->trans_complete();
+
+        return $insert_id;
     }
 }

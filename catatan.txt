@@ -4,8 +4,8 @@
     - Modal disposisi masih manual belum pake per role (berarti mo ator p dpe footer dg dpe views lagi noch)
     - Arsip lagi belum pake backend dpe pilih tahun
     - Kirim surat KTU belum selesai
-    - Jang lupa style kase pisah
-    - Jang lupa script lagi kase pisah
+    - Jang lupa style kase pisah (style yang di disposisi/disposisi.php)
+    - Jang lupa script lagi kase pisah (script yang di disposisi/disposisi.php)
     - Tambah input keterangan di page kirim surat ktu (done)
     - Tambah tombol reset/hapus data di modal tambah penerima (page kirim surat ktu)
 *****

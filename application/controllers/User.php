@@ -13,27 +13,29 @@ class User extends CI_Controller
         $this->load->model('user_m');
         $this->load->model('surma_model');
     }
+    // public function ups()
+    // {
+    //     $getsurat = $this->user_m->getSuratData();
+    //     $data['jenis_surat'] = $getsurat;
+    //     $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+    //     $data['judul'] = 'Dashboard';
+    //     $data['totals'] = $this->user_m->count_all_data();
 
+    //     $this->load->view('templates/header', $data);
+    //     $this->load->view('templates/sidebar_user', $data);
+    //     $this->load->view('templates/navbar', $data);
+    //     $this->load->view('user/kirim_surat', array('error' => ' '), $data);
+    //     $this->load->view('templates/footer');
+    // }
 
     public function index()
     {
-        //form validation
-        // $this->form_validation->set_rules('type', 'Type', 'required');
-        // $this->form_validation->set_rules('date_sended', 'Date_sended', 'required');
-        // $this->form_validation->set_rules('regarding', 'Regarding', 'required');
-        // $this->form_validation->set_rules('File_name', 'file_name', 'required');
-
-        // if ($this->form_validation->run() == FALSE) {
 
         $getsurat = $this->user_m->getSuratData();
         $data['jenis_surat'] = $getsurat;
-
-        // $item = $this->user_m->get_surma()->result();
-        // $data = ['item' => $item];
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Dashboard';
         $data['totals'] = $this->user_m->count_all_data();
-        // $data['surma'] = $this->user_m->select_surma();
 
         $error = array('error' => $this->upload->display_errors());
 
@@ -42,93 +44,48 @@ class User extends CI_Controller
         $this->load->view('templates/navbar', $data);
         $this->load->view('templates/U_table_suratMasuk', $data);
         $this->load->view('templates/footer');
-        // } else {
-        // $id = $this->uri->segment(3);
-        // $jid = $this->user_m->input_data($id)->id;
-
-        // $type   = $this->input->post('type');
-        // $date_sended   = $this->input->post('date_sended');
-        // $regarding   = $this->input->post('regarding');
-        // $File_name  = $this->input->post('File_name');
-        // $sender  = $this->input->post('sender');
-        // // $is_done_dispo  = $this->input->post('is_done_dispo');
-        // // $is_dispo  = $this->input->post('is_dispo');
-
-        // $data = array(
-        //     'type' => $type,
-        //     'date_sended' => $date_sended,
-        //     'regarding' => $regarding,
-        //     'File_name' => $File_name,
-        //     'sender' => $sender,
-        //     'is_done_dispo' => 'false',
-        //     'is_dispo' => 'false',
-
-        //     // 'type' => $this->input->post('type'),
-        //     // 'regarding' => $this->input->post('regarding'),
-        //     // 'File_name' => $this->input->post('File_name'),
-        //     // 'sender' => $this->input->post('sender'),
-        //     // 'surat_masuk' => $jid,
-        //     // 'tbl_jobseeker_tbl_user_u_id' => $id
-
-        //     // 'type'   => $this->input->post('type'),
-        //     // 'date_sended'   => $this->input->post('date_sended'),
-        //     // 'regarding'   => $this->input->post('regarding'),
-        //     // 'File_name'  => $this->input->post('File_name'),
-        //     // 'sender'  => $this->input->post('sender'),
-        // );
-
-        // $this->user_m->input_data($data, 'surat_masuk');
-        // // $this->db->insert('surat_masuk', $data);
-        // // redirect('User/user_surat_kel');
-        // echo 'Added successfully.';
-
     }
 
     public function kirim_surat()
     {
         //form validation
-        $this->form_validation->set_rules('type', 'Type', 'required');
-        $this->form_validation->set_rules('date_sended', 'Date_sended', 'required');
-        $this->form_validation->set_rules('regarding', 'Regarding', 'required');
-        $this->form_validation->set_rules('File_name', 'file_name', 'required');
 
-        if ($this->form_validation->run() == FALSE) {
+        // $this->form_validation->set_rules('type', 'Type', 'required');
+        // $this->form_validation->set_rules('date_sended', 'Date_sended', 'required');
+        // $this->form_validation->set_rules('regarding', 'Regarding', 'required');
+        // $this->form_validation->set_rules('File_name', 'file_name', 'required');
+        $config['upload_path']          = './uploads/';
+        $config['allowed_types']        = 'gif|jpg|png|pdf';
+        $config['max_size']             = 10000;
+        $config['max_width']            = 1024;
+        $config['max_height']           = 768;
+
+        $this->load->library('upload');
+        $this->upload->initialize($config);
 
 
+        // if ($this->form_validation->run() == FALSE) {
+        if (!$this->upload->do_upload('File_name')) {
             $getsurat = $this->user_m->getSuratData();
+
             $data['jenis_surat'] = $getsurat;
-
-            $config['allowed_types']          = './upload/';
-            $config['allowed_types']        = 'pdf';
-            $config['max_size']             = 2048;
-            $this->load->library('upload', $config);
-
-
-            // $item = $this->user_m->get_surma()->result();
-            // $data = ['item' => $item];
             $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
             $data['judul'] = 'Dashboard';
-            $data['totals'] = $this->user_m->count_all_data();
-            // $data['surma'] = $this->user_m->select_surma();
-
-            $error = array('error' => $this->upload->display_errors());
+            $data['totals'] = $this->surma_model->count_all_data();
 
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar_user', $data);
             $this->load->view('templates/navbar', $data);
-            $this->load->view('user/kirim_surat', $data, $error);
+            $this->load->view('user/kirim_surat', $data);
             $this->load->view('templates/footer');
         } else {
-            // $id = $this->uri->segment(3);
-            // $jid = $this->user_m->input_data($id)->id;
+
 
             $type   = $this->input->post('type');
             $date_sended   = $this->input->post('date_sended');
             $regarding   = $this->input->post('regarding');
             $File_name  = $this->input->post('File_name');
             $sender  = $this->input->post('sender');
-            // $is_done_dispo  = $this->input->post('is_done_dispo');
-            // $is_dispo  = $this->input->post('is_dispo');
 
             $data = array(
                 'type' => $type,
@@ -136,60 +93,110 @@ class User extends CI_Controller
                 'regarding' => $regarding,
                 'File_name' => $File_name,
                 'sender' => $sender,
-
                 'is_done_dispo' => 'false',
                 'is_dispo' => 'false',
-
-                // 'type' => $this->input->post('type'),
-                // 'regarding' => $this->input->post('regarding'),
-                // 'File_name' => $this->input->post('File_name'),
-                // 'sender' => $this->input->post('sender'),
-                // 'surat_masuk' => $jid,
-                // 'tbl_jobseeker_tbl_user_u_id' => $id
-
-                // 'type'   => $this->input->post('type'),
-                // 'date_sended'   => $this->input->post('date_sended'),
-                // 'regarding'   => $this->input->post('regarding'),
-                // 'File_name'  => $this->input->post('File_name'),
-                // 'sender'  => $this->input->post('sender'),
-
-
             );
 
-            $this->user_m->input_data($data, 'surat_masuk');
-            // $this->db->insert('surat_masuk', $data);
-            // redirect('User/user_surat_kel');
+
+            $upload_data = $this->upload->data();
+            //get the uploaded file name
+            $data['File_name'] = $upload_data['file_name'];
+            //store pic data to the db
+            $insert = $this->user_m->input_data($data, 'surat_masuk');
+
+            // $this->user_m->input_data($data, 'surat_masuk');
+            // $data = array('upload_data' => $this->upload->data());
+            // $this->load->view('user/upload_success', $data);
             // redirect('User/kirim_surat');
+            if ($insert) {
+                redirect('User/kirim_surat');
+            } else {
+                echo "Gagal";
+            }
             // echo 'Added successfully.';
+
         }
     }
 
     //fungsi untuk mengupload surat user.....
-    public function upload()
+    // public function do_upload()
+    // {
+    //     $config['upload_path']          = './uploads/';
+    //     $config['allowed_types']        = 'gif|jpg|png|pdf';
+    //     $config['max_size']             = 2000;
+    //     $config['max_width']            = 1024;
+    //     $config['max_height']           = 768;
+
+    //     $this->load->library('upload');
+    //     $this->upload->initialize($config);
+
+
+    //     if (!$this->upload->do_upload('File_name')) {
+    //         $error = array('error' => $this->upload->display_errors());
+    //         $this->kirim_surat($error);
+    //     } else {
+    //         // $upload_data = $this->upload->data();
+    //         // $data = $upload_data['File_name'];
+
+    //         // $insert = $this->user_m->input_data($data);
+    //         $data = array('upload_data' => $this->upload->data());
+
+    //         $this->load->view('user/upload_success', $data);
+
+    //         //         $this->load->view('user/upload_success', $data);
+    //         // if ($insert) {
+    //         //     redirect('User/kirim_surat');
+    //         // } else {
+    //         //     echo "Gagal";
+    //         // }
+    //     }
+    // }
+
+    // public function upload_file()
+    // {
+    //     $status = "";
+    //     $msg = "";
+    //     $file_element_name = 'File_name';
+
+    //     if (empty($_POST['File_name'])) {
+    //         $status = "error";
+    //         $msg = "Please enter a title";
+    //     }
+
+    //     if ($status != "error") {
+    //         $config['upload_path'] = './uploads/';
+    //         $config['allowed_types'] = 'gif|jpg|png|doc|txt|pdf';
+    //         $config['max_size'] = 1024 * 8;
+    //         $config['encrypt_name'] = TRUE;
+
+    //         $this->load->library('upload', $config);
+
+    //         if (!$this->upload->do_upload($file_element_name)) {
+    //             $status = 'error';
+    //             $msg = $this->upload->display_errors('', '');
+    //         } else {
+    //             $data = $this->upload->data();
+    //             $file_id = $this->user_model->input_data($data['File_name'], $_POST['File_name']);
+    //             if ($file_id) {
+    //                 $status = "success";
+    //                 $msg = "File successfully uploaded";
+    //             } else {
+    //                 unlink($data['full_path']);
+    //                 $status = "error";
+    //                 $msg = "Something went wrong when saving the file, please try again.";
+    //             }
+    //         }
+    //         @unlink($_FILES[$file_element_name]);
+    //     }
+    //     echo json_encode(array('status' => $status, 'msg' => $msg));
+    // }
+
+    // end of file upload
+
+    function download($id)
     {
-        $config['upload_path']          = './upload/';
-        $config['allowed_types']        = 'pdf';
-        $config['max_size']             = 2048;
-
-        $this->load->library('upload', $config);
-
-        if (!$this->upload->do_upload('File_user')) {
-            $error = array('error' => $this->upload->display_errors());
-            $this->index($error);
-        } else {
-            $upload_data = $this->upload->data();
-            $data = $upload_data['file_name'];
-
-            // $insert = $this->M_Welcome->insertGambar($name);
-            $insert = $this->user_m->input_data($data);
-
-
-            if ($insert) {
-                redirect(base_url());
-            } else {
-                echo "Gagal";
-            }
-        }
+        $data = $this->db->get_where('surat_masuk', ['id' => $id])->row();
+        force_download('uploads/' . $data->File_name, NULL);
     }
 
 

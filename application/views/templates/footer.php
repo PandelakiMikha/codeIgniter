@@ -593,7 +593,7 @@
 <!-- script untuk mendisable button saat field input pada kirim surat masih kosong -->
 <script>
     document.getElementById('button-submit').disabled = true;
-    document.getElementById('regarding', 'jenis_surat', 'date_sended', 'perihal', 'File_name').addEventListener('keyup', e => {
+    document.getElementById('regarding').addEventListener('keyup', e => {
         //Check for the input's value
         if (e.target.value == "") {
             document.getElementById('button-submit').disabled = true;
@@ -641,29 +641,30 @@
 </script> -->
 
 <script>
-    //     $(document).ready(function() {
-    //         $(document).on('submit', '#my-form-new', function() {
-    //             // do your things
-    //             Swal.fire(
-    //                 'Surat Sudah Terkirim!',
-    //                 'Surat Sudah Masuk Ke Biro!',
-    //                 'success'
-    //             )
-    //         });
-    //     });
+    $(document).ready(function() {
+        $(document).on('submit', '#my-form-new', function() {
+            // do your things
+            Swal.fire(
+                'Surat Sudah Terkirim!',
+                'Surat Sudah Masuk Ke Biro!',
+                'success'
+            )
 
-    //     // var data = new FormData(document.getElementById("#my-form"));
-    //     // var xhr = new XMLHttpRequest();
-    //     // xhr.open("POST", "SERVER-SCRIPT");
-    //     // xhr.send(data);
-    // 
+        });
+    });
+
+    // var data = new FormData(document.getElementById("#my-form"));
+    // var xhr = new XMLHttpRequest();
+    // xhr.open("POST", "SERVER-SCRIPT");
+    // xhr.send(data);
 </script>
 
+
 <!-- ----- -->
-<script>
+<!-- <script>
     $(document).ready(function() {
-        $("#my-form-new").submit(function(e) {
-            e.preventDefault();
+        $("#my-form-new").submit(function(event) {
+            event.preventDefault();
             var sender = $("#sender").val();
             var jenis_surat = $("#jenis_surat").val();
             var type = $("#type").val();
@@ -682,26 +683,26 @@
                     regarding: regarding,
                     File_name: File_name,
                 },
-                success: function(data) {
-                    Swal.fire(
-                        'Surat Terkirim!',
-                        'Terimakasih!',
-                        'success'
-                    )
-                    $('#my-form-new').trigger("reset");
-                    // console.log(data);
-                },
-                error: function() {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Silahkan Kirim Kembali!',
-                    })
-                }
+                // success: function(data) {
+                //     Swal.fire(
+                //         'Surat Terkirim!',
+                //         'Terimakasih!',
+                //         'success'
+                //     )
+                //     $('#my-form-new').trigger("reset");
+                //     // console.log(data);
+                // },
+                // error: function() {
+                //     Swal.fire({
+                //         icon: 'error',
+                //         title: 'Oops...',
+                //         text: 'Silahkan Kirim Kembali!',
+                //     })
+                // }
             });
         });
     });
-</script>
+</script> -->
 
 <!-- end of jquery script -->
 
@@ -772,6 +773,36 @@
 
 
 <!-- end of sweet alert -->
+
+<!-- upload file method -->
+
+<script>
+    // $(function() {
+    //     $('#upload_file').submit(function(e) {
+    //         e.preventDefault();
+    //         $.ajaxFileUpload({
+    //             url: './User/do_upload/',
+    //             secureuri: false,
+    //             fileElementId: 'File_name',
+    //             dataType: 'json',
+    //             data: {
+    //                 'title': $('#title').val()
+    //             },
+    //             success: function(data, status) {
+    //                 if (data.status != 'error') {
+    //                     $('#files').html('<p>Reloading files...</p>');
+    //                     refresh_files();
+    //                     $('#title').val('');
+    //                 }
+    //                 alert(data.msg);
+    //             }
+    //         });
+    //         return false;
+    //     });
+    // });
+</script>
+
+<!-- end of file upload -->
 <script>
     $("table thead tr th").addClass("align-middle");
     $("table tbody").addClass("align-middle");

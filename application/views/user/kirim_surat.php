@@ -1,5 +1,14 @@
 <div class="container">
-    <form id="my-form-new" class="row form-1 g-3" action="<?= base_url('User/kirim_surat') ?>" method="POST">
+    <div style="color:red">
+        <?php if (isset($error)) {
+            print $error;
+        } ?>
+    </div>
+    <!-- <?php echo $error; ?> -->
+    <!-- <div class="row form-1 g-3"> -->
+    <!-- <?php echo form_open_multipart('User/kririm_surat'); ?> -->
+    <form id="my-form-new" class="row form-1 g-3" action="<?= base_url('User/kirim_surat') ?>" method="post" enctype="multipart/form-data">
+
 
         <!-- input data user -->
         <div class="col-md-4">
@@ -40,33 +49,23 @@
 
         <!-- pilih file -->
 
-        <!-- <?php if ($error !== null) : echo $error;
-                endif; ?> -->
-        <!-- <?php echo $error; ?> -->
-        <!-- <?php echo form_open_multipart('User/kirim_surat'); ?> -->
+
         <div class="col-md-4 mb-3 mt-3">
-            <label for="nama_file" class="form-label"><b>Pilih File</b></label>
-            <input class="form-control form-control-sm" name="File_name" id="File_name" type="file" accept="application/pdf" value="" multiple />
+            <label for="File_name" class="form-label"><b>Pilih File</b></label>
+            <input class="form-control form-control-sm" name="File_name" id="File_name" type="file" value="" accept="application/pdf" multiple />
             <small class="text-danger"><?= form_error('File_name'); ?></small>
         </div>
-
-        <!-- upload file -->
-        <!-- <div class="col-md-4">
-    <input class="btn btn-primary mt-4" type="submit" id="upload" value="upload">
-    <input type="submit" value="upload" />
-
-</div> -->
 
         <div class=" d-flex justify-content-center mt-5">
             <button type="reset" class="btn bg-body  d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;" name="save" value="Save Data"><span class="Btn_reset"><i class="bi bi-trash"></i>Hapus</span></button>
 
-            <!-- <button type="submit" id="btn-submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;" name="save" value="Save Data"><i class="bi bi-send"></i><strong>Kirim</strong></button> -->
+            <!-- <button type="submit" value="KIRIM" name="btn-submit" onclick="pilih()" onkeyup="success()" id="button-submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;"><i class="bi bi-send"></i><strong>Kirim</strong></button> -->
 
-            <button type="submit" value="KIRIM" name="btn-submit" onclick="pilih()" onkeyup="success()" id="button-submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;"><i class="bi bi-send"></i><strong>Kirim</strong></button>
-
-            <!-- <input type="submit" value="KIRIM" name="btn-submit" onkeyup="success()" id="button-submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;"> -->
+            <input type="submit" value="KIRIM" name="btn-submit" onkeyup="success()" id="button-submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;">
         </div>
 
         <!-- <?= form_close(); ?> -->
     </form>
+    <!-- </div> -->
+
 </div>

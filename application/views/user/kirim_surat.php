@@ -1,4 +1,9 @@
 <div class="container">
+    <CEnter>
+        <h1>KIRIM SURAT</h1>
+    </CEnter>
+    <hr>
+    <br>
     <div style="color:red">
         <?php if (isset($error)) {
             print $error;
@@ -19,7 +24,7 @@
 
         <div class="col-md-4">
             <label for="jenis_surat" class="form-label"><b>Jenis Surat</b></label>
-            <select name="type" id="jenis_surat" class="form-select" value="<?= set_value('type') ?>">
+            <select name="type" id="jenis_surat" class="form-select" value="<?= set_value('type') ?>" required>
                 <?php foreach ($jenis_surat as $value) : ?>
                     <option value="" hidden>Pilih..</option>
                     <option value="<?= $value->id ?>"><?= $value->name ?></option>
@@ -30,29 +35,29 @@
         <!-- bagian text input -->
         <div class="col-md-4">
             <label for="lainya" class="form-label"><b>Tipe Surat Lainya</b></label>
-            <input type="text" class="form-control" name="type" id="lainya" placeholder="Masukan Tipe Surat Lainya" value="<?= set_value('type') ?>">
+            <input type="text" class="form-control" name="type" id="lainya" placeholder="Masukan Tipe Surat Lainya" value="<?= set_value('type') ?>" required3>
             <small class="text-danger"><?= form_error('type'); ?></small>
         </div>
 
         <!-- date picker -->
         <div class="col-md-4">
             <label for="date" class="form-label"><b>Waktu Mengirim</b></label>
-            <input class="form-control" type="date" name="date_sended" id="date_sended" value="<?= set_value('date_sended') ?>">
+            <input class="form-control" type="date" name="date_sended" id="date_sended" value="<?= set_value('date_sended') ?>" required>
             <small class="text-danger"><?= form_error('date_sended'); ?></small>
         </div>
 
         <div class="col-12">
             <label for="perihal" class="form-label"><b>Perihal</b></label>
-            <input type="text" class="form-control" name="regarding" id="regarding" placeholder="Masukan Perihal yang Anda Inginkan" value="<?= set_value('regarding') ?>">
+            <input type="text" class="form-control" name="regarding" id="regarding" placeholder="Masukan Perihal yang Anda Inginkan" value="<?= set_value('regarding') ?>" required>
             <small class="text-danger"><?= form_error('regarding'); ?></small>
         </div>
 
         <!-- pilih file -->
 
 
-        <div class="col-md-4 mb-3 mt-3">
+        <div class=" mt-3">
             <label for="File_name" class="form-label"><b>Pilih File</b></label>
-            <input class="form-control form-control-sm" name="File_name" id="File_name" type="file" value="" accept="application/pdf" multiple />
+            <input class="form-control form-control-xl border-0 bg-transparent" name="File_name" id="File_name" type="file" value="" accept="application/pdf" multiple required />
             <small class="text-danger"><?= form_error('File_name'); ?></small>
         </div>
 
@@ -66,6 +71,6 @@
 
         <!-- <?= form_close(); ?> -->
     </form>
+    <hr>
     <!-- </div> -->
-
 </div>

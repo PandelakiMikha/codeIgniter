@@ -591,7 +591,7 @@
 </script>
 
 <!-- script untuk mendisable button saat field input pada kirim surat masih kosong -->
-<script>
+<!-- <script>
     document.getElementById('button-submit').disabled = true;
     document.getElementById('regarding').addEventListener('keyup', e => {
         //Check for the input's value
@@ -601,7 +601,7 @@
             document.getElementById('button-submit').disabled = false;
         }
     });
-</script>
+</script> -->
 <!-- script untuk menampilkan detail pada modal yang ada di U_table_srutaMasuk.. -->
 <!-- <script>
     $(document).ready(function() {

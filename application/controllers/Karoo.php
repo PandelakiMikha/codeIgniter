@@ -49,11 +49,21 @@ class Karoo extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
         $data['judul'] = 'Arsip';
+        $data['year'] = $this->surma_model->get_year();
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/navbar', $data);
         $this->load->view('arsip/index.php');
         $this->load->view('templates/footer');
+    }
+
+    public function filterArsip($year, $month)
+    {
+        $data['surat'] = $this->surma_model->getArsip($year, $month);
+        // print_r($data['surat']);
+
+        $this->load->view('arsip/result', $data);
     }
 
     public function dispoKaro()

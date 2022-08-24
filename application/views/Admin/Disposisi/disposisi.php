@@ -3,7 +3,7 @@
     <div class="card">
         <div class="card-body table-responsive">
             <table id="surat" class="table table-hover">
-                <thead class="table-light">
+                <thead class="table-active">
                     <tr>
                         <th>Pingirim</th>
                         <th>Jenis Surat</th>

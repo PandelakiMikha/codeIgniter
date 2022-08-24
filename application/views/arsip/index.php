@@ -6,22 +6,51 @@
 
 <!-- <div class="container-arsip"> -->
 <div class="container">
-    <div class="dropdownPilihTahun mt-5">
-        <label for="form-select">Pilih Tahun</label>
-        <select name="pilihTahunArsip" id="" class="form-select pilihTahunArsip">
-            <option value="1" hidden selected>Pilih</option>
-            <option value="2">2015</option>
-            <option value="3">2016</option>
-            <option value="4">2017</option>
-            <option value="5">2018</option>
-            <option value="6">2019</option>
-            <option value="7">2020</option>
-            <option value="8">2021</option>
-        </select>
-    </div>
+    <form action="" id="filter">
+        <div class="select-wrapper">
+            <div class="dropdownPilihTahun">
+                <label for="form-select">Pilih Tahun</label>
+                <select name="pilihTahunArsip" id="year" required class="form-select pilihTahunArsip">
+                    <option value="" hidden selected>Pilih</option>
+                    <?php
+                    if (!empty($year)) {
+                        foreach ($year as $y) {
+                    ?>
+                            <option value="<?= $y->year ?>"><?= $y->year ?></option>
+                    <?php
+                        }
+                    }
+                    ?>
+
+                </select>
+            </div>
+
+            <div class="dropdownPilihTahun">
+                <label for="form-select">Pilih Bulan</label>
+                <select name="pilihTahunArsip" id="month" class="form-select pilihTahunArsip">
+                    <option value="0" hidden selected>Pilih</option>
+                    <option value="01">Januari</option>
+                    <option value="02">Februari</option>
+                    <option value="03">Maret</option>
+                    <option value="04">April</option>
+                    <option value="05">Mei</option>
+                    <option value="06">Juni</option>
+                    <option value="07">Juli</option>
+                    <option value="08">Agustus</option>
+                    <option value="09">September</option>
+                    <option value="10">Oktober</option>
+                    <option value="11">November</option>
+                    <option value="12">Desember</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-outline-danger">Tampilkan</button>
+            </div>
+        </div>
+    </form>
 
     <!-- Arsip File Start -->
-    <div class="container-arsip">
+    <!-- <div class="container-arsip">
         <div class="row">
             <div class="col-custom bulan">
                 <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
@@ -99,7 +128,10 @@
                 </a>
             </div>
         </div>
-        <!-- Arsip File End -->
+    </div> -->
+
+    <div class="col-md-12">
+        <div id="result"></div>
     </div>
 </div>
 
@@ -111,6 +143,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    .select-wrapper {
+        display: flex;
+        gap: 2rem;
+        align-items: flex-end;
+        margin-bottom: 20px;
     }
 
     label {

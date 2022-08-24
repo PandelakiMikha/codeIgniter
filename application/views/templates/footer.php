@@ -1219,6 +1219,21 @@
     });
 </script>
 
+<script>
+    $(document).ready(function() {
+        $('#filter').submit(function(e) {
+            e.preventDefault();
+            $('#arsip').DataTable();
+            var year = $('#year').val();
+            var month = $('#month').val();
+            // console.log(month);
+            var url = "<?= site_url('karoo/filterArsip/') ?>" + year + '/' + month;
+            // console.log(url);
+            $('#result').load(url);
+        })
+    })
+</script>
+
 </body>
 
 </html>

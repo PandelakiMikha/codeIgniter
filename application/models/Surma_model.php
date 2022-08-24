@@ -15,7 +15,13 @@ class Surma_model extends CI_Model
             if ($currentUri == 'http://localhost/codeIgniter/karoo') {
                 return $query = $this->db->get_where('surat_masuk', ['date_sended' => $currentDate])->result();
             } else {
-                return $query = $this->db->get_where('surat_masuk', ['is_done_dispo' => 'false'])->result();
+                $this->db->select('*');
+                $this->db->from('surat_masuk');
+                $this->db->where(['is_done_dispo' => 'false']);
+                $this->db->join('tbl_dispo', 'tbl_dispo.surat_masuk_id = surat_masuk.id', 'left');
+                $query = $this->db->get();
+                return $query->result();
+                // return $query = $this->db->get_where('surat_masuk', ['is_done_dispo' => 'false'])->result();
             }
         } elseif ($checkUserR == '2') {
             if ($currentUri == 'http://localhost/codeIgniter/kabag') {
@@ -27,7 +33,13 @@ class Surma_model extends CI_Model
                 }
             } else {
                 if ($checkUserN == $checkUserN) {
-                    return $query = $this->db->get_where('surat_masuk', ['penerima_dispo' => $checkUserE])->result();
+                    $this->db->select('*');
+                    $this->db->from('surat_masuk');
+                    $this->db->where(['is_done_dispo' => 'false', 'penerima_dispo' => $checkUserE]);
+                    $this->db->join('tbl_dispo', 'tbl_dispo.surat_masuk_id = surat_masuk.id', 'left');
+                    $query = $this->db->get();
+                    return $query->result();
+                    // return $query = $this->db->get_where('surat_masuk', ['penerima_dispo' => $checkUserE])->result();
                 }
             }
         } elseif ($checkUserR == '3') {
@@ -272,5 +284,30 @@ class Surma_model extends CI_Model
         $this->db->trans_complete();
 
         return $insert_id;
+    }
+
+    function get_year()
+    {
+        $this->db->select('*');
+        $this->db->from('surat_masuk');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    function getArsip($year, $month)
+    {
+        if ($year && $month) {
+            $this->db->select('*');
+            $this->db->from('surat_masuk');
+            $this->db->where(['year' => $year, 'month' => $month]);
+            $query = $this->db->get();
+            return $query->result();
+        } else if ($year && !$month) {
+            $this->db->select('*');
+            $this->db->from('surat_masuk');
+            $this->db->where(['year' => $year]);
+            $query = $this->db->get();
+            return $query->result();
+        }
     }
 }

@@ -114,7 +114,7 @@
         <div class="bagian-bawah">
             <div class="input-file">
                 <!-- <label for="" class=""><b>Pilih File</b></label> -->
-                <input class="form-control form-control-sm" name="File_name" id="File_name" type="file" value="" multiple />
+                <input class="form-control form-control-sm" name="File_name" id="File_name" type="file" accept="application/pdf" value="" multiple />
             </div>
             <div class="btn-custom submit">
                 <button type="submit" class="btn btn-danger" style="width: 230px; height: 55px; font-size: 25px;" id="liveAlertBtnKirim"><strong>Kirim</strong>

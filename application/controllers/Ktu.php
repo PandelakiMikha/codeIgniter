@@ -51,11 +51,11 @@ class Ktu extends CI_Controller
         $this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required|max_length[256]|xss_clean');
         $this->form_validation->set_rules('perihal', 'perihal', 'trim|required|max_length[256]|xss_clean');
         $this->form_validation->set_rules('pilihTujuan', 'pilihTujuan', 'trim|required|max_length[30]|xss_clean');
-        $this->form_validation->set_rules('File_name', 'File_Name', 'required');
+        $this->form_validation->set_rules('File_name', 'file_name', 'required');
 
         if ($this->form_validation->run() == FALSE) {
             echo "Upload asdf";
-            print_r($this->input->post($_FILES['File_name']));
+            print_r($this->input->post('File_name'));
         } else {
 
             $nomorAgenda    = $this->input->post('nomorAgenda');

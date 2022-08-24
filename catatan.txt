@@ -1,13 +1,18 @@
 
 ***** Salomo's notes
-    - Modal detail belum selesai (masih mo tambah disposisi yang so dibuat oleh ktu, karo, dkk)
-    - Modal disposisi masih manual belum pake per role (berarti mo ator p dpe footer dg dpe views lagi noch)
+    - Modal detail belum selesai (masih mo tambah disposisi yang so dibuat oleh ktu, karo, dkk) (done)
+    - Modal disposisi masih manual belum pake per role (berarti mo ator p dpe footer dg dpe views lagi noch)(probably done)
     - Arsip lagi belum pake backend dpe pilih tahun
     - Kirim surat KTU belum selesai
-    - Jang lupa style kase pisah
-<<<<<<< HEAD
+    - Jang lupa style kase pisah (style yang di disposisi/disposisi.php)
+    - Jang lupa script lagi kase pisah (script yang di disposisi/disposisi.php)
+     - Jang lupa script lagi kase pisah
+    - Tambah input keterangan di page kirim surat ktu (done)
+    - Tambah tombol reset/hapus data di modal tambah penerima (page kirim surat ktu)(probably done)
 
-    data-Jenis_surat"<?= $data->Jenis_surat ?>" data-No_agenda"<?= $data->No_agenda ?>" data-Nama_file"<?= $data->Nama_file ?>" data-Perihal"<?= $data->Perihal ?>"
+*****
+
+ data-Jenis_surat"<?= $data->Jenis_surat ?>" data-No_agenda"<?= $data->No_agenda ?>" data-Nama_file"<?= $data->Nama_file ?>" data-Perihal"<?= $data->Perihal ?>"
 
       <!-- <a class="btn btn-default btn-xs btn-primary spmodal" id="Detail" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-targert="#Detail" data-JenisSurat="<?= $data->Jenis_surat ?>" data-NoAgenda="<?= $data->No_agenda ?>" data-NamaFile="<?= $data->Nama_file ?>" dataPerihal="<?= $data->Perihal ?>">
                                         <i class="bi bi-file-earmark-text"></i>Detail
@@ -36,6 +41,7 @@
                         }
                     }
                     ?>
+<<<<<<< HEAD
                 </tbody>
 =======
     - Jang lupa script lagi kase pisah
@@ -43,3 +49,97 @@
     - Tambah tombol reset/hapus data di modal tambah penerima (page kirim surat ktu)
 >>>>>>> fa8ddf39e35cbb0fad97fa3f9024b42b5b08f787
 *****
+
+
+==== controler user function untuk kirim surat..
+   public function kirim_surat()
+    {
+        //form validation
+
+        $this->form_validation->set_rules('type', 'Type', 'required');
+        $this->form_validation->set_rules('date_sended', 'Date_sended', 'required');
+        $this->form_validation->set_rules('regarding', 'Regarding', 'required');
+        $this->form_validation->set_rules('File_name', 'file_name', 'required');
+
+
+        if ($this->form_validation->run() == FALSE) {
+            $getsurat = $this->user_m->getSuratData();
+            $data['jenis_surat'] = $getsurat;
+            $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+            $data['judul'] = 'Dashboard';
+            $data['totals'] = $this->surma_model->count_all_data();
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar_user', $data);
+            $this->load->view('templates/navbar', $data);
+            $this->load->view('user/kirim_surat', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data['type'] = $this->input->post('type', TRUE);
+            $data['date_sended'] = $this->input->post('date_sended', TRUE);
+            $data['regarding'] = $this->input->post('regarding', TRUE);
+            $data['File_name'] = $this->input->post('File_name', TRUE);
+            $data['sender'] = $this->input->post('sender', TRUE);
+
+            // $type   = $this->input->post('type');
+            // $date_sended   = $this->input->post('date_sended');
+            // $regarding   = $this->input->post('regarding');
+            // $File_name  = $this->input->post('File_name');
+            // $sender  = $this->input->post('sender');
+
+            // $data = array(
+            //     'type' => $type,
+            //     'date_sended' => $date_sended,
+            //     'regarding' => $regarding,
+            //     'File_name' => $File_name,
+            //     'sender' => $sender,
+            //     'is_done_dispo' => 'false',
+            //     'is_dispo' => 'false',
+            // );
+
+            print_r($data);
+
+            $config['upload_path']          = './uploads/';
+            $config['allowed_types']        = 'pdf';
+            $config['max_size']             = 3000;
+
+            $this->load->library('upload', $config);
+
+            if (!$this->upload->do_upload('File_name')) {
+                $error = array('error' => $this->upload->display_errors());
+                $getsurat = $this->user_m->getSuratData();
+                $data['jenis_surat'] = $getsurat;
+                $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+                $data['judul'] = 'Dashboard';
+                $data['totals'] = $this->surma_model->count_all_data();
+
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/sidebar_user', $data);
+                $this->load->view('templates/navbar', $data);
+                $this->load->view('user/kirim_surat', $data, $error);
+                $this->load->view('templates/footer');
+            } else {
+                //file is uploaded successfully
+                //now get the file uploaded data 
+                // $upload_data = $this->upload->data();
+                // //get the uploaded file name
+                // $data['File_name'] = $upload_data['File_name'];
+                // //store pic data to the db
+                // $this->user_m->input_data($data, 'surat_masuk');
+                // redirect('/');
+
+                $data = array('upload_data' => $this->upload->data());
+
+                $this->load->view('user/upload_success', $data);
+            }
+
+
+            // redirect('User/kirim_surat');
+            // echo 'Added successfully.';
+
+        }
+    }
+====
+=======
+                </tbody>
+>>>>>>> 7b7aa3133fce9750bb8aaeef10d5e3f0abf6fa0d

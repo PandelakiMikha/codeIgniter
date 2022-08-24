@@ -3,7 +3,7 @@
     <div class="card">
         <div class="card-body table-responsive">
             <table id="surat" class="table table-hover">
-                <thead class="table-light">
+                <thead class="table-active">
                     <tr>
                         <th>Pingirim</th>
                         <th>Jenis Surat</th>
@@ -197,6 +197,14 @@
                         <label for="form-control" class="label-bold">Catatan Kepala Biro</label>
                         <input type="hidden" required="required" id="dKaro_id" name="dKaro_id" value="">
                         <textarea class="form-control" required="required" id="catKaro" name="catKaro" aria-label="With textarea" placeholder="Isi catatan disini."></textarea>
+                    </div>
+                    <div class="ttd-karo">
+                        <!-- <div class="ttd-karo-content"> -->
+                        <button class="btn-ttd-karo" id="btnTTDKaro" onclick="clicked()" value="hide/show">
+                            <label for="btn-ttd-karo">Tekan untuk TTD</label>
+                            <img src="<?= base_url('assets/img/ttd.jpg') ?> " id="ttdImg">
+                        </button>
+                        <!-- </div> -->
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -486,6 +494,17 @@
 </div>
 
 
+<script>
+    function clicked() {
+        if (ttdImg == 1) {
+            document.getElementById("ttdImg").style.display = "inline";
+            return ttdImg = 0;
+        } else {
+            document.getElementById("ttdImg").style.display = "none";
+            return ttdImg = 1;
+        }
+    }
+</script>
 <style>
     /* .form-group {
         margin-left: -12px;
@@ -533,4 +552,32 @@
         display: flex;
         justify-content: space-around;
     } */
+
+    .btn-ttd-karo {
+        /* border: 1px solid black; */
+        height: 210px;
+        width: 210px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* background: transparent !important; */
+    }
+
+    .ttd-karo img {
+        position: absolute;
+        height: 200px;
+        width: 200px;
+    }
+
+    .ttd-karo {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+    }
+
+    .ttd-karo-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 </style>

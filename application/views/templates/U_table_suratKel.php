@@ -5,24 +5,28 @@
             <table id="surat" class="table table-hover">
                 <thead class="table-light">
                     <tr class="table-active">
+                        <th>No</th>
                         <th>Jenis Surat</th>
                         <th>Perihal</th>
+                        <th>Nama File</th>
                         <th>Tanggal Masuk</th>
-                        <!-- <th>Action</th> -->
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
+                    <?php $no = 1;
                     if (!empty($surat)) {
                         $i = 0;
                         foreach ($surat as $row) {
                             $i++;
                     ?>
                             <tr>
+                                <td><?= $no++ ?></td>
                                 <td class="tg-baqh"><?= $row->type; ?></td>
                                 <td class="tg-baqh"><?= $row->regarding; ?></td>
+                                <td class="tg-bagh"><?= $row->File_name; ?></td>
                                 <td class="tg-baqh"><?= $row->date_sended; ?></td>
-                                <!-- <td><a href="<?= base_url(); ?>User/download/<?= $row->File_name; ?> ">Download</a></td> -->
+                                <td class="tg-baqh"><a class="btn btn-primary btn-sm" href="<?= base_url(); ?>User/download/<?= $row->id; ?> "><i class="bi bi-download"></i>Download</a></td>
 
                             </tr>
                     <?php

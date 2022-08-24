@@ -3,6 +3,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
 <script src="<?= base_url('assets/'); ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -16,6 +17,9 @@
 <!-- jquery-3.2.1 for filter -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
+<script>
+    AOS.init();
+</script>
 
 <!-- select bertingkat -->
 <script type="text/javascript">
@@ -568,7 +572,8 @@
     })
     // <!-- jquery script for sidebar_user -->
 </script>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+
 <script>
     // untuk mendisablekan form lainya ketika user mengklik form jenis surat..
     $('#jenis_surat').change(function() {
@@ -589,6 +594,18 @@
     });
 </script>
 
+<!-- script untuk mendisable button saat field input pada kirim surat masih kosong -->
+<!-- <script>
+    document.getElementById('button-submit').disabled = true;
+    document.getElementById('regarding').addEventListener('keyup', e => {
+        //Check for the input's value
+        if (e.target.value == "") {
+            document.getElementById('button-submit').disabled = true;
+        } else {
+            document.getElementById('button-submit').disabled = false;
+        }
+    });
+</script> -->
 <!-- script untuk menampilkan detail pada modal yang ada di U_table_srutaMasuk.. -->
 <!-- <script>
     $(document).ready(function() {
@@ -617,7 +634,7 @@
 </script> -->
 
 <!-- script untuk membuat modal yang ada di sidebar user tetap timbul walaupun ada actio yang di lakukan -->
-<script>
+<!-- <script>
     $(function() {
         $('#exampleModal').modal({
             backdrop: false,
@@ -625,26 +642,90 @@
         });
         $('#exampleModal').modal('show');
     });
+</script> -->
+
+<script>
+    // $(document).ready(function() {
+    //     $(document).on('submit', '#my-form-new', function() {
+    //         // do your things
+    //         Swal.fire(
+    //             'Surat Sudah Terkirim!',
+    //             'Surat Sudah Masuk Ke Biro!',
+    //             'success'
+    //         )
+
+    //     });
+    // });
+
+    // var data = new FormData(document.getElementById("#my-form"));
+    // var xhr = new XMLHttpRequest();
+    // xhr.open("POST", "SERVER-SCRIPT");
+    // xhr.send(data);
 </script>
+
+
+<!-- ----- -->
+<!-- <script>
+    $(document).ready(function() {
+        $("#my-form-new").submit(function(event) {
+            event.preventDefault();
+            var sender = $("#sender").val();
+            var jenis_surat = $("#jenis_surat").val();
+            var type = $("#type").val();
+            var date_sended = $("#date_sended").val();
+            var regarding = $("#regarding").val();
+            var File_name = $("#File_name").val();
+
+            $.ajax({
+                type: "POST",
+                url: '<?php echo base_url() ?>User/kirim_surat',
+                data: {
+                    sender: sender,
+                    jenis_surat: jenis_surat,
+                    type: type,
+                    date_sended: date_sended,
+                    regarding: regarding,
+                    File_name: File_name,
+                },
+                // success: function(data) {
+                //     Swal.fire(
+                //         'Surat Terkirim!',
+                //         'Terimakasih!',
+                //         'success'
+                //     )
+                //     $('#my-form-new').trigger("reset");
+                //     // console.log(data);
+                // },
+                // error: function() {
+                //     Swal.fire({
+                //         icon: 'error',
+                //         title: 'Oops...',
+                //         text: 'Silahkan Kirim Kembali!',
+                //     })
+                // }
+            });
+        });
+    });
+</script> -->
 
 <!-- end of jquery script -->
 
 <!-- sweet alert -->
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
 
 <script>
     // letting css, html to be loaded first before execute the function
-    $(document).ready(function() {
-        // condition if btn-show-sweetalert2 cliced
-        $("#btn-submit").click(function() {
-            // show the sweetalert after btn clicked
-            Swal.fire(
-                'Good job!',
-                'You clicked the button!',
-                'success'
-            )
-        });
-    });
+    // $(document).ready(function() {
+    //     // condition if btn-show-sweetalert2 cliced
+    //     $("#btn-submit").click(function() {
+    //         // show the sweetalert after btn clicked
+    //         Swal.fire(
+    //             'Surat Sudah Terkirim!',
+    //             'Surat Sudah Masuk Ke Biro!',
+    //             'success'
+    //         )
+    //     });
+    // });
 
     // $('#btn-submit').submit(function(e, params) {
     //     var localParams = params || {};
@@ -696,6 +777,36 @@
 
 
 <!-- end of sweet alert -->
+
+<!-- upload file method -->
+
+<script>
+    // $(function() {
+    //     $('#upload_file').submit(function(e) {
+    //         e.preventDefault();
+    //         $.ajaxFileUpload({
+    //             url: './User/do_upload/',
+    //             secureuri: false,
+    //             fileElementId: 'File_name',
+    //             dataType: 'json',
+    //             data: {
+    //                 'title': $('#title').val()
+    //             },
+    //             success: function(data, status) {
+    //                 if (data.status != 'error') {
+    //                     $('#files').html('<p>Reloading files...</p>');
+    //                     refresh_files();
+    //                     $('#title').val('');
+    //                 }
+    //                 alert(data.msg);
+    //             }
+    //         });
+    //         return false;
+    //     });
+    // });
+</script>
+
+<!-- end of file upload -->
 <script>
     $("table thead tr th").addClass("align-middle");
     $("table tbody").addClass("align-middle");
@@ -1106,6 +1217,21 @@
 
         });
     });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#filter').submit(function(e) {
+            e.preventDefault();
+            $('#arsip').DataTable();
+            var year = $('#year').val();
+            var month = $('#month').val();
+            // console.log(month);
+            var url = "<?= site_url('karoo/filterArsip/') ?>" + year + '/' + month;
+            // console.log(url);
+            $('#result').load(url);
+        })
+    })
 </script>
 
 </body>

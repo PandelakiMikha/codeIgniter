@@ -14,55 +14,57 @@ class User extends CI_Controller
         $this->load->model('surma_model');
     }
 
-
     public function index()
     {
+        $getsurat = $this->user_m->getSuratData();
+        $data['jenis_surat'] = $getsurat;
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['judul'] = 'Dashboard';
+        $data['totals'] = $this->user_m->count_all_data();
+        $error = array('error' => $this->upload->display_errors());
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar_user', $data, $error);
+        $this->load->view('templates/navbar', $data);
+        $this->load->view('templates/U_table_suratMasuk', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function kirim_surat()
+    {
         //form validation
-        $this->form_validation->set_rules('type', 'Type', 'required');
-        $this->form_validation->set_rules('date_sended', 'Date_sended', 'required');
-        $this->form_validation->set_rules('regarding', 'Regarding', 'required');
-        $this->form_validation->set_rules('File_name', 'file_name', 'required');
 
-        if ($this->form_validation->run() == FALSE) {
+        // $this->form_validation->set_rules('type', 'Type', 'required');
+        // $this->form_validation->set_rules('date_sended', 'Date_sended', 'required');
+        // $this->form_validation->set_rules('regarding', 'Regarding', 'required');
+        // $this->form_validation->set_rules('File_name', 'file_name', 'required');
+        $config['upload_path']          = './uploads/';
+        $config['allowed_types']        = 'gif|jpg|png|pdf';
+        $config['max_size']             = 10000;
+        $config['max_width']            = 1024;
+        $config['max_height']           = 768;
 
-            $config['allowed_types']          = './upload/';
-            $config['allowed_types']        = 'pdf';
-            $config['max_size']             = 2048;
-            $this->load->library('upload', $config);
+        $this->load->library('upload');
+        $this->upload->initialize($config);
 
 
-            if (!$this->upload->do_upload('File_name')) {
-                $getsurat = $this->user_m->getSuratData();
-                $data['jenis_surat'] = $getsurat;
+        // if ($this->form_validation->run() == FALSE) {
+        if (!$this->upload->do_upload('File_name')) {
+            $getsurat = $this->user_m->getSuratData();
 
-                // $item = $this->user_m->get_surma()->result();
-                // $data = ['item' => $item];
-                $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-                $data['judul'] = 'Dashboard';
-                $data['totals'] = $this->user_m->count_all_data();
-                // $data['surma'] = $this->user_m->select_surma();
+            $data['jenis_surat'] = $getsurat;
+            $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+            $data['judul'] = 'Dashboard';
+            $data['totals'] = $this->surma_model->count_all_data();
 
-                // $error = array('error' => $this->upload->display_errors());
-
-                $this->load->view('templates/header', $data);
-                $this->load->view('templates/sidebar_user', $data);
-                $this->load->view('templates/navbar', $data);
-                $this->load->view('templates/U_table_suratMasuk', $data);
-                $this->load->view('templates/footer');
-            } else {
-                $upload_data = $this->upload->data();
-                $name = $upload_data['File_name'];
-
-                // $insert = $this->M_Welcome->insertGambar($name);
-                $insert = $this->user_m->input_data($name);
-
-                if ($insert) {
-                    redirect(base_url());
-                } else {
-                    echo "Gagal";
-                }
-            }
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar_user', $data);
+            $this->load->view('templates/navbar', $data);
+            $this->load->view('user/kirim_surat', $data);
+            $this->load->view('templates/footer');
         } else {
+
+
             $type   = $this->input->post('type');
             $date_sended   = $this->input->post('date_sended');
             $regarding   = $this->input->post('regarding');
@@ -75,43 +77,47 @@ class User extends CI_Controller
                 'regarding' => $regarding,
                 'File_name' => $File_name,
                 'sender' => $sender,
+                'is_done_dispo' => 'false',
                 'is_dispo' => 'false',
-                'is_done_dispo' => 'false'
             );
 
-            $this->user_m->input_data($data, 'surat_masuk');
-            redirect('User/user_surat_kel');
+
+            $upload_data = $this->upload->data();
+            //mengambil file_name... 
+            $data['File_name'] = $upload_data['file_name'];
+            //untuk kirim ke database..
+            $insert = $this->user_m->input_data($data, 'surat_masuk');
+
+            if ($insert) {
+                redirect('User/upload_success');
+            } else {
+                echo "Gagal";
+            }
         }
     }
 
-    //fungsi untuk mengupload surat user.....
-    //  public function upload(){
-    // 	$config['upload_path']          = './upload/';
-    // 	$config['allowed_types']        = 'pdf';
-    // 	$config['max_size']             = 2048;
+    public function upload_success()
+    {
+        $getsurat = $this->user_m->getSuratData();
+        $data['jenis_surat'] = $getsurat;
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['judul'] = 'Dashboard';
+        $data['totals'] = $this->surma_model->count_all_data();
+        $error = array('error' => $this->upload->display_errors());
 
-    // 	$this->load->library('upload', $config);
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar_user', $data, $error);
+        $this->load->view('templates/navbar', $data);
+        $this->load->view('user/upload_success');
+        $this->load->view('templates/footer');
+    }
 
-    // 	if ( ! $this->upload->do_upload('userfile'))
-    // 	{
-    // 			$error = array('error' => $this->upload->display_errors());
-    // 			$this->load->view('User', $error);
-    // 	}
-    // 	else{
-    // 		$upload_data = $this->upload->data();
-    // 		$data = $upload_data['file_name'];
-
-    // 		// $insert = $this->M_Welcome->insertGambar($name);
-    // 		$insert = $this->user_m->input_data($data);
-
-
-    // 		if ($insert) {
-    // 			redirect(base_url());
-    // 		}else{
-    // 			echo "Gagal";
-    // 		}
-    // 	}
-    // }
+    //function untuk mendownload surat....
+    function download($id)
+    {
+        $data = $this->db->get_where('surat_masuk', ['id' => $id])->row();
+        force_download('uploads/' . $data->File_name, NULL);
+    }
 
 
     public function user_surat_kel()
@@ -121,7 +127,6 @@ class User extends CI_Controller
 
         $data['judul'] = "Dashboard";
         $data['surat'] = $this->surma_model->dataSuratKelUser();
-        // $data['kode'] = $this->user_m->download();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
 
@@ -134,12 +139,6 @@ class User extends CI_Controller
         $this->load->view("templates/U_table_suratKel", $data, NULL);
         $this->load->view('templates/footer');
     }
-
-    // public function download($kode)
-    // {
-    //     $data = $this->db->get_where('surat_masuk', ['id' => $kode])->$row();
-    //     force_download('uploads/' . $data->File_name, NULL);
-    // }
 
 
     //function untuk data table surat masuk......
@@ -166,110 +165,4 @@ class User extends CI_Controller
 
         $this->output->set_content_type('application/json')->set_output(json_encode($output));
     }
-
-    //function untuk data table surat keluar...
-    // public function getDataKel()
-    // {
-    //     $results = $this->user_m->getDataSuratKel();
-    //     $data = [];
-    //     foreach ($results as $result) {
-
-    //         $row = array();
-    //         $row[] = $result->Perihal;
-    //         $row[] = $result->Jenis_surat;
-    //         $row[] = $result->Nama_file;
-    //         $data[] = $row;
-    //     }
-
-    //     $output = array(
-    //         "draw" => $_POST['draw'],
-    //         "recordsTotal" => $this->user_m->count_all_dataKel(),
-    //         "recordsFiltered" => $this->user_m->count_filtered_data(),
-    //         "data" => $data,
-    //     );
-
-    //     $this->output->set_content_type('application/json')->set_output(json_encode($output));
-    // }
-
-    public function getDataPerangkatDaerah()
-    {
-        $id_daerah = $this->input->post('daerah');
-        // $id_perangkat_daerah = $this->input->post('perangkatDaerah');
-        // var_dump($id_daerah);
-        // die;
-
-        $getDaerah = $this->Serverside_model->getDaerah($id_daerah);
-
-        echo json_encode($getDaerah);
-        $getdata = $this->User_m->getdataDaerah();
-        $getsurat = $this->User_m->getdataSurat();
-        $data['jenis_surat'] = $getsurat;
-        $data['daerah_data'] = $getdata;
-        $data['judul'] = 'Home User';
-        $data['totals'] = $this->Serverside_model->count_all_data();
-
-        // $data = [
-        //     "Daerah" => $this->input->post('daerah', true),
-        //     "Perangkat" => $this->input->post('perangkat_daerah2', true),
-        //     "Jenis_perangkat" => $this->input->post('daftar_dinal', true),
-        //     "UPTD" => $this->input->post('uptd', true),
-        //     "Jenis_surat" => $this->input->post('jenis_surat', true),
-        //     "Lainya" => $this->input->post('lainya', true),
-        //     "Perihal" => $this->input->post('perihal', true),
-        //     "Nama_file" => $this->input->post('nama_file', true),
-        // ];
-
-        // $this->db->insert('surat_masuk_user', $data);
-        // redirect('User/tampilanHome_user');
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar_user', $data);
-        $this->load->view('templates/navbar', $data);
-        $this->load->view('user/tampilanHome_user');
-        $this->load->view('templates/datatables');
-        $this->load->view('templates/footer');
-    }
-
-    //untuk menangkap data daerah yang yang di lemparkan dari User_m.php
-    public function getDataPerangkat()
-    {
-        $id_daerah = $this->input->post('daerah');
-
-        $ambilDaerah = $this->User_m->ambilDaerah($id_daerah);
-
-        echo json_encode($ambilDaerah);
-    }
-
-    //untuk menangkap data dinas yang yang di lemparkan dari User_m.php
-    public function getDataDinas()
-    {
-        $id_dinas = $this->input->post('dinas');
-
-        $ambilDinas = $this->User_m->ambilDinas($id_dinas);
-
-        echo json_encode($ambilDinas);
-    }
 }
-
-
-// catatan
-// $row[] = '<div class="cuss">
-            //             <div>
-            //                 <button type="button" class="btn btn-warning" data-bs-trigger="focus" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover">
-            //                     <i class="bi bi-eye"></i>    
-            //                     Lihat
-            //                 </button>
-            //             </div>
-            //             <div class="middle">
-            //                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            //                     <i class="bi bi-check-circle"></i>    
-            //                     Disposisi
-            //                 </button>
-            //             </div>
-            //             <div>
-            //                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            //                     <i class="bi bi-file-earmark-text"></i>    
-            //                     Detail
-            //                 </button>
-            //             </div>
-            //           </div>';

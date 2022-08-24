@@ -31,6 +31,8 @@
     <link rel="stylesheet" href="<?= base_url('assets/'); ?>css/table.css">
     <link rel="stylesheet" href="<?= base_url('assets/'); ?>css/modal.css">
 
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <style>
         * {
             font-family: 'Poppins', sans-serif;

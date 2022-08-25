@@ -12,15 +12,16 @@
                 <label for="form-select">Pilih Tahun</label>
                 <select name="pilihTahunArsip" id="year" required class="form-select pilihTahunArsip">
                     <option value="" hidden selected>Pilih</option>
-                    <?php
-                    if (!empty($year)) {
-                        foreach ($year as $y) {
-                    ?>
+                    <option value="2022">2022</option>
+                    <!-- <?php
+                            if (!empty($year)) {
+                                foreach ($year as $y) {
+                            ?>
                             <option value="<?= $y->year ?>"><?= $y->year ?></option>
                     <?php
-                        }
-                    }
-                    ?>
+                                }
+                            }
+                    ?> -->
 
                 </select>
             </div>

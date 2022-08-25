@@ -21,6 +21,7 @@ class User extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Dashboard';
         $data['totals'] = $this->user_m->count_all_data();
+        $data['num_pesan'] = 1;
         $error = array('error' => $this->upload->display_errors());
 
         $this->load->view('templates/header', $data);
@@ -56,6 +57,7 @@ class User extends CI_Controller
             $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
             $data['judul'] = 'Dashboard';
             $data['totals'] = $this->surma_model->count_all_data();
+            $data['num_pesan'] = 2;
 
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar_user', $data);

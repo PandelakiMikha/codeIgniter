@@ -7,7 +7,11 @@
                 <img src="https://cdn-icons.flaticon.com/png/128/4436/premium/4436481.png?token=exp=1661254220~hmac=622d46a909b80ea974382148086f118b" class="card-img-top" alt="centang">
                 <p class="card-text">Surat Anda Akan Segera di Proses..</p>
                 <br>
-                <a href="<?= base_url('User/kirim_surat') ?>" class="btn btn-primary">Kembali</a>
+                <?php if ($user['role_id'] == 3) : ?>
+                    <a href="<?= base_url('ktu/surat_keluar') ?>" class="btn btn-primary">Kembali</a>
+                <?php else : ?>
+                    <a href="<?= base_url('User/kirim_surat') ?>" class="btn btn-primary">Kembali</a>
+                <?php endif; ?>
             </div>
         </div>
     </div>

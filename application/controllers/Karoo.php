@@ -15,6 +15,7 @@ class Karoo extends CI_Controller
         $data['surat'] = $this->surma_model->dataSuratM();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
+        $data['num_pesan'] = 1;
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -27,9 +28,20 @@ class Karoo extends CI_Controller
     {
         // echo date('y-m-d');
         $data['judul'] = "Karo Disposisi";
-        $data['surat'] = $this->surma_model->dataSuratM();
+        $data['surat'] = $this->surma_model->dataSuratD();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
+        $data['num_pesan'] = 2;
+
+        $results = $this->surma_model->get_karo_ttd();
+        $query = [];
+        foreach ($results as $result) {
+            $row = array();
+            $row[] = $result->is_dispo_karo;
+            $query[] = $row;
+        }
+
+        $data['karo_ttd'] = $query;
 
         $bawahan = 1;
 
@@ -42,6 +54,21 @@ class Karoo extends CI_Controller
         $this->load->view('templates/navbar', $data);
         $this->load->view("Admin/Disposisi/disposisi", $data, NULL);
         $this->load->view('templates/footer');
+    }
+
+    // public function track_log($idnya)
+    // {
+    //     $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+    //     $data['log'] = $this->surma_model->track_log($idnya);
+
+    //     $this->load->view('Admin/Disposisi/lihat', $data);
+    // }
+
+    public function getKaroTtd($is_dispo_karo)
+    {
+        $data['ttd_karo'] = $is_dispo_karo;
+
+        $this->load->view('Admin/Disposisi/details', $data);
     }
 
     public function arsip()

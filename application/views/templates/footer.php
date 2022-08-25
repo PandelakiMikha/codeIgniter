@@ -858,7 +858,7 @@
         var push_dispo_ktu = $('#push_dispo_ktu');
         var push_dispo_ktu1 = $('#push_dispo_ktu1');
 
-        var kirim_surat_ktu = $('#kirim_surat_ktu');
+        // var kirim_surat_ktu = $('#kirim_surat_ktu');
         // var kirim_surat_ktu_tujuan = $('#kirim_surat_ktu_tujuan');
 
         // dispo ktu pertama
@@ -922,37 +922,36 @@
         });
 
         // push kirim surat ktu
-        kirim_surat_ktu.submit(function(e) {
-            e.preventDefault();
+        // kirim_surat_ktu.submit(function(e) {
+        //     e.preventDefault();
 
-            var uri = window.base_url = <?php echo json_encode(base_url('Ktu/')); ?> + 'kirim_surat_ktu'
-            // console.log(uri);
+        //     var uri = window.base_url = <?php echo json_encode(base_url('Ktu/')); ?> + 'kirim_surat_ktu'
 
-            $.ajax({
+        //     $.ajax({
 
-                type: kirim_surat_ktu.attr('method'),
-                url: uri,
-                data: kirim_surat_ktu.serialize(),
-                success: function(data) {
-                    if (data.status = true) {
-                        location.reload();
+        //         type: kirim_surat_ktu.attr('method'),
+        //         url: uri,
+        //         data: kirim_surat_ktu.serialize(),
+        //         success: function(data) {
+        //             if (data.status = true) {
+        //                 location.reload();
 
-                    } else if (data.status = false) {
+        //             } else if (data.status = false) {
 
-                        location.reload();
+        //                 location.reload();
 
-                    };
+        //             };
 
-                },
-                error: function() {
+        //         },
+        //         error: function() {
 
-                    alert('Terjadi Mistake!')
+        //             alert('Terjadi Mistake!')
 
-                }
+        //         }
 
 
-            })
-        })
+        //     })
+        // })
 
         // kirim_surat_ktu_tujuan.submit(function(e) {
         //     e.preventDefault();
@@ -1149,6 +1148,7 @@
             })
 
         });
+
     });
 </script>
 
@@ -1219,17 +1219,75 @@
     });
 </script>
 
+
+<!-- filter arsip masuk -->
 <script>
     $(document).ready(function() {
         $('#filter').submit(function(e) {
             e.preventDefault();
-            $('#arsip').DataTable();
             var year = $('#year').val();
             var month = $('#month').val();
             // console.log(month);
             var url = "<?= site_url('karoo/filterArsip/') ?>" + year + '/' + month;
-            // console.log(url);
+            var url = "<?= site_url('ktu/filterArsip/') ?>" + year + '/' + month;
             $('#result').load(url);
+            // console.log(url);
+        })
+    })
+</script>
+
+<!-- filter arsip masuk -->
+<script>
+    $(document).ready(function() {
+        $('#filter_surkel').submit(function(e) {
+            e.preventDefault();
+            console.log('aku');
+            var year = $('#year').val();
+            var month = $('#month').val();
+            // console.log(month);
+            // console.log(url);
+
+            var url_kel = "<?= site_url('ktu/filterArsipKeluar/') ?>" + year + '/' + month;
+            console.log(url_kel);
+            $('#surkel').load(url_kel);
+        })
+    })
+</script>
+
+<!-- tracking log surat ando -->
+<script>
+    $(document).ready(function() {
+        jQuery(document).on("click", "#log", function() {
+
+            var penerima = $(this).data("penerima");
+
+            $('#penerima').text(penerima);
+
+        });
+    })
+</script>
+
+<!-- get karo ttd -->
+<script>
+    $(document).ready(function() {
+        // karo controler
+        jQuery(document).on("click", "#details", function(e) {
+            e.preventDefault();
+            var is_dispo_karo = $(this).data("dispokaro");
+            var url = "<?= site_url('karoo/getKaroTtd/') ?>" + is_dispo_karo;
+
+            $('#detail').load(url);
+
+        })
+
+        //ktu controller
+        jQuery(document).on("click", "#details", function(e) {
+            // e.preventDefault();
+            var is_dispo_karo = $(this).data("dispokaro");
+            var url = "<?= site_url('ktu/getKaroTtd/') ?>" + is_dispo_karo;
+
+            $('#detail').load(url);
+
         })
     })
 </script>

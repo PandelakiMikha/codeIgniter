@@ -12,6 +12,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- date picker -->
+
+
     <link href="<?= base_url('assets/'); ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
     <link href="<?= base_url('assets/'); ?>css/sb-admin-2.min.css" rel="stylesheet">
@@ -22,6 +25,11 @@
     <!-- Data tables bootstrap 5 -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+
+    <!-- Styling untuk page Disposisi -->
+    <link rel="stylesheet" href="<?= base_url('assets/'); ?>css/disposisi.css">
+    <link rel="stylesheet" href="<?= base_url('assets/'); ?>css/table.css">
+    <link rel="stylesheet" href="<?= base_url('assets/'); ?>css/modal.css">
 
     <style>
         * {

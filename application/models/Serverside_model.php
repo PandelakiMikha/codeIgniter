@@ -16,6 +16,9 @@ class Serverside_model extends CI_Model
         //     $this->db->like('daerah_id', $filter);
         // }
         $this->db->from($this->table);
+        // if ($this->session->userdata('role_id') == '1') {
+        //     $this->db->get_where('surat_masuk', ['sender' => 'Kemenpan']);
+        // }
         if (isset($_POST['search']['value'])) {
             $this->db->like('sender', $_POST['search']['value']);
             $this->db->or_like('type', $_POST['search']['value']);

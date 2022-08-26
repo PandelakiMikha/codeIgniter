@@ -31,6 +31,12 @@ class Karo extends CI_Controller
         $data['judul'] = 'Dashboard';
         $data['totals'] = $this->Serverside_model->count_all_data();
 
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/navbar', $data);
+        $this->load->view('dispo/index');
+        $this->load->view('templates/footer');
+
         $results = $this->Serverside_model->getDataSurat();
         $data = [];
         foreach ($results as $result) {

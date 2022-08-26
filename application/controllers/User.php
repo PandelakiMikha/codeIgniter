@@ -10,45 +10,265 @@ class User extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Serverside_model');
-        $this->load->model('User_m');
-        $this->load->model('Serverside_model');
+        $this->load->model('user_m');
+        $this->load->model('surma_model');
     }
+
+
     public function index()
     {
+        //form validation
+        // $this->form_validation->set_rules('type', 'Type', 'required');
+        // $this->form_validation->set_rules('date_sended', 'Date_sended', 'required');
+        // $this->form_validation->set_rules('regarding', 'Regarding', 'required');
+        // $this->form_validation->set_rules('File_name', 'file_name', 'required');
+
+        // if ($this->form_validation->run() == FALSE) {
+
+        $getsurat = $this->user_m->getSuratData();
+        $data['jenis_surat'] = $getsurat;
+
+        // $item = $this->user_m->get_surma()->result();
+        // $data = ['item' => $item];
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Dashboard';
-        $data['totals'] = $this->Serverside_model->count_all_data();
-        $data['data_daerah'] = $this->Serverside_model->getDataDaerah();
+        $data['totals'] = $this->user_m->count_all_data();
+        // $data['surma'] = $this->user_m->select_surma();
+
+        $error = array('error' => $this->upload->display_errors());
 
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar_user', $data);
+        $this->load->view('templates/sidebar_user', $data, $error);
         $this->load->view('templates/navbar', $data);
-        $this->load->view('surat_masuk/index');
+        $this->load->view('templates/U_table_suratMasuk', $data);
+        $this->load->view('templates/footer');
+        // } else {
+        // $id = $this->uri->segment(3);
+        // $jid = $this->user_m->input_data($id)->id;
+
+        // $type   = $this->input->post('type');
+        // $date_sended   = $this->input->post('date_sended');
+        // $regarding   = $this->input->post('regarding');
+        // $File_name  = $this->input->post('File_name');
+        // $sender  = $this->input->post('sender');
+        // // $is_done_dispo  = $this->input->post('is_done_dispo');
+        // // $is_dispo  = $this->input->post('is_dispo');
+
+        // $data = array(
+        //     'type' => $type,
+        //     'date_sended' => $date_sended,
+        //     'regarding' => $regarding,
+        //     'File_name' => $File_name,
+        //     'sender' => $sender,
+        //     'is_done_dispo' => 'false',
+        //     'is_dispo' => 'false',
+
+        //     // 'type' => $this->input->post('type'),
+        //     // 'regarding' => $this->input->post('regarding'),
+        //     // 'File_name' => $this->input->post('File_name'),
+        //     // 'sender' => $this->input->post('sender'),
+        //     // 'surat_masuk' => $jid,
+        //     // 'tbl_jobseeker_tbl_user_u_id' => $id
+
+        //     // 'type'   => $this->input->post('type'),
+        //     // 'date_sended'   => $this->input->post('date_sended'),
+        //     // 'regarding'   => $this->input->post('regarding'),
+        //     // 'File_name'  => $this->input->post('File_name'),
+        //     // 'sender'  => $this->input->post('sender'),
+        // );
+
+        // $this->user_m->input_data($data, 'surat_masuk');
+        // // $this->db->insert('surat_masuk', $data);
+        // // redirect('User/user_surat_kel');
+        // echo 'Added successfully.';
+
+    }
+
+    public function kirim_surat()
+    {
+        //form validation
+        $this->form_validation->set_rules('type', 'Type', 'required');
+        $this->form_validation->set_rules('date_sended', 'Date_sended', 'required');
+        $this->form_validation->set_rules('regarding', 'Regarding', 'required');
+        $this->form_validation->set_rules('File_name', 'file_name', 'required');
+
+        if ($this->form_validation->run() == FALSE) {
+
+
+            $getsurat = $this->user_m->getSuratData();
+            $data['jenis_surat'] = $getsurat;
+
+            $config['allowed_types']          = './upload/';
+            $config['allowed_types']        = 'pdf';
+            $config['max_size']             = 2048;
+            $this->load->library('upload', $config);
+
+
+            // $item = $this->user_m->get_surma()->result();
+            // $data = ['item' => $item];
+            $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+            $data['judul'] = 'Dashboard';
+            $data['totals'] = $this->user_m->count_all_data();
+            // $data['surma'] = $this->user_m->select_surma();
+
+            $error = array('error' => $this->upload->display_errors());
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar_user', $data);
+            $this->load->view('templates/navbar', $data);
+            $this->load->view('user/kirim_surat', $data, $error);
+            $this->load->view('templates/footer');
+        } else {
+            // $id = $this->uri->segment(3);
+            // $jid = $this->user_m->input_data($id)->id;
+
+            $type   = $this->input->post('type');
+            $date_sended   = $this->input->post('date_sended');
+            $regarding   = $this->input->post('regarding');
+            $File_name  = $this->input->post('File_name');
+            $sender  = $this->input->post('sender');
+            // $is_done_dispo  = $this->input->post('is_done_dispo');
+            // $is_dispo  = $this->input->post('is_dispo');
+
+            $data = array(
+                'type' => $type,
+                'date_sended' => $date_sended,
+                'regarding' => $regarding,
+                'File_name' => $File_name,
+                'sender' => $sender,
+
+                'is_done_dispo' => 'false',
+                'is_dispo' => 'false',
+
+                // 'type' => $this->input->post('type'),
+                // 'regarding' => $this->input->post('regarding'),
+                // 'File_name' => $this->input->post('File_name'),
+                // 'sender' => $this->input->post('sender'),
+                // 'surat_masuk' => $jid,
+                // 'tbl_jobseeker_tbl_user_u_id' => $id
+
+                // 'type'   => $this->input->post('type'),
+                // 'date_sended'   => $this->input->post('date_sended'),
+                // 'regarding'   => $this->input->post('regarding'),
+                // 'File_name'  => $this->input->post('File_name'),
+                // 'sender'  => $this->input->post('sender'),
+
+
+            );
+
+            $this->user_m->input_data($data, 'surat_masuk');
+            // $this->db->insert('surat_masuk', $data);
+            // redirect('User/user_surat_kel');
+            // redirect('User/kirim_surat');
+            // echo 'Added successfully.';
+        }
+    }
+
+    //fungsi untuk mengupload surat user.....
+    public function upload()
+    {
+        $config['upload_path']          = './upload/';
+        $config['allowed_types']        = 'pdf';
+        $config['max_size']             = 2048;
+
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload('File_user')) {
+            $error = array('error' => $this->upload->display_errors());
+            $this->index($error);
+        } else {
+            $upload_data = $this->upload->data();
+            $data = $upload_data['file_name'];
+
+            // $insert = $this->M_Welcome->insertGambar($name);
+            $insert = $this->user_m->input_data($data);
+
+
+            if ($insert) {
+                redirect(base_url());
+            } else {
+                echo "Gagal";
+            }
+        }
+    }
+
+
+    public function user_surat_kel()
+    {
+        $getsurat = $this->user_m->getSuratData();
+        $data['jenis_surat'] = $getsurat;
+
+        $data['judul'] = "Dashboard";
+        $data['surat'] = $this->surma_model->dataSuratKelUser();
+        // $data['kode'] = $this->user_m->download();
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['totals'] = $this->surma_model->count_all_data();
+
+        $error = array('error' => $this->upload->display_errors());
+
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar_user', $data, $error);
+        $this->load->view('templates/navbar', $data);
+        $this->load->view("templates/U_table_suratKel", $data, NULL);
         $this->load->view('templates/footer');
     }
 
+    // public function download($kode)
+    // {
+    //     $data = $this->db->get_where('surat_masuk', ['id' => $kode])->$row();
+    //     force_download('uploads/' . $data->File_name, NULL);
+    // }
+
+
+    //function untuk data table surat masuk......
     public function getData()
     {
-        $results = $this->Serverside_model->getDataSurat();
+        $results = $this->user_m->getDataSurat();
         $data = [];
         foreach ($results as $result) {
+
             $row = array();
-            $row[] = $result->sender;
-            $row[] = $result->type;
-            $row[] = $result->regarding;
-            $row[] = $result->date_sended;
+            $row[] = $result->Perihal;
+            $row[] = $result->Jenis_surat;
+            $row[] = $result->No_agenda;
+            $row[] = $result->Nama_file;
             $data[] = $row;
         }
 
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->Serverside_model->count_all_data(),
-            "recordsFiltered" => $this->Serverside_model->count_filtered_data(),
+            "recordsTotal" => $this->user_m->count_all_data(),
+            "recordsFiltered" => $this->user_m->count_filtered_data(),
             "data" => $data,
         );
 
         $this->output->set_content_type('application/json')->set_output(json_encode($output));
     }
+
+    //function untuk data table surat keluar...
+    // public function getDataKel()
+    // {
+    //     $results = $this->user_m->getDataSuratKel();
+    //     $data = [];
+    //     foreach ($results as $result) {
+
+    //         $row = array();
+    //         $row[] = $result->Perihal;
+    //         $row[] = $result->Jenis_surat;
+    //         $row[] = $result->Nama_file;
+    //         $data[] = $row;
+    //     }
+
+    //     $output = array(
+    //         "draw" => $_POST['draw'],
+    //         "recordsTotal" => $this->user_m->count_all_dataKel(),
+    //         "recordsFiltered" => $this->user_m->count_filtered_data(),
+    //         "data" => $data,
+    //     );
+
+    //     $this->output->set_content_type('application/json')->set_output(json_encode($output));
+    // }
 
     public function getDataPerangkatDaerah()
     {
@@ -107,19 +327,6 @@ class User extends CI_Controller
         $ambilDinas = $this->User_m->ambilDinas($id_dinas);
 
         echo json_encode($ambilDinas);
-    }
-
-
-    public function user_surat_kel()
-    {
-        $data['totals'] = $this->Serverside_model->count_all_data();
-        $data['judul'] = 'Home User';
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar_user');
-        $this->load->view('templates/navbar', $data);
-        $this->load->view('user/user_surat_kel', $data);
-        $this->load->view('templates/U_table_suratKel');
-        $this->load->view('templates/footer');
     }
 }
 

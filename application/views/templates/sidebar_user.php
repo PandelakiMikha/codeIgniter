@@ -1,89 +1,7 @@
 <!-- Modal -->
-<div class="modal fade" style="border-radius: 50px;" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">KIRIM SURAT</h5>
-                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-            </div>
-            <div class="modal-body">
-                <!-- content -->
-                <form class="row g-3" action="" method="post">
-                    <!-- bagian dropdown -->
 
-                    <div class="col-md-4">
-                        <label for="daerah" class="form-label"><b>Daerah</b></label>
-                        <select name="daerah" id="daerah" class="form-select" value="<?= set_value('daerah') ?>">
-                            <?php foreach ($daerah_data as $value) : ?>
-                                <option value="" hidden>Pilih..</option>
-                                <option value="<?= $value->id ?>"><?= $value->name ?></option>
-                            <?php endforeach ?>
-                        </select>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label for="perangkat_daerah2" class="form-label"><b>Jenis Perangkat / kementrian</b></label>
-                        <select name="perangkat_daerah2" id="perangkat_daerah2" class="form-select" value="<?= set_value('perangkat_daerah2') ?>">
-                            <option selected>Pilih...</option>
-                            <option>...</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-4 mt-5">
-                        <!-- <label for="daftar_dinas" class="form-label"><b>Daftar Dinas</b></label> -->
-                        <select name="daftar_dinas" id="daftar_dinas" class="form-select" value="<?= set_value('daftar_dinas') ?>">
-                            <option selected>Pilih...</option>
-                            <option>...</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label for="uptd" class="form-label"><b>UPTD dan Dinas Induk</b></label>
-                        <select name="uptd" id="uptd" class="form-select" value="<?= set_value('uptd') ?>">
-                            <option selected>Pilih...</option>
-                            <option>...</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="jenis_surat" class="form-label"><b>Jenis Surat</b></label>
-                        <select name="jenis_surat" id="jenis_surat" class="form-select" value="<?= set_value('jenis_surat') ?>">
-                            <?php foreach ($jenis_surat as $value) : ?>
-                                <option value="" hidden>Pilih..</option>
-                                <option value="<?= $value->id ?>"><?= $value->name ?></option>
-
-                            <?php endforeach ?>
-                        </select>
-                    </div>
-                    <!-- bagian text input -->
-                    <div class="col-12">
-                        <label for="lainya" class="form-label"><b>Lainya</b></label>
-                        <input type="text" class="form-control" name="lainya" id="lainya" placeholder="Jenis Surat Lainya" value="<?= set_value('lainya') ?>">
-                    </div>
-                    <div class="col-12">
-                        <label for="perihal" class="form-label"><b>Perihal</b></label>
-                        <input type="text" class="form-control" name="perihal" id="perihal" placeholder="Masukan Perihal yang Anda Inginkan" value="<?= set_value('perihal') ?>">
-                    </div>
-
-                    <!-- pilih file -->
-                    <div class="mb-3 mt-3">
-                        <label for="nama_file" class="form-label"><b>Pilih File</b></label>
-                        <input class="form-control form-control-sm" name="nama_file" id="nama_file" type="file" accept="application/pdf" value="<?= set_value('nama_file') ?>" multiple>
-                    </div>
-
-                    <div class=" d-flex justify-content-center mt-5">
-                        <button type="submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 230px; height: 55px; font-size: 25px;"><strong>Kirim</strong></button>
-                    </div>
-                </form>
-                <!-- end of content -->
-            </div>
-            <!-- <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div> -->
-        </div>
-    </div>
-</div>
 <!-- end of modal -->
+
 
 <div class="sidebarr">
     <div class="hamburger   ">
@@ -115,8 +33,8 @@
                         <span class="item-title">Surat</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="<?= base_url('user/tampilanHome_user') ?>">Surat Masuk</a></li>
-                        <li><a class="dropdown-item" href="<?= base_url('user/user_surat_kel') ?>">Surat Keluar</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('User/index') ?>">Surat Masuk</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('User/user_surat_kel') ?>">Surat Keluar</a></li>
                     </ul>
                 </div>
 
@@ -127,8 +45,8 @@
                 </a> -->
 
                 <!-- metode kirim surat 2 -->
-                <a class="item">
-                    <div class="spmodal" data-bs-target="#exampleModal" data-bs-toggle="modal">
+                <a class="item" href="<?= base_url('User/kirim_surat') ?>">
+                    <div class="spmodal">
                         <i class="fa-fw bi bi-send-plus"></i>
                         <span class="item-title">Kirim Surat</span>
                     </div>
@@ -148,7 +66,22 @@
 </div> -->
 
 
+
+
 <style>
+    .btn {
+        margin-left: 15px;
+    }
+
+    .Btn_reset {
+        color: red;
+    }
+
+    .Btn,
+    .bi {
+        margin-right: 10px;
+    }
+
     .sidebarr {
         display: flex;
         width: 350px;
@@ -450,6 +383,8 @@
             transform: rotateZ(0);
         }
     }
+
+    /* date picker style */
 </style>
 
 <script>
@@ -463,6 +398,8 @@
         console.log('ok');
     })
 </script>
+
+<!-- jquery date picker -->
 
 <!-- dropdown select bertingkat -->
 <!-- <script>

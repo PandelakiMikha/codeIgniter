@@ -1,0 +1,30 @@
+.page {
+    background: linear-gradient(224.57deg, #F4E1E1 0.62%, rgba(217, 217, 217, 0) 75.19%);
+}
+
+.container {
+    margin-top: 58px;
+}
+
+/* Dropdown */
+.dua-dropdown {
+    width: 50%;
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 34px;
+}
+
+.dua-dropdown .dropdown1 {
+    width: 40%;
+}
+
+.dua-dropdown .dropdown2 {
+    width: 50%;
+}
+
+/* Untuk semua inputan musti pke border radius */
+.form-control,
+.form-select {
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.6);
+}

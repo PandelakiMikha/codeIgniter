@@ -5,7 +5,7 @@
  -->
 
 <!-- <div class="container-arsip"> -->
-<div class="container">
+<div class="containerr mt-5 ">
     <form action="" id="filter">
         <div class="select-wrapper">
             <div class="dropdownPilihTahun">
@@ -139,7 +139,17 @@
 
 
 <style>
-    .container-arsip {
+    .containerr {
+        box-sizing: border-box;
+        /* margin: auto; */
+        flex-grow: 1;
+        margin-left: 30px;
+        margin-right: 30px;
+        /* margin-top: 100px !important; */
+        /* background-color: aliceblue; */
+    }
+
+    .containerr-arsip {
         /* margin-left: 131px; */
         display: flex;
         align-items: center;

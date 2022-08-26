@@ -1026,7 +1026,8 @@
         });
 
         // untuk details
-        jQuery(document).on("click", "#details", function() {
+        jQuery(document).on("click", "#details", function(e) {
+            e.preventDefault();
 
             var idnya = $(this).data("idnya");
             var surat_dari = $(this).data("suratdari");
@@ -1045,8 +1046,10 @@
             var cat_kabag = $(this).data("catkabag");
             var tujuan_ktu = $(this).data("tujuanktu");
             var cat_ktu = $(this).data("catktu");
+            // var ttd_karo = $(this).data("dispokaro");
 
-            var basee = window.base_url = <?php echo json_encode(base_url('Ktu/')); ?> + 'disposisi';
+            var basee = window.base_url = <?php echo json_encode(base_url('karoo/')); ?> + 'disposisi';
+            // console.log(basee);
 
             $('#modalDetail').modal('show');
 
@@ -1074,6 +1077,7 @@
                     $('#cat_kabag_id').text(cat_kabag);
                     $('#tujaun_ktu_id').text(tujuan_ktu);
                     $('#cat_ktu_id').text(cat_ktu);
+
                 }
             });
 
@@ -1124,6 +1128,7 @@
         jQuery(document).on("click", "#pushDispoKaro", function() {
 
             var idnya = $(this).data("idnya");
+            // console.log(idnya);
 
             var basee = window.base_url = <?php echo json_encode(base_url('Karoo/')); ?> + 'dispoKaro';
 
@@ -1236,19 +1241,20 @@
     })
 </script>
 
-<!-- filter arsip masuk -->
+<!-- filter arsip keluar -->
 <script>
     $(document).ready(function() {
         $('#filter_surkel').submit(function(e) {
             e.preventDefault();
-            console.log('aku');
+            // console.log('aku');
             var year = $('#year').val();
             var month = $('#month').val();
             // console.log(month);
             // console.log(url);
 
             var url_kel = "<?= site_url('ktu/filterArsipKeluar/') ?>" + year + '/' + month;
-            console.log(url_kel);
+            var url_kel = "<?= site_url('karoo/filterArsipKeluar/') ?>" + year + '/' + month;
+            // console.log(url_kel);
             $('#surkel').load(url_kel);
         })
     })
@@ -1267,28 +1273,44 @@
     })
 </script>
 
-<!-- get karo ttd -->
+<!-- get details -->
 <script>
     $(document).ready(function() {
-        // karo controler
         jQuery(document).on("click", "#details", function(e) {
             e.preventDefault();
             var is_dispo_karo = $(this).data("dispokaro");
-            var url = "<?= site_url('karoo/getKaroTtd/') ?>" + is_dispo_karo;
+            var idnya = $(this).data("idnya");
+            // console.log(idnya);
+
+            var url = "<?= site_url('Details/getDetails/') ?>" + idnya + '/' + is_dispo_karo;
 
             $('#detail').load(url);
 
         })
+    })
+</script>
 
-        //ktu controller
-        jQuery(document).on("click", "#details", function(e) {
-            // e.preventDefault();
-            var is_dispo_karo = $(this).data("dispokaro");
-            var url = "<?= site_url('ktu/getKaroTtd/') ?>" + is_dispo_karo;
+<!-- done dispo -->
+<script>
+    $(document).ready(function() {
+        jQuery(document).on("click", "#done", function(e) {
+            e.preventDefault();
+            var idnya = $(this).data("idnya");
+            // console.log(idnya);
 
-            $('#detail').load(url);
-
+            var url = "<?= site_url('jabfung/pushDone/') ?>" + idnya;
+            // console.log(url);
         })
+    })
+</script>
+
+<!-- hide and show ttd karo -->
+<script>
+    $(document).ready(function() {
+        $("#ttdImg").hide();
+        jQuery(document).on("click", "#btnTTDKaro", function(e) {
+            $("#ttdImg").show();
+        });
     })
 </script>
 

@@ -22,7 +22,7 @@
                     <td class="tg-baqh"><?= $s->perihal; ?></td>
                     <td class="tg-baqh"><?= $s->keterangan; ?></td>
                     <td class="tg-baqh"><?= $s->date_sended; ?></td>
-                    <td class="tg-baqh"><a class="btn btn-danger btn-sm" href="<?= base_url(); ?>ktu/download/<?= $s->id; ?> "><i class="bi bi-download me-1"></i>Download</a></td>
+                    <td class="tg-baqh"><a class="btn btn-danger btn-sm" href="<?= base_url(); ?>download/downloadSK/<?= $s->id; ?> "><i class="bi bi-download me-1"></i>Download</a></td>
                 </tr>
         <?php
             }

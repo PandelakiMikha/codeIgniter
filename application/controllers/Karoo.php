@@ -33,16 +33,6 @@ class Karoo extends CI_Controller
         $data['totals'] = $this->surma_model->count_all_data();
         $data['num_pesan'] = 2;
 
-        $results = $this->surma_model->get_karo_ttd();
-        $query = [];
-        foreach ($results as $result) {
-            $row = array();
-            $row[] = $result->is_dispo_karo;
-            $query[] = $row;
-        }
-
-        $data['karo_ttd'] = $query;
-
         $bawahan = 1;
 
         $data['user_biro'] = $this->User_model->getUserBiro($bawahan);
@@ -68,7 +58,7 @@ class Karoo extends CI_Controller
     {
         $data['ttd_karo'] = $is_dispo_karo;
 
-        $this->load->view('Admin/Disposisi/details', $data);
+        $this->load->view('Admin/Disposisi/detail', $data);
     }
 
     public function arsip()
@@ -77,6 +67,7 @@ class Karoo extends CI_Controller
         $data['totals'] = $this->surma_model->count_all_data();
         $data['judul'] = 'Arsip';
         $data['year'] = $this->surma_model->get_year();
+        $data['num_pesan'] = 2;
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -91,6 +82,29 @@ class Karoo extends CI_Controller
         // print_r($data['surat']);
 
         $this->load->view('arsip/result', $data);
+    }
+
+    public function filterArsipKeluar($year, $month)
+    {
+        $data['surat'] = $this->surma_model->getArsipKeluar($year, $month);
+        // print_r($data['surat']);
+
+        $this->load->view('arsip/surkel', $data);
+    }
+
+    public function arsip_surat_kel()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['totals'] = $this->surma_model->count_all_data();
+        $data['judul'] = 'Arsip';
+        $data['year'] = $this->surma_model->get_year();
+        $data['num_pesan'] = 2;
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/navbar', $data);
+        $this->load->view('arsip/surat_keluar.php');
+        $this->load->view('templates/footer');
     }
 
     public function dispoKaro()
@@ -108,7 +122,7 @@ class Karoo extends CI_Controller
 
     public function push_dispo_karo()
     {
-        $this->form_validation->set_rules('tujuan', 'Tujuan', 'trim|required|max_length[20]|xss_clean');
+        $this->form_validation->set_rules('tujuan', 'Tujuan', 'trim|required|max_length[50]|xss_clean');
         $this->form_validation->set_rules('mengharapkan', 'Mengharapkan', 'trim|required|max_length[30]|xss_clean');
         $this->form_validation->set_rules('catKaro', 'CatKaro', 'trim|required|max_length[256]|xss_clean');
 
@@ -125,6 +139,8 @@ class Karoo extends CI_Controller
                 'mengharapkan'      => $mengharapkan,
                 'catKaro'           => $catKaro,
             ];
+            // var_dump($isiDispoKaro);
+            // die;
 
             $result = $this->surma_model->tambahDispoKaro($isiDispoKaro, $idnya);
             $update = $this->surma_model->updateStatusKaro($idnya, $tujuan);
@@ -134,6 +150,8 @@ class Karoo extends CI_Controller
             } else {
                 echo (json_encode(array('status' => FALSE)));
             }
+
+            echo 'berhasil';
         }
     }
 }

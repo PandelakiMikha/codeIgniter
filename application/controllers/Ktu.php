@@ -29,7 +29,7 @@ class Ktu extends CI_Controller
         $data['judul'] = "Surat Keluar";
         $data['surat'] = $this->surma_model->dataSuratK();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['totals'] = $this->surma_model->count_all_data();
+        $data['totals'] = $this->surma_model->count_all_data_surkel();
         $data['num_pesan'] = 1;
 
         $this->load->view('templates/header', $data);
@@ -95,6 +95,8 @@ class Ktu extends CI_Controller
                 'pilihTujuan'    => $tujuan,
                 'File_name'    => $File_name,
                 'date_sended'  => date('Y-m-d'),
+                'year' => date('Y'),
+                'month' => date('m'),
 
             ];
 
@@ -179,7 +181,7 @@ class Ktu extends CI_Controller
         $data['surat'] = $this->surma_model->dataSuratD();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
-        $data['num_pesan'] = 2;
+        $data['num_pesan'] = 'true';
 
         $bawahan = 3;
         $data['user_biro'] = $this->User_model->getUserBiro($bawahan);
@@ -248,12 +250,6 @@ class Ktu extends CI_Controller
         // print_r($data['surat']);
 
         $this->load->view('arsip/surkel', $data);
-    }
-
-    function download($id)
-    {
-        $data = $this->db->get_where('surat_keluar', ['id' => $id])->row();
-        force_download('uploads/' . $data->File_name, NULL);
     }
 
     public function dispoKTU()
@@ -352,7 +348,7 @@ class Ktu extends CI_Controller
             ];
 
             $result = $this->surma_model->tambahDispoKtu1($isiDispoKtu1, $idnya);
-            $update = $this->surma_model->updateStatusKtu1($idnya);
+            $update = $this->surma_model->updateStatusKtu1($idnya, $tujuan);
 
             if ($result > 0) {
                 echo (json_encode(array('status' => TRUE)));

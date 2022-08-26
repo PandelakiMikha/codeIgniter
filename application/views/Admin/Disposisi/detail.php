@@ -91,32 +91,28 @@
             </div>
             <!-- Lampiran Surat dalam bentuk dokumen -->
             <div class="col-right">
-                <div class="lampiran-kotak-wrapper">
-                    <label for="lampiran-surat-kotak" class="lampiran">Lampiran Surat</label>
+                <div class="lampiran-kotak-wrapper ms-5">
+                    <label for="lampiran-surat-kotak" class="lampiran">Lampiran Surat <?= $ttd_karo ?></label>
                     <div class="lampiran-surat-kotak">
                         <h3>PDF</h3>
                     </div>
-                    <button class="btn btn-download">Download</button>
+                    <a class="btn btn-danger w-75" href="<?= base_url(); ?>download/downloadSM/<?= $id; ?> "><i class="bi bi-download me-1"></i>Download</a>
                 </div>
 
                 <?php if ($ttd_karo == 'true') : ?>
-                    <div class="ttd-karo">
+                    <div class="ttd-karo mt-4 ms-5">
                         <h6 class="fw-bolder">TTD Karo</h6>
                         <img src="<?= base_url('assets/img/ttd.jpg') ?> " id="ttdImg">
+                        <h6 class="mt-2 text-center">Christodharma S. M. P. Sondakh, SH</h6>
                     </div>
                 <?php elseif ($ttd_karo == 'false') : ?>
                 <?php endif; ?>
 
-                <!-- <?php for ($i = 0; $i < 1; $i++) : ?>
-                            <?php var_dump($karo_ttd) ?>
-                            <?php if ($karo_ttd == 'true') : ?>
-                                <div class="ttd-karo">
-                                    <h6 class="fw-bolder">TTD Karo</h6>
-                                    <img src="<?= base_url('assets/img/ttd.jpg') ?> " id="ttdImg">
-                                </div>
-                                <?php elseif ($karo_ttd == 'false') : ?>
-                            <?php endif; ?>
-                        <?php endfor; ?> -->
+                <?php if ($user['role_id'] == 4) : ?>
+                    <div class="ms-4 mt-4 d-flex justify-content-center">
+                        <a class="btn btn-success w-75 text-center" href="<?= base_url(); ?>jabfung/pushDone/<?= $id; ?> "><i class="bi-check-circle me-1"></i>Selesai</a>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
 

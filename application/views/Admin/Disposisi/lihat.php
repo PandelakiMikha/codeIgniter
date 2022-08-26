@@ -7,7 +7,6 @@
 
         <!-- Data Static -->
         <?php
-        var_dump($log);
         if (!empty($log)) {
             foreach ($log as $s) {
         ?>

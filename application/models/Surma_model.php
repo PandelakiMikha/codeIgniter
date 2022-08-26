@@ -11,16 +11,17 @@ class Surma_model extends CI_Model
         $currentDate = date('Y-m-d');
 
         if ($checkUserR == 1) {
-            return $query = $this->db->get_where('surat_masuk', ['date_sended' => $currentDate])->result();
+            return $query = $this->db->get_where('surat_masuk', ['date_sended' => $currentDate, 'is_done_dispo' => 'false',])->result();
         } elseif ($checkUserR == 2) {
             if ($checkUserN == $checkUserN) {
                 return $query = $this->db->get_where('surat_masuk', [
-                    'date_sended' => $currentDate,
-                    'penerima_dispo' => $checkUserE
+                    'dispo_sended' => $currentDate,
+                    'penerima_dispo' => $checkUserN,
+                    'is_done_dispo' => 'false',
                 ])->result();
             }
         } elseif ($checkUserR == 3) {
-            return $query = $this->db->get_where('surat_masuk', ['date_sended' => $currentDate])->result();
+            return $query = $this->db->get_where('surat_masuk', ['date_sended' => $currentDate, 'is_done_dispo' => 'false',])->result();
         } elseif ($checkUserR == 4) {
             if ($checkUserN == $checkUserN) {
                 return $query = $this->db->get_where('surat_masuk', [
@@ -98,6 +99,17 @@ class Surma_model extends CI_Model
 
         if ($checkUserN == $checkUserN) {
             return $query = $this->db->get_where('surat_masuk', ['sender' => $checkUserN])->result();
+            // return $query = $this->db->get_where('surat_masuk', ['is_done_dispo' => 'false'])->result();
+        }
+    }
+
+    function getSuratData()
+    {
+        $checkUserN = $this->session->userdata('name');
+        $checkUserE = $this->session->userdata('email');
+
+        if ($checkUserN == $checkUserN) {
+            return $query = $this->db->get_where('surat_keluar', ['pilihTujuan' => $checkUserE])->result();
             // return $query = $this->db->get_where('surat_masuk', ['is_done_dispo' => 'false'])->result();
         }
     }
@@ -239,12 +251,21 @@ class Surma_model extends CI_Model
             $isDispoKaro = [
                 'is_dispo' => 'false',
                 'is_dispo_karo' => 'true',
-                'penerima_dispo' => $tujuan
+                'penerima_dispo' => $tujuan,
+                'dispo_sended' => date('Y-m-d')
             ];
-        } elseif ($tujuan == 'Kepala Bagian Tata Laksana' || $tujuan == 'Kepala Bagian Kelembagaan dan Anjab' || $tujuan == 'Kepala Bagian Reformasi Birokrasi') {
+        } elseif ($tujuan == 'Bendahara') {
             $isDispoKaro = [
                 'is_dispo_karo' => 'true',
-                'penerima_dispo' => $tujuan
+                'is_dispo_ktu' => 'true',
+                'penerima_dispo' => $tujuan,
+                'dispo_sended' => date('Y-m-d')
+            ];
+        } else {
+            $isDispoKaro = [
+                'is_dispo_karo' => 'true',
+                'penerima_dispo' => $tujuan,
+                'dispo_sended' => date('Y-m-d')
             ];
         }
         $this->db->where('id', $idnya);

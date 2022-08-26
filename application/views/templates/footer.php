@@ -821,7 +821,7 @@
 </script>
 
 
-<script>
+<!-- <script>
     const menu = document.getElementById('menu-label');
     const sidebar = document.getElementsByClassName('sidebarr')[0];
     const dropdown = document.getElementsByClassName('dropdown')[0];
@@ -831,7 +831,7 @@
         dropdown.classList.toggle('dropend');
         console.log('ok');
     })
-</script>
+</script> -->
 
 <!-- <script>
     $("#pesan").hide();

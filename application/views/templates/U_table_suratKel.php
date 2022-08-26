@@ -4,7 +4,7 @@
         <div class="card-body table-responsive">
             <table id="surat" class="table table-hover">
                 <thead class="table-light">
-                    <tr class="table-active">
+                    <tr class="table-light">
                         <th>No</th>
                         <th>Jenis Surat</th>
                         <th>Perihal</th>

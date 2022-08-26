@@ -10,7 +10,7 @@
                 <?php if ($user['role_id'] == 3) : ?>
                     <a href="<?= base_url('ktu/surat_keluar') ?>" class="btn btn-primary">Kembali</a>
                 <?php else : ?>
-                    <a href="<?= base_url('User/kirim_surat') ?>" class="btn btn-primary">Kembali</a>
+                    <a href="<?= base_url('User/user_surat_kel') ?>" class="btn btn-primary">Kembali</a>
                 <?php endif; ?>
             </div>
         </div>

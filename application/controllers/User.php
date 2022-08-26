@@ -16,8 +16,7 @@ class User extends CI_Controller
 
     public function index()
     {
-        $getsurat = $this->user_m->getSuratData();
-        $data['jenis_surat'] = $getsurat;
+        $data['surat'] = $this->surma_model->getSuratData();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Dashboard';
         $data['totals'] = $this->user_m->count_all_data();
@@ -81,6 +80,12 @@ class User extends CI_Controller
                 'sender' => $sender,
                 'is_done_dispo' => 'false',
                 'is_dispo' => 'false',
+                'is_dispo_karo' => 'false',
+                'is_dispo_ktu' => 'false',
+                'is_dispo_kabag' => 'false',
+                'year' => date('Y'),
+                'month'  => date('m'),
+                'penerima_dispo' => 'Kepala Tata Usaha'
             );
 
 
@@ -105,6 +110,7 @@ class User extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Dashboard';
         $data['totals'] = $this->surma_model->count_all_data();
+        $data['num_pesan'] = 2;
         $error = array('error' => $this->upload->display_errors());
 
         $this->load->view('templates/header', $data);
@@ -131,6 +137,7 @@ class User extends CI_Controller
         $data['surat'] = $this->surma_model->dataSuratKelUser();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
+        $data['num_pesan'] = 2;
 
         $error = array('error' => $this->upload->display_errors());
 

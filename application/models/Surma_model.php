@@ -21,7 +21,13 @@ class Surma_model extends CI_Model
                 ])->result();
             }
         } elseif ($checkUserR == 3) {
-            return $query = $this->db->get_where('surat_masuk', ['date_sended' => $currentDate, 'is_done_dispo' => 'false',])->result();
+            $this->db->select('*');
+            $this->db->from('surat_masuk');
+            $this->db->where(['date_sended' => $currentDate, 'is_done_dispo' => 'false',]);
+            $query = $this->db->get();
+            return $query->result();
+
+            // return $query = $this->db->get_where('surat_masuk', ['date_sended' => $currentDate, 'is_done_dispo' => 'false',])->result();
         } elseif ($checkUserR == 4) {
             if ($checkUserN == $checkUserN) {
                 return $query = $this->db->get_where('surat_masuk', [

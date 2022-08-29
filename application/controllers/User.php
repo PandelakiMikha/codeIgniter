@@ -96,10 +96,40 @@ class User extends CI_Controller
             $insert = $this->user_m->input_data($data, 'surat_masuk');
 
             if ($insert) {
+                $this->_sendEmail();
                 redirect('User/upload_success');
             } else {
                 echo "Gagal";
             }
+        }
+    }
+
+    private function _sendEmail()
+    {
+        $config = [
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 's21910305@student.unklab.ac.id',
+            'smtp_pass' => 'rolando050401',
+            'smtp_port' => 465,
+            'mail_type' => 'text',
+            'charset' => 'utf-8',
+            'newline' => "\r\n"
+        ];
+
+        $this->load->library('email', $config);
+        $this->email->initialize($config);
+
+        $this->email->from('s21910305@student.unklab.ac.id', 'SILONBOG');
+        $this->email->to('silonbog@gmail.com');
+        $this->email->subject('Surat Masuk');
+        $this->email->message('Surat masuk dari ' . $this->input->post('sender') . '. Prihal Surat : ' . $this->input->post('regarding') . ' ');
+
+        if ($this->email->send()) {
+            return true;
+        } else {
+            echo $this->email->print_debugger();
+            die;
         }
     }
 

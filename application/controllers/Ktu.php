@@ -169,7 +169,7 @@ class Ktu extends CI_Controller
         $error = array('error' => $this->upload->display_errors());
 
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar_user', $data, $error);
+        $this->load->view('templates/sidebar', $data, $error);
         $this->load->view('templates/navbar', $data);
         $this->load->view('user/upload_success');
         $this->load->view('templates/footer');

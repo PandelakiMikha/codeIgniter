@@ -9,9 +9,12 @@
             <!-- Nav Item - Messages -->
             <li class="pesan nav-item mx-1" id="pesan">
                 <div class="nav-link ">
-                    <i class="fas fass fa-envelope fa-fw" style="font-size: 25px;"></i>
-                    <!-- Counter - Messages -->
-                    <span class="badge badge-danger badge-counter"><?= $totals ?></span>
+                    <?php if ($num_pesan == 1) : ?>
+                        <i class="fas fass fa-envelope fa-fw" style="font-size: 25px;"></i>
+                        <!-- Counter - Messages -->
+                        <span class="badge badge-danger badge-counter"><?= $totals ?></span>
+                    <?php elseif ($num_pesan == 2) : ?>
+                    <?php endif; ?>
                 </div>
             </li>
 

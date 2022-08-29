@@ -3,6 +3,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
 <script src="<?= base_url('assets/'); ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -16,12 +17,15 @@
 <!-- jquery-3.2.1 for filter -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-
+<script>
+    AOS.init();
+</script>
 
 <!-- select bertingkat -->
 <script type="text/javascript">
     var table;
     $(document).ready(function() {
+        $("#perangkat_daerah").hide();
 
         //data tables
         table = $('#dispo').DataTable({
@@ -29,7 +33,7 @@
             "serverSide": true,
             "order": [],
             "ajax": {
-                "url": "<?= base_url('dispo/getData'); ?>",
+                "url": "<?= base_url('ServerSideTables/getData'); ?>",
                 "type": "POST",
                 "data": function(data) {
                     // var perda;
@@ -48,6 +52,7 @@
                 }
             }]
         });
+        loadPerangkatDaerah();
     });
 
     var table;
@@ -268,10 +273,10 @@
     }
 </script>
 
-<!-- // surat masuk table -->
 <script>
     var table;
     $(document).ready(function() {
+        //data tables
         table = $('#surat_masuk').DataTable({
             "processing": true,
             "serverSide": true,
@@ -280,13 +285,20 @@
                 "url": "<?= base_url('Surat_masuk/getData'); ?>",
                 "type": "POST",
                 "data": function(data) {
+                    // var perda;
                     data.daerah = $("#daerah").val();
+                    // perda = data.perangkat_daerah;
+                    // console.log('perda', perda);
                 },
             },
             "columnDefs": [{
                 "target": [-1],
                 "orderable": false,
                 "searchable": false,
+                // "render": function(data, type, row) {
+                //     var btn = '<div class="cuss"><div><button type="button" class="btn btn-warning" data-bs-trigger="focus" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover"><i class="bi bi-eye"></i>Lihattt</button></div><div class="middle"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-check-circle"></i>Disposisi</button></div><div><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-file-earmark-text"></i>Detail</button></div></div>';
+                //     return btn;
+                // }
             }]
         });
     });
@@ -583,9 +595,9 @@
 </script>
 
 <!-- script untuk mendisable button saat field input pada kirim surat masih kosong -->
-<script>
+<!-- <script>
     document.getElementById('button-submit').disabled = true;
-    document.getElementById('regarding', 'jenis_surat', 'date_sended', 'perihal', 'File_name').addEventListener('keyup', e => {
+    document.getElementById('regarding').addEventListener('keyup', e => {
         //Check for the input's value
         if (e.target.value == "") {
             document.getElementById('button-submit').disabled = true;
@@ -593,7 +605,7 @@
             document.getElementById('button-submit').disabled = false;
         }
     });
-</script>
+</script> -->
 <!-- script untuk menampilkan detail pada modal yang ada di U_table_srutaMasuk.. -->
 <!-- <script>
     $(document).ready(function() {
@@ -602,17 +614,17 @@
             var Noagenda = $(this).data('Noagenda');
             var Namafile = $(this).data('Namafile');
             var Perihal = $(this).data('Perihal');
-
+ 
             $("#modal-detail, #Jenis_surat").text(Jenissurat);
             $("#modal-detail, #No_agenda").text(Noagenda);
             $("#modal-detail, #Nama_file").text(Namafile);
             $("#modal-detail, #Perihal").text(Perihal);
-
+ 
             // $("#modal-detail #Jenis_surat").val(Jenissurat);
             // $("#modal-detail #No_agenda").val(Noagenda);
             // $("#modal-detail #Nama_file").val(Namafile);
             // $("#modal-detail #Perihal").val(Perihal);
-
+ 
             // $('#Jenis_surat').text(Jenissurat);
             // $('#No_agenda').text(Noagenda);
             // $('#Nama_file').text(Namafile);
@@ -633,36 +645,37 @@
 </script> -->
 
 <script>
-    //     $(document).ready(function() {
-    //         $(document).on('submit', '#my-form-new', function() {
-    //             // do your things
-    //             Swal.fire(
-    //                 'Surat Sudah Terkirim!',
-    //                 'Surat Sudah Masuk Ke Biro!',
-    //                 'success'
-    //             )
-    //         });
-    //     });
+    // $(document).ready(function() {
+    //     $(document).on('submit', '#my-form-new', function() {
+    //         // do your things
+    //         Swal.fire(
+    //             'Surat Sudah Terkirim!',
+    //             'Surat Sudah Masuk Ke Biro!',
+    //             'success'
+    //         )
 
-    //     // var data = new FormData(document.getElementById("#my-form"));
-    //     // var xhr = new XMLHttpRequest();
-    //     // xhr.open("POST", "SERVER-SCRIPT");
-    //     // xhr.send(data);
-    // 
+    //     });
+    // });
+
+    // var data = new FormData(document.getElementById("#my-form"));
+    // var xhr = new XMLHttpRequest();
+    // xhr.open("POST", "SERVER-SCRIPT");
+    // xhr.send(data);
 </script>
 
+
 <!-- ----- -->
-<script>
+<!-- <script>
     $(document).ready(function() {
-        $("#my-form-new").submit(function(e) {
-            e.preventDefault();
+        $("#my-form-new").submit(function(event) {
+            event.preventDefault();
             var sender = $("#sender").val();
             var jenis_surat = $("#jenis_surat").val();
             var type = $("#type").val();
             var date_sended = $("#date_sended").val();
             var regarding = $("#regarding").val();
             var File_name = $("#File_name").val();
-
+ 
             $.ajax({
                 type: "POST",
                 url: '<?php echo base_url() ?>User/kirim_surat',
@@ -674,26 +687,26 @@
                     regarding: regarding,
                     File_name: File_name,
                 },
-                success: function(data) {
-                    Swal.fire(
-                        'Surat Terkirim!',
-                        'Terimakasih!',
-                        'success'
-                    )
-                    $('#my-form-new').trigger("reset");
-                    // console.log(data);
-                },
-                error: function() {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Silahkan Kirim Kembali!',
-                    })
-                }
+                // success: function(data) {
+                //     Swal.fire(
+                //         'Surat Terkirim!',
+                //         'Terimakasih!',
+                //         'success'
+                //     )
+                //     $('#my-form-new').trigger("reset");
+                //     // console.log(data);
+                // },
+                // error: function() {
+                //     Swal.fire({
+                //         icon: 'error',
+                //         title: 'Oops...',
+                //         text: 'Silahkan Kirim Kembali!',
+                //     })
+                // }
             });
         });
     });
-</script>
+</script> -->
 
 <!-- end of jquery script -->
 
@@ -764,6 +777,36 @@
 
 
 <!-- end of sweet alert -->
+
+<!-- upload file method -->
+
+<script>
+    // $(function() {
+    //     $('#upload_file').submit(function(e) {
+    //         e.preventDefault();
+    //         $.ajaxFileUpload({
+    //             url: './User/do_upload/',
+    //             secureuri: false,
+    //             fileElementId: 'File_name',
+    //             dataType: 'json',
+    //             data: {
+    //                 'title': $('#title').val()
+    //             },
+    //             success: function(data, status) {
+    //                 if (data.status != 'error') {
+    //                     $('#files').html('<p>Reloading files...</p>');
+    //                     refresh_files();
+    //                     $('#title').val('');
+    //                 }
+    //                 alert(data.msg);
+    //             }
+    //         });
+    //         return false;
+    //     });
+    // });
+</script>
+
+<!-- end of file upload -->
 <script>
     $("table thead tr th").addClass("align-middle");
     $("table tbody").addClass("align-middle");
@@ -778,23 +821,23 @@
 </script>
 
 
-<script>
+<!-- <script>
     const menu = document.getElementById('menu-label');
     const sidebar = document.getElementsByClassName('sidebarr')[0];
     const dropdown = document.getElementsByClassName('dropdown')[0];
-
+ 
     menu.addEventListener('click', function() {
         sidebar.classList.toggle('hide');
         dropdown.classList.toggle('dropend');
         console.log('ok');
     })
-</script>
+</script> -->
 
 <!-- <script>
     $("#pesan").hide();
     const side = document.getElementById('surma');
     console.log('side', side);
-
+ 
     side.addEventListener('click', function(e) {
         console.log('e', e);
         $("#pesan").show();
@@ -815,7 +858,7 @@
         var push_dispo_ktu = $('#push_dispo_ktu');
         var push_dispo_ktu1 = $('#push_dispo_ktu1');
 
-        var kirim_surat_ktu = $('#kirim_surat_ktu');
+        // var kirim_surat_ktu = $('#kirim_surat_ktu');
         // var kirim_surat_ktu_tujuan = $('#kirim_surat_ktu_tujuan');
 
         // dispo ktu pertama
@@ -879,37 +922,36 @@
         });
 
         // push kirim surat ktu
-        kirim_surat_ktu.submit(function(e) {
-            e.preventDefault();
+        // kirim_surat_ktu.submit(function(e) {
+        //     e.preventDefault();
 
-            var uri = window.base_url = <?php echo json_encode(base_url('Ktu/')); ?> + 'kirim_surat_ktu'
-            // console.log(uri);
+        //     var uri = window.base_url = <?php echo json_encode(base_url('Ktu/')); ?> + 'kirim_surat_ktu'
 
-            $.ajax({
+        //     $.ajax({
 
-                type: kirim_surat_ktu.attr('method'),
-                url: uri,
-                data: kirim_surat_ktu.serialize(),
-                success: function(data) {
-                    if (data.status = true) {
-                        location.reload();
+        //         type: kirim_surat_ktu.attr('method'),
+        //         url: uri,
+        //         data: kirim_surat_ktu.serialize(),
+        //         success: function(data) {
+        //             if (data.status = true) {
+        //                 location.reload();
 
-                    } else if (data.status = false) {
+        //             } else if (data.status = false) {
 
-                        location.reload();
+        //                 location.reload();
 
-                    };
+        //             };
 
-                },
-                error: function() {
+        //         },
+        //         error: function() {
 
-                    alert('Terjadi Mistake!')
+        //             alert('Terjadi Mistake!')
 
-                }
+        //         }
 
 
-            })
-        })
+        //     })
+        // })
 
         // kirim_surat_ktu_tujuan.submit(function(e) {
         //     e.preventDefault();
@@ -984,7 +1026,8 @@
         });
 
         // untuk details
-        jQuery(document).on("click", "#details", function() {
+        jQuery(document).on("click", "#details", function(e) {
+            e.preventDefault();
 
             var idnya = $(this).data("idnya");
             var surat_dari = $(this).data("suratdari");
@@ -1003,13 +1046,15 @@
             var cat_kabag = $(this).data("catkabag");
             var tujuan_ktu = $(this).data("tujuanktu");
             var cat_ktu = $(this).data("catktu");
+            // var ttd_karo = $(this).data("dispokaro");
 
-            var basee = window.base_url = <?php echo json_encode(base_url('Ktu/')); ?> + 'disposisi';
+            var basee = window.base_url = <?php echo json_encode(base_url('karoo/')); ?> + 'disposisi';
+            // console.log(basee);
 
             $('#modalDetail').modal('show');
 
             $.ajax({
-                type: "POST", //send with post 
+                type: "POST", //send with post
                 url: basee,
                 data: {
                     idnya: idnya
@@ -1032,6 +1077,7 @@
                     $('#cat_kabag_id').text(cat_kabag);
                     $('#tujaun_ktu_id').text(tujuan_ktu);
                     $('#cat_ktu_id').text(cat_ktu);
+
                 }
             });
 
@@ -1082,6 +1128,7 @@
         jQuery(document).on("click", "#pushDispoKaro", function() {
 
             var idnya = $(this).data("idnya");
+            // console.log(idnya);
 
             var basee = window.base_url = <?php echo json_encode(base_url('Karoo/')); ?> + 'dispoKaro';
 
@@ -1106,6 +1153,7 @@
             })
 
         });
+
     });
 </script>
 
@@ -1176,68 +1224,96 @@
     });
 </script>
 
+
+<!-- filter arsip masuk -->
 <script>
     $(document).ready(function() {
-        var basee = window.base_url = <?php echo json_encode(base_url('Ktu/dispoKTU')); ?>;
-
-        jQuery(document).on("click", "#pilih_tahun", function(e) {
+        $('#filter').submit(function(e) {
             e.preventDefault();
-
-            var year = $('#pilih_tahun').val();
-
-            var url = "<?= site_url('arsip/arsip_surat_masuk/') ?>" + year;
-        })
-
-        jQuery(document).on("click", "#januari", function(e) {
-            e.preventDefault();
-            var month = 01;
-
-            var url = "<?= site_url('arsip/arsip_surat_masuk/') ?>" + month;
+            var year = $('#year').val();
+            var month = $('#month').val();
+            // console.log(month);
+            var url = "<?= site_url('karoo/filterArsip/') ?>" + year + '/' + month;
+            var url = "<?= site_url('ktu/filterArsip/') ?>" + year + '/' + month;
+            $('#result').load(url);
+            // console.log(url);
         })
     })
 </script>
 
-<!-- <script>
-    $('#btn-filter').click(function() { //button filter event click
-        table.ajax.reload(); //just reload table
-    });
-</script> -->
+<!-- filter arsip keluar -->
+<script>
+    $(document).ready(function() {
+        $('#filter_surkel').submit(function(e) {
+            e.preventDefault();
+            // console.log('aku');
+            var year = $('#year').val();
+            var month = $('#month').val();
+            // console.log(month);
+            // console.log(url);
+
+            var url_kel = "<?= site_url('ktu/filterArsipKeluar/') ?>" + year + '/' + month;
+            var url_kel = "<?= site_url('karoo/filterArsipKeluar/') ?>" + year + '/' + month;
+            // console.log(url_kel);
+            $('#surkel').load(url_kel);
+        })
+    })
+</script>
+
+<!-- tracking log surat ando -->
+<script>
+    $(document).ready(function() {
+        jQuery(document).on("click", "#log", function() {
+
+            var penerima = $(this).data("penerima");
+
+            $('#penerima').text(penerima);
+
+        });
+    })
+</script>
+
+<!-- get details -->
+<script>
+    $(document).ready(function() {
+        jQuery(document).on("click", "#details", function(e) {
+            e.preventDefault();
+            var is_dispo_karo = $(this).data("dispokaro");
+            var idnya = $(this).data("idnya");
+            // console.log(idnya);
+
+            var url = "<?= site_url('Details/getDetails/') ?>" + idnya + '/' + is_dispo_karo;
+
+            $('#detail').load(url);
+
+        })
+    })
+</script>
+
+<!-- done dispo -->
+<script>
+    $(document).ready(function() {
+        jQuery(document).on("click", "#done", function(e) {
+            e.preventDefault();
+            var idnya = $(this).data("idnya");
+            // console.log(idnya);
+
+            var url = "<?= site_url('jabfung/pushDone/') ?>" + idnya;
+            // console.log(url);
+        })
+    })
+</script>
+
+<!-- hide and show ttd karo -->
+<script>
+    $(document).ready(function() {
+        $("#ttdImg").hide();
+        jQuery(document).on("click", "#btnTTDKaro", function(e) {
+            $("#ttdImg").show();
+        });
+    })
+</script>
 
 </body>
 
 </html>
-
-<!-- $('#btn-filter').click(function() { //button filter event click
-table.ajax.reload(); //just reload table
-});
-$('#btn-reset').click(function() { //button reset event click
-$('#form-filter')[0].reset();
-table.ajax.reload(); //just reload table
-}); -->
-
-<!-- $(document).ready(function() {
-$("#perangkat_daerah2").show();
-$("#daftar_dinas").hide();
-
-daerahLoad();
-dinasLoad();
-});
-
-
-function loadPerangkatDaerah() {
-// for get data for filter
-$("#daerah").change(function() {
-var getDaerah = $("#daerah").val();
-$.ajax({
-type: "POST",
-dataType: "JSON",
-url: "<?= base_url('ServerSideTables/getDataPerangkatDaerah'); ?>",
-data: {
-daerah: getDaerah,
-},
-success: function(data) {
-console.log('data', data);
-
-var html = "";
-var i;
-for (i = 0; i < data.length; i++) { html +='<option selected hidden>Pilih Perangkat Daerah</option> <option value="' + data[i].id + '">' + data[i].name + '</option>' ; } $("#perangkat_daerah").html(html); $("#perangkat_daerah").show(); } }); }); } // //function untuk krim surat..... // //untuk daerah function daerahLoad() { $("#daerah").change(function() { var ambilDaerah=$("#daerah").val(); $.ajax({ type: "POST" , dataType: "JSON" , url: "<?= base_url('User/getDataPerangkat'); ?>" , data: { daerah: ambilDaerah, }, success: function(data) { console.log(data); var html="" ; var i; for (i=0; i < data.length; i++) { html +='<option selected hidden>Pilih Perangkat</option> <option value="' + data[i].id + '">' + data[i].name + '</option>' ; } $("#perangkat_daerah2").html(html); $("#perangkat_daerah2").show(); } }); }); }; //untuk dinas.... function dinasLoad() { $("#perangkat_daerah2").change(function() { var ambilDinas=$("#perangkat_daerah2").val(); $.ajax({ type: "POST" , dataType: "JSON" , url: "<?= base_url('User/getDataDinas'); ?>" , data: { dinas: ambilDinas, }, success: function(data) { console.log(data); var html="" ; var i; for (i=0; i < data.length; i++) { html +='<option selected hidden>Silahkan Pilih Dinas/Badan/Setda</option> <option value="' + data[i].id + '">' + data[i].name + '</option>' ; } $("#daftar_dinas").html(html); $("#daftar_dinas").show(); } }); }); }; -->

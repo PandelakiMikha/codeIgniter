@@ -25,7 +25,7 @@
                     <i class="fa-fw bi bi-envelope-paper"></i>
                     <span class="item-title">Surat Masuk</span>
                 </a>
-                <a href="<?= base_url('karoo/disposisi') ?>" class="item">
+                <a href="<?= base_url('karoo/disposisi') ?>" class="item" id="dispoPage">
                     <i class="fa-fw bi bi-clipboard-check"></i>
                     <span class="item-title">Disposisi</span>
                 </a>
@@ -36,7 +36,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item" href="<?= base_url('karoo/arsip') ?>">Surat Masuk</a></li>
-                        <li><a class="dropdown-item" href="#">Surat Keluar</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('karoo/arsip_surat_kel') ?>">Surat Keluar</a></li>
                     </ul>
                 </div>
             <?php elseif ($user['role_id'] == 2) : ?>
@@ -48,16 +48,6 @@
                     <i class="fa-fw bi bi-clipboard-check"></i>
                     <span class="item-title">Disposisi</span>
                 </a>
-                <div class="dropdown">
-                    <a href="#" class="item dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-fw bi bi-journal-bookmark"></i>
-                        <span class="item-title">Arsip</span>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="<?= base_url('kabag/arsip') ?>">Surat Masuk</a></li>
-                        <li><a class="dropdown-item" href="#">Surat Keluar</a></li>
-                    </ul>
-                </div>
             <?php elseif ($user['role_id'] == 3) : ?>
                 <div class="dropdown">
                     <a href="#" class="item dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -66,7 +56,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item" href="<?= base_url('ktu') ?>">Surat Masuk</a></li>
-                        <li><a class="dropdown-item" href="#">Surat Keluar</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('ktu/surat_keluar') ?>">Surat Keluar</a></li>
                     </ul>
                 </div>
                 <a href="<?= base_url('ktu/disposisi') ?>" class="item">
@@ -83,8 +73,8 @@
                         <span class="item-title">Arsip</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#">Surat Masuk</a></li>
-                        <li><a class="dropdown-item" href="#">Surat Keluar</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('ktu/arsip') ?>">Surat Masuk</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('ktu/arsip_surat_kel') ?>">Surat Keluar</a></li>
                     </ul>
                 </div>
             <?php elseif ($user['role_id'] == 4) : ?>

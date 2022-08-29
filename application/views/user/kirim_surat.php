@@ -1,5 +1,19 @@
 <div class="container">
-    <form id="my-form-new" class="row form-1 g-3" action="<?= base_url('User/kirim_surat') ?>" method="POST">
+    <CEnter>
+        <h1>KIRIM SURAT</h1>
+    </CEnter>
+    <hr>
+    <br>
+    <div style="color:red">
+        <?php if (isset($error)) {
+            print $error;
+        } ?>
+    </div>
+    <!-- <?php echo $error; ?> -->
+    <!-- <div class="row form-1 g-3"> -->
+    <!-- <?php echo form_open_multipart('User/kririm_surat'); ?> -->
+    <form id="my-form-new" class="row form-1 g-3" action="<?= base_url('User/kirim_surat') ?>" method="post" enctype="multipart/form-data">
+
 
         <!-- input data user -->
         <div class="col-md-4">
@@ -10,7 +24,7 @@
 
         <div class="col-md-4">
             <label for="jenis_surat" class="form-label"><b>Jenis Surat</b></label>
-            <select name="type" id="jenis_surat" class="form-select" value="<?= set_value('type') ?>">
+            <select name="type" id="jenis_surat" class="form-select" value="<?= set_value('type') ?>" required>
                 <?php foreach ($jenis_surat as $value) : ?>
                     <option value="" hidden>Pilih..</option>
                     <option value="<?= $value->id ?>"><?= $value->name ?></option>
@@ -21,52 +35,42 @@
         <!-- bagian text input -->
         <div class="col-md-4">
             <label for="lainya" class="form-label"><b>Tipe Surat Lainya</b></label>
-            <input type="text" class="form-control" name="type" id="lainya" placeholder="Masukan Tipe Surat Lainya" value="<?= set_value('type') ?>">
+            <input type="text" class="form-control" name="type" id="lainya" placeholder="Masukan Tipe Surat Lainya" value="<?= set_value('type') ?>" required3>
             <small class="text-danger"><?= form_error('type'); ?></small>
         </div>
 
         <!-- date picker -->
         <div class="col-md-4">
             <label for="date" class="form-label"><b>Waktu Mengirim</b></label>
-            <input class="form-control" type="date" name="date_sended" id="date_sended" value="<?= set_value('date_sended') ?>">
+            <input class="form-control" type="date" name="date_sended" id="date_sended" value="<?= set_value('date_sended') ?>" required>
             <small class="text-danger"><?= form_error('date_sended'); ?></small>
         </div>
 
         <div class="col-12">
             <label for="perihal" class="form-label"><b>Perihal</b></label>
-            <input type="text" class="form-control" name="regarding" id="regarding" placeholder="Masukan Perihal yang Anda Inginkan" value="<?= set_value('regarding') ?>">
+            <input type="text" class="form-control" name="regarding" id="regarding" placeholder="Masukan Perihal yang Anda Inginkan" value="<?= set_value('regarding') ?>" required>
             <small class="text-danger"><?= form_error('regarding'); ?></small>
         </div>
 
         <!-- pilih file -->
 
-        <!-- <?php if ($error !== null) : echo $error;
-                endif; ?> -->
-        <!-- <?php echo $error; ?> -->
-        <!-- <?php echo form_open_multipart('User/kirim_surat'); ?> -->
-        <div class="col-md-4 mb-3 mt-3">
-            <label for="nama_file" class="form-label"><b>Pilih File</b></label>
-            <input class="form-control form-control-sm" name="File_name" id="File_name" type="file" accept="application/pdf" value="" multiple />
+
+        <div class=" mt-3">
+            <label for="File_name" class="form-label"><b>Pilih File</b></label>
+            <input class="form-control form-control-xl border-0 bg-transparent" name="File_name" id="File_name" type="file" value="" accept="application/pdf" multiple required />
             <small class="text-danger"><?= form_error('File_name'); ?></small>
         </div>
-
-        <!-- upload file -->
-        <!-- <div class="col-md-4">
-    <input class="btn btn-primary mt-4" type="submit" id="upload" value="upload">
-    <input type="submit" value="upload" />
-
-</div> -->
 
         <div class=" d-flex justify-content-center mt-5">
             <button type="reset" class="btn bg-body  d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;" name="save" value="Save Data"><span class="Btn_reset"><i class="bi bi-trash"></i>Hapus</span></button>
 
-            <!-- <button type="submit" id="btn-submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;" name="save" value="Save Data"><i class="bi bi-send"></i><strong>Kirim</strong></button> -->
+            <!-- <button type="submit" value="KIRIM" name="btn-submit" onclick="pilih()" onkeyup="success()" id="button-submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;"><i class="bi bi-send"></i><strong>Kirim</strong></button> -->
 
-            <button type="submit" value="KIRIM" name="btn-submit" onclick="pilih()" onkeyup="success()" id="button-submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;"><i class="bi bi-send"></i><strong>Kirim</strong></button>
-
-            <!-- <input type="submit" value="KIRIM" name="btn-submit" onkeyup="success()" id="button-submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;"> -->
+            <input type="submit" value="KIRIM" name="btn-submit" onkeyup="success()" id="button-submit" class="btn btn-danger d-flex align-items-center justify-content-center" style="width: 150px; height: 40px; font-size: 20px;">
         </div>
 
         <!-- <?= form_close(); ?> -->
     </form>
+    <hr>
+    <!-- </div> -->
 </div>

@@ -63,67 +63,66 @@
 <!-- Main Content -->
 <div class="container">
     <h3 style="text-align: center ;" class="headingKirimSurat">Kirim Surat</h3>
-    <?= form_open_multipart('ktu/kirim_surat_ktu'); ?>
-    <!-- <form role="form" id="kirim_surat_ktu" action="" method="post" enctype="multipart/form-data"> -->
-    <div class="content">
-        <div class="content-form">
-            <div class="form-floating nomor-agenda">
-                <input name="nomorAgenda" id="nomorAgenda" required="required" cols="30" rows="10" placeholder="Nomor Agenda" class="form-control"></input>
-                <label for="nomorAgenda">Nomor Agenda</label>
-            </div>
-            <div class="form-jenis-surat">
-                <select name="jenisSurat" id="jenisSurat" required="required" class="form-select form-select-lg">
-                    <option value="" hidden selected>
-                        <p>Pilih Jenis Surat</p>
-                    </option>
-                    <option value="surat">Surat</option>
-                    <option value="laporan">Undangan</option>
-                    <option value="undangan">Laporan</option>
-                </select>
-            </div>
-            <div class="form-floating keterangan">
-                <textarea name="keterangan" id="keterangan" required="required" cols="30" rows="10" class="form-control keteranga" placeholder="Keterangan"></textarea>
-                <label for="keterangan">Keterangan</label>
-            </div>
-            <div class="form-floating perihal">
-                <textarea name="perihal" id="perihal" required="required" cols="30" rows="10" class="form-control perihal" placeholder="Perihal"></textarea>
-                <label for="perihal">Perihal</label>
-            </div>
-            <div class="form-tujuan">
-                <select name="pilihTujuan" id="pilihTujuan" required="required" class="form-select form-select-lg">
-                    <option value="" hidden selected>
-                        <p>Pilih Tujuan</p>
-                    </option>
-                    <?php
-                    if (!empty($data_user)) {
-                        foreach ($data_user as $dU) {
-                    ?>
-                            <option value="<?= $dU->email ?>"><?= $dU->email ?></option>
-                    <?php
+    <!-- <?= form_open_multipart('ktu/kirim_surat_ktu'); ?> -->
+    <form role="form" id="kirim_surat_ktu" action="<?= base_url('ktu/kirim_surat_ktu') ?>" method="post" enctype="multipart/form-data">
+        <div class="content">
+            <div class="content-form">
+                <div class="form-floating nomor-agenda">
+                    <input name="no_agenda" id="no_agenda" required="required" cols="30" rows="10" placeholder="Nomor Agenda" class="form-control"></input>
+                    <label for="no_agenda">Nomor Agenda</label>
+                </div>
+                <div class="form-jenis-surat">
+                    <select name="jenis_surat" id="jenis_surat" required="required" class="form-select form-select-lg">
+                        <option value="" hidden selected>
+                            <p>Pilih Jenis Surat</p>
+                        </option>
+                        <option value="surat">Surat</option>
+                        <option value="laporan">Undangan</option>
+                        <option value="undangan">Laporan</option>
+                    </select>
+                </div>
+                <div class="form-floating keterangan">
+                    <textarea name="keterangan" id="keterangan" required="required" cols="30" rows="10" class="form-control keteranga" placeholder="Keterangan"></textarea>
+                    <label for="keterangan">Keterangan</label>
+                </div>
+                <div class="form-floating perihal">
+                    <textarea name="perihal" id="perihal" required="required" cols="30" rows="10" class="form-control perihal" placeholder="Perihal"></textarea>
+                    <label for="perihal">Perihal</label>
+                </div>
+                <div class="form-tujuan">
+                    <select name="tujuan" id="tujuan" required="required" class="form-select form-select-lg">
+                        <option value="" hidden selected>
+                            <p>Pilih Tujuan</p>
+                        </option>
+                        <?php
+                        if (!empty($data_user)) {
+                            foreach ($data_user as $dU) {
+                        ?>
+                                <option value="<?= $dU->email ?>"><?= $dU->name ?></option>
+                        <?php
+                            }
                         }
-                    }
-                    ?>
-                </select>
-            </div>
-            <!-- <a class="btn tambah-penerima" data-bs-target="#modalTambahPenerima" data-bs-toggle="modal">
+                        ?>
+                    </select>
+                </div>
+                <!-- <a class="btn tambah-penerima" data-bs-target="#modalTambahPenerima" data-bs-toggle="modal">
                     <img src="<?= base_url('assets/img/Plus.svg') ?>" alt="">
                     <p>Tambah Penerima</p>
                 </a> -->
-        </div>
+            </div>
 
-        <div class="bagian-bawah">
-            <div class="input-file">
-                <!-- <label for="" class=""><b>Pilih File</b></label> -->
-                <input class="form-control form-control-sm" name="File_name" id="File_name" type="file" value="" multiple />
-            </div>
-            <div class="btn-custom submit">
-                <button type="submit" class="btn btn-danger" style="width: 230px; height: 55px; font-size: 25px;" id="liveAlertBtnKirim"><strong>Kirim</strong>
-                </button>
+            <div class="bagian-bawah">
+                <div class="input-file">
+                    <!-- <label for="" class=""><b>Pilih File</b></label> -->
+                    <input class="form-control form-control-xl border-0 bg-transparent" name="File_name" id="File_name" type="file" value="" accept="application/pdf" multiple required />
+                </div>
+                <div class="btn-custom submit">
+                    <input type="submit" onkeyup="success()" id="kirim_surat" value="KIRIM" class="btn btn-danger" style="width: 230px; height: 55px; font-size: 25px;">
+                </div>
             </div>
         </div>
-    </div>
-    <!-- </form> -->
-    <?= form_close(); ?>
+    </form>
+    <!-- <?= form_close(); ?> -->
 </div>
 
 

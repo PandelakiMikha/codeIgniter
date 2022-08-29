@@ -1,44 +1,71 @@
 <!--
-    Catatan: 
+    Catatan:
     Untuk sementara yang button for tiap bulan itu pas click cuman mo muncul yang surat masuk punya, kalo yang surat keluar belum ada karena dpe table nda ada
     Kan harusnya kalo user pilih yang surat keluar kan dia muncul yang surat keluar punya lagi to
  -->
 
 <!-- <div class="container-arsip"> -->
-<div class="container">
-    <div class="dropdownPilihTahun mt-5">
-        <label for="form-select">Pilih Tahun</label>
-        <select name="pilihTahunArsip" id="pilih_tahun" class="form-select pilihTahunArsip">
-            <option value="" hidden selected>Pilih</option>
-            <?php
-            if (!empty($year)) {
-                $get_year = '';
-                foreach ($year as $y) {
-            ?>
-                    <option value="<?= $y->year ?>"><?= $y->year ?></option>
-            <?php
-                }
-            }
-            ?>
-        </select>
-    </div>
+<div class="containerr mt-5 ">
+    <form action="" id="filter">
+        <div class="select-wrapper">
+            <div class="dropdownPilihTahun">
+                <label for="form-select">Pilih Tahun</label>
+                <select name="pilihTahunArsip" id="year" required class="form-select pilihTahunArsip">
+                    <option value="" hidden selected>Pilih</option>
+                    <option value="2022">2022</option>
+                    <!-- <?php
+                            if (!empty($year)) {
+                                foreach ($year as $y) {
+                            ?>
+                            <option value="<?= $y->year ?>"><?= $y->year ?></option>
+                    <?php
+                                }
+                            }
+                    ?> -->
+
+                </select>
+            </div>
+
+            <div class="dropdownPilihTahun">
+                <label for="form-select">Pilih Bulan</label>
+                <select name="pilihTahunArsip" id="month" class="form-select pilihTahunArsip">
+                    <option value="0" hidden selected>Pilih</option>
+                    <option value="01">Januari</option>
+                    <option value="02">Februari</option>
+                    <option value="03">Maret</option>
+                    <option value="04">April</option>
+                    <option value="05">Mei</option>
+                    <option value="06">Juni</option>
+                    <option value="07">Juli</option>
+                    <option value="08">Agustus</option>
+                    <option value="09">September</option>
+                    <option value="10">Oktober</option>
+                    <option value="11">November</option>
+                    <option value="12">Desember</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-outline-danger">Tampilkan</button>
+            </div>
+        </div>
+    </form>
 
     <!-- Arsip File Start -->
-    <div class="container-arsip">
+    <!-- <div class="container-arsip">
         <div class="row">
             <div class="col-custom bulan">
                 <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
-                <a href="<?= base_url('arsip/arsip_surat_masuk') ?>" class="">
+                <a href="<?= base_url('/arsip/arsip_surat_masuk') ?>" class="">
                     <h5>Januari</h5>
                 </a>
             </div>
             <div class="col-custom bulan">
                 <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
-                <a href="<?= base_url('/arsip/arsip_surat_masuk') ?>" id="januari">
+                <a href="<?= base_url('/arsip/arsip_surat_masuk') ?>">
                     <h5>Februari</h5>
                 </a>
             </div>
-
+ 
             <div class="col-custom bulan">
                 <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
                 <a href="<?= base_url('/arsip/arsip_surat_masuk') ?>" class="">
@@ -102,18 +129,38 @@
                 </a>
             </div>
         </div>
-        <!-- Arsip File End -->
+    </div> -->
+
+    <div class="col-md-12">
+        <div id="result"></div>
     </div>
 </div>
 
 
 
 <style>
-    .container-arsip {
+    .containerr {
+        box-sizing: border-box;
+        /* margin: auto; */
+        flex-grow: 1;
+        margin-left: 30px;
+        margin-right: 30px;
+        /* margin-top: 100px !important; */
+        /* background-color: aliceblue; */
+    }
+
+    .containerr-arsip {
         /* margin-left: 131px; */
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    .select-wrapper {
+        display: flex;
+        gap: 2rem;
+        align-items: flex-end;
+        margin-bottom: 20px;
     }
 
     label {

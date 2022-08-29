@@ -1,14 +1,13 @@
 <div class="containerr mt-5 ">
     <h4>Daftar Surat</h4>
-    <div class="card">
-        <div class="card-body table-responsive">
+    <div>
+        <div class=" table-responsive">
             <table id="surat" class="table table-hover">
                 <thead class="table-light">
                     <tr>
                         <th>Pingirim</th>
                         <th>Jenis Surat</th>
                         <th>Perihal</th>
-                        <th>Keterangan</th>
                         <th>Tanggal Masuk</th>
                         <th></th>
                     </tr>
@@ -22,19 +21,22 @@
                                 <td class="tg-baqh"><?= $s->sender; ?></td>
                                 <td class="tg-baqh"><?= $s->type; ?></td>
                                 <td class="tg-baqh"><?= $s->regarding; ?></td>
-                                <td class="tg-baqh"><?= $s->ket; ?></td>
                                 <td class="tg-baqh"><?= $s->date_sended; ?></td>
                                 <td>
                                     <div class="cuss">
-                                        <?php if ($user['role_id'] == 1 || $user['role_id'] == 2) : ?>
+                                        <?php if ($user['role_id'] == 1) : ?>
                                             <div class="me-4">
-                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-placement="center" data-bs-target="#staticBackdropLihat">
+                                                <button type="button" id="log" data-penerima="<?= $s->penerima_dispo; ?>" class="btn btn-warning" data-bs-toggle="modal" data-bs-placement="center" data-bs-target="#lihat_log">
                                                     <i class="bi bi-eye"></i>Log
                                                 </button>
                                             </div>
                                         <?php endif ?>
                                         <?php if ($user['role_id'] == 4) : ?>
-                                            <!-- Tidah menampilkan button disposisi -->
+                                            <div class="ms-4">
+                                                <button type="button" id="details" class="btn btn-primary" data-idnya="<?= $s->surma_id; ?>" data-dispokaro="<?= $s->is_dispo_karo; ?>" data-suratdari="<?= $s->suratDari; ?>" data-nosurat="<?= $s->noSurat; ?>" data-tglsurat="<?= $s->tglSurat; ?>" data-diterima="<?= $s->diterima; ?>" data-tanggalkeluar="<?= $s->tanggalKeluar; ?>" data-noagenda="<?= $s->noAgenda; ?>" data-sifatsurat="<?= $s->sifatSurat; ?>" data-status="<?= $s->status; ?>" data-hal="<?= $s->hal; ?>" data-tujuankaro="<?= $s->tujuan_karo; ?>" data-mengharapkan="<?= $s->mengharapkan; ?>" data-catkaro="<?= $s->catKaro; ?>" data-tujuankabag="<?= $s->tujuan_kabag; ?>" data-catkabag="<?= $s->catKabag; ?>" data-tujuanktu="<?= $s->tujuan_ktu; ?>" data-catktu="<?= $s->catKtu1; ?>" data-bs-toggle="modal" data-bs-target="#modalDetail">
+                                                    <i class="bi bi-file-earmark-text"></i>Detail
+                                                </button>
+                                            </div>
                                         <?php elseif ($user['role_id'] != 4) : ?>
                                             <?php if ($s->is_dispo == 'false' && $user['role_id'] != 3) : ?>
                                                 <div>
@@ -52,7 +54,7 @@
                                                         </div>
                                                     <?php elseif ($user['role_id'] == 2) : ?>
                                                         <div>
-                                                            <button type="button" class="btn btn-danger" id="pushDispoKabag" data-idnya="<?= $s->id; ?>" data-bs-toggle="modal" data-bs-target="#modalKabag">
+                                                            <button type="button" class="btn btn-danger" id="pushDispoKabag" data-idnya="<?= $s->surma_id; ?>" data-bs-toggle="modal" data-bs-target="#modalKabag">
                                                                 <i class="bi bi-check-circle"></i>Disposisi
                                                             </button>
                                                         </div>
@@ -80,7 +82,7 @@
                                                 <?php else : ?>
                                                     <?php if ($user['role_id'] == 1) : ?>
                                                         <div>
-                                                            <button type="button" class="btn btn-danger" id="pushDispoKaro" data-idnya="<?= $s->id; ?>" data-bs-toggle="modal" data-bs-target="#modalKaro">
+                                                            <button type="button" class="btn btn-danger" id="pushDispoKaro" data-idnya="<?= $s->surma_id; ?>" data-bs-toggle="modal" data-bs-target="#modalKaro">
                                                                 <i class="bi bi-check-circle"></i>Disposisi
                                                             </button>
                                                         </div>
@@ -89,24 +91,32 @@
                                             <?php elseif ($s->is_dispo == 'false' && $user['role_id'] == 3) : ?>
                                                 <?php if ($s->is_dispo_karo == 'true' || $s->is_dispo_kabag == 'true') : ?>
                                                     <div>
-                                                        <button type="button" class="btn btn-danger" id="pushDispoKtu1" data-idnya="<?= $s->id; ?>" data-bs-toggle="modal" data-bs-target="#modalKtu1">
+                                                        <button type="button" class="btn btn-danger" id="pushDispoKtu1" data-idnya="<?= $s->surma_id; ?>" data-bs-toggle="modal" data-bs-target="#modalKtu1">
                                                             <i class="bi bi-check-circle"></i>Disposisi
                                                         </button>
                                                     </div>
                                                 <?php else : ?>
                                                     <div>
-                                                        <button type="button" class="btn btn-danger" id="pushDispoKtu" data-idnya="<?= $s->id; ?>" data-bs-toggle="modal" data-bs-target="#modalKtu">
+                                                        <button type="button" class="btn btn-danger" id="pushDispoKtu" data-idnya="<?= $s->surma_id; ?>" data-bs-toggle="modal" data-bs-target="#modalKtu">
                                                             <i class="bi bi-check-circle"></i>Disposisi
                                                         </button>
                                                     </div>
                                                 <?php endif ?>
                                             <?php endif ?>
+                                            <?php if ($s->is_dispo == 'false' && $s->is_dispo_karo == 'false' && $s->is_dispo_kabag == 'false' && $s->is_dispo_ktu == 'false') : ?>
+                                                <div class="ms-4">
+                                                    <button disabled type="button" id="details" class="btn btn-primary" data-idnya="<?= $s->id; ?>" data-dispokaro="<?= $s->is_dispo_karo; ?>" data-suratdari="<?= $s->suratDari; ?>" data-nosurat="<?= $s->noSurat; ?>" data-tglsurat="<?= $s->tglSurat; ?>" data-diterima="<?= $s->diterima; ?>" data-tanggalkeluar="<?= $s->tanggalKeluar; ?>" data-noagenda="<?= $s->noAgenda; ?>" data-sifatsurat="<?= $s->sifatSurat; ?>" data-status="<?= $s->status; ?>" data-hal="<?= $s->hal; ?>" data-tujuankaro="<?= $s->tujuan_karo; ?>" data-mengharapkan="<?= $s->mengharapkan; ?>" data-catkaro="<?= $s->catKaro; ?>" data-tujuankabag="<?= $s->tujuan_kabag; ?>" data-catkabag="<?= $s->catKabag; ?>" data-tujuanktu="<?= $s->tujuan_ktu; ?>" data-catktu="<?= $s->catKtu1; ?>" data-bs-toggle="modal" data-bs-target="#modalDetail">
+                                                        <i class="bi bi-file-earmark-text"></i>Detail
+                                                    </button>
+                                                </div>
+                                            <?php else : ?>
+                                                <div class="ms-4">
+                                                    <button type="button" id="details" class="btn btn-primary" data-idnya="<?= $s->surma_id; ?>" data-dispokaro="<?= $s->is_dispo_karo; ?>" data-suratdari="<?= $s->suratDari; ?>" data-nosurat="<?= $s->noSurat; ?>" data-tglsurat="<?= $s->tglSurat; ?>" data-diterima="<?= $s->diterima; ?>" data-tanggalkeluar="<?= $s->tanggalKeluar; ?>" data-noagenda="<?= $s->noAgenda; ?>" data-sifatsurat="<?= $s->sifatSurat; ?>" data-status="<?= $s->status; ?>" data-hal="<?= $s->hal; ?>" data-tujuankaro="<?= $s->tujuan_karo; ?>" data-mengharapkan="<?= $s->mengharapkan; ?>" data-catkaro="<?= $s->catKaro; ?>" data-tujuankabag="<?= $s->tujuan_kabag; ?>" data-catkabag="<?= $s->catKabag; ?>" data-tujuanktu="<?= $s->tujuan_ktu; ?>" data-catktu="<?= $s->catKtu1; ?>" data-bs-toggle="modal" data-bs-target="#modalDetail">
+                                                        <i class="bi bi-file-earmark-text"></i>Detail
+                                                    </button>
+                                                </div>
+                                            <?php endif ?>
                                         <?php endif ?>
-                                        <div class="ms-4">
-                                            <button type="button" id="details" class="btn btn-primary" data-idnya="<?= $s->id; ?>" data-suratdari="<?= $s->suratDari; ?>" data-nosurat="<?= $s->noSurat; ?>" data-tglsurat="<?= $s->tglSurat; ?>" data-diterima="<?= $s->diterima; ?>" data-tanggalkeluar="<?= $s->tanggalKeluar; ?>" data-noagenda="<?= $s->noAgenda; ?>" data-sifatsurat="<?= $s->sifatSurat; ?>" data-status="<?= $s->status; ?>" data-hal="<?= $s->hal; ?>" data-tujuankaro="<?= $s->tujuan_karo; ?>" data-mengharapkan="<?= $s->mengharapkan; ?>" data-catkaro="<?= $s->catKaro; ?>" data-tujuankabag="<?= $s->tujuan_kabag; ?>" data-catkabag="<?= $s->catKabag; ?>" data-tujuanktu="<?= $s->tujuan_ktu; ?>" data-catktu="<?= $s->catKtu1; ?>" data-bs-toggle="modal" data-bs-target="#modalDetail">
-                                                <i class="bi bi-file-earmark-text"></i>Detail
-                                            </button>
-                                        </div>
 
                                     </div>
                                 </td>
@@ -122,7 +132,7 @@
 </div>
 
 <!-- Modal untuk button lihat -->
-<div class="modal fade" id="staticBackdropLihat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="lihat_log" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -130,25 +140,8 @@
                 <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
             <div class="modal-body">
-
                 <!-- Data Static -->
-                <?php foreach ($surat as $s) { ?>
-                    <?php if ($user['role_id'] == 1) : ?>
-                        <?php if ($s->is_dispo == 'false') : ?>
-                            <h5 class="editBy">Menunggu disposi KTU</h5>
-                            <?php break; ?>
-                        <?php elseif ($s->is_dispo == 'true') : ?>
-                            <?php if ($s->is_dispo_karo == 'true' || $s->is_dispo_kabag == 'true' || $s->is_dispo_ktu == 'true') : ?>
-                                <h5 class="editBy">Sedang ditindaklanjuti oleh Jabfung</h5>
-                                <?php break; ?>
-                            <?php elseif ($s->is_dispo_kabag == 'false') : ?>
-                                <h5 class="editBy">Menunggu disposi Kabag</h5>
-                                <?php break; ?>
-                            <?php endif ?>
-                        <?php endif ?>
-                    <?php endif ?>
-                <?php
-                } ?>
+                <h5 class="editBy">Surat berada pada <span id="penerima" name="detail_id"></span></h5>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -174,7 +167,7 @@
                             if (!empty($user_biro)) {
                                 foreach ($user_biro as $uB) {
                             ?>
-                                    <option value="<?= $uB->email ?>"><?= $uB->name ?></option>
+                                    <option value="<?= $uB->name ?>"><?= $uB->name ?></option>
                             <?php
                                 }
                             }
@@ -198,6 +191,12 @@
                         <input type="hidden" required="required" id="dKaro_id" name="dKaro_id" value="">
                         <textarea class="form-control" required="required" id="catKaro" name="catKaro" aria-label="With textarea" placeholder="Isi catatan disini."></textarea>
                     </div>
+                    <!-- <div class="add-ttd-karo">
+                        <button type="button" class="btn-ttd-karo" id="btnTTDKaro">
+                            <label for=" btn-ttd-karo">Tekan untuk TTD</label>
+                            <img src="<?= base_url('assets/img/ttd.jpg') ?> " id="ttdImg">
+                        </button>
+                    </div> -->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
@@ -226,15 +225,15 @@
                             if (!empty($user_biro)) {
                                 foreach ($user_biro as $uB) {
                             ?>
-                                    <option value="<?= $uB->email ?>"><?= $uB->name ?></option>
+                                    <option value="<?= $uB->name ?>"><?= $uB->name ?></option>
                             <?php
                                 }
                             }
                             ?>
                         </select>
                     </div>
-                    <div class="input-groupp">
-                        <label class="label-bold">Catatan Kepala Bagian</label>
+                    <div class="input-groupp ">
+                        <label class="label-bold w-100">Catatan Kepala Bagian</label>
                         <input type="hidden" required="required" id="dKabag_id" name="dKabag_id" value="">
                         <textarea class="form-control" name="catKabag" id="catKabag" required="required" aria-label="With textarea" placeholder="Isi catatan disini."></textarea>
                     </div>
@@ -346,7 +345,7 @@
                             if (!empty($user_biro)) {
                                 foreach ($user_biro as $uB) {
                             ?>
-                                    <option value="<?= $uB->email ?>"><?= $uB->name ?></option>
+                                    <option value="<?= $uB->name ?>"><?= $uB->name ?></option>
                             <?php
                                 }
                             }
@@ -354,7 +353,7 @@
                         </select>
                     </div>
                     <div class="input-groupp">
-                        <label class="label-bold">Catatan KTU/Jabfung Ahli Muda</label>
+                        <label class="label-bold w-100">Catatan KTU/Jabfung Ahli Muda</label>
                         <input type="hidden" required="required" id="dKtu1_id" name="dKtu1_id" value="">
                         <textarea class="form-control" id="catKtu1" name="catKtu1" required="required" aria-label="With textarea" placeholder="Isi catatan disini."></textarea>
                     </div>
@@ -370,102 +369,7 @@
 
 <!--Modal Untuk Button Detail -->
 <div class="modal fade" id="modalDetail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalDetail" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-        <div class=" modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="staticBackdropLabel">Detail Surat</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row-custom gap-5">
-                    <!-- Daftar isi detail surat -->
-                    <div class="col-left">
-                        <!-- <span id="detail_id" name="detail_id">hai</span> -->
-                        <div class="item">
-                            <p class="label-bold">Surat dari: </p>
-                            <p id="surat_dari_id"></p>
-                        </div>
-                        <div class="item">
-                            <p class="label-bold">Nomor Surat: </p>
-                            <p id="no_surat_id"></p>
-                        </div>
-                        <div class="item">
-                            <p class="label-bold">Tanggal Surat: </p>
-                            <p id="tgl_surat_id"></p>
-                        </div>
-                        <div class="item">
-                            <p class="label-bold">Diterima Tanggal: </p>
-                            <p id="diterima_id"></p>
-                        </div>
-                        <div class="item">
-                            <p class="label-bold">Tanggal Keluar: </p>
-                            <p id="tgl_keluar_id"></p>
-                        </div>
-                        <div class="item">
-                            <p class="label-bold">Nomor Agenda: </p>
-                            <p id="no_agenda_id"></p>
-                        </div>
-                        <div class="item">
-                            <p class="label-bold">Sifat: </p>
-                            <p id="sifat_surat_id"></p>
-                        </div>
-                        <div class="item">
-                            <p class="label-bold">Status: </p>
-                            <p id="status_id"></p>
-                        </div>
-                        <div class="item">
-                            <p class="label-bold">Hal: </p>
-                            <p id="hal_id"></p>
-                        </div>
-                        <div class="item">
-                            <p class="label-bold">Tujuan dari Karo: </p>
-                            <p id="tujuan_karo_id"></p>
-                        </div>
-                        <div class="item">
-                            <p class="label-bold">Mengharapkan: </p>
-                            <p id="mengharapkan_id"></p>
-                        </div>
-                        <div class="item">
-                            <p class="label-bold">Cat Karo: </p>
-                            <p id="cat_karo_id"></p>
-                        </div>
-                        <div class="item">
-                            <p class="label-bold">Ttd Karo: </p>
-                            <p>Sign </p>
-                        </div>
-                        <div class="item">
-                            <p class="label-bold">Tujuan dari Kabag: </p>
-                            <p id="tujuan_kabag_id"></p>
-                        </div>
-                        <div class="item">
-                            <p class="label-bold">Cat Kabag: </p>
-                            <p id="cat_kabag_id"></p>
-                        </div>
-                        <div class="item">
-                            <p class="label-bold">Tujuan dari JAM: </p>
-                            <p id="tujaun_ktu_id"></p>
-                        </div>
-                        <div class="item">
-                            <p class="label-bold">Cat Jam: </p>
-                            <p id="cat_ktu_id"></p>
-                        </div>
-                    </div>
-                    <!-- Lampiran Surat dalam bentuk dokumen -->
-                    <div class="col-right form-hover">
-                        <label for="lampiran-surat-kotak">Lampiran Surat</label>
-                        <div class="lampiran-surat-kotak">
-                            <h3>PDF</h3>
-                        </div>
-                        <button class="btn btn-download">Download</button>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-            </div>
-        </div>
+    <div class="modals modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable" id="detail">
     </div>
 </div>
 
@@ -484,7 +388,6 @@
         </div>
     </div>
 </div>
-
 
 <style>
     /* .form-group {
@@ -533,4 +436,48 @@
         display: flex;
         justify-content: space-around;
     } */
+
+    /* TTD di modal disposisi karo */
+    .add-ttd-karo {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
+    }
+
+    .add-ttd-karo .btn-ttd-karo {
+        /* border: 1px solid black; */
+        height: 210px;
+        width: 210px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* background: transparent !important; */
+    }
+
+    .add-ttd-karo .btn-ttd-karo img {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+    }
+
+
+    /* TTD di modal detail */
+    .ttd-karo {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        /* background: transparent !important; */
+    }
+
+    .ttd-karo img {
+        /* position: absolute; */
+        border: 1px solid black;
+        height: 155px;
+        width: 155px;
+    }
+
+    .ttd-karo {
+        display: flex;
+        margin-top: 20px;
+    }
 </style>

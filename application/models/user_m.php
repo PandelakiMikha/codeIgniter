@@ -21,6 +21,11 @@ class user_m extends CI_Model
     //untuk insert data kedalam table surat_masuk.....
     function input_data($data)
     {
+        // $insert_data['File_name'] = $data['File_name'];
+        // $insert_data['type'] = $data['type'];
+        // $insert_data['date_sended'] = $data['date_sended'];
+        // $insert_data['regarding'] = $data['regarding'];
+        // $insert_data['sender'] = $data['sender'];
 
         $this->db->insert('surat_masuk', $data);
         // $this->db->insert('surat_kel_user', $data);

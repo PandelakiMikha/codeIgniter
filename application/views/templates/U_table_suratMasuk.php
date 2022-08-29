@@ -1,22 +1,35 @@
 <div class="containerr mt-5 ">
-    <h4>Daftar Surat Masuk</h4>
-
-
+    <h4>Daftar Surat</h4>
     <div class="card">
         <div class="card-body table-responsive">
-            <table id="surat_masuk_user" class="table table-hover">
-                <thead>
-                    <tr class="table-active">
-
-                        <th>Perihal</th>
+            <table id="surat" class="table table-hover">
+                <thead class="table-light">
+                    <tr>
                         <th>Jenis Surat</th>
-                        <th>No Agenda</th>
-                        <th>Nama File</th>
-                        <th>Action</th>
+                        <th>Perihal</th>
+                        <th>Keterangan</th>
+                        <th>Tanggal Masuk</th>
+                        <th></th>
                     </tr>
-
                 </thead>
                 <tbody>
+                    <?php
+                    if (!empty($surat)) {
+                        $i = 0;
+                        foreach ($surat as $s) {
+                            $i++;
+                    ?>
+                            <tr>
+                                <td class="tg-baqh"><?= $s->jenisSurat; ?></td>
+                                <td class="tg-baqh"><?= $s->perihal; ?></td>
+                                <td class="tg-baqh"><?= $s->keterangan; ?></td>
+                                <td class="tg-baqh"><?= $s->date_sended; ?></td>
+                                <td class="tg-baqh"><a class="btn btn-primary btn-sm" href="<?= base_url(); ?>download/downloadSK/<?= $s->id; ?> "><i class="bi bi-download me-1"></i>Download</a></td>
+                            </tr>
+                    <?php
+                        }
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>

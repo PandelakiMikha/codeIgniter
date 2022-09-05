@@ -16,11 +16,11 @@ class User extends CI_Controller
 
     public function index()
     {
-        $getsurat = $this->user_m->getSuratData();
-        $data['jenis_surat'] = $getsurat;
+        $data['surat'] = $this->surma_model->getSuratData();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Dashboard';
         $data['totals'] = $this->user_m->count_all_data();
+        $data['num_pesan'] = 1;
         $error = array('error' => $this->upload->display_errors());
 
         $this->load->view('templates/header', $data);
@@ -56,6 +56,7 @@ class User extends CI_Controller
             $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
             $data['judul'] = 'Dashboard';
             $data['totals'] = $this->surma_model->count_all_data();
+            $data['num_pesan'] = 2;
 
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar_user', $data);
@@ -79,6 +80,12 @@ class User extends CI_Controller
                 'sender' => $sender,
                 'is_done_dispo' => 'false',
                 'is_dispo' => 'false',
+                'is_dispo_karo' => 'false',
+                'is_dispo_ktu' => 'false',
+                'is_dispo_kabag' => 'false',
+                'year' => date('Y'),
+                'month'  => date('m'),
+                'penerima_dispo' => 'Kepala Tata Usaha'
             );
 
 
@@ -89,10 +96,40 @@ class User extends CI_Controller
             $insert = $this->user_m->input_data($data, 'surat_masuk');
 
             if ($insert) {
+                $this->_sendEmail();
                 redirect('User/upload_success');
             } else {
                 echo "Gagal";
             }
+        }
+    }
+
+    private function _sendEmail()
+    {
+        $config = [
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 's21910305@student.unklab.ac.id',
+            'smtp_pass' => 'rolando050401',
+            'smtp_port' => 465,
+            'mail_type' => 'text',
+            'charset' => 'utf-8',
+            'newline' => "\r\n"
+        ];
+
+        $this->load->library('email', $config);
+        $this->email->initialize($config);
+
+        $this->email->from('s21910305@student.unklab.ac.id', 'SILONBOG');
+        $this->email->to('silonbog@gmail.com');
+        $this->email->subject('Surat Masuk');
+        $this->email->message('Surat masuk dari ' . $this->input->post('sender') . '. Prihal Surat : ' . $this->input->post('regarding') . ' ');
+
+        if ($this->email->send()) {
+            return true;
+        } else {
+            echo $this->email->print_debugger();
+            die;
         }
     }
 
@@ -103,6 +140,7 @@ class User extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Dashboard';
         $data['totals'] = $this->surma_model->count_all_data();
+        $data['num_pesan'] = 2;
         $error = array('error' => $this->upload->display_errors());
 
         $this->load->view('templates/header', $data);
@@ -129,6 +167,7 @@ class User extends CI_Controller
         $data['surat'] = $this->surma_model->dataSuratKelUser();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
+        $data['num_pesan'] = 2;
 
         $error = array('error' => $this->upload->display_errors());
 

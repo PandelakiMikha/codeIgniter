@@ -11,15 +11,11 @@ class Kabag extends CI_Controller
     }
     public function index()
     {
-
-        // $get = $this->uri->segment(1);
-        // var_dump($get);
-        // die;
-
         $data['judul'] = "Surat Masuk";
         $data['surat'] = $this->surma_model->dataSuratM();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
+        $data['num_pesan'] = 1;
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -32,9 +28,10 @@ class Kabag extends CI_Controller
     {
         // echo date('y-m-d');
         $data['judul'] = "Kabag Disposisi";
-        $data['surat'] = $this->surma_model->dataSuratM();
+        $data['surat'] = $this->surma_model->dataSuratD();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
+        $data['num_pesan'] = 2;
 
         $bawahan = '';
         if ($data['user']['name'] == 'Kepala Bagian Tata Laksana') {
@@ -59,6 +56,8 @@ class Kabag extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
         $data['judul'] = 'Arsip';
+        $data['num_pesan'] = 2;
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/navbar', $data);

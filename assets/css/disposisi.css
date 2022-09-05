@@ -1,26 +1,30 @@
+.page {
+	background: white;
+}
+
 .container {
-    margin-top: 58px;
+	margin-top: 58px;
 }
 
 /* Dropdown */
 .dua-dropdown {
-    width: 50%;
-    display: flex;
-    gap: 2rem;
-    margin-bottom: 34px;
+	width: 50%;
+	display: flex;
+	gap: 2rem;
+	margin-bottom: 34px;
 }
 
 .dua-dropdown .dropdown1 {
-    width: 40%;
+	width: 40%;
 }
 
 .dua-dropdown .dropdown2 {
-    width: 50%;
+	width: 50%;
 }
 
 /* Untuk semua inputan musti pke border radius */
 .form-control,
 .form-select {
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.6);
+	border-radius: 8px;
+	background: rgba(255, 255, 255, 0.6);
 }

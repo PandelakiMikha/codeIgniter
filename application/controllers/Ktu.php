@@ -15,6 +15,7 @@ class Ktu extends CI_Controller
         $data['surat'] = $this->surma_model->dataSuratM();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
+        $data['num_pesan'] = 1;
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -23,15 +24,27 @@ class Ktu extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function surat_keluar()
+    {
+        $data['judul'] = "Surat Keluar";
+        $data['surat'] = $this->surma_model->dataSuratK();
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['totals'] = $this->surma_model->count_all_data_surkel();
+        $data['num_pesan'] = 1;
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/navbar', $data);
+        $this->load->view("Admin/Surat_Keluar/surat_keluar", $data, NULL);
+        $this->load->view('templates/footer');
+    }
+
     public function kirim_surat()
     {
-        // $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        // $data['judul'] = 'Kirim Surat';
-        // $data['totals'] = $this->Serverside_model->count_all_data();
-        // $data['data_daerah'] = $this->Serverside_model->getDataDaerah();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
         $data['judul'] = 'Kirim Surat';
+        $data['num_pesan'] = 2;
 
         $data['data_user'] = $this->User_model->getUser();
 
@@ -45,75 +58,130 @@ class Ktu extends CI_Controller
 
     public function kirim_surat_ktu()
     {
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('nomorAgenda', 'NomorAgenda', 'trim|required|max_length[25]|xss_clean');
-        $this->form_validation->set_rules('jenisSurat', 'JenisSurat', 'trim|required|max_length[20]|xss_clean');
-        $this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required|max_length[256]|xss_clean');
-        $this->form_validation->set_rules('perihal', 'perihal', 'trim|required|max_length[256]|xss_clean');
-        $this->form_validation->set_rules('pilihTujuan', 'pilihTujuan', 'trim|required|max_length[30]|xss_clean');
-        $this->form_validation->set_rules('File_name', 'File_Name', 'required');
+        // $this->load->library('form_validation');
+        // $this->form_validation->set_rules('nomorAgenda', 'NomorAgenda', 'trim|required|max_length[25]|xss_clean');
+        // $this->form_validation->set_rules('jenisSurat', 'JenisSurat', 'trim|required|max_length[20]|xss_clean');
+        // $this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required|max_length[256]|xss_clean');
+        // $this->form_validation->set_rules('perihal', 'perihal', 'trim|required|max_length[256]|xss_clean');
+        // $this->form_validation->set_rules('pilihTujuan', 'pilihTujuan', 'trim|required|max_length[30]|xss_clean');
+        // $this->form_validation->set_rules('File_name', 'file_name', 'required');
 
-        if ($this->form_validation->run() == FALSE) {
-            echo "Upload asdf";
-            print_r($this->input->post($_FILES['File_name']));
+        $config['upload_path']          = './uploads/';
+        $config['allowed_types']        = 'gif|jpg|png|pdf';
+        $config['max_size']             = 10000;
+        $config['max_width']            = 1024;
+        $config['max_height']           = 768;
+
+        $this->load->library('upload');
+        $this->upload->initialize($config);
+
+        if (!$this->upload->do_upload('File_name')) {
+            // var_dump($config);
+            // die;
+            $this->kirim_surat();
         } else {
-
-            $nomorAgenda    = $this->input->post('nomorAgenda');
-            $jenisSurat     = $this->input->post('jenisSurat');
+            $no_agenda    = $this->input->post('no_agenda');
+            $no_agenda     = $this->input->post('jenis_surat');
             $keterangan     = $this->input->post('keterangan');
             $perihal        = $this->input->post('perihal');
-            $pilihTujuan    = $this->input->post('pilihTujuan');
-            $File_name      = $_FILES['File_name'];
-            if ($File_name == '') {
-            } else {
-                $config['upload_path']  = '../../assets/suratKeluar';
-                $config['allowed_types']  = 'jpg|png';
+            $tujuan    = $this->input->post('tujuan');
+            $File_name      = $this->input->post('File_name');
 
-                $this->load->library('upload', $config);
-                if (!$this->upload->do_upload('File_name')) {
-                    echo "Upload gagal";
-                    die();
-                } else {
-                    $File_name = $this->upload->data('file_name');
-                }
-            }
-
-            $isiSurat = [
-                'nomorAgenda'       => $nomorAgenda,
-                'jenisSurat'        => $jenisSurat,
+            $data = [
+                'nomorAgenda'       => $no_agenda,
+                'jenisSurat'        => $no_agenda,
                 'perihal'        => $perihal,
                 'keterangan'    => $keterangan,
-                'pilihTujuan'    => $pilihTujuan,
+                'pilihTujuan'    => $tujuan,
                 'File_name'    => $File_name,
+                'date_sended'  => date('Y-m-d'),
+                'year' => date('Y'),
+                'month' => date('m'),
 
             ];
 
-            $result = $this->surma_model->kirimSuratKtu($isiSurat);
-            // $this->index();
 
-            if ($result > 0) {
-                echo (json_encode(array('status' => TRUE)));
+            $upload_data = $this->upload->data();
+            //mengambil file_name... 
+            $data['File_name'] = $upload_data['file_name'];
+            //untuk kirim ke database..
+            $result = $this->surma_model->kirimSuratKtu($data, 'surat_keluar');
+
+            if ($result) {
+                redirect('ktu/upload_success');
             } else {
-                echo (json_encode(array('status' => FALSE)));
+                echo "Gagal";
             }
         }
+
+        // if ($this->form_validation->run() == FALSE) {
+        //     echo "Upload asdf";
+        //     print_r($this->input->post('File_name'));
+        // } else {
+
+        //     $nomorAgenda    = $this->input->post('nomorAgenda');
+        //     $jenisSurat     = $this->input->post('jenisSurat');
+        //     $keterangan     = $this->input->post('keterangan');
+        //     $perihal        = $this->input->post('perihal');
+        //     $pilihTujuan    = $this->input->post('pilihTujuan');
+        //     $File_name      = $_FILES['File_name'];
+        //     if ($File_name == '') {
+        //     } else {
+        //         $config['upload_path']  = '../../assets/suratKeluar';
+        //         $config['allowed_types']  = 'jpg|png';
+
+        //         $this->load->library('upload', $config);
+        //         if (!$this->upload->do_upload('File_name')) {
+        //             echo "Upload gagal";
+        //             die();
+        //         } else {
+        //             $File_name = $this->upload->data('file_name');
+        //         }
+        //     }
+
+        //     $isiSurat = [
+        //         'nomorAgenda'       => $nomorAgenda,
+        //         'jenisSurat'        => $jenisSurat,
+        //         'perihal'        => $perihal,
+        //         'keterangan'    => $keterangan,
+        //         'pilihTujuan'    => $pilihTujuan,
+        //         'File_name'    => $File_name,
+
+        //     ];
+
+        //     $result = $this->surma_model->kirimSuratKtu($isiSurat, 'surat_keluar');
+        //     if ($result > 0) {
+        //         echo (json_encode(array('status' => TRUE)));
+        //     } else {
+        //         echo (json_encode(array('status' => FALSE)));
+        //     }
+        // }
+    }
+
+    public function upload_success()
+    {
+        $getsurat = $this->user_m->getSuratData();
+        $data['jenis_surat'] = $getsurat;
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['judul'] = 'Dashboard';
+        $data['totals'] = $this->surma_model->count_all_data();
+        $data['num_pesan'] = 2;
+        $error = array('error' => $this->upload->display_errors());
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data, $error);
+        $this->load->view('templates/navbar', $data);
+        $this->load->view('user/upload_success');
+        $this->load->view('templates/footer');
     }
 
     public function disposisi()
     {
-        // echo date('y-m-d');
         $data['judul'] = "KTU Disposisi";
-        $data['surat'] = $this->surma_model->dataSuratM();
+        $data['surat'] = $this->surma_model->dataSuratD();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
-        // var_dump($data['surat']);
-        // die;
-
-        // $idSurat = $_POST['idnya'];
-        $idSurat = $this->input->post('idnya');
-
-        $data['details'] = $this->surma_model->getDataDisposisi($idSurat);
-        // var_dump($data['details']);
+        $data['num_pesan'] = 'true';
 
         $bawahan = 3;
         $data['user_biro'] = $this->User_model->getUserBiro($bawahan);
@@ -123,6 +191,13 @@ class Ktu extends CI_Controller
         $this->load->view('templates/navbar', $data);
         $this->load->view("Admin/Disposisi/disposisi", $data, NULL);
         $this->load->view('templates/footer');
+    }
+
+    public function getKaroTtd($is_dispo_karo)
+    {
+        $data['ttd_karo'] = $is_dispo_karo;
+
+        $this->load->view('Admin/Disposisi/details', $data);
     }
 
     public function detailDispo()
@@ -136,11 +211,45 @@ class Ktu extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
         $data['judul'] = 'Arsip';
+        $data['year'] = $this->surma_model->get_year();
+        $data['num_pesan'] = 2;
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/navbar', $data);
         $this->load->view('arsip/index.php');
         $this->load->view('templates/footer');
+    }
+
+    public function filterArsip($year, $month)
+    {
+        $data['surat'] = $this->surma_model->getArsip($year, $month);
+        // print_r($data['surat']);
+
+        $this->load->view('arsip/result', $data);
+    }
+
+    public function arsip_surat_kel()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['totals'] = $this->surma_model->count_all_data();
+        $data['judul'] = 'Arsip';
+        $data['year'] = $this->surma_model->get_year();
+        $data['num_pesan'] = 2;
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/navbar', $data);
+        $this->load->view('arsip/surat_keluar.php');
+        $this->load->view('templates/footer');
+    }
+
+    public function filterArsipKeluar($year, $month)
+    {
+        $data['surat'] = $this->surma_model->getArsipKeluar($year, $month);
+        // print_r($data['surat']);
+
+        $this->load->view('arsip/surkel', $data);
     }
 
     public function dispoKTU()
@@ -239,7 +348,7 @@ class Ktu extends CI_Controller
             ];
 
             $result = $this->surma_model->tambahDispoKtu1($isiDispoKtu1, $idnya);
-            $update = $this->surma_model->updateStatusKtu1($idnya);
+            $update = $this->surma_model->updateStatusKtu1($idnya, $tujuan);
 
             if ($result > 0) {
                 echo (json_encode(array('status' => TRUE)));

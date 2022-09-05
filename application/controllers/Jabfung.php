@@ -14,6 +14,7 @@ class Jabfung extends CI_Controller
         $data['surat'] = $this->surma_model->dataSuratM();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
+        $data['num_pesan'] = 1;
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -25,9 +26,10 @@ class Jabfung extends CI_Controller
     public function disposisi()
     {
         $data['judul'] = "Daftar Surat Disposisi";
-        $data['surat'] = $this->surma_model->dataSuratM();
+        $data['surat'] = $this->surma_model->dataSuratD();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['totals'] = $this->surma_model->count_all_data();
+        $data['num_pesan'] = 2;
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -46,5 +48,17 @@ class Jabfung extends CI_Controller
         $this->load->view('templates/navbar', $data);
         $this->load->view('arsip/index.php');
         $this->load->view('templates/footer');
+    }
+
+    public function pushDone($id)
+    {
+        // var_dump($idnya);
+        // die;
+        if (!$id) {
+            $this->index();
+        } else {
+            $this->surma_model->push_done($id);
+            $this->disposisi();
+        }
     }
 }

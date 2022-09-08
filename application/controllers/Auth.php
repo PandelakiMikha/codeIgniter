@@ -103,13 +103,13 @@ class Auth extends CI_Controller
                 'image' => 'default.jpg',
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
                 'role_id' => 5,
-                'is_active' => 0,
+                'is_active' => 1,
                 'date_created' => time()
             ];
 
             $this->db->insert('user', $data);
 
-            $this->_sendEmail();
+            // $this->_sendEmail();
 
             $this->session->set_flashdata('massage', '<div class="alert alert-success" role="alert">Akun anda berhasil didaftarkan. Silahkan Login</div>');
             redirect('auth');

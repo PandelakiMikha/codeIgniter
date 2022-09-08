@@ -4,7 +4,7 @@
             <div class="card-body">
                 <h5 class="card-title"><strong> Kirim Surat Anda Berhasil!!</strong></h5>
                 <br>
-                <img src="https://cdn-icons.flaticon.com/png/128/4436/premium/4436481.png?token=exp=1661254220~hmac=622d46a909b80ea974382148086f118b" class="card-img-top" alt="centang">
+                <img src="https://cdn.pixabay.com/photo/2021/05/04/17/53/right-6229287_1280.png" class="card-img-top" alt="centang">
                 <p class="card-text">Surat Anda Akan Segera di Proses..</p>
                 <br>
                 <?php if ($user['role_id'] == 3) : ?>

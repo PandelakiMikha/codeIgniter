@@ -314,7 +314,8 @@ class Surma_model extends CI_Model
         } else {
             $isDispoKabag = [
                 'is_dispo_kabag' => 'true',
-                'penerima_dispo' => $tujuan
+                'penerima_dispo' => $tujuan,
+                'is_dispo_ktu' => 'true'
             ];
         }
         $this->db->where('id', $idnya);

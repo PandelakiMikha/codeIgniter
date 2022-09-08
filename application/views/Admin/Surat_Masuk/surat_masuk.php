@@ -1,5 +1,5 @@
 <div class="containerr mt-5 ">
-    <h4>Daftar Surat</h4>
+    <h4>Daftar Surat Masuk</h4>
     <div>
         <div class="table-responsive">
             <table id="surat" class="table table-hover">

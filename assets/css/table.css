@@ -37,6 +37,7 @@ th:last-of-type {
     transform: scale(1.02);
 }
 
+
 .table-hover tbody tr:hover,
 .table-hover tbody tr:hover {
     background: linear-gradient(190deg, #E7E7E7 0%, rgba(217, 217, 217, 0) 40%);
@@ -46,9 +47,22 @@ th:last-of-type {
 .page-item.active .page-link {
     background-color: grey;
     border-color: grey;
+    /* border-color: #ff0000 !important; */
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px grey !important;
 }
 
 /* Ini ketika prev / next tidak ditekan */
 .page-link {
+    color: red;
+}
+
+.page.item.page-item.active {
+    /* border-color: #ff0000 !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6) !important; */
+    /* color: #000; */
+}
+
+.page-item .page-link:hover {
     color: black;
+    /* background-color: red; */
 }

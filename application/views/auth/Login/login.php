@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="col-lg-5 imgWrapper">
-                <img class="img" src="<?php echo base_url('assets/logo/provSulut.png') ?>" width="100%" height="100%">
+                <img class="img" src="<?php echo base_url('assets/logo/provSulut.png') ?>">
             </div>
         </div>
     </div>
@@ -67,7 +67,7 @@
 
     .bacground-gradient {
         width: 100%;
-        height: 100%;
+        height: 100vh;
         /* background-color: blue;   */
         background: linear-gradient(223.79deg, #FF7C7C 0.75%, rgba(215, 212, 212, 0) 75.53%);
     }
@@ -112,6 +112,8 @@
         height: 100vh;
         opacity: 0.4;
     }
+
+    /* for handphone */
 </style>
 
 </html>

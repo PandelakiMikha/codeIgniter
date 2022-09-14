@@ -614,17 +614,17 @@
             var Noagenda = $(this).data('Noagenda');
             var Namafile = $(this).data('Namafile');
             var Perihal = $(this).data('Perihal');
-
+ 
             $("#modal-detail, #Jenis_surat").text(Jenissurat);
             $("#modal-detail, #No_agenda").text(Noagenda);
             $("#modal-detail, #Nama_file").text(Namafile);
             $("#modal-detail, #Perihal").text(Perihal);
-
+ 
             // $("#modal-detail #Jenis_surat").val(Jenissurat);
             // $("#modal-detail #No_agenda").val(Noagenda);
             // $("#modal-detail #Nama_file").val(Namafile);
             // $("#modal-detail #Perihal").val(Perihal);
-
+ 
             // $('#Jenis_surat').text(Jenissurat);
             // $('#No_agenda').text(Noagenda);
             // $('#Nama_file').text(Namafile);
@@ -675,7 +675,7 @@
             var date_sended = $("#date_sended").val();
             var regarding = $("#regarding").val();
             var File_name = $("#File_name").val();
-
+ 
             $.ajax({
                 type: "POST",
                 url: '<?php echo base_url() ?>User/kirim_surat',
@@ -825,7 +825,7 @@
     const menu = document.getElementById('menu-label');
     const sidebar = document.getElementsByClassName('sidebarr')[0];
     const dropdown = document.getElementsByClassName('dropdown')[0];
-
+ 
     menu.addEventListener('click', function() {
         sidebar.classList.toggle('hide');
         dropdown.classList.toggle('dropend');
@@ -837,7 +837,7 @@
     $("#pesan").hide();
     const side = document.getElementById('surma');
     console.log('side', side);
-
+ 
     side.addEventListener('click', function(e) {
         console.log('e', e);
         $("#pesan").show();
@@ -1054,7 +1054,7 @@
             $('#modalDetail').modal('show');
 
             $.ajax({
-                type: "POST", //send with post 
+                type: "POST", //send with post
                 url: basee,
                 data: {
                     idnya: idnya

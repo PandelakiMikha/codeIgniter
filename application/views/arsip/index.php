@@ -1,5 +1,5 @@
 <!--
-    Catatan: 
+    Catatan:
     Untuk sementara yang button for tiap bulan itu pas click cuman mo muncul yang surat masuk punya, kalo yang surat keluar belum ada karena dpe table nda ada
     Kan harusnya kalo user pilih yang surat keluar kan dia muncul yang surat keluar punya lagi to
  -->
@@ -65,7 +65,7 @@
                     <h5>Februari</h5>
                 </a>
             </div>
-
+ 
             <div class="col-custom bulan">
                 <img src="<?= base_url('assets/img/ArsipFile.svg') ?>" alt="">
                 <a href="<?= base_url('/arsip/arsip_surat_masuk') ?>" class="">

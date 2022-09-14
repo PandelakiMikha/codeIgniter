@@ -1,3 +1,21 @@
+<div class="containerr mt-5 ">
+    <h4>Daftar Surat</h4>
+    <div class="card">
+        <div class="card-body table-responsive">
+            <table id="dispo" class="table table-hover1">
+                <thead class="table-light">
+                    <tr>
+                        <th>Pingirim</th>
+                        <th>Jenis Surat</th>
+                        <th>Perihal</th>
+                        <th>Tanggal Masuk</th>
+                        <th class="hala"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
 <!-- Modals -->
 <!-- Modal Untuk Button Lihat -->
 <div class="modal fade" id="staticBackdropLihat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

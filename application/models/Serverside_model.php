@@ -54,19 +54,4 @@ class Serverside_model extends CI_Model
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }
-
-    public function getDataDaerah()
-    {
-        $this->db->order_by("name", "asc");
-        $query = $this->db->get('daerah');
-
-        return $query->result();
-    }
-
-    public function getDaerah($id_daerah)
-    {
-        $query = $this->db->get_where('perangkat_daerah', ['daerah_id' => $id_daerah])->result_array();
-
-        return $query;
-    }
 }

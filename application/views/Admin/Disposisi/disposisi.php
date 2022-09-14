@@ -1,5 +1,5 @@
 <div class="containerr mt-5 ">
-    <h4>Daftar Surat</h4>
+    <h4>Daftar Surat Disposisi</h4>
     <div>
         <div class=" table-responsive">
             <table id="surat" class="table table-hover">
@@ -25,14 +25,14 @@
                                 <td>
                                     <div class="cuss">
                                         <?php if ($user['role_id'] == 1) : ?>
-                                            <div class="me-4">
+                                            <div class="me-2">
                                                 <button type="button" id="log" data-penerima="<?= $s->penerima_dispo; ?>" class="btn btn-warning" data-bs-toggle="modal" data-bs-placement="center" data-bs-target="#lihat_log">
                                                     <i class="bi bi-eye"></i>Log
                                                 </button>
                                             </div>
                                         <?php endif ?>
                                         <?php if ($user['role_id'] == 4) : ?>
-                                            <div class="ms-4">
+                                            <div class="ms-2 me-2">
                                                 <button type="button" id="details" class="btn btn-primary" data-idnya="<?= $s->surma_id; ?>" data-dispokaro="<?= $s->is_dispo_karo; ?>" data-suratdari="<?= $s->suratDari; ?>" data-nosurat="<?= $s->noSurat; ?>" data-tglsurat="<?= $s->tglSurat; ?>" data-diterima="<?= $s->diterima; ?>" data-tanggalkeluar="<?= $s->tanggalKeluar; ?>" data-noagenda="<?= $s->noAgenda; ?>" data-sifatsurat="<?= $s->sifatSurat; ?>" data-status="<?= $s->status; ?>" data-hal="<?= $s->hal; ?>" data-tujuankaro="<?= $s->tujuan_karo; ?>" data-mengharapkan="<?= $s->mengharapkan; ?>" data-catkaro="<?= $s->catKaro; ?>" data-tujuankabag="<?= $s->tujuan_kabag; ?>" data-catkabag="<?= $s->catKabag; ?>" data-tujuanktu="<?= $s->tujuan_ktu; ?>" data-catktu="<?= $s->catKtu1; ?>" data-bs-toggle="modal" data-bs-target="#modalDetail">
                                                     <i class="bi bi-file-earmark-text"></i>Detail
                                                 </button>
@@ -104,19 +104,20 @@
                                                 <?php endif ?>
                                             <?php endif ?>
                                             <?php if ($s->is_dispo == 'false' && $s->is_dispo_karo == 'false' && $s->is_dispo_kabag == 'false' && $s->is_dispo_ktu == 'false') : ?>
-                                                <div class="ms-4">
+                                                <div class="ms-2 me-2">
                                                     <button disabled type="button" id="details" class="btn btn-primary" data-idnya="<?= $s->id; ?>" data-dispokaro="<?= $s->is_dispo_karo; ?>" data-suratdari="<?= $s->suratDari; ?>" data-nosurat="<?= $s->noSurat; ?>" data-tglsurat="<?= $s->tglSurat; ?>" data-diterima="<?= $s->diterima; ?>" data-tanggalkeluar="<?= $s->tanggalKeluar; ?>" data-noagenda="<?= $s->noAgenda; ?>" data-sifatsurat="<?= $s->sifatSurat; ?>" data-status="<?= $s->status; ?>" data-hal="<?= $s->hal; ?>" data-tujuankaro="<?= $s->tujuan_karo; ?>" data-mengharapkan="<?= $s->mengharapkan; ?>" data-catkaro="<?= $s->catKaro; ?>" data-tujuankabag="<?= $s->tujuan_kabag; ?>" data-catkabag="<?= $s->catKabag; ?>" data-tujuanktu="<?= $s->tujuan_ktu; ?>" data-catktu="<?= $s->catKtu1; ?>" data-bs-toggle="modal" data-bs-target="#modalDetail">
                                                         <i class="bi bi-file-earmark-text"></i>Detail
                                                     </button>
                                                 </div>
                                             <?php else : ?>
-                                                <div class="ms-4">
+                                                <div class="ms-2 me-2">
                                                     <button type="button" id="details" class="btn btn-primary" data-idnya="<?= $s->surma_id; ?>" data-dispokaro="<?= $s->is_dispo_karo; ?>" data-suratdari="<?= $s->suratDari; ?>" data-nosurat="<?= $s->noSurat; ?>" data-tglsurat="<?= $s->tglSurat; ?>" data-diterima="<?= $s->diterima; ?>" data-tanggalkeluar="<?= $s->tanggalKeluar; ?>" data-noagenda="<?= $s->noAgenda; ?>" data-sifatsurat="<?= $s->sifatSurat; ?>" data-status="<?= $s->status; ?>" data-hal="<?= $s->hal; ?>" data-tujuankaro="<?= $s->tujuan_karo; ?>" data-mengharapkan="<?= $s->mengharapkan; ?>" data-catkaro="<?= $s->catKaro; ?>" data-tujuankabag="<?= $s->tujuan_kabag; ?>" data-catkabag="<?= $s->catKabag; ?>" data-tujuanktu="<?= $s->tujuan_ktu; ?>" data-catktu="<?= $s->catKtu1; ?>" data-bs-toggle="modal" data-bs-target="#modalDetail">
                                                         <i class="bi bi-file-earmark-text"></i>Detail
                                                     </button>
                                                 </div>
                                             <?php endif ?>
                                         <?php endif ?>
+                                        <a class="btn btn-sm btn-success" href="<?= base_url(); ?>download/downloadSM/<?= $s->surma_id; ?> "><i class="bi bi-download me-1"></i>Download</a>
 
                                     </div>
                                 </td>

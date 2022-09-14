@@ -102,7 +102,7 @@ class Ktu extends CI_Controller
 
 
             $upload_data = $this->upload->data();
-            //mengambil file_name... 
+            //mengambil file_name...
             $data['File_name'] = $upload_data['file_name'];
             //untuk kirim ke database..
             $result = $this->surma_model->kirimSuratKtu($data, 'surat_keluar');
@@ -358,3 +358,4 @@ class Ktu extends CI_Controller
         }
     }
 }
+    

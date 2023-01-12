@@ -34,6 +34,9 @@
     <link rel="stylesheet" href="<?= base_url('assets/'); ?>css/modal.css">
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
+
+
 
     <style>
         * {

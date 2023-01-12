@@ -5,7 +5,9 @@
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-<script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
+<!-- ubah pass -->
+<script src="<?= base_url('/assets/js/ubah-pass.js') ?>"></script>
+
 <script src="<?= base_url('assets/'); ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
@@ -15,7 +17,6 @@
 <script src="<?= base_url('assets/'); ?>js/sb-admin-2.min.js"></script>
 
 <!-- jquery-3.2.1 for filter -->
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 <script>
     AOS.init();

@@ -1,20 +1,21 @@
-<ul name="" id="" class="daftar-user">
-    <?php foreach ($users as $u) : ?>
-        <li class="pilih-user">
-
-            <a href="<?php echo base_url() . "Ktu/ubah_pass/" . $u->id; ?>"><?php echo $u->name; ?></a>
-
-        </li>
-    <?php endforeach; ?>
-</ul>
-
-
 <div class="tambah-user-container">
-    <h4>Ubah Password User</h4>
+    <div class="pilih-user-container">
+        <h5>Pilih User</h5>
+        <i class="bi bi-chevron-down" style="font-size:18px"></i>
+        <div name="" id="" class="daftar-user">
+            <?php foreach ($users as $u) : ?>
+
+                <a href="<?php echo base_url() . "Ktu/ubah_pass/" . $u->id; ?>"><?php echo $u->name; ?></a>
+            <?php endforeach; ?>
+        </div>
+
+    </div>
 
     <?php foreach ($userID as $user) : ?>
+        <h4>Ubah Password User</h4>
         <p>Ubah Password <b><?php echo $user->name; ?></b></p>
         <form class="form-tambah-user-container" method="POST" action="<?= base_url('Ktu/pass'); ?>">
+
             <?= $this->session->flashdata('massage'); ?>
             <input type="hidden" name="id" value="<?php echo $user->id; ?>">
 
@@ -40,8 +41,6 @@
         width: 20%;
         display: flex;
         flex-direction: column;
-        margin-top: 20px;
-
     }
 
     .form-tambah-user-container input {
@@ -70,5 +69,67 @@
 
     .form-tambah-user-container button:hover {
         border: 1px solid white;
+    }
+
+
+
+    .pilih-user-container {
+        border-style: dotted;
+        width: 60%;
+        height: 40px;
+        line-height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        margin-bottom: 30px;
+    }
+
+    .pilih-user-container i:hover {
+        color: #EB6D6D;
+        cursor: pointer;
+    }
+
+    .pilih-user-container h5 {
+        margin: 0;
+        font-size: 20px;
+        margin-right: 7px;
+    }
+
+    .pilih-user-container .daftar-user {
+        position: absolute;
+        background: #EB6D6D;
+        top: 0;
+        right: -5%;
+        width: 350px;
+        height: 220px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 12px;
+        padding: 5px;
+        overflow: hidden;
+        overflow-y: scroll;
+        opacity: 0;
+        display: none;
+    }
+
+    .pilih-user-container .daftar-user.active {
+        opacity: 1;
+        display: flex;
+    }
+
+
+    .pilih-user-container a {
+        text-decoration: none;
+        color: white;
+        width: 100%;
+        margin: 0;
+        height: 30px;
+        line-height: 30px;
+    }
+
+    .pilih-user-container a:hover {
+        background: white;
+        color: black;
     }
 </style>

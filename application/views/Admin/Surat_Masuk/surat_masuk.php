@@ -20,6 +20,7 @@
                             $i++;
                     ?>
                             <tr>
+                                <td><?= $i; ?></td>
                                 <td class="tg-baqh"><?= $s->sender; ?></td>
                                 <td class="tg-baqh"><?= $s->type; ?></td>
                                 <td class="tg-baqh"><?= $s->regarding; ?></td>

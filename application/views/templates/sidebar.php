@@ -11,7 +11,7 @@
     </div>
     <div class="header">
         <div class="list-item">
-            <a href="<?= base_url('karo') ?>">
+            <a>
                 <img src="<?= base_url('assets/logo/Silonbog.png') ?>" alt="">
                 <span class="header-title">Sistem Layanan Online Biro Organisasi</span>
             </a>
@@ -39,6 +39,10 @@
                         <li><a class="dropdown-item" href="<?= base_url('karoo/arsip_surat_kel') ?>">Surat Keluar</a></li>
                     </ul>
                 </div>
+                <a href="<?= base_url('karoo/tambah_user') ?>" class="item" id="dispoPage">
+                    <i class="bi bi-person-plus"></i>
+                    <span class="item-title">Tambah User</span>
+                </a>
             <?php elseif ($user['role_id'] == 2) : ?>
                 <a href="<?= base_url('kabag') ?>" class="item" id="surma">
                     <i class="fa-fw bi bi-envelope-paper"></i>

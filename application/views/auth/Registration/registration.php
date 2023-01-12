@@ -236,8 +236,7 @@
     }
 
     /* for handphones with width screen 375 to 420px */
-    @media only screen and (min-width: 375px) and (max-width: 420px) {
-
+    @media only screen and (min-width: 340px) and (max-width: 420px) {
         h1 {
             font-size: 18px;
         }
@@ -247,6 +246,7 @@
             /* background: white; */
             width: 100%;
             height: 100vh;
+            overflow: hidden;
         }
 
         .content1 {

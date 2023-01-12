@@ -154,4 +154,19 @@ class Karoo extends CI_Controller
             echo 'berhasil';
         }
     }
+
+    public function tambah_user()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['totals'] = $this->surma_model->count_all_data();
+        $data['year'] = $this->surma_model->get_year();
+        $data['num_pesan'] = 2;
+        $data['judul'] = "Tambah User";
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/navbar', $data);
+        $this->load->view('admin/tambah_user/index.php');
+        $this->load->view('templates/footer');
+    }
 }

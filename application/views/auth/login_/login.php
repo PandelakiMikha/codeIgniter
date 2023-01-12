@@ -296,7 +296,7 @@
 
 
         /* for handphones with width screen 375 to 420px */
-        @media only screen and (min-width: 375px) and (max-width: 420px) {
+        @media only screen and (min-width: 340px) and (max-width: 420px) {
             .background-gradient {
                 background: linear-gradient(780deg, #FF7C7C 0.78%, rgba(215, 212, 212, 0) 88.53%);
                 /* background: white; */

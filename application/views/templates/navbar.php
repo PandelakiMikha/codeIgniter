@@ -27,12 +27,12 @@
                     <img class="img-profile rounded-circle" src="https://cdn.pixabay.com/photo/2017/11/10/05/48/user-2935527_1280.png">
                 </a>
                 <!-- Dropdown - User Information -->
-                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <!-- <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="<?php echo site_url('Auth/logout'); ?>" data-toggle="modal" data-target="#logoutModal">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                         Logout
                     </a>
-                </div>
+                </div> -->
             </li>
 
         </ul>

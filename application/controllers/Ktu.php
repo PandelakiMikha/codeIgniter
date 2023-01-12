@@ -390,6 +390,8 @@ class Ktu extends CI_Controller
 
         );
         $this->Madm->update_pass($id, $data);
+        $this->session->set_flashdata('massage', '<div class="alert alert-success" role="alert">Password berhasil diubah!</div>');
+
         redirect('ktu/ubah_pass');
     }
 

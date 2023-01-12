@@ -4,7 +4,7 @@
         <table id="surat" class="table table-hover">
             <thead class="table-light">
                 <tr>
-                    <th>Pingirim</th>
+                    <th>Pengirim</th>
                     <th>Jenis Surat</th>
                     <th>Perihal</th>
                     <th>Tanggal Masuk</th>

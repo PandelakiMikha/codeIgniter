@@ -1,5 +1,7 @@
 <div class="tambah-user-container">
     <div class="pilih-user-container">
+
+
         <h5>Pilih User</h5>
         <i class="bi bi-chevron-down" style="font-size:18px"></i>
         <div name="" id="" class="daftar-user">
@@ -10,8 +12,10 @@
         </div>
 
     </div>
+    <?= $this->session->flashdata('massage'); ?>
 
     <?php foreach ($userID as $user) : ?>
+
         <h4>Ubah Password User</h4>
         <p>Ubah Password <b><?php echo $user->name; ?></b></p>
         <form class="form-tambah-user-container" method="POST" action="<?= base_url('Ktu/pass'); ?>">
@@ -22,7 +26,7 @@
             <label for="">Password</label>
             <input type="text" name="password1" id="password" placeholder="Masukan Password Baru User" required>
 
-            <button type="submit">Tambah</button>
+            <button type="submit">Ubah</button>
         </form>
     <?php endforeach; ?>
 </div>
@@ -132,4 +136,6 @@
         background: white;
         color: black;
     }
+
+    .msg-container {}
 </style>

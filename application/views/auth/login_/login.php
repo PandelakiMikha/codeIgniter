@@ -26,9 +26,9 @@
                         </form>
                     </div>
                 </div>
-                <div class="daftar-disini mt-3">
+                <!-- <div class="daftar-disini mt-3">
                     <p>Belum punya akun? <strong><a class="text-dark" href="<?= base_url('auth/registration') ?> ">Daftar disini.</a></strong></p>
-                </div>
+                </div> -->
             </div>
             <div class="col-lg-5 imgWrapper">
                 <img class="img" src="<?php echo base_url('assets/logo/provSulut.png') ?>">

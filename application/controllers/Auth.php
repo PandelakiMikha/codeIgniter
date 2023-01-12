@@ -153,4 +153,12 @@ class Auth extends CI_Controller
         $this->session->set_flashdata('massage', '<div class="alert alert-success" role="alert">Anda berhasil keluar</div>');
         redirect('auth');
     }
+
+    // function logout()
+    // {
+    //     $this->session->sess_destroy();
+    //     // $url = base_url('Auth/_login');
+    //     // redirect($url);
+    //     redirect('Auth/_login');
+    // }
 }

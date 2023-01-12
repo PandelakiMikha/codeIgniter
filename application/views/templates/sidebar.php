@@ -52,6 +52,7 @@
                     <i class="fa-fw bi bi-clipboard-check"></i>
                     <span class="item-title">Disposisi</span>
                 </a>
+
             <?php elseif ($user['role_id'] == 3) : ?>
                 <div class="dropdown">
                     <a href="#" class="item dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -81,6 +82,19 @@
                         <li><a class="dropdown-item" href="<?= base_url('ktu/arsip_surat_kel') ?>">Surat Keluar</a></li>
                     </ul>
                 </div>
+
+                <div class="dropdown">
+                    <a href="#" class="item dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-gear"></i>
+                        <span class="item-title">Pengaturan</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="<?= base_url('ktu/tambah_user') ?>">Tambah User</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('ktu/ubah_pass') ?>">Ubah Password User</a></li>
+                    </ul>
+                </div>
+
+
             <?php elseif ($user['role_id'] == 4) : ?>
                 <a href="<?= base_url('jabfung') ?>" class="item">
                     <i class="fa-fw bi bi-envelope-paper"></i>

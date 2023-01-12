@@ -1,6 +1,6 @@
 <div class="tambah-user-container">
     <h4>Tambah User</h4>
-    <form class="form-tambah-user-container" method="POST" action="<?= base_url('Karoo/tambah_user'); ?>">
+    <form class="form-tambah-user-container" method="POST" action="<?= base_url('Ktu/tambah_user'); ?>">
         <?= $this->session->flashdata('massage'); ?>
         <label for="">Username</label>
         <input type="text" name="name" id="username" value="<?= set_value('name'); ?>">

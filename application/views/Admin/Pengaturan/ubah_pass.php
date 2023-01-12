@@ -1,24 +1,29 @@
+<ul name="" id="" class="daftar-user">
+    <?php foreach ($users as $u) : ?>
+        <li class="pilih-user">
+
+            <a href="<?php echo base_url() . "Ktu/ubah_pass/" . $u->id; ?>"><?php echo $u->name; ?></a>
+
+        </li>
+    <?php endforeach; ?>
+</ul>
+
+
 <div class="tambah-user-container">
-    <h4>Tambah User</h4>
-    <form class="form-tambah-user-container" method="POST" action="<?= base_url('Karoo/tambah_user'); ?>">
-        <?= $this->session->flashdata('massage'); ?>
-        <label for="">Username</label>
-        <input type="text" name="name" id="username" value="<?= set_value('name'); ?>">
-        <?= form_error('name', '<small class="text-danger">', '</small>') ?>
+    <h4>Ubah Password User</h4>
 
-        <label for="">Email</label>
-        <input type="text" name="email" id="email" value="<?= set_value('email'); ?>">
-        <?= form_error('email', '<small class="text-danger">', '</small>') ?>
+    <?php foreach ($userID as $user) : ?>
+        <p>Ubah Password <b><?php echo $user->name; ?></b></p>
+        <form class="form-tambah-user-container" method="POST" action="<?= base_url('Ktu/pass'); ?>">
+            <?= $this->session->flashdata('massage'); ?>
+            <input type="hidden" name="id" value="<?php echo $user->id; ?>">
 
-        <label for="">Password</label>
-        <input type="text" name="password1" id="password" value="">
-        <?= form_error('password1', '<small class="text-danger">', '</small>') ?>
+            <label for="">Password</label>
+            <input type="text" name="password1" id="password" placeholder="Masukan Password Baru User" required>
 
-        <label for="">Konfirmasi Password Baru</label>
-        <input type="text" name="password2" id="konfirmasiPassword" value="">
-
-        <button type="submit">Tambah</button>
-    </form>
+            <button type="submit">Tambah</button>
+        </form>
+    <?php endforeach; ?>
 </div>
 
 <style>
